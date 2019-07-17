@@ -1,27 +1,23 @@
 package chapter2
 
-import chapter2.MyExample23.Companion.abs
-import chapter2.MyExample23.Companion.factorial
-import chapter2.MyExample23.Companion.formatResult
+import chapter2.MyModule23.abs
+import chapter2.MyModule23.factorial
 
 //Listing 2.1
-class MyExample21 {
+object MyModule21 {
 
-    companion object {
+    private fun abs(n: Int): Int =
+            if (n < 0) -n
+            else n
 
-        private fun abs(n: Int): Int =
-                if (n < 0) -n
-                else n
-
-        fun formatAbs(x: Int): String {
-            val msg = "The absolute value of %d is %d"
-            return msg.format(x, abs(x))
-        }
+    fun formatAbs(x: Int): String {
+        val msg = "The absolute value of %d is %d"
+        return msg.format(x, abs(x))
     }
 }
 
 //Listing 2.2
-fun factorial(i: Int): Int {
+fun factorial22(i: Int): Int {
     fun go(n: Int, acc: Int): Int =
             if (n <= 0) acc
             else go(n - 1, n * acc)
@@ -29,31 +25,28 @@ fun factorial(i: Int): Int {
 }
 
 //Listing 2.3 (after refactoring)
-class MyExample23 {
+object MyModule23 {
 
-    companion object {
+    fun abs(n: Int): Int =
+            if (n < 0) -n
+            else n
 
-        fun abs(n: Int): Int =
-                if (n < 0) -n
-                else n
+    fun factorial(i: Int): Int {
+        fun go(n: Int, acc: Int): Int =
+                if (n <= 0) acc
+                else go(n - 1, n * acc)
+        return go(i, 1)
+    }
 
-        fun factorial(i: Int): Int {
-            fun go(n: Int, acc: Int): Int =
-                    if (n <= 0) acc
-                    else go(n - 1, n * acc)
-            return go(i, 1)
-        }
-
-        fun formatResult(name: String, n: Int, f: (Int) -> Int): String {
-            val msg = "The %s of %d is %d."
-            return msg.format(name, n, f(n))
-        }
+    fun formatResult(name: String, n: Int, f: (Int) -> Int): String {
+        val msg = "The %s of %d is %d."
+        return msg.format(name, n, f(n))
     }
 }
 
 fun main() {
-    println(formatResult("abs", 42, ::abs))
-    println(formatResult("factorial", 7, ::factorial))
+    println(MyModule23.formatResult("abs", 42, ::abs))
+    println(MyModule23.formatResult("factorial", 7, ::factorial))
 }
 
 //Listing 2.4
