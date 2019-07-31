@@ -4,33 +4,47 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 
 //Exercise 3.1
+
+// tag::exercise3.1[]
 fun <A> tail(xs: List<A>): List<A> = when (xs) {
     is Cons -> xs.tail
     is Nil -> throw Exception("Nil cannot have a `tail`")
 }
+// end::exercise3.1[]
 
 //Exercise 3.2
+
+// tag::exercise3.2[]
 fun <A> setHead(xs: List<A>, x: A): List<A> = when (xs) {
     is Cons -> Cons(x, xs.tail)
     is Nil -> throw Exception("Cannot replace `head` of a Nil list")
 }
+// end::exercise3.2[]
 
 //Exercise 3.3
+
+// tag::exercise3.3[]
 fun <A> drop(l: List<A>, n: Int): List<A> =
         if (n == 0) l
         else when (l) {
             is Cons -> drop(l.tail, n - 1)
             is Nil -> throw Exception("Cannot drop more elements than in list")
         }
+// tag::exercise3.3[]
 
 //Exercise 3.4
+
+// tag::exercise3.4[]
 fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> =
         when (l) {
             is Cons -> if (f(l.head)) dropWhile(l.tail, f) else l
             is Nil -> l
         }
+// end::exercise3.4[]
 
 //Exercise 3.5
+
+// tag::exercise3.5[]
 fun <A> init(l: List<A>): List<A> =
         when (l) {
             is Cons ->
@@ -39,6 +53,7 @@ fun <A> init(l: List<A>): List<A> =
             is Nil ->
                 throw Exception("Cannot init Nil list")
         }
+// end::exercise3.5[]
 
 //Exercise 3.17
 fun <A, B> map(ss: List<A>, f: (A) -> B): List<B> = TODO()
