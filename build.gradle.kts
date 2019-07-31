@@ -9,6 +9,7 @@ application {
 
 dependencies {
     compile(kotlin("stdlib"))
+    implementation("org.assertj:assertj-core:3.11.1")
 }
 
 repositories {
