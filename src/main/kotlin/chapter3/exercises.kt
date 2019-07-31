@@ -30,7 +30,7 @@ fun <A> drop(l: List<A>, n: Int): List<A> =
             is Cons -> drop(l.tail, n - 1)
             is Nil -> throw Exception("Cannot drop more elements than in list")
         }
-// tag::exercise3.3[]
+// end::exercise3.3[]
 
 //Exercise 3.4
 
