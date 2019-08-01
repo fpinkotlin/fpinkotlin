@@ -7,9 +7,14 @@ application {
     mainClassName = "samples.HelloWorldKt"
 }
 
+val test by tasks.getting(Test::class) {
+    useJUnitPlatform { }
+}
+
 dependencies {
     compile(kotlin("stdlib"))
-    implementation("org.assertj:assertj-core:3.11.1")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
+
 }
 
 repositories {

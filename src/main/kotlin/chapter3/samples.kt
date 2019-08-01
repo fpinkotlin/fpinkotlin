@@ -22,6 +22,8 @@ sealed class List<out A> {
             return if (aa.isEmpty()) Nil else Cons(aa[0], of(*tail))
         }
 
+        fun <A> empty(): List<A> = Nil
+
         fun <A> append(a1: List<A>, a2: List<A>): List<A> =
                 when (a1) {
                     is Nil -> a2
