@@ -114,6 +114,12 @@ class ExerciseSpec : WordSpec({
         }
     }
 
+    "List.reverse" should {
+        "reverse list elements" {
+            reverse(List.of(1, 2, 3, 4, 5)) shouldBe List.of(5, 4, 3, 2, 1)
+        }
+    }
+
 
 })
 

@@ -42,7 +42,7 @@ fun <A> init(l: List<A>): List<A> =
         }
 // end::exercise3.5[]
 
-// tag::exercise3.6[]
+// tag::exercise3.7[]
 fun <A, B> foldRight(xs: List<A>, z: B, f: (A, B) -> B): B =
         when (xs) {
             is Nil -> z
@@ -57,28 +57,32 @@ val step2 = Cons(1, foldRight(List.of(2, 3), z, f))
 val step3 = Cons(1, Cons(2, foldRight(List.of(3), z, f)))
 val step4 = Cons(1, Cons(2, Cons(3, foldRight(List.empty(), z, f))))
 val step5: List<Int> = Cons(1, Cons(2, Cons(3, Nil)))
-// end::exercise3.6[]
-
-// tag::exercise3.7[]
-fun <A> length(xs: List<A>): Int = foldRight(xs, 0, { _, acc -> 1 + acc })
 // end::exercise3.7[]
 
 // tag::exercise3.8[]
+fun <A> length(xs: List<A>): Int = foldRight(xs, 0, { _, acc -> 1 + acc })
+// end::exercise3.8[]
+
+// tag::exercise3.9[]
 tailrec fun <A, B> foldLeft(xs: List<A>, z: B, f: (B, A) -> B): B =
         when (xs) {
             is Nil -> z
             is Cons -> foldLeft(xs.tail, f(z, xs.head), f)
         }
-// end::exercise3.8[]
+// end::exercise3.9[]
 
-// tag::exercise3.9[]
+// tag::exercise3.10[]
 fun sumL(xs: List<Int>): Int = foldLeft(xs, 0, { x, y -> x + y })
 
 fun productL(xs: List<Double>): Double = foldLeft(xs, 1.0, { x, y -> x * y })
 
 fun <A> lengthL(xs: List<A>): Int = foldLeft(xs, 0, { acc, _ -> acc + 1 })
-// end::exercise3.9[]
+// end::exercise3.10[]
 
+// tag::exercise3.11[]
+fun <A> reverse(xs: List<A>): List<A> =
+        foldLeft(xs, Nil as List<A>, { t: List<A>, h: A -> Cons(h, t)})
+// end::exercise3.11[]
 
 //Exercise 3.17
 fun <A, B> map(ss: List<A>, f: (A) -> B): List<B> = TODO()
