@@ -81,8 +81,57 @@ fun <A> lengthL(xs: List<A>): Int = foldLeft(xs, 0, { acc, _ -> acc + 1 })
 
 // tag::exercise3.11[]
 fun <A> reverse(xs: List<A>): List<A> =
-        foldLeft(xs, Nil as List<A>, { t: List<A>, h: A -> Cons(h, t)})
+        foldLeft(xs, Nil as List<A>, { t: List<A>, h: A -> Cons(h, t) })
 // end::exercise3.11[]
+
+// tag::exercise3.12[]
+// foldLeft processes items in the reverse order from foldRight.  It's
+// cheating to use reverse() here because that's implemented in terms of
+// foldLeft! Instead, wrap each operation in a simple identity function to
+// delay evaluation until later and stack (nest) the functions so that the
+// order of application can be reversed.  We'll call the type of this
+// particular identity/delay function Identity<B> so we aren't writing B => B
+// everywhere:
+typealias Identity<B> = (B) -> B
+
+fun <A, B> foldLeftR_2(ls: List<A>, outerIdentity: B, combiner: (B, A) -> B): B {
+
+    // Here we declare a simple instance of BtoB according to the above
+    // description.  This function will be the identity value for the inner
+    // foldRight.
+    fun innerIdentity(): Identity<B> = { b: B -> b }
+
+    // For each item in the 'ls' list (the 'a' parameter below), make a new
+    // delay function which will use the combiner function (passed in above)
+    // when it is evaluated later.  Each new function becomes the input to the
+    // previous delayExec function.
+    //
+    //                    This much is just the type signature
+    //                     ,--------------^---------------,
+    fun combinerDelayer(): (A, Identity<B>) -> Identity<B> =
+            { a: A, delayExec: Identity<B> -> { b: B -> delayExec(combiner(b, a)) } }
+    //        `------------v-------------'    `-----------------v-----------------'
+    //                Parameters                 The returned function
+
+
+    // Pass the original list 'ls', plus the simple identity function and the
+    // new combinerDelayer to foldRight.  This will create the functions for
+    // delayed evaluation with a combiner inside each one, but will not
+    // invoke any of those functions.
+    fun go(combinerDelayer: (A, Identity<B>) -> Identity<B>): Identity<B> =
+            foldRight(ls, innerIdentity(), combinerDelayer)
+
+    // This forces all the evaluations to take place
+    return go(combinerDelayer()).invoke(outerIdentity)
+}
+
+fun <A, B> foldLeftR(xs: List<A>, z: B, f: (B, A) -> B): B =
+        foldRight(xs, { b: B -> b }, { a, g -> { b -> g(f(b, a)) } })(z)
+
+fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B =
+        foldLeft(xs, { b: B -> b }, { g, a -> { b -> g(f(a, b)) } })(z)
+// end::exercise3.12[]
+
 
 //Exercise 3.17
 fun <A, B> map(ss: List<A>, f: (A) -> B): List<B> = TODO()
