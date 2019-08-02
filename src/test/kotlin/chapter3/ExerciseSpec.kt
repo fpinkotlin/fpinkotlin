@@ -131,5 +131,17 @@ class ExerciseSpec : WordSpec({
             foldRightL(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
         }
     }
+
+    "List.append" should {
+        "append two lists to each other" {
+            appendR(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(1, 2, 3, 4, 5, 6)
+        }
+    }
+
+    "List.concat" should {
+        "concatenate a list of lists into a single list" {
+            concat(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
+        }
+    }
 })
 

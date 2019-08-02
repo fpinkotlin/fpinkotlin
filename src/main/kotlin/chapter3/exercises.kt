@@ -132,6 +132,16 @@ fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B =
         foldLeft(xs, { b: B -> b }, { g, a -> { b -> g(f(a, b)) } })(z)
 // end::exercise3.12[]
 
+// tag::exercise3.13[]
+fun <A> appendR(a1: List<A>, a2: List<A>): List<A> =
+        foldRight(a1, a2, { x, y -> Cons(x, y) })
+// end::exercise3.13[]
+
+// tag::exercise3.14[]
+fun <A> concat(xxs: List<List<A>>): List<A> =
+        foldRight(xxs, Nil as List<A>, { xs1: List<A>, xs2: List<A> ->
+            foldRight(xs1, xs2, { a, ls -> Cons(a, ls) }) })
+// end::exercise3.14[]
 
 //Exercise 3.17
 fun <A, B> map(ss: List<A>, f: (A) -> B): List<B> = TODO()
