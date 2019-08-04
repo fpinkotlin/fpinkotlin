@@ -179,4 +179,24 @@ fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> =
         flatMap(xa, { a -> if (f(a)) List.of(a) else List.empty() })
 // end::exercise3.20[]
 
+// tag::exercise3.21[]
+fun add(xa: List<Int>, xb: List<Int>): List<Int> =
+        when (xa) {
+            is Nil -> Nil
+            is Cons -> when (xb) {
+                is Nil -> Nil
+                is Cons -> Cons(xa.head + xb.head, add(xa.tail, xb.tail))
+            }
+        }
+// end::exercise3.21[]
 
+// tag::exercise3.22[]
+fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
+        when (xa) {
+            is Nil -> Nil
+            is Cons -> when (xb) {
+                is Nil -> Nil
+                is Cons -> Cons(f(xa.head, xb.head), zipWith(xa.tail, xb.tail, f))
+            }
+        }
+// end::exercise3.22[]

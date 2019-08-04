@@ -176,5 +176,17 @@ class ExerciseSpec : WordSpec({
             flatMap2(List.of(1, 2, 3), { i -> List.of(i, i) }) shouldBe List.of(1,1,2,2,3,3)
         }
     }
+
+    "List.add" should {
+        "add elements of two corresponding lists" {
+            add(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(5, 7, 9)
+        }
+    }
+
+    "List.zipWith" should {
+        "apply a function to elements of two corresponding lists" {
+            zipWith(List.of(1, 2, 3), List.of(4, 5, 6)) { x, y -> x + y } shouldBe List.of(5, 7, 9)
+        }
+    }
 })
 
