@@ -81,7 +81,10 @@ fun <A> lengthL(xs: List<A>): Int = foldLeft(xs, 0, { acc, _ -> acc + 1 })
 
 // tag::exercise3.11[]
 fun <A> reverse(xs: List<A>): List<A> =
-        foldLeft(xs, Nil as List<A>, { t: List<A>, h: A -> Cons(h, t) })
+        foldLeft(xs, List.empty(), { t: List<A>, h: A -> Cons(h, t) })
+
+fun <A> reverse2(xs: List<A>): List<A> =
+        foldLeft(xs, List.empty(), { t: List<A>, h: A -> Cons(h, t) })
 // end::exercise3.11[]
 
 // tag::exercise3.12[]
@@ -105,14 +108,8 @@ fun <A, B> foldLeftR_2(ls: List<A>, outerIdentity: B, combiner: (B, A) -> B): B 
     // delay function which will use the combiner function (passed in above)
     // when it is evaluated later.  Each new function becomes the input to the
     // previous delayExec function.
-    //
-    //                    This much is just the type signature
-    //                     ,--------------^---------------,
     fun combinerDelayer(): (A, Identity<B>) -> Identity<B> =
             { a: A, delayExec: Identity<B> -> { b: B -> delayExec(combiner(b, a)) } }
-    //        `------------v-------------'    `-----------------v-----------------'
-    //                Parameters                 The returned function
-
 
     // Pass the original list 'ls', plus the simple identity function and the
     // new combinerDelayer to foldRight.  This will create the functions for
@@ -133,22 +130,53 @@ fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B =
 // end::exercise3.12[]
 
 // tag::exercise3.13[]
-fun <A> appendR(a1: List<A>, a2: List<A>): List<A> =
+fun <A> append(a1: List<A>, a2: List<A>): List<A> =
         foldRight(a1, a2, { x, y -> Cons(x, y) })
 // end::exercise3.13[]
 
 // tag::exercise3.14[]
 fun <A> concat(xxs: List<List<A>>): List<A> =
-        foldRight(xxs, Nil as List<A>, { xs1: List<A>, xs2: List<A> ->
-            foldRight(xs1, xs2, { a, ls -> Cons(a, ls) }) })
+        foldRight(xxs, List.empty(), { xs1: List<A>, xs2: List<A> ->
+            foldRight(xs1, xs2, { a, ls -> Cons(a, ls) })
+        })
+
+fun <A> concat2(xxs: List<List<A>>): List<A> =
+        foldRight(xxs, List.empty(), { xs1, xs2 -> append(xs1, xs2) })
 // end::exercise3.14[]
 
-//Exercise 3.17
-fun <A, B> map(ss: List<A>, f: (A) -> B): List<B> = TODO()
+// tag::exercise3.15[]
+fun increment(xs: List<Int>): List<Int> =
+        foldRight(xs, List.empty(), { i: Int, ls -> Cons(i + 1, ls) })
+// end::exercise3.15[]
 
-//Exercise 3.18
-fun <A> filter(ls: List<A>, f: (A) -> Boolean): List<A> = TODO()
+// tag::exercise3.16[]
+fun doubleToString(xs: List<Double>): List<String> =
+        foldRight(xs, List.empty(), { d, ds -> Cons(d.toString(), ds) })
+// end::exercise3.16[]
 
-//Exercise 3.19
-fun <A, B> flatMap(ss: List<A>, f: (A) -> List<B>): List<B> = TODO()
+// tag::exercise3.17[]
+fun <A, B> map(xs: List<A>, f: (A) -> B): List<B> =
+        foldRight(xs, List.empty(), { a, xa -> Cons(f(a), xa) })
+// end::exercise3.17[]
+
+// tag::exercise3.18[]
+fun <A> filter(xs: List<A>, f: (A) -> Boolean): List<A> =
+        foldRight(xs, List.empty(), { a, ls -> if (f(a)) Cons(a, ls) else ls })
+// tag::exercise3.18[]
+
+// tag::exercise3.19[]
+fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> =
+        foldRight(xa, List.empty(), { a, lb -> append(f(a), lb) })
+
+fun <A, B> flatMap2(xa: List<A>, f: (A) -> List<B>): List<B> =
+        foldRight(xa, List.empty(), { a, xb ->
+            foldRight(f(a), xb, { b, lb -> Cons(b, lb) })
+        })
+// end::exercise3.19[]
+
+// tag::exercise3.20[]
+fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> =
+        flatMap(xa, { a -> if (f(a)) List.of(a) else List.empty() })
+// end::exercise3.20[]
+
 

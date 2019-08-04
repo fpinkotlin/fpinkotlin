@@ -134,13 +134,46 @@ class ExerciseSpec : WordSpec({
 
     "List.append" should {
         "append two lists to each other" {
-            appendR(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(1, 2, 3, 4, 5, 6)
+            append(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(1, 2, 3, 4, 5, 6)
         }
     }
 
     "List.concat" should {
         "concatenate a list of lists into a single list" {
             concat(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
+            concat2(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
+        }
+    }
+
+    "List.increment" should {
+        "add 1 to every element" {
+            increment(List.of(1, 2, 3, 4, 5)) shouldBe List.of(2, 3, 4, 5, 6)
+        }
+    }
+
+    "List.doubleToString" should {
+        "convert every double element to a string" {
+            doubleToString(List.of(1.1, 1.2, 1.3, 1.4)) shouldBe List.of("1.1", "1.2", "1.3", "1.4")
+        }
+    }
+
+    "List.map" should {
+        "apply a function to every list element" {
+            map(List.of(1, 2, 3, 4, 5), { it * 10 }) shouldBe List.of(10, 20, 30, 40, 50)
+        }
+    }
+
+    "List.filter" should {
+        "filter out elements not compliant to predicate" {
+            filter(List.of(1, 2, 3, 4, 5), { it % 2 == 0 }) shouldBe List.of(2, 4)
+            filter2(List.of(1, 2, 3, 4, 5), { it % 2 == 0 }) shouldBe List.of(2, 4)
+        }
+    }
+
+    "List.flatmap" should {
+        "map and flatten a list" {
+            flatMap(List.of(1, 2, 3), { i -> List.of(i, i) }) shouldBe List.of(1,1,2,2,3,3)
+            flatMap2(List.of(1, 2, 3), { i -> List.of(i, i) }) shouldBe List.of(1,1,2,2,3,3)
         }
     }
 })
