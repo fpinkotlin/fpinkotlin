@@ -172,8 +172,8 @@ class ExerciseSpec : WordSpec({
 
     "List.flatmap" should {
         "map and flatten a list" {
-            flatMap(List.of(1, 2, 3), { i -> List.of(i, i) }) shouldBe List.of(1,1,2,2,3,3)
-            flatMap2(List.of(1, 2, 3), { i -> List.of(i, i) }) shouldBe List.of(1,1,2,2,3,3)
+            flatMap(List.of(1, 2, 3)) { i -> List.of(i, i) } shouldBe List.of(1, 1, 2, 2, 3, 3)
+            flatMap2(List.of(1, 2, 3)) { i -> List.of(i, i) } shouldBe List.of(1, 1, 2, 2, 3, 3)
         }
     }
 

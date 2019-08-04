@@ -156,7 +156,7 @@ fun doubleToString(xs: List<Double>): List<String> =
 
 // tag::exercise3.17[]
 fun <A, B> map(xs: List<A>, f: (A) -> B): List<B> =
-        foldRight(xs, List.empty(), { a, xa -> Cons(f(a), xa) })
+        foldRightL(xs, List.empty(), { a, xa -> Cons(f(a), xa) })
 // end::exercise3.17[]
 
 // tag::exercise3.18[]
