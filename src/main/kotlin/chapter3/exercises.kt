@@ -176,7 +176,9 @@ fun <A, B> flatMap2(xa: List<A>, f: (A) -> List<B>): List<B> =
 
 // tag::exercise3.20[]
 fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> =
-        flatMap(xa, { a -> if (f(a)) List.of(a) else List.empty() })
+        flatMap(xa) { a ->
+            if (f(a)) List.of(a) else List.empty()
+        }
 // end::exercise3.20[]
 
 // tag::exercise3.21[]
