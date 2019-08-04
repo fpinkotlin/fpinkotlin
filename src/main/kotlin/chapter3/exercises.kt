@@ -162,7 +162,7 @@ fun <A, B> map(xs: List<A>, f: (A) -> B): List<B> =
 // tag::exercise3.18[]
 fun <A> filter(xs: List<A>, f: (A) -> Boolean): List<A> =
         foldRight(xs, List.empty(), { a, ls -> if (f(a)) Cons(a, ls) else ls })
-// tag::exercise3.18[]
+// end::exercise3.18[]
 
 // tag::exercise3.19[]
 fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> =
