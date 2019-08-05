@@ -202,3 +202,26 @@ fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
             }
         }
 // end::exercise3.22[]
+
+// tag::exercise3.23[]
+tailrec fun <A> startsWith(l1: List<A>, l2: List<A>): Boolean =
+        when (l1) {
+            is Nil -> l2 == Nil
+            is Cons -> when (l2) {
+                is Nil -> true
+                is Cons ->
+                    if (l1.head == l2.head) startsWith(l1.tail, l2.tail)
+                    else false
+            }
+        }
+
+tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean {
+    return when (xs) {
+        is Nil -> false
+        is Cons ->
+            if (startsWith(xs, sub)) true
+            else hasSubsequence(xs.tail, sub)
+    }
+}
+// end::exercise3.23[]
+
