@@ -6,7 +6,7 @@ import io.kotlintest.specs.WordSpec
 
 class ExerciseSpec : WordSpec({
 
-    "List.tail" should {
+    "list tail" should {
         "return the the tail when present" {
             tail(List.of(1, 2, 3, 4, 5)) shouldBe List.of(2, 3, 4, 5)
         }
@@ -18,7 +18,7 @@ class ExerciseSpec : WordSpec({
         }
     }
 
-    "List.setHead" should {
+    "list setHead" should {
         "return a new List with a replaced head" {
             setHead(List.of(1, 2, 3, 4, 5), 6) shouldBe List.of(6, 2, 3, 4, 5)
         }
@@ -30,7 +30,7 @@ class ExerciseSpec : WordSpec({
         }
     }
 
-    "List.drop" should {
+    "list drop" should {
         "drop a given number of elements within capacity" {
             drop(List.of(1, 2, 3, 4, 5), 3) shouldBe List.of(4, 5)
         }
@@ -46,7 +46,7 @@ class ExerciseSpec : WordSpec({
         }
     }
 
-    "List.dropWhile" should {
+    "list dropWhile" should {
         "drop elements until predicate is no longer satisfied" {
             dropWhile(List.of(1, 2, 3, 4, 5)) { it < 4 } shouldBe List.of(4, 5)
         }
@@ -64,7 +64,7 @@ class ExerciseSpec : WordSpec({
         }
     }
 
-    "List.init" should {
+    "list init" should {
         "return all but the last element" {
             init(List.of(1, 2, 3, 4, 5)) shouldBe List.of(1, 2, 3, 4)
         }
@@ -80,7 +80,7 @@ class ExerciseSpec : WordSpec({
         }
     }
 
-    "List.length" should {
+    "list length" should {
         "calculate the length" {
             length(List.of(1, 2, 3, 4, 5)) shouldBe 5
         }
@@ -90,106 +90,106 @@ class ExerciseSpec : WordSpec({
         }
     }
 
-    "List.foldLeft" should {
+    "list foldLeft" should {
         "apply a function f providing a zero accumulator from tail recursive position" {
             foldLeft(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
         }
     }
 
-    "List.sumL" should {
+    "list sumL" should {
         "add all integers" {
             sumL(List.of(1, 2, 3, 4, 5)) shouldBe 15
         }
     }
 
-    "List.productL" should {
+    "list productL" should {
         "multiply all doubles" {
             productL(List.of(1.0, 2.0, 3.0, 4.0, 5.0)) shouldBe 120.0
         }
     }
 
-    "List.lengthL" should {
+    "list lengthL" should {
         "count the list elements" {
             lengthL(List.of(1, 2, 3, 4, 5)) shouldBe 5
         }
     }
 
-    "List.reverse" should {
+    "list reverse" should {
         "reverse list elements" {
             reverse(List.of(1, 2, 3, 4, 5)) shouldBe List.of(5, 4, 3, 2, 1)
         }
     }
 
-    "List.foldLeftR" should {
+    "list foldLeftR" should {
         "implement foldLeft functionality using foldRight" {
             foldLeftR(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
         }
     }
 
-    "List.foldRightL" should {
+    "list foldRightL" should {
         "implement foldRight functionality using foldLeft" {
             foldRightL(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
         }
     }
 
-    "List.append" should {
+    "list append" should {
         "append two lists to each other" {
             append(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(1, 2, 3, 4, 5, 6)
         }
     }
 
-    "List.concat" should {
+    "list concat" should {
         "concatenate a list of lists into a single list" {
             concat(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
             concat2(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
         }
     }
 
-    "List.increment" should {
+    "list increment" should {
         "add 1 to every element" {
             increment(List.of(1, 2, 3, 4, 5)) shouldBe List.of(2, 3, 4, 5, 6)
         }
     }
 
-    "List.doubleToString" should {
+    "list doubleToString" should {
         "convert every double element to a string" {
             doubleToString(List.of(1.1, 1.2, 1.3, 1.4)) shouldBe List.of("1.1", "1.2", "1.3", "1.4")
         }
     }
 
-    "List.map" should {
+    "list map" should {
         "apply a function to every list element" {
             map(List.of(1, 2, 3, 4, 5), { it * 10 }) shouldBe List.of(10, 20, 30, 40, 50)
         }
     }
 
-    "List.filter" should {
+    "list filter" should {
         "filter out elements not compliant to predicate" {
             filter(List.of(1, 2, 3, 4, 5), { it % 2 == 0 }) shouldBe List.of(2, 4)
             filter2(List.of(1, 2, 3, 4, 5), { it % 2 == 0 }) shouldBe List.of(2, 4)
         }
     }
 
-    "List.flatmap" should {
+    "list flatmap" should {
         "map and flatten a list" {
             flatMap(List.of(1, 2, 3)) { i -> List.of(i, i) } shouldBe List.of(1, 1, 2, 2, 3, 3)
             flatMap2(List.of(1, 2, 3)) { i -> List.of(i, i) } shouldBe List.of(1, 1, 2, 2, 3, 3)
         }
     }
 
-    "List.add" should {
+    "list add" should {
         "add elements of two corresponding lists" {
             add(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(5, 7, 9)
         }
     }
 
-    "List.zipWith" should {
+    "list zipWith" should {
         "apply a function to elements of two corresponding lists" {
             zipWith(List.of(1, 2, 3), List.of(4, 5, 6)) { x, y -> x + y } shouldBe List.of(5, 7, 9)
         }
     }
 
-    "List.subsequence" should {
+    "list subsequence" should {
         "determine if a list starts with" {
             startsWith(List.of(1, 2, 3), List.of(1)) shouldBe true
             startsWith(List.of(1, 2, 3), List.of(1, 2)) shouldBe true
@@ -212,5 +212,70 @@ class ExerciseSpec : WordSpec({
             hasSubsequence(List.of(1, 2, 3, 4, 5), List.of(2, 4)) shouldBe false
         }
     }
-})
 
+    "tree size" should {
+        "determine the total size of a tree" {
+            val tree = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
+            size(tree) shouldBe 7
+        }
+    }
+
+    "tree maximum" should {
+        "determine the maximum value held in a tree" {
+            val tree = Branch(Branch(Leaf(1), Leaf(9)), Branch(Leaf(3), Leaf(4)))
+            maximum(tree) shouldBe 9
+        }
+    }
+
+    "tree depth" should {
+        "determine the maximum depth from the root to any leaf" {
+            val tree = Branch( //0
+                    Branch(Leaf(1), Leaf(2)), //2
+                    Branch(Leaf(3), //2
+                            Branch(Branch(Leaf(4), Leaf(5)), //4
+                                    Branch(Leaf(6), //4
+                                            Branch(Leaf(7), Leaf(8)))))) //5
+            depth(tree) shouldBe 5
+        }
+
+    }
+
+    "tree map" should {
+        "transform all leaves of a map" {
+            val actual = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
+            val expected = Branch(Branch(Leaf(10), Leaf(20)), Branch(Leaf(30), Leaf(40)))
+            map(actual) { it * 10 } shouldBe expected
+        }
+    }
+
+    "tree fold" should {
+
+        val tree = Branch( //0
+                Branch(Leaf(1), Leaf(2)), //2
+                Branch(Leaf(3), //2
+                        Branch(Branch(Leaf(4), Leaf(5)), //4
+                                Branch(Leaf(21), //4
+                                        Branch(Leaf(7), Leaf(8)))))) //5
+        "generalise size" {
+            fold(tree, { 1 }, { b1: Int, b2: Int -> 1 + b1 + b2 }) shouldBe 15
+        }
+
+        "generalise maximum" {
+            fold(tree, { a -> a }, { b1: Int, b2: Int -> maxOf(b1, b2) }) shouldBe 21
+        }
+
+        "generalise depth" {
+            fold(tree, { a -> 0 }, { b1: Int, b2: Int -> 1 + maxOf(b1, b2) }) shouldBe 5
+        }
+
+        "generalise map" {
+            fold(tree, { Leaf(it * 10) }, { b1: Tree<Int>, b2: Tree<Int> -> Branch(b1, b2) }) shouldBe
+                    Branch( //0
+                            Branch(Leaf(10), Leaf(20)), //2
+                            Branch(Leaf(30), //2
+                                    Branch(Branch(Leaf(40), Leaf(50)), //4
+                                            Branch(Leaf(210), //4
+                                                    Branch(Leaf(70), Leaf(80))))))
+        }
+    }
+})

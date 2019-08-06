@@ -215,13 +215,52 @@ tailrec fun <A> startsWith(l1: List<A>, l2: List<A>): Boolean =
             }
         }
 
-tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean {
-    return when (xs) {
-        is Nil -> false
-        is Cons ->
-            if (startsWith(xs, sub)) true
-            else hasSubsequence(xs.tail, sub)
-    }
-}
+tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean =
+        when (xs) {
+            is Nil -> false
+            is Cons ->
+                if (startsWith(xs, sub)) true
+                else hasSubsequence(xs.tail, sub)
+
+        }
 // end::exercise3.23[]
 
+// tag::exercise3.24[]
+fun <A> size(tree: Tree<A>): Int =
+        when (tree) {
+            is Leaf -> 1
+            is Branch -> 1 + size(tree.left) + size(tree.right)
+        }
+// end::exercise3.24[]
+
+// tag::exercise3.25[]
+fun maximum(tree: Tree<Int>): Int =
+        when (tree) {
+            is Leaf -> tree.value
+            is Branch -> maxOf(maximum(tree.left), maximum(tree.right))
+        }
+// end::exercise3.25[]
+
+// tag::exercise3.26[]
+fun depth(tree: Tree<Int>): Int =
+        when (tree) {
+            is Leaf -> 0
+            is Branch -> 1 + maxOf(depth(tree.left), depth(tree.right))
+        }
+// end::exercise3.26[]
+
+// tag::exercise3.27[]
+fun <A, B> map(tree: Tree<A>, f: (A) -> B): Tree<B> =
+        when (tree) {
+            is Leaf -> Leaf(f(tree.value))
+            is Branch -> Branch(map(tree.left, f), map(tree.right, f))
+        }
+// end::exercise3.27[]
+
+// tag::exercise3.28[]
+fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B =
+        when (ta) {
+            is Leaf -> l(ta.value)
+            is Branch -> b(fold(ta.left, l, b), fold(ta.right, l, b))
+        }
+// end::exercise3.28[]

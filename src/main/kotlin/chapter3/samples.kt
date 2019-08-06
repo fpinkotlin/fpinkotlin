@@ -49,7 +49,13 @@ object Nil : List<Nothing>() {
 data class Cons<out A>(val head: A, val tail: List<A>) : List<A>()
 
 //Tree structures
-sealed class Tree<out A>
+sealed class Tree<out A> {
+    companion object {
+        fun <A> of(vararg tt: A): Tree<A> {
+            return TODO()
+        }
+    }
+}
 
 data class Leaf<A>(val value: A) : Tree<A>()
 
