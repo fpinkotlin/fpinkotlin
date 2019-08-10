@@ -1,5 +1,7 @@
 package chapter3
 
+import java.lang.Integer.parseInt
+
 //List structures
 sealed class List<out A> {
     companion object {
@@ -49,18 +51,11 @@ object Nil : List<Nothing>() {
 data class Cons<out A>(val head: A, val tail: List<A>) : List<A>()
 
 //Tree structures
-sealed class Tree<out A> {
-    companion object {
-        fun <A> of(vararg tt: A): Tree<A> {
-            return TODO()
-        }
-    }
-}
+sealed class Tree<out A>
 
 data class Leaf<A>(val value: A) : Tree<A>()
 
 data class Branch<A>(val left: Tree<A>, val right: Tree<A>) : Tree<A>()
-
 
 
 fun main() {
