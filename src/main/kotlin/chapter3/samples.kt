@@ -1,7 +1,5 @@
 package chapter3
 
-import java.lang.Integer.parseInt
-
 //List structures
 sealed class List<out A> {
     companion object {
