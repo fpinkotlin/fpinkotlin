@@ -2,18 +2,20 @@ package chapter3
 
 //Singly Linked List data structure
 
-// tag::singly_linked_list[]
+//tag::example[]
 sealed class List<out A> { // <1>
-    //tag:comments[]
-    // companion object containing helper methods
-    //end:comments[]
-    //tag:companion_object[]
+    // helper functions
+    //tag::companion[]
     companion object { // <2>
+        //tag::sum[]
+
         fun sum(ints: List<Int>): Int =
                 when (ints) {
                     is Nil -> 0
                     is Cons -> ints.head + sum(ints.tail)
                 }
+        //end::sum[]
+        //tag::product[]
 
         fun product(doubles: List<Double>): Double =
                 when (doubles) {
@@ -22,13 +24,16 @@ sealed class List<out A> { // <1>
                         if (doubles.head == 0.0) 0.0
                         else doubles.head * product(doubles.tail)
                 }
+        //end::product[]
 
-        fun <A> of(vararg aa: A): List<A> {
+        //tag::of[]
+        fun <A> of(vararg aa: A): List<A> { // <3>
             val tail = aa.sliceArray(1 until aa.size)
             return if (aa.isEmpty()) Nil else Cons(aa[0], of(*tail))
         }
+        //end::of[]
+        //tag::extra[]
 
-        //tag:extras[]
         fun <A> empty(): List<A> = Nil
 
         fun <A> append(xs1: List<A>, xs2: List<A>): List<A> =
@@ -38,12 +43,14 @@ sealed class List<out A> { // <1>
                 }
 
         fun sumFR(xs: List<Int>): Int = foldRight(xs, 0, { a, b -> a + b })
-        //end:extras[]
+        //end::extra[]
     }
-    // end::companion_object[]
+    //end::companion[]
 }
 
-object Nil : List<Nothing>()
+//tag::impls[]
+object Nil : List<Nothing>() // <2>
 
-data class Cons<out A>(val head: A, val tail: List<A>) : List<A>()
-// end::singly_linked_list[]
+data class Cons<out A>(val head: A, val tail: List<A>) : List<A>() // <3>
+//end::impls[]
+//end::example[]
