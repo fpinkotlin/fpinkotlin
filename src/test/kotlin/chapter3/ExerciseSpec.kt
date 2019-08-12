@@ -265,7 +265,7 @@ class ExerciseSpec : WordSpec({
         }
 
         "generalise depth" {
-            fold(tree, { a -> 0 }, { b1: Int, b2: Int -> 1 + maxOf(b1, b2) }) shouldBe 5
+            fold(tree, { _ -> 0 }, { b1: Int, b2: Int -> 1 + maxOf(b1, b2) }) shouldBe 5
         }
 
         "generalise map" {
