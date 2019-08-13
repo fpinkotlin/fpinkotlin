@@ -4,8 +4,11 @@ package chapter3
 
 //tag::example[]
 sealed class List<out A> { // <1>
+    //tag::comment[]
     // helper functions
+    //end::comment[]
     //tag::companion[]
+
     companion object { // <2>
 
         //tag::of[]
