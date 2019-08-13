@@ -2,7 +2,7 @@ package chapter3.exercises
 
 import chapter3.listings.Tree
 
-object Listings {
+object Signatures {
 
     //tag::exercise_3.1[]
     fun <A> tail(xs: List<A>): List<A> = TODO()
