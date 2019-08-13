@@ -1,6 +1,7 @@
-package chapter3
+package chapter3.exercises
 
-import chapter3.exercises.*
+import chapter3.listings.Branch
+import chapter3.listings.Leaf
 import chapter3.listings.List
 import chapter3.listings.Nil
 import io.kotlintest.shouldBe
@@ -260,19 +261,19 @@ class ExerciseSpec : WordSpec({
                                 Branch(Leaf(21), //4
                                         Branch(Leaf(7), Leaf(8)))))) //5
         "generalise size" {
-            fold(tree, { 1 }, { b1: Int, b2: Int -> 1 + b1 + b2 }) shouldBe 15
+            sizeF(tree) shouldBe 15
         }
 
         "generalise maximum" {
-            fold(tree, { a -> a }, { b1: Int, b2: Int -> maxOf(b1, b2) }) shouldBe 21
+            maximumF(tree) shouldBe 21
         }
 
         "generalise depth" {
-            fold(tree, { _ -> 0 }, { b1: Int, b2: Int -> 1 + maxOf(b1, b2) }) shouldBe 5
+            depthF(tree) shouldBe 5
         }
 
         "generalise map" {
-            fold(tree, { Leaf(it * 10) }, { b1: Tree<Int>, b2: Tree<Int> -> Branch(b1, b2) }) shouldBe
+            mapF(tree) { it * 10 } shouldBe
                     Branch( //0
                             Branch(Leaf(10), Leaf(20)), //2
                             Branch(Leaf(30), //2
