@@ -1,5 +1,6 @@
 package chapter3
 
+import chapter3.exercises.*
 import chapter3.listings.List
 import chapter3.listings.Nil
 import io.kotlintest.shouldBe
