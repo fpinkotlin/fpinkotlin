@@ -1,6 +1,6 @@
 package chapter3.exercises
 
-import chapter3.Tree
+import chapter3.listings.Tree
 
 object Listings {
 

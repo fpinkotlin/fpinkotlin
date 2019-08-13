@@ -1,8 +1,8 @@
 package chapter3.exercises
 
-import chapter3.Branch
-import chapter3.Leaf
-import chapter3.Tree
+import chapter3.listings.Branch
+import chapter3.listings.Leaf
+import chapter3.listings.Tree
 import chapter3.listings.Cons
 import chapter3.listings.List
 import chapter3.listings.Nil
