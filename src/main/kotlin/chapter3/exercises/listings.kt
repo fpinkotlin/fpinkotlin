@@ -44,6 +44,10 @@ object Listings {
     fun <A, B> flatMap(xs: List<A>, f: (A) -> List<B>): List<B> = TODO()
     //end::exercise_3.19[]
 
+    //tag::exercise_3.23[]
+    fun <A> hasSubsequence(sup: List<A>, sub: List<A>): Boolean = TODO()
+    //end::exercise_3.23[]
+
     //tag::exercise_3.28[]
     fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B = TODO()
     //end::exercise_3.28[]
