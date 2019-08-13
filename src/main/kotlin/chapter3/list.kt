@@ -7,16 +7,23 @@ sealed class List<out A> { // <1>
     // helper functions
     //tag::companion[]
     companion object { // <2>
-        //tag::sum[]
 
+        //tag::of[]
+        fun <A> of(vararg aa: A): List<A> { // <3>
+            val tail = aa.sliceArray(1 until aa.size)
+            return if (aa.isEmpty()) Nil else Cons(aa[0], of(*tail))
+        }
+
+        //end::of[]
+        //tag::sum[]
         fun sum(ints: List<Int>): Int =
                 when (ints) {
                     is Nil -> 0
                     is Cons -> ints.head + sum(ints.tail)
                 }
+
         //end::sum[]
         //tag::product[]
-
         fun product(doubles: List<Double>): Double =
                 when (doubles) {
                     is Nil -> 1.0
@@ -24,26 +31,11 @@ sealed class List<out A> { // <1>
                         if (doubles.head == 0.0) 0.0
                         else doubles.head * product(doubles.tail)
                 }
+
         //end::product[]
-
-        //tag::of[]
-        fun <A> of(vararg aa: A): List<A> { // <3>
-            val tail = aa.sliceArray(1 until aa.size)
-            return if (aa.isEmpty()) Nil else Cons(aa[0], of(*tail))
-        }
-        //end::of[]
-        //tag::extra[]
-
+        //tag::empty[]
         fun <A> empty(): List<A> = Nil
-
-        fun <A> append(xs1: List<A>, xs2: List<A>): List<A> =
-                when (xs1) {
-                    is Nil -> xs2
-                    is Cons -> Cons(xs1.head, append(xs1.tail, xs2))
-                }
-
-        fun sumFR(xs: List<Int>): Int = foldRight(xs, 0, { a, b -> a + b })
-        //end::extra[]
+        //end::empty[]
     }
     //end::companion[]
 }
