@@ -1,8 +1,8 @@
-package chapter3
+package chapter3.listings
 
 import kotlin.random.Random
 
-object Snippet2 {
+object Listing_3_6 {
     //tag::init[]
     val x = Random.nextInt(-10, 10)
     val y: String = when { // <1>

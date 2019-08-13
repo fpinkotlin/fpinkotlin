@@ -1,6 +1,6 @@
-package chapter3
+package chapter3.listings
 
-object Snippet8 {
+object Listing_3_11 {
 
     //tag::init[]
     fun <A, B> foldRight(xs: List<A>, z: B, f: (A, B) -> B): B =

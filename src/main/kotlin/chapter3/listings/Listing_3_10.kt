@@ -1,6 +1,6 @@
-package chapter3
+package chapter3.listings
 
-object Snippet7 {
+object Listing_3_10 {
 
     //tag::init[]
     fun sum(xs: List<Int>): Int = when (xs) {

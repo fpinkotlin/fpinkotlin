@@ -1,6 +1,6 @@
-package chapter3
+package chapter3.listings
 
-object Snippet3 {
+object Listing_3_9 {
     //tag::init[]
     fun <A> append(a1: List<A>, a2: List<A>): List<A> =
             when (a1) {

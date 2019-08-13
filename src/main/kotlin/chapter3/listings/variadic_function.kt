@@ -1,6 +1,6 @@
-package chapter3
+package chapter3.listings
 
-object Snippet4 {
+object VariadicFunctionSidebar {
     //tag::init[]
     fun <A> of(vararg aa: A): List<A> {
         val tail = aa.sliceArray(1 until aa.size)

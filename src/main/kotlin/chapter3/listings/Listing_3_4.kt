@@ -1,6 +1,6 @@
-package chapter3
+package chapter3.listings
 
-object Snippet0 {
+object Listing_3_4 {
 
     //tag::init[]
     val ints = List.of(1, 2, 3, 4) // <1>

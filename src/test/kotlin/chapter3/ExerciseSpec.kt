@@ -1,5 +1,7 @@
 package chapter3
 
+import chapter3.listings.List
+import chapter3.listings.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec

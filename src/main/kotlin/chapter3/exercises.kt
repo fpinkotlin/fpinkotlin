@@ -1,5 +1,9 @@
 package chapter3
 
+import chapter3.listings.Cons
+import chapter3.listings.List
+import chapter3.listings.Nil
+
 // tag::exercise3.1[]
 fun <A> tail(xs: List<A>): List<A> = when (xs) {
     is Cons -> xs.tail
