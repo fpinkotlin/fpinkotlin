@@ -9,6 +9,7 @@ fun <A, B, C> map2(a: Option<A>, b: Option<B>, f: (A, B) -> C): Option<C> =
 class SolutionSpec_4_3 : WordSpec({
 
     "map2" should {
+
         val a = Some(5)
         val b = Some(20)
         val none = Option.empty<Int>()

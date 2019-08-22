@@ -48,9 +48,11 @@ class SolutionSpec_4_1 : WordSpec({
 
     val none = Option.empty<Int>()
 
+    val some = Some(10)
+
     "Option.map" should {
-        "apply the given function to the content of an option of some value" {
-            Some(10).map { it * 2 } shouldBe Some(20)
+        "transform an option of some value" {
+            some.map { it * 2 } shouldBe Some(20)
         }
         "pass over an option of none" {
             none.map { it * 10 } shouldBe None
@@ -58,9 +60,9 @@ class SolutionSpec_4_1 : WordSpec({
     }
 
     "Option.flatMap" should {
-        "apply the given function to the content of an option of some value" {
-            Some(10).flatMap { a -> Some(a.toString()) } shouldBe Some("10")
-            Some(10).flatMap_2 { a -> Some(a.toString()) } shouldBe Some("10")
+        "apply a function yielding an option to an option of some value" {
+            some.flatMap { a -> Some(a.toString()) } shouldBe Some("10")
+            some.flatMap_2 { a -> Some(a.toString()) } shouldBe Some("10")
         }
         "pass over an option of none" {
             none.flatMap { a -> Some(a.toString()) } shouldBe None
@@ -69,19 +71,18 @@ class SolutionSpec_4_1 : WordSpec({
     }
 
     "Option.getOrElse" should {
-        "extract the value of an option of some value" {
-            Some(10).getOrElse { 0 } shouldBe 10
+        "extract the value of some option" {
+            some.getOrElse { 0 } shouldBe 10
         }
-        "return a default if the option is none" {
+        "return a default value if the option is none" {
             none.getOrElse { 10 } shouldBe 10
         }
     }
 
     "Option.orElse" should {
         "return the option if the option is some" {
-            Some(10).orElse { Some(20) } shouldBe Some(10)
-            Some(10).orElse_2 { Some(20) } shouldBe Some(10)
-
+            some.orElse { Some(20) } shouldBe some
+            some.orElse_2 { Some(20) } shouldBe some
         }
         "return a default option if the option is none" {
             none.orElse { Some(20) } shouldBe Some(20)
@@ -91,12 +92,12 @@ class SolutionSpec_4_1 : WordSpec({
 
     "Option.filter" should {
         "return some option if the predicate is met" {
-            Some(10).filter { it > 0 } shouldBe Some(10)
-            Some(10).filter_2 { it > 0 } shouldBe Some(10)
+            some.filter { it > 0 } shouldBe some
+            some.filter_2 { it > 0 } shouldBe some
         }
         "return a none option if the predicate is not met" {
-            Some(10).filter { it < 0 } shouldBe None
-            Some(10).filter_2 { it < 0 } shouldBe None
+            some.filter { it < 0 } shouldBe None
+            some.filter_2 { it < 0 } shouldBe None
         }
     }
 })
