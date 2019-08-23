@@ -1,10 +1,10 @@
-package chapter4
+package chapter4.solutions
 
 import chapter3.listings.Cons
 import chapter3.listings.List
 import chapter3.listings.Nil
 
-fun <A, B> List<A>.map(f: (A) -> B): List<B> = this.foldRight(List.empty<B>(), { a, b -> Cons(f(a), b) })
+fun <A, B> List<A>.map(f: (A) -> B): List<B> = this.foldRight(List.empty(), { a, b -> Cons(f(a), b) })
 
 fun <A, B> List<A>.foldRight(z: B, f: (A, B) -> B): B =
         when (this) {

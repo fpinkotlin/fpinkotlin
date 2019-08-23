@@ -1,5 +1,8 @@
-package chapter4
+package chapter4.solutions
 
+import chapter4.Either
+import chapter4.Left
+import chapter4.Right
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 

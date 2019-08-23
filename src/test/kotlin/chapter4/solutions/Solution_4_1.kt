@@ -1,5 +1,8 @@
-package chapter4
+package chapter4.solutions
 
+import chapter4.None
+import chapter4.Option
+import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 

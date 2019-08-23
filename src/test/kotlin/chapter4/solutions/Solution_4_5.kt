@@ -1,8 +1,11 @@
-package chapter4
+package chapter4.solutions
 
 import chapter3.listings.Cons
 import chapter3.listings.List
 import chapter3.listings.Nil
+import chapter4.None
+import chapter4.Option
+import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
