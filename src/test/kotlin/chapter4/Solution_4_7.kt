@@ -6,11 +6,6 @@ import chapter3.listings.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-sealed class Either<out E, out A>
-
-data class Left<out E>(val value: E) : Either<E, Nothing>()
-data class Right<out A>(val value: A) : Either<Nothing, A>()
-
 class SolutionSpec_4_7 : WordSpec({
 
     fun <E, A, B> traverse(xs: List<A>, f: (A) -> Either<E, B>): Either<E, List<B>> =

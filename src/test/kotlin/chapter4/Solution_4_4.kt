@@ -13,7 +13,7 @@ fun <A> sequence(xs: List<Option<A>>): Option<List<A>> =
             }
         })
 
-class SolutionSpec_4_4: WordSpec({
+class SolutionSpec_4_4 : WordSpec({
 
     "sequence" should {
         "turn a list of some options into an option of list" {
