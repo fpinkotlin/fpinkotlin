@@ -9,14 +9,11 @@ import chapter3.exercises.Solution_3_8.length
 
 object Listing_4_2 {
 
-    fun List<Double>.sum(): Double = foldRightL(this, 0.0, { a, b -> a + b })
+    fun List<Double>.sum(): Double = TODO()
 
-    fun List<Double>.isEmpty(): Boolean = when(this) {
-        is Nil -> true
-        is Cons -> false
-    }
+    fun List<Double>.isEmpty(): Boolean = TODO()
 
-    fun <A> List<A>.size(): Int = foldRightL(this, 0, { _, acc -> 1 + acc })
+    fun <A> List<A>.size(): Int = TODO()
 
     fun mean(xs: List<Double>): Double =
             if (xs.isEmpty())

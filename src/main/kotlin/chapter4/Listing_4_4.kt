@@ -4,6 +4,7 @@ import chapter3.listings.List
 import kotlin.math.abs
 
 object Listing_4_4 {
+
     fun <A, B> lift(f: (A) -> B): (Option<A>) -> Option<B> = { oa -> oa.map(f) }
 
     val absO: (Option<Double>) -> Option<Double> = lift { abs(it) }

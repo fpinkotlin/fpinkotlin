@@ -6,7 +6,7 @@ import chapter3.listings.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class SolutionSpec_4_5 : WordSpec({
+class Solution_4_5 : WordSpec({
 
     fun <A, B> traverse(xa: List<A>, f: (A) -> Option<B>): Option<List<B>> =
             when (xa) {

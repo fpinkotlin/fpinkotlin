@@ -3,21 +3,7 @@ package chapter4
 object Listing_4_8 {
 
     // boilerplate developed in exercises
-
-    fun <E, A, B> Either<E, A>.flatMap(f: (A) -> Either<E, B>): Either<E, B> =
-            when (this) {
-                is Left -> this
-                is Right -> f(this.value)
-            }
-
-    fun <E, A, B> Either<E, A>.map(f: (A) -> B): Either<E, B> =
-            when (this) {
-                is Left -> this
-                is Right -> Right(f(this.value))
-            }
-
-    fun <E, A, B, C> map2(ae: Either<E, A>, be: Either<E, B>, f: (A, B) -> C): Either<E, C> =
-            ae.flatMap { a -> be.map { b -> f(a, b) } }
+    fun <E, A, B, C> map2(ae: Either<E, A>, be: Either<E, B>, f: (A, B) -> C): Either<E, C> = TODO()
 
     data class Person(val name: Name, val age: Age)
     data class Name(val value: String)

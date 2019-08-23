@@ -7,14 +7,11 @@ import chapter3.listings.Nil
 
 object Listing_4_6 {
 
-    fun List<Double>.sum(): Double = Solution_3_12.foldRightL(this, 0.0, { a, b -> a + b })
+    fun List<Double>.sum(): Double = TODO()
 
-    fun <A> List<A>.isEmpty(): Boolean = when (this) {
-        is Nil -> true
-        is Cons -> false
-    }
+    fun <A> List<A>.isEmpty(): Boolean = TODO()
 
-    fun <A> List<A>.size(): Int = Solution_3_12.foldRightL(this, 0, { _, acc -> 1 + acc })
+    fun <A> List<A>.size(): Int = TODO()
 
     fun mean(xs: List<Double>): Either<String, Double> =
             if (xs.isEmpty())

@@ -44,7 +44,7 @@ fun <A> Option<A>.filter_2(f: (A) -> Boolean): Option<A> =
                 else None
         }
 
-class SolutionSpec_4_1 : WordSpec({
+class Solution_4_1 : WordSpec({
 
     val none = Option.empty<Int>()
 
