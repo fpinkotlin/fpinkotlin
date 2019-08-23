@@ -1,6 +1,10 @@
 package chapter4.exercises
 
 import chapter3.listings.List
+import chapter4.Boilerplate.isEmpty
+import chapter4.Boilerplate.map
+import chapter4.Boilerplate.size
+import chapter4.Boilerplate.sum
 import chapter4.None
 import chapter4.Option
 import chapter4.Some
