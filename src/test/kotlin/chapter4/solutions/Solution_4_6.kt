@@ -27,7 +27,7 @@ fun <E, A, B> Either<E, A>.flatMap(f: (A) -> Either<E, B>): Either<E, B> =
 fun <E, A, B, C> map2(ae: Either<E, A>, be: Either<E, B>, f: (A, B) -> C): Either<E, C> =
         ae.flatMap { a -> be.map { b -> f(a, b) } }
 
-class SolutionSpec_4_6 : WordSpec({
+class Solution_4_6 : WordSpec({
 
     val right: Either<Throwable, Int> = Right(1)
 

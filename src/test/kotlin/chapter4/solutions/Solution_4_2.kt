@@ -17,7 +17,7 @@ fun mean(xs: List<Double>): Option<Double> =
 fun variance(xs: List<Double>): Option<Double> =
         mean(xs).flatMap { m -> mean(xs.map { x -> (x - m).pow(2) }) }
 
-class SolutionSpec_4_2 : WordSpec({
+class Solution_4_2 : WordSpec({
 
     "variance" should {
         "determine the variance of a list of numbers" {

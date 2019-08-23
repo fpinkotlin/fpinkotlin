@@ -9,7 +9,7 @@ import chapter4.Right
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class SolutionSpec_4_7 : WordSpec({
+class Solution_4_7 : WordSpec({
 
     fun <E, A, B> traverse(xs: List<A>, f: (A) -> Either<E, B>): Either<E, List<B>> =
             when (xs) {

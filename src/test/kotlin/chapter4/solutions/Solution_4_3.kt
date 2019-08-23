@@ -9,7 +9,7 @@ import io.kotlintest.specs.WordSpec
 fun <A, B, C> map2(a: Option<A>, b: Option<B>, f: (A, B) -> C): Option<C> =
         a.flatMap { aa -> b.map { bb -> f(aa, bb) } }
 
-class SolutionSpec_4_3 : WordSpec({
+class Solution_4_3 : WordSpec({
 
     "map2" should {
 
