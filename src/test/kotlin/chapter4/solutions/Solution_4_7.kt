@@ -1,8 +1,8 @@
 package chapter4.solutions
 
-import chapter3.listings.Cons
-import chapter3.listings.List
-import chapter3.listings.Nil
+import chapter3.Cons
+import chapter3.List
+import chapter3.Nil
 import chapter4.Either
 import chapter4.Left
 import chapter4.Right

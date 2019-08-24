@@ -20,7 +20,7 @@ class Exercise_4_6 : WordSpec({
 
     val left: Either<Throwable, Int> = Left(Throwable("boom"))
 
-    "Either.map" should {
+    "either map" should {
         "!transform a right value" {
             right.map { it.toString() } shouldBe Right("1")
         }
@@ -29,7 +29,7 @@ class Exercise_4_6 : WordSpec({
         }
     }
 
-    "Either.orElse" should {
+    "either orElse" should {
         "!return the either if it is right" {
             right.orElse { left } shouldBe right
         }
@@ -38,7 +38,7 @@ class Exercise_4_6 : WordSpec({
         }
     }
 
-    "Either.flatMap" should {
+    "either flatMap" should {
         "!apply a function yielding an either to a right either" {
             right.flatMap { a -> Right(a.toString()) } shouldBe Right("1")
         }
@@ -47,7 +47,7 @@ class Exercise_4_6 : WordSpec({
         }
     }
 
-    "Either.map2" should {
+    "either map2" should {
         val right1: Right<Int> = Right(3)
         val right2: Right<Int> = Right(2)
         val left1: Either<Throwable, Int> = Left(IllegalArgumentException("boom"))

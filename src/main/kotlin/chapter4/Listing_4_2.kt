@@ -1,17 +1,14 @@
 package chapter4
 
-import chapter3.exercises.Solution_3_12.foldRightL
-import chapter3.exercises.Solution_3_7
-import chapter3.listings.Cons
-import chapter3.listings.List
-import chapter3.listings.Nil
-import chapter3.exercises.Solution_3_8.length
+import chapter3.List
 
 object Listing_4_2 {
 
-    fun List<Double>.sum(): Double = TODO()
+    private fun <A> length(xs: List<A>): Int = TODO()
 
-    fun List<Double>.isEmpty(): Boolean = TODO()
+    private fun List<Double>.sum(): Double = TODO()
+
+    private fun List<Double>.isEmpty(): Boolean = TODO()
 
     fun <A> List<A>.size(): Int = TODO()
 

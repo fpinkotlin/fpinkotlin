@@ -28,7 +28,7 @@ class Exercise_4_1 : WordSpec({
 
     val some = Some(10)
 
-    "Option.map" should {
+    "option map" should {
         "!transform an option of some value" {
             some.map { it * 2 } shouldBe Some(20)
         }
@@ -37,7 +37,7 @@ class Exercise_4_1 : WordSpec({
         }
     }
 
-    "Option.flatMap" should {
+    "option flatMap" should {
         "!apply a function yielding an option to an option of some value" {
             some.flatMap { a -> Some(a.toString()) } shouldBe Some("10")
             some.flatMap_2 { a -> Some(a.toString()) } shouldBe Some("10")
@@ -48,7 +48,7 @@ class Exercise_4_1 : WordSpec({
         }
     }
 
-    "Option.getOrElse" should {
+    "option getOrElse" should {
         "!extract the value of some option" {
             some.getOrElse { 0 } shouldBe 10
         }
@@ -57,7 +57,7 @@ class Exercise_4_1 : WordSpec({
         }
     }
 
-    "Option.orElse" should {
+    "option orElse" should {
         "!return the option if the option is some" {
             some.orElse { Some(20) } shouldBe some
             some.orElse_2 { Some(20) } shouldBe some
@@ -68,7 +68,7 @@ class Exercise_4_1 : WordSpec({
         }
     }
 
-    "Option.filter" should {
+    "option filter" should {
         "!return some option if the predicate is met" {
             some.filter { it > 0 } shouldBe some
             some.filter_2 { it > 0 } shouldBe some

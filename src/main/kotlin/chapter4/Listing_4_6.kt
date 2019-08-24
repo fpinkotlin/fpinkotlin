@@ -1,9 +1,6 @@
 package chapter4
 
-import chapter3.exercises.Solution_3_12
-import chapter3.listings.Cons
-import chapter3.listings.List
-import chapter3.listings.Nil
+import chapter3.List
 
 object Listing_4_6 {
 
@@ -32,6 +29,4 @@ object Listing_4_6 {
             } catch (e: Exception) {
                 Left(e)
             }
-
-
 }

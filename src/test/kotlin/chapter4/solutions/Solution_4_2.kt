@@ -1,6 +1,6 @@
 package chapter4.solutions
 
-import chapter3.listings.List
+import chapter3.List
 import chapter4.Boilerplate.isEmpty
 import chapter4.Boilerplate.map
 import chapter4.Boilerplate.size

@@ -1,8 +1,7 @@
 package chapter4.exercises
 
-import chapter3.listings.List
+import chapter3.List
 import chapter4.Boilerplate.isEmpty
-import chapter4.Boilerplate.map
 import chapter4.Boilerplate.size
 import chapter4.Boilerplate.sum
 import chapter4.None
@@ -11,7 +10,6 @@ import chapter4.Some
 import io.kotlintest.matchers.doubles.plusOrMinus
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
-import kotlin.math.pow
 
 //using `mean` method from listing 4.2
 fun mean(xs: List<Double>): Option<Double> =

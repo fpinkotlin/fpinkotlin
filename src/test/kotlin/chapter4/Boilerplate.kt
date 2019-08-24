@@ -1,8 +1,8 @@
 package chapter4
 
-import chapter3.listings.Cons
-import chapter3.listings.List
-import chapter3.listings.Nil
+import chapter3.Cons
+import chapter3.List
+import chapter3.Nil
 
 object Boilerplate {
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = this.foldRight(List.empty(), { a, b -> Cons(f(a), b) })

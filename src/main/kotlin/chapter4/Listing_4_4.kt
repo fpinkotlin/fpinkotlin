@@ -1,9 +1,13 @@
 package chapter4
 
-import chapter3.listings.List
+import chapter3.List
 import kotlin.math.abs
 
 object Listing_4_4 {
+
+    private fun <A, B> Option<A>.map(f: (A) -> B): Option<B> = TODO()
+
+    private fun <A, B, C> map2(a: Option<A>, b: Option<B>, f: (A, B) -> C): Option<C> = TODO()
 
     fun <A, B> lift(f: (A) -> B): (Option<A>) -> Option<B> = { oa -> oa.map(f) }
 
