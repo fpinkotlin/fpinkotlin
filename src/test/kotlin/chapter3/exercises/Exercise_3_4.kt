@@ -6,11 +6,11 @@ import chapter3.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class Exercise_3_4 : WordSpec({
+// tag::init[]
+fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> = TODO()
+// end::init[]
 
-    // tag::init[]
-    fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> = TODO()
-    // end::init[]
+class Exercise_3_4 : WordSpec({
 
     "list dropWhile" should {
         "!drop elements until predicate is no longer satisfied" {

@@ -7,8 +7,6 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> = TODO()
-
-fun <A, B> flatMap2(xa: List<A>, f: (A) -> List<B>): List<B> = TODO()
 // end::init[]
 
 class Exercise_3_19 : WordSpec({
