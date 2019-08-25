@@ -1,14 +1,17 @@
 package chapter2
 
-//Listing 2.1
 object Listing_2_1 {
 
-    private fun abs(n: Int): Int =
-            if (n < 0) -n
-            else n
+    //tag::init[]
+    object MyModule { //<1>
+        private fun abs(n: Int): Int = //<2>
+                if (n < 0) -n //<3>
+                else n
 
-    fun formatAbs(x: Int): String {
-        val msg = "The absolute value of %d is %d"
-        return msg.format(x, abs(x))
+        fun formatAbs(x: Int): String { //<4>
+            val msg = "The absolute value of %d is %d" //<5>
+            return msg.format(x, abs(x)) //<6>
+        }
     }
+    fun main() = println(MyModule.formatAbs(-42)) //<7>
 }

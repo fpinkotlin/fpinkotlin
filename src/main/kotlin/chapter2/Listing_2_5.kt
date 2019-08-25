@@ -1,12 +1,13 @@
 package chapter2
 
-//Listing 2.5
 object Listing_2_5 {
-    fun <A> findFirst(xs: Array<A>, p: (A) -> Boolean): Int {
+    //tag::init[]
+    fun <A> findFirst(xs: Array<A>, p: (A) -> Boolean): Int { // <1>
         tailrec fun loop(n: Int): Int =
                 if (n >= xs.size) -1
-                else if (p(xs[n])) n
+                else if (p(xs[n])) n // <2>
                 else loop(n + 1)
         return loop(0)
     }
+    //end::init[]
 }

@@ -1,7 +1,7 @@
 package chapter2.exercises
 
 object Exercise_2_1 {
-    // tag::exercise2.1[]
+    // tag::init[]
     fun fib(i: Int): Int = TODO()
-    // end::exercise2.1[]
+    // end::init[]
 }
