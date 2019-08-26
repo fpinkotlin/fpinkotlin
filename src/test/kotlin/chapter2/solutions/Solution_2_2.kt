@@ -1,7 +1,7 @@
 package chapter2.solutions
 
 object Solution_2_2 {
-    // tag::exercise2.2[]
+    // tag::init[]
     val <T> List<T>.tail: List<T>
         get() = drop(1)
 
@@ -18,5 +18,5 @@ object Solution_2_2 {
 
         return go(aa.head, aa.tail)
     }
-    // end::exercise2.2[]
+    // end::init[]
 }
