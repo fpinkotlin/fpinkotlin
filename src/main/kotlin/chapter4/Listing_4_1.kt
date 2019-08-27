@@ -1,6 +1,8 @@
 package chapter4
 
 object Listing_4_1 {
+
+    //tag::init[]
     fun failingFn(i: Int): Int {
         val y: Int = (throw Exception("boom")) as Int
         return try {
@@ -10,6 +12,7 @@ object Listing_4_1 {
             43
         }
     }
+    //end::init[]
 
     fun failingFn2(i: Int): Int =
             try {
