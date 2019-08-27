@@ -14,4 +14,5 @@ object Listing_2_1 {
         }
     }
     fun main() = println(MyModule.formatAbs(-42)) //<7>
+    //end::init[]
 }
