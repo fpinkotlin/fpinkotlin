@@ -7,7 +7,9 @@ import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
+//tag::init[]
 fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()
+//end::init[]
 
 class Exercise_4_4 : WordSpec({
 

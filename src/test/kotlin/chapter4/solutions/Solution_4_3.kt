@@ -6,8 +6,8 @@ import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-fun <A, B, C> map2(a: Option<A>, b: Option<B>, f: (A, B) -> C): Option<C> =
-        a.flatMap { aa -> b.map { bb -> f(aa, bb) } }
+fun <A, B, C> map2(oa: Option<A>, ob: Option<B>, f: (A, B) -> C): Option<C> =
+        oa.flatMap { a -> ob.map { b -> f(a, b) } }
 
 class Solution_4_3 : WordSpec({
 

@@ -11,12 +11,13 @@ import io.kotlintest.matchers.doubles.plusOrMinus
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//using `mean` method from listing 4.2
 fun mean(xs: List<Double>): Option<Double> =
         if (xs.isEmpty()) None
         else Some(xs.sum() / xs.size())
 
+//tag::init[]
 fun variance(xs: List<Double>): Option<Double> = TODO()
+//end::init[]
 
 class Exercise_4_2 : WordSpec({
 
