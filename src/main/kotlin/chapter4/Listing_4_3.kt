@@ -17,13 +17,13 @@ object Listing_4_3 {
 
     fun lookupByName(name: String): Option<Employee> = TODO()
 
-    fun joeDepartment(): Option<String> = lookupByName("Joe").map { it.department }
+    fun timDepartment(): Option<String> = lookupByName("Tim").map { it.department }
     //end::init[]
 
     //tag::init2[]
-    val dept: String = lookupByName("Joe")
+    val dept: String = lookupByName("Tim")
             .map { it.department }
-            .filter { it != "Accounting" }
-            .getOrElse { "Default department" }
+            .filter { it != "Accounts" }
+            .getOrElse { "Unemployed" }
     //end::init2[]
 }
