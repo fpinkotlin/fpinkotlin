@@ -9,9 +9,9 @@ object Listing_4_6 {
     //tag::init[]
     fun parseInsuranceRateQuote(age: String, numberOfSpeedingTickets: String): Either<Throwable, Double> =
         binding {
-            val (a) = Try { age.toInt() }
+            val (age) = Try { age.toInt() }
             val (tickets) = Try { numberOfSpeedingTickets.toInt() }
-            insuranceRateQuote(a, tickets)
+            insuranceRateQuote(age, tickets)
         }.toEither()
     //end::init[]
 }
