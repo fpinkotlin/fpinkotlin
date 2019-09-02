@@ -11,6 +11,7 @@ import io.kotlintest.specs.WordSpec
 
 class Solution_4_5 : WordSpec({
 
+    //tag::init[]
     fun <A, B> traverse(xa: List<A>, f: (A) -> Option<B>): Option<List<B>> =
             when (xa) {
                 is Nil -> Some(Nil)
@@ -19,6 +20,7 @@ class Solution_4_5 : WordSpec({
             }
 
     fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = traverse(xs) { it }
+    //end::init[]
 
     fun <A> Try(a: () -> A): Option<A> =
             try {

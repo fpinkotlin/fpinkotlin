@@ -6,6 +6,7 @@ import chapter4.Right
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
+//tag::init[]
 fun <E, A, B> Either<E, A>.map(f: (A) -> B): Either<E, B> =
         when (this) {
             is Left -> this
@@ -26,6 +27,7 @@ fun <E, A, B> Either<E, A>.flatMap(f: (A) -> Either<E, B>): Either<E, B> =
 
 fun <E, A, B, C> map2(ae: Either<E, A>, be: Either<E, B>, f: (A, B) -> C): Either<E, C> =
         ae.flatMap { a -> be.map { b -> f(a, b) } }
+//end::init[]
 
 class Solution_4_6 : WordSpec({
 

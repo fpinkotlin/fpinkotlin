@@ -11,6 +11,7 @@ import io.kotlintest.specs.WordSpec
 
 class Solution_4_7 : WordSpec({
 
+    //tag::init[]
     fun <E, A, B> traverse(xs: List<A>, f: (A) -> Either<E, B>): Either<E, List<B>> =
             when (xs) {
                 is Nil -> Right(Nil)
@@ -19,6 +20,7 @@ class Solution_4_7 : WordSpec({
             }
 
     fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> = traverse(es) { it }
+    //end::init[]
 
     fun <A> Try(a: () -> A): Either<String, A> =
             try {

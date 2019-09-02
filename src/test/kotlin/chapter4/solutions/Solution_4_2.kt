@@ -13,6 +13,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import kotlin.math.pow
 
+//tag::init[]
 //using `mean` method from listing 4.2
 fun mean(xs: List<Double>): Option<Double> =
         if (xs.isEmpty()) None
@@ -20,6 +21,7 @@ fun mean(xs: List<Double>): Option<Double> =
 
 fun variance(xs: List<Double>): Option<Double> =
         mean(xs).flatMap { m -> mean(xs.map { x -> (x - m).pow(2) }) }
+//end::init[]
 
 class Solution_4_2 : WordSpec({
 
