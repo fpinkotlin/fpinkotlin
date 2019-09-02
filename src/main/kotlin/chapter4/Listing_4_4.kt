@@ -25,11 +25,11 @@ object Listing_4_4 {
     //end::quote[]
 
     //tag::quote2[]
-    fun parseInsuranceQuote(age: String, numberOfSpeedingTickets: String): Option<Double> {
+    fun parseInsuranceQuote(age: String, speedingTickets: String): Option<Double> {
 
         val optAge: Option<Int> = Try { age.toInt() }
 
-        val optTickets: Option<Int> = Try { numberOfSpeedingTickets.toInt() }
+        val optTickets: Option<Int> = Try { speedingTickets.toInt() }
 
         //tag::secondsolution[]
         return map2(optAge, optTickets) { a, t -> insuranceRateQuote(a, t) }
