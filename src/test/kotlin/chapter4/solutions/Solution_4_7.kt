@@ -19,7 +19,8 @@ class Solution_4_7 : WordSpec({
                     map2(f(xs.head), traverse(xs.tail, f)) { b, xb -> Cons(b, xb) }
             }
 
-    fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> = traverse(es) { it }
+    fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> =
+            traverse(es) { it }
     //end::init[]
 
     fun <A> Try(a: () -> A): Either<String, A> =
