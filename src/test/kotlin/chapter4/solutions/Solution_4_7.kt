@@ -12,7 +12,10 @@ import io.kotlintest.specs.WordSpec
 class Solution_4_7 : WordSpec({
 
     //tag::init[]
-    fun <E, A, B> traverse(xs: List<A>, f: (A) -> Either<E, B>): Either<E, List<B>> =
+    fun <E, A, B> traverse(
+            xs: List<A>,
+            f: (A) -> Either<E, B>
+    ): Either<E, List<B>> =
             when (xs) {
                 is Nil -> Right(Nil)
                 is Cons ->

@@ -23,7 +23,11 @@ fun <A, B> foldLeftRLikeYouMeanIt(
     val innerIdentity: Identity<B> = { b: B -> b }
 
     val combinerDelayer: (A, Identity<B>) -> Identity<B> =
-            { a: A, delayExec: Identity<B> -> { b: B -> delayExec(combiner(b, a)) } }
+            { a: A, delayExec: Identity<B> ->
+                { b: B ->
+                    delayExec(combiner(b, a))
+                }
+            }
 
     fun go(combinerDelayer: (A, Identity<B>) -> Identity<B>): Identity<B> =
             foldRight(ls, innerIdentity, combinerDelayer)
