@@ -16,7 +16,9 @@ class Solution_4_7 : WordSpec({
             when (xs) {
                 is Nil -> Right(Nil)
                 is Cons ->
-                    map2(f(xs.head), traverse(xs.tail, f)) { b, xb -> Cons(b, xb) }
+                    map2(f(xs.head), traverse(xs.tail, f)) { b, xb ->
+                        Cons(b, xb)
+                    }
             }
 
     fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> =

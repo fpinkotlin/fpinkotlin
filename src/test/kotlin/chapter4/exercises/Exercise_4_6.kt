@@ -7,13 +7,20 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <E, A, B> Either<E, A>.map(f: (A) -> B): Either<E, B> = TODO()
+fun <E, A, B> Either<E, A>
+        .map(f: (A) -> B): Either<E, B> = TODO()
 
-fun <E, A, B> Either<E, A>.flatMap(f: (A) -> Either<E, B>): Either<E, B> = TODO()
+fun <E, A, B> Either<E, A>
+        .flatMap( f: (A) -> Either<E, B>): Either<E, B> = TODO()
 
-fun <E, A> Either<E, A>.orElse(f: () -> Either<E, A>): Either<E, A> = TODO()
+fun <E, A> Either<E, A>
+        .orElse(f: () -> Either<E, A>): Either<E, A> = TODO()
 
-fun <E, A, B, C> map2(ae: Either<E, A>, be: Either<E, B>, f: (A, B) -> C): Either<E, C> = TODO()
+fun <E, A, B, C> map2(
+        ae: Either<E, A>,
+        be: Either<E, B>,
+        f: (A, B) -> C
+): Either<E, C> = TODO()
 //end::init[]
 
 class Exercise_4_6 : WordSpec({

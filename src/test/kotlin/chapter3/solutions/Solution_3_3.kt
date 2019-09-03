@@ -12,7 +12,8 @@ fun <A> drop(l: List<A>, n: Int): List<A> =
         if (n == 0) l
         else when (l) {
             is Cons -> drop(l.tail, n - 1)
-            is Nil -> throw IllegalStateException("Cannot drop more elements than in list")
+            is Nil -> throw IllegalStateException(
+                    "Cannot drop more elements than in list")
         }
 // end::init[]
 

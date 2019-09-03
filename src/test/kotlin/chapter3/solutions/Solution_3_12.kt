@@ -14,7 +14,11 @@ fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B =
 //expanded example
 typealias Identity<B> = (B) -> B
 
-fun <A, B> foldLeftRLikeYouMeanIt(ls: List<A>, outerIdentity: B, combiner: (B, A) -> B): B {
+fun <A, B> foldLeftRLikeYouMeanIt(
+        ls: List<A>,
+        outerIdentity: B,
+        combiner: (B, A) -> B
+): B {
 
     val innerIdentity: Identity<B> = { b: B -> b }
 
