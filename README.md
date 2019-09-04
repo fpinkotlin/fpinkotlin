@@ -17,7 +17,7 @@ compiled, and where applicable, tested.  The exercise listings are also taken
 from this repo, as are the solutions found in the appendix at the back of the
 book. All exercises and solutions have unit tests to prove their validity.
 
-### How to use this repo
+### Running the tests when doing the exercises
 
 This repo is not only used for the purpose of providing the code in book, but
 can also be used by the reader to complete the exercises. All unimplemented
