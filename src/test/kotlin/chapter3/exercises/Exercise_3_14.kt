@@ -14,8 +14,8 @@ fun <A> concat2(xxs: List<List<A>>): List<A> = TODO()
 class Exercise_3_14 : WordSpec({
     "list concat" should {
         "!concatenate a list of lists into a single list" {
-            chapter3.solutions.concat(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
-            chapter3.solutions.concat2(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
+            concat(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
+            concat2(List.of(List.of(1, 2, 3), List.of(4, 5, 6))) shouldBe List.of(1, 2, 3, 4, 5, 6)
         }
     }
 })

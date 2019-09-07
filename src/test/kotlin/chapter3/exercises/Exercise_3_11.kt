@@ -14,7 +14,7 @@ fun <A> reverse2(xs: List<A>): List<A> = TODO()
 class Exercise_3_11 : WordSpec({
     "list reverse" should {
         "!reverse list elements" {
-            chapter3.solutions.reverse(List.of(1, 2, 3, 4, 5)) shouldBe List.of(5, 4, 3, 2, 1)
+            reverse(List.of(1, 2, 3, 4, 5)) shouldBe List.of(5, 4, 3, 2, 1)
         }
     }
 })

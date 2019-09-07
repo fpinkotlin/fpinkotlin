@@ -19,7 +19,7 @@ class Exercise_3_26 : WordSpec({
                             Branch(Branch(Leaf(4), Leaf(5)), //4
                                     Branch(Leaf(6), //4
                                             Branch(Leaf(7), Leaf(8)))))) //5
-            chapter3.solutions.depth(tree) shouldBe 5
+            depth(tree) shouldBe 5
         }
     }
 })

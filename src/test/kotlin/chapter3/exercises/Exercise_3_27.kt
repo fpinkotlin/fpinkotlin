@@ -15,7 +15,7 @@ class Exercise_3_27 : WordSpec({
         "transform all leaves of a map" {
             val actual = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
             val expected = Branch(Branch(Leaf(10), Leaf(20)), Branch(Leaf(30), Leaf(40)))
-            chapter3.solutions.map(actual) { it * 10 } shouldBe expected
+            map(actual) { it * 10 } shouldBe expected
         }
     }
 })

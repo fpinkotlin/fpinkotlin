@@ -14,7 +14,7 @@ class Exercise_3_25 : WordSpec ({
     "tree maximum" should {
         "!determine the maximum value held in a tree" {
             val tree = Branch(Branch(Leaf(1), Leaf(9)), Branch(Leaf(3), Leaf(4)))
-            chapter3.solutions.maximum(tree) shouldBe 9
+            maximum(tree) shouldBe 9
         }
     }
 })

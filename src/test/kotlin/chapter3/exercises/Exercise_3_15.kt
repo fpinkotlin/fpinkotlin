@@ -12,7 +12,7 @@ fun increment(xs: List<Int>): List<Int> = TODO()
 class Exercise_3_15 : WordSpec({
     "list increment" should {
         "!add 1 to every element" {
-            chapter3.solutions.increment(List.of(1, 2, 3, 4, 5)) shouldBe List.of(2, 3, 4, 5, 6)
+            increment(List.of(1, 2, 3, 4, 5)) shouldBe List.of(2, 3, 4, 5, 6)
         }
     }
 })

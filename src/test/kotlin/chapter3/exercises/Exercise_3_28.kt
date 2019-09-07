@@ -28,19 +28,19 @@ class Exercise_3_28 : WordSpec({
                                 Branch(Leaf(21), //4
                                         Branch(Leaf(7), Leaf(8)))))) //5
         "!generalise size" {
-            chapter3.solutions.sizeF(tree) shouldBe 15
+            sizeF(tree) shouldBe 15
         }
 
         "!generalise maximum" {
-            chapter3.solutions.maximumF(tree) shouldBe 21
+            maximumF(tree) shouldBe 21
         }
 
         "!generalise depth" {
-            chapter3.solutions.depthF(tree) shouldBe 5
+            depthF(tree) shouldBe 5
         }
 
         "!generalise map" {
-            chapter3.solutions.mapF(tree) { it * 10 } shouldBe
+            mapF(tree) { it * 10 } shouldBe
                     Branch( //0
                             Branch(Leaf(10), Leaf(20)), //2
                             Branch(Leaf(30), //2
