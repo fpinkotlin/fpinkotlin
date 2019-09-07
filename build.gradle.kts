@@ -16,7 +16,7 @@ dependencies {
     compile(kotlin("stdlib"))
     compile("io.arrow-kt:arrow-core-data:$arrow_version")
     compile("io.arrow-kt:arrow-effects-io-extensions:$arrow_version")
-	runtime("org.slf4j:slf4j-simple:1.7.28")
+    runtime("org.slf4j:slf4j-simple:1.7.28")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
 }
 
