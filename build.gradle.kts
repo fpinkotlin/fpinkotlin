@@ -1,10 +1,5 @@
 plugins {
-    application
     kotlin("jvm") version "1.3.21"
-}
-
-application {
-    mainClassName = "samples.HelloWorldKt"
 }
 
 val test by tasks.getting(Test::class) {
