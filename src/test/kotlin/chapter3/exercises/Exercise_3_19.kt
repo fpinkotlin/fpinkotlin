@@ -10,9 +10,9 @@ fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> = TODO()
 // end::init[]
 
 class Exercise_3_19 : WordSpec({
-    "list flatmap" should {
-        "!map and flatten a list" {
-            flatMap(List.of(1, 2, 3)) { i -> List.of(i, i) } shouldBe List.of(1, 1, 2, 2, 3, 3)
-        }
+  "list flatmap" should {
+    "!map and flatten a list" {
+      flatMap(List.of(1, 2, 3)) { i -> List.of(i, i) } shouldBe List.of(1, 1, 2, 2, 3, 3)
     }
+  }
 })

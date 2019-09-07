@@ -9,18 +9,18 @@ import io.kotlintest.specs.WordSpec
 // tag::init[]
 fun add(xa: List<Int>, xb: List<Int>): List<Int> =
         when (xa) {
+          is Nil -> Nil
+          is Cons -> when (xb) {
             is Nil -> Nil
-            is Cons -> when (xb) {
-                is Nil -> Nil
-                is Cons -> Cons(xa.head + xb.head, add(xa.tail, xb.tail))
-            }
+            is Cons -> Cons(xa.head + xb.head, add(xa.tail, xb.tail))
+          }
         }
 // end::init[]
 
 class Solution_3_21 : WordSpec({
-    "list add" should {
-        "add elements of two corresponding lists" {
-            add(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(5, 7, 9)
-        }
+  "list add" should {
+    "add elements of two corresponding lists" {
+      add(List.of(1, 2, 3), List.of(4, 5, 6)) shouldBe List.of(5, 7, 9)
     }
+  }
 })

@@ -20,32 +20,32 @@ fun <A, B> foldLeftRLikeYouMeanIt(
         combiner: (B, A) -> B
 ): B {
 
-    val innerIdentity: Identity<B> = { b: B -> b }
+  val innerIdentity: Identity<B> = { b: B -> b }
 
-    val combinerDelayer: (A, Identity<B>) -> Identity<B> =
-            { a: A, delayExec: Identity<B> ->
-                { b: B ->
-                    delayExec(combiner(b, a))
-                }
+  val combinerDelayer: (A, Identity<B>) -> Identity<B> =
+          { a: A, delayExec: Identity<B> ->
+            { b: B ->
+              delayExec(combiner(b, a))
             }
+          }
 
-    fun go(combinerDelayer: (A, Identity<B>) -> Identity<B>): Identity<B> =
-            foldRight(ls, innerIdentity, combinerDelayer)
+  fun go(combinerDelayer: (A, Identity<B>) -> Identity<B>): Identity<B> =
+          foldRight(ls, innerIdentity, combinerDelayer)
 
-    return go(combinerDelayer).invoke(outerIdentity)
+  return go(combinerDelayer).invoke(outerIdentity)
 }
 // end::init[]
 
 class Solution_3_12 : WordSpec({
-    "list foldLeftR" should {
-        "implement foldLeft functionality using foldRight" {
-            foldLeftR(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
-        }
+  "list foldLeftR" should {
+    "implement foldLeft functionality using foldRight" {
+      foldLeftR(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
     }
+  }
 
-    "list foldRightL" should {
-        "implement foldRight functionality using foldLeft" {
-            foldRightL(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
-        }
+  "list foldRightL" should {
+    "implement foldRight functionality using foldLeft" {
+      foldRightL(List.of(1, 2, 3, 4, 5), 0, { x, y -> x + y }) shouldBe 15
     }
+  }
 })

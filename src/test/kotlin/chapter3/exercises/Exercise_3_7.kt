@@ -6,21 +6,21 @@ import chapter3.Nil
 import chapter3.exercises.Exercise_3_7.foldRight
 
 object Exercise_3_7 {
-    fun <A, B> foldRight(xs: List<A>, z: B, f: (A, B) -> B): B = TODO()
+  fun <A, B> foldRight(xs: List<A>, z: B, f: (A, B) -> B): B = TODO()
 
-    val f = { x: Int, y: List<Int> -> Cons(x, y) }
-    val z = Nil as List<Int>
+  val f = { x: Int, y: List<Int> -> Cons(x, y) }
+  val z = Nil as List<Int>
 
-    val step1 = foldRight(List.of(1, 2, 3), z, f)
-    val step2 = Cons(1, foldRight(List.of(2, 3), z, f))
-    val step3 = Cons(1, Cons(2, foldRight(List.of(3), z, f)))
-    val step4 = Cons(1, Cons(2, Cons(3, foldRight(List.empty(), z, f))))
-    val step5: List<Int> = Cons(1, Cons(2, Cons(3, Nil)))
+  val step1 = foldRight(List.of(1, 2, 3), z, f)
+  val step2 = Cons(1, foldRight(List.of(2, 3), z, f))
+  val step3 = Cons(1, Cons(2, foldRight(List.of(3), z, f)))
+  val step4 = Cons(1, Cons(2, Cons(3, foldRight(List.empty(), z, f))))
+  val step5: List<Int> = Cons(1, Cons(2, Cons(3, Nil)))
 
 }
 
 fun main() {
-    // tag::init[]
-    foldRight(List.of(1, 2, 3), List.empty<Int>(), { x, y -> Cons(x, y) })
-    // end::init[]
+  // tag::init[]
+  foldRight(List.of(1, 2, 3), List.empty<Int>(), { x, y -> Cons(x, y) })
+  // end::init[]
 }
