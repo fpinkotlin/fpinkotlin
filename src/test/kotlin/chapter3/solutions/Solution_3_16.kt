@@ -11,9 +11,9 @@ fun doubleToString(xs: List<Double>): List<String> =
 // end::init[]
 
 class Solution_3_16 : WordSpec({
-  "list doubleToString" should {
-    "convert every double element to a string" {
-      doubleToString(List.of(1.1, 1.2, 1.3, 1.4)) shouldBe List.of("1.1", "1.2", "1.3", "1.4")
+    "list doubleToString" should {
+        "convert every double element to a string" {
+            doubleToString(List.of(1.1, 1.2, 1.3, 1.4)) shouldBe List.of("1.1", "1.2", "1.3", "1.4")
+        }
     }
-  }
 })

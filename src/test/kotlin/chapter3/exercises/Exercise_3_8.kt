@@ -10,13 +10,13 @@ fun <A> length(xs: List<A>): Int = TODO()
 // end::init[]
 
 class Exercise_3_8 : WordSpec({
-  "list length" should {
-    "!calculate the length" {
-      length(List.of(1, 2, 3, 4, 5)) shouldBe 5
-    }
+    "list length" should {
+        "!calculate the length" {
+            length(List.of(1, 2, 3, 4, 5)) shouldBe 5
+        }
 
-    "!calculate zero for an empty list" {
-      length(Nil) shouldBe 0
+        "!calculate zero for an empty list" {
+            length(Nil) shouldBe 0
+        }
     }
-  }
 })
