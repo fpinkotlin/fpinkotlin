@@ -23,7 +23,8 @@ fun <A> depthF(ta: Tree<A>): Int =
         fold(ta, { 0 }, { b1, b2 -> 1 + maxOf(b1, b2) })
 
 fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> =
-        fold(ta, { a: A -> Leaf(f(a)) }, { b1: Tree<B>, b2: Tree<B> -> Branch(b1, b2) })
+        fold(ta, { a: A -> Leaf(f(a)) },
+                { b1: Tree<B>, b2: Tree<B> -> Branch(b1, b2) })
 // end::init[]
 
 class Solution_3_28 : WordSpec({

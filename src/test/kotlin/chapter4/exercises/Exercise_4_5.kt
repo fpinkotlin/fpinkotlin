@@ -10,10 +10,7 @@ import io.kotlintest.specs.WordSpec
 class Exercise_4_5 : WordSpec({
 
     //tag::traverse[]
-    fun <A, B> traverse(
-            xa: List<A>,
-            f: (A) -> Option<B>
-    ): Option<List<B>> = TODO()
+    fun <A, B> traverse(xa: List<A>, f: (A) -> Option<B>): Option<List<B>> = TODO()
     //end::traverse[]
 
     fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()

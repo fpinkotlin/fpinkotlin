@@ -21,17 +21,11 @@ object Listing_4_4 {
      * Top secret formula for computing an annual car
      * insurance premium from two key factors.
      */
-    fun insuranceRateQuote(
-            age: Int,
-            numberOfSpeedingTickets: Int
-    ): Double = TODO()
+    fun insuranceRateQuote(age: Int, numberOfSpeedingTickets: Int): Double = TODO()
     //end::quote[]
 
     //tag::quote2[]
-    fun parseInsuranceQuote(
-            age: String,
-            speedingTickets: String
-    ): Option<Double> {
+    fun parseInsuranceQuote(age: String, speedingTickets: String): Option<Double> {
 
         val optAge: Option<Int> = Try { age.toInt() }
 

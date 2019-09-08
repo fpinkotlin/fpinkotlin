@@ -17,8 +17,7 @@ object Listing_4_3 {
 
     fun lookupByName(name: String): Option<Employee> = TODO()
 
-    fun timDepartment(): Option<String> =
-            lookupByName("Tim").map { it.department }
+    fun timDepartment(): Option<String> = lookupByName("Tim").map { it.department }
     //end::init[]
 
     //tag::init2[]
