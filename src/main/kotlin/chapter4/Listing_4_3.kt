@@ -13,7 +13,10 @@ object Listing_4_3 {
     fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> = TODO()
 
     //tag::init[]
-    data class Employee(val name: String, val department: String, val manager: Option<String>)
+    data class Employee(
+            val name: String,
+            val department: String,
+            val manager: Option<String>)
 
     fun lookupByName(name: String): Option<Employee> = TODO()
 
