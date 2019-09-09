@@ -1,20 +1,37 @@
 package chapter4
 
-import arrow.core.Try
-import arrow.core.Either
-import arrow.core.extensions.`try`.monad.binding
-import chapter4.Listing_4_4.insuranceRateQuote
+import chapter3.List
 
 object Listing_4_6 {
-    //tag::init[]
-    fun parseInsuranceRateQuote(
-            age: String,
-            numberOfSpeedingTickets: String
-    ): Either<Throwable, Double> =
-            binding {
-                val (age) = Try { age.toInt() }
-                val (tickets) = Try { numberOfSpeedingTickets.toInt() }
-                insuranceRateQuote(age, tickets)
-            }.toEither()
-    //end::init[]
+
+    fun List<Double>.sum(): Double = TODO()
+
+    fun <A> List<A>.isEmpty(): Boolean = TODO()
+
+    fun <A> List<A>.size(): Int = TODO()
+
+    //tag::mean[]
+    fun mean(xs: List<Double>): Either<String, Double> =
+            if (xs.isEmpty())
+                Left("mean of empty list!")
+            else Right(xs.sum() / xs.size())
+    //end::mean[]
+
+    //tag::safediv[]
+    fun safeDiv(x: Int, y: Int): Either<Exception, Int> =
+            try {
+                Right(x / y)
+            } catch (e: Exception) {
+                Left(e)
+            }
+    //end::safediv[]
+
+    //tag::try[]
+    fun <A> Try(a: () -> A): Either<Exception, A> =
+            try {
+                Right(a())
+            } catch (e: Exception) {
+                Left(e)
+            }
+    //end::try[]
 }
