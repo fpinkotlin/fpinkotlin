@@ -23,7 +23,7 @@ object Listing_2_3 {
 
         fun formatFactorial(x: Int): String { //<2>
             val msg = "The factorial of %d is %d"
-            return msg.format(x, abs(x))
+            return msg.format(x, factorial(x))
         }
     }
 
