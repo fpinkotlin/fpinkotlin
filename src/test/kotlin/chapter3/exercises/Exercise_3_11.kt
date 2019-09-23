@@ -7,8 +7,6 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> reverse(xs: List<A>): List<A> = TODO()
-
-fun <A> reverse2(xs: List<A>): List<A> = TODO()
 // end::init[]
 
 class Exercise_3_11 : WordSpec({
