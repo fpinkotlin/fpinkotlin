@@ -45,6 +45,11 @@ sealed class List<out A> { // <1>
 
 //tag::impls[]
 object Nil : List<Nothing>() // <2>
+//tag::ignore[]
+{
+    override fun toString(): String = "Nil"
+}
+//end::ignore[]
 
 data class Cons<out A>(val head: A, val tail: List<A>) : List<A>() // <3>
 //end::impls[]
