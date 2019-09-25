@@ -1,4 +1,4 @@
-package chapter5.solutions
+package chapter5.exercises
 
 import chapter4.None
 import chapter4.Option
@@ -8,20 +8,22 @@ import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class Solution_5_6 : WordSpec({
+/**
+ * Re-enable the tests by removing the `!` prefix!
+ */
+class Exercise_5_6 : WordSpec({
 
     //tag::init[]
-    fun <A> Stream<A>.headOption(): Option<A> =
-            this.foldRight({ None as Option<A> }, { a, _ -> Some(a) })
+    fun <A> Stream<A>.headOption(): Option<A> = TODO()
     //end::init[]
 
     "Stream.headOption" should {
-        "return some first element from the stream if it is not empty" {
+        "!return some first element from the stream if it is not empty" {
             val s = Stream.of(1, 2, 3, 4)
             s.headOption() shouldBe Some(1)
         }
 
-        "return none if the stream is empty" {
+        "!return none if the stream is empty" {
             Stream.empty<Int>().headOption() shouldBe None
         }
     }

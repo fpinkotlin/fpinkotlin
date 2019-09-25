@@ -2,25 +2,33 @@ package chapter5
 
 //tag::init[]
 sealed class Stream<out A> {
-    companion object {
 
-        fun <A> cons(hd: () -> A, tl: () -> Stream<A>): Stream<A> { // <1>
-            val head: A by lazy { hd() } // <2>
-            val tail: Stream<A> by lazy { tl() } // <3>
+    //tag::companion[]
+    companion object {
+        //smart constructors
+        //tag::cons[]
+
+        fun <A> cons(hd: () -> A, tl: () -> Stream<A>): Stream<A> {
+            val head: A by lazy { hd() }
+            val tail: Stream<A> by lazy { tl() }
             return Cons({ head }, { tail })
         }
+        //end::cons[]
+        //tag::of[]
 
-        fun <A> of(vararg xs: A): Stream<A> = // <4>
+        fun <A> of(vararg xs: A): Stream<A> =
                 if (xs.isEmpty()) empty()
-                else cons(thnk(xs[0]), thnk(of(*xs.sliceArray(1 until xs.size))))
+                else cons({ xs[0] }, { of(*xs.sliceArray(1 until xs.size)) })
+        //end::of[]
+        //tag::empty[]
 
-        fun <A> empty(): Stream<A> = Empty // <5>
-
-        fun <A> thnk(a: A): () -> A = { -> a }
+        fun <A> empty(): Stream<A> = Empty
+        //end::empty[]
     }
+    //end::companion[]
 }
 
-data class Cons<out A>(val h: () -> A, val t: () -> Stream<A>) : Stream<A>() // <6>
+data class Cons<out A>(val h: () -> A, val t: () -> Stream<A>) : Stream<A>()
 
 object Empty : Stream<Nothing>()
 //end::init[]

@@ -5,7 +5,6 @@ import chapter5.Boilerplate.foldRight
 import chapter5.Stream
 import chapter5.Stream.Companion.cons
 import chapter5.Stream.Companion.empty
-import chapter5.Stream.Companion.thnk
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
@@ -13,8 +12,8 @@ class Solution_5_5 : WordSpec({
 
     //tag::init[]
     fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
-            foldRight(thnk(empty()),
-                    { h, t -> if (p(h)) cons(thnk(h), t) else t() })
+            foldRight({ empty() },
+                    { h, t -> if (p(h)) cons({ h }, t) else t() })
     //end::init[]
 
     "Stream.takeWhile" should {

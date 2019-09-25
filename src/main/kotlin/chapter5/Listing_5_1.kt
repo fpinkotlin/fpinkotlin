@@ -39,7 +39,7 @@ object Listing_5_1 {
     //end::init4[]
 
     //tag::maybetwice1[]
-    fun maybeTwice(b: Boolean, i: () -> Int) = if (b) i + i else 0
+    fun maybeTwice1(b: Boolean, i: () -> Int) = if (b) i() + i() else 0
     //end::maybetwice1[]
 
     //tag::maybetwice2[]

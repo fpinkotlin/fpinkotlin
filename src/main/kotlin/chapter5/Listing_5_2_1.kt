@@ -9,7 +9,7 @@ object Listing_5_2_1 {
     fun <A> Stream<A>.headOption(): Option<A> =
             when (this) {
                 is Empty -> None
-                is Cons -> Some(h())
+                is Cons -> Some(h()) // <1>
             }
     //end::init[]
 
@@ -17,7 +17,9 @@ object Listing_5_2_1 {
     fun expensive(c: String): String = TODO()
     val y: String = TODO()
 
+    //tag::init2[]
     val x = Cons({ expensive(y) }, { tl })
     val h1 = x.headOption()
     val h2 = x.headOption()
+    //end::init2[]
 }
