@@ -68,7 +68,8 @@ fun <A, B, C> Stream<A>.zipWith(
 //end::zipwith[]
 
 //tag::zipall[]
-fun <A, B> Stream<A>.zipAll(that: Stream<B>): Stream<Pair<Option<A>, Option<B>>> =
+fun <A, B> Stream<A>.zipAll(
+        that: Stream<B>): Stream<Pair<Option<A>, Option<B>>> =
         unfold(Pair(this, that)) { (ths, tht) ->
             when (ths) {
                 is Cons -> when (tht) {
