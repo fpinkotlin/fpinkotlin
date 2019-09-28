@@ -13,12 +13,14 @@ import chapter3.Nil as NilL
 class Solution_5_15 : WordSpec({
 
     //tag::tails[]
-    fun <A> Stream<A>.tails(): Stream<Stream<A>> = unfold(this) { s: Stream<A> ->
-        when (s) {
-            is Cons -> Some(Pair(s, s.t()))
-            else -> None
-        }
-    }
+    fun <A> Stream<A>.tails(): Stream<Stream<A>> =
+            unfold(this) { s: Stream<A> ->
+                when (s) {
+                    is Cons ->
+                        Some(Pair(s, s.t()))
+                    else -> None
+                }
+            }
     //end::tails[]
 
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = when (this) {

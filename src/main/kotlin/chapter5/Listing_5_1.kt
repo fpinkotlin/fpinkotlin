@@ -11,10 +11,10 @@ object Listing_5_1 {
 
     val listing = {
         //tag::init[]
-        persistentListOf(1, 2, 3, 4).map { it + 10 }.filter { it % 2 == 0 }.map { it * 3 }
-        persistentListOf(11, 12, 13, 14).filter { it % 2 == 0 }.map { it * 3 }
-        persistentListOf(12, 14).map { it * 3 }
-        persistentListOf(36, 42)
+        List.of(1, 2, 3, 4).map { it + 10 }.filter { it % 2 == 0 }.map { it * 3 }
+        List.of(11, 12, 13, 14).filter { it % 2 == 0 }.map { it * 3 }
+        List.of(12, 14).map { it * 3 }
+        List.of(36, 42)
         //end::init[]
     }
 
@@ -29,11 +29,11 @@ object Listing_5_1 {
 
     val a = 10
     //tag::init4[]
-    fun <A> if2(cond: Boolean, onTrue: () -> A, onFalse: () -> A): A =
+    fun <A> if2(cond: Boolean, onTrue: () -> A, onFalse: () -> A): A = //<1>
             if (cond) onTrue() else onFalse()
 
     val y = if2((a < 22),
-            { println("a") }, // <1>
+            { println("a") }, // <2>
             { println("b") }
     )
     //end::init4[]

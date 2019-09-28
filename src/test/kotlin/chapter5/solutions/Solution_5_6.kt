@@ -12,7 +12,7 @@ class Solution_5_6 : WordSpec({
 
     //tag::init[]
     fun <A> Stream<A>.headOption(): Option<A> =
-            this.foldRight({ None as Option<A> }, { a, _ -> Some(a) })
+            this.foldRight({ Option.empty() }, { a, _ -> Some(a) })
     //end::init[]
 
     "Stream.headOption" should {

@@ -12,11 +12,12 @@ import chapter3.Nil as NilL
 
 //tag::init[]
 //Unsafe! Naive solution could cause a stack overflow.
-fun <A> Stream<A>.toListUnsf(): List<A> = when (this) {
+fun <A> Stream<A>.toListUnsafe(): List<A> = when (this) {
     is Empty -> NilL
-    is Cons -> ConsL(this.h(), this.t().toListUnsf())
+    is Cons -> ConsL(this.h(), this.t().toListUnsafe())
 }
 
+//Use tailrec in combination with reverse for a safer implementation
 fun <A> Stream<A>.toList(): List<A> {
     tailrec fun go(xs: Stream<A>, acc: List<A>): List<A> = when (xs) {
         is Empty -> acc
@@ -30,7 +31,7 @@ class Solution_5_1 : WordSpec({
     "Stream.toList" should {
         "force the stream into an evaluated list" {
             val s = Stream.of(1, 2, 3, 4, 5)
-            s.toListUnsf() shouldBe List.of(1, 2, 3, 4, 5)
+            s.toListUnsafe() shouldBe List.of(1, 2, 3, 4, 5)
             s.toList() shouldBe List.of(1, 2, 3, 4, 5)
         }
     }

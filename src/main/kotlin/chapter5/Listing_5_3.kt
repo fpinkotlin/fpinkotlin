@@ -3,9 +3,10 @@ package chapter5
 import chapter3.List
 import chapter4.Option
 import chapter5.Stream.Companion.cons
-import chapter5.Stream.Companion.empty
+//tag::imports[]
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
+//end::imports[]
 
 object Listing_5_3 {
 

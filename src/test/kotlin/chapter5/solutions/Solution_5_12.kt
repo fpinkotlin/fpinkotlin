@@ -9,9 +9,10 @@ import io.kotlintest.specs.WordSpec
 class Solution_5_12 : WordSpec({
 
     //tag::fibs[]
-    fun fibs(): Stream<Int> = unfold(Pair(0, 1), { (curr, next) ->
-        Some(Pair(curr, Pair(next, curr + next)))
-    })
+    fun fibs(): Stream<Int> =
+            unfold(Pair(0, 1), { (curr, next) ->
+                Some(Pair(curr, Pair(next, curr + next)))
+            })
     //end::fibs[]
 
     //tag::from[]

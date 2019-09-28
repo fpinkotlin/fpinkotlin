@@ -12,26 +12,19 @@ import chapter5.solutions.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::map[]
+//tag::init[]
 fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> = TODO()
-//end::map[]
 
-//tag::take[]
 fun <A> Stream<A>.take(n: Int): Stream<A> = TODO()
-//end::take[]
 
-//tag::takewhile[]
 fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> = TODO()
-//end::takewhile[]
 
-//tag::zipwith[]
-fun <A, B, C> Stream<A>.zipWith(that: Stream<B>, f: (A, B) -> C): Stream<C> = TODO()
-//end::zipwith[]
+fun <A, B, C> Stream<A>.zipWith(
+        that: Stream<B>, f: (A, B) -> C): Stream<C> = TODO()
 
-//tag::zipall[]
-fun <A, B> Stream<A>.zipAll(that: Stream<B>):
-        Stream<Pair<Option<A>, Option<B>>> = TODO()
-//end::zipall[]
+fun <A, B> Stream<A>.zipAll(
+        that: Stream<B>): Stream<Pair<Option<A>, Option<B>>> = TODO()
+//end::init[]
 
 /**
  * Re-enable the tests by removing the `!` prefix!

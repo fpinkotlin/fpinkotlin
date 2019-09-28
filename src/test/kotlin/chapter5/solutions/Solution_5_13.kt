@@ -42,7 +42,8 @@ fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
                 { s: Stream<A> ->
                     when (s) {
                         is Cons ->
-                            if (p(s.h())) Some(Pair(s.h(), s.t()))
+                            if (p(s.h()))
+                                Some(Pair(s.h(), s.t()))
                             else None
                         else -> None
                     }
@@ -50,14 +51,15 @@ fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
 //end::takewhile[]
 
 //tag::zipwith[]
-fun <A, B, C> Stream<A>.zipWith(that: Stream<B>, f: (A, B) -> C): Stream<C> =
+fun <A, B, C> Stream<A>.zipWith(
+        that: Stream<B>, f: (A, B) -> C): Stream<C> =
         unfold(Pair(this, that)) { (ths: Stream<A>, tht: Stream<B>) ->
             when (ths) {
                 is Cons ->
                     when (tht) {
-                        is Cons -> Some(
-                                Pair(f(ths.h(), tht.h()),
-                                        Pair(ths.t(), tht.t())))
+                        is Cons ->
+                            Some(Pair(f(ths.h(), tht.h()),
+                                    Pair(ths.t(), tht.t())))
                         else -> None
                     }
                 else -> None
@@ -71,18 +73,18 @@ fun <A, B> Stream<A>.zipAll(that: Stream<B>): Stream<Pair<Option<A>, Option<B>>>
             when (ths) {
                 is Cons -> when (tht) {
                     is Cons ->
-                        Some(Pair(Pair(
-                                Some(ths.h()), Some(tht.h())),
+                        Some(Pair(
+                                Pair(Some(ths.h()), Some(tht.h())),
                                 Pair(ths.t(), tht.t())))
                     else ->
-                        Some(Pair(Pair(
-                                Some(ths.h()), None),
+                        Some(Pair(
+                                Pair(Some(ths.h()), None),
                                 Pair(ths.t(), empty<B>())))
                 }
                 else -> when (tht) {
                     is Cons ->
-                        Some(Pair(Pair(
-                                None, Some(tht.h())),
+                        Some(Pair(
+                                Pair(None, Some(tht.h())),
                                 Pair(empty<A>(), tht.t())))
                     else -> None
                 }

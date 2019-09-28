@@ -3,7 +3,7 @@ package chapter5
 object Listing_5_4 {
     //tag::ones[]
     fun ones(): Stream<Int> = Stream.cons({ 1 }, { ones() })
-    //end::ones]
+    //end::ones[]
 
 
     fun <A> Stream<A>.tails(): Stream<Stream<A>> = TODO()
