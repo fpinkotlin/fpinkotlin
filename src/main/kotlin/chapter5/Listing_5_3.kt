@@ -55,7 +55,8 @@ object Listing_5_3 {
 
         ConsL(12, Stream.of(4).map { it + 10 }.filter { it % 2 == 0 }.toList()) // <5>
 
-        ConsL(12, ConsL(14, Stream.empty<Int>().map { it + 10 }.filter { it % 2 == 0 }.toList())) // <6>
+        ConsL(12, ConsL(14, Stream.empty<Int>().map { it + 10 }
+                .filter { it % 2 == 0 }.toList())) // <6>
 
         ConsL(12, ConsL(14, NilL)) // <7>
         //end::trace[]
