@@ -3,7 +3,7 @@ package chapter2
 object Listing_2_3 {
 
     //tag::init[]
-    object MyModule {
+    object Example {
 
         private fun abs(n: Int): Int =
                 if (n < 0) -n
@@ -28,8 +28,8 @@ object Listing_2_3 {
     }
 
     fun main() {
-        println(MyModule.formatAbs(-42))
-        println(MyModule.formatFactorial(7)) //<3>
+        println(Example.formatAbs(-42))
+        println(Example.formatFactorial(7)) //<3>
     }
     //end::init[]
 }
