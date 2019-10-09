@@ -15,7 +15,7 @@ object Listing_2_3_1 {
     //tag::main[]
     fun main() {
         println(formatResult("factorial", 7, ::factorial))
-        println(formatResult("absolute", -42, ::abs))
+        println(formatResult("absolute value", -42, ::abs))
     }
     //end::main[]
 }
