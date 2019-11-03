@@ -1,9 +1,12 @@
 package chapter6.exercises
 
-import chapter6.Listing_6_1.RNG
+import chapter6.RNG
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
+/**
+ * TODO: Re-enable tests by removing `!` prefix!
+ */
 class Exercise_6_3 : WordSpec({
 
     //tag::init[]

@@ -6,11 +6,11 @@ val test by tasks.getting(Test::class) {
     useJUnitPlatform { }
 }
 
-val arrow_version = "0.9.0"
+val arrowVersion = "0.10.2"
 dependencies {
     compile(kotlin("stdlib"))
-    compile("io.arrow-kt:arrow-core-data:$arrow_version")
-    compile("io.arrow-kt:arrow-effects-io-extensions:$arrow_version")
+    compile("io.arrow-kt:arrow-core-data:$arrowVersion")
+    compile("io.arrow-kt:arrow-mtl:$arrowVersion")
     compile("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.2")
     runtime("org.slf4j:slf4j-simple:1.7.28")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")

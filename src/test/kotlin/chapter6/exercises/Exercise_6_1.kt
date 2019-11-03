@@ -1,6 +1,7 @@
 package chapter6.exercises
 
-import chapter6.Listing_6_1.RNG
+import chapter6.RNG
+import chapter6.unusedRng
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
@@ -8,13 +9,12 @@ import io.kotlintest.specs.WordSpec
 fun nonNegativeInt(rng: RNG): Pair<Int, RNG> = TODO()
 //end::init[]
 
+/**
+ * TODO: Re-enable tests by removing `!` prefix!
+ */
 class Exercise_6_1 : WordSpec({
 
     "nonNegativeInt" should {
-
-        val unusedRng = object : RNG {
-            override fun nextInt(): Pair<Int, RNG> = TODO()
-        }
 
         "!return 0 if nextInt() yields 0" {
 

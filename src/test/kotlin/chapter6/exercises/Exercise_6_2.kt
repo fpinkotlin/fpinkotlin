@@ -1,8 +1,7 @@
 package chapter6.exercises
 
-import chapter6.Listing_6_1
-import chapter6.Listing_6_1.RNG
-import chapter6.solutions.nonNegativeInt
+import chapter6.RNG
+import chapter6.unusedRng
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
@@ -10,13 +9,12 @@ import io.kotlintest.specs.WordSpec
 fun double(rng: RNG): Pair<Double, RNG> = TODO()
 //end::init[]
 
-class Exercise_6_2 : WordSpec ({
+/**
+ * TODO: Re-enable tests by removing `!` prefix!
+ */
+class Exercise_6_2 : WordSpec({
 
     "double" should {
-
-        val unusedRng = object : RNG {
-            override fun nextInt(): Pair<Int, RNG> = TODO()
-        }
 
         "!generate a max value approaching 1 based on Int.MAX_VALUE" {
 

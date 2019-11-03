@@ -1,11 +1,12 @@
 package chapter6.solutions
 
-import chapter6.Listing_6_1.RNG
+import chapter6.RNG
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 class Solution_6_3 : WordSpec({
 
+    //tag::init[]
     fun intDouble(rng: RNG): Pair<Pair<Int, Double>, RNG> {
         val (i, rng2) = rng.nextInt()
         val (d, rng3) = double(rng2)
@@ -19,11 +20,12 @@ class Solution_6_3 : WordSpec({
     }
 
     fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> {
-        val (d1, rng2) = double(rng)
-        val (d2, rng3) = double(rng2)
-        val (d3, rng4) = double(rng3)
+        val (d1, rng2) = doubleR(rng)
+        val (d2, rng3) = doubleR(rng2)
+        val (d3, rng4) = doubleR(rng3)
         return Pair(Triple(d1, d2, d3), rng4)
     }
+    //end::init[]
 
     "intDouble" should {
 

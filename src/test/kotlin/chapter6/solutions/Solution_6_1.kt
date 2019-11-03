@@ -1,6 +1,6 @@
 package chapter6.solutions
 
-import chapter6.Listing_6_1.RNG
+import chapter6.RNG
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 

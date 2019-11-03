@@ -1,7 +1,7 @@
 package chapter4
 
 import arrow.core.Option
-import arrow.core.extensions.option.monad.binding
+import arrow.core.extensions.fx
 
 object ForComprehensionSidebar {
 
@@ -26,11 +26,12 @@ object ForComprehensionSidebar {
                 oa: Option<A>,
                 ob: Option<B>,
                 f: (A, B) -> C
-        ): Option<C> = binding {
-            val (a) = oa
-            val (b) = ob
-            f(a, b)
-        }
+        ): Option<C> =
+                Option.fx {
+                    val (a) = oa
+                    val (b) = ob
+                    f(a, b)
+                }
         //end::binding[]
     }
 
