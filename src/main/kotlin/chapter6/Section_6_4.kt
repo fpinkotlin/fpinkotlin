@@ -1,6 +1,6 @@
 package chapter6
 
-import chapter6.Listing_6_1.RNG
+import chapter6.Section_6_1.RNG
 
 //tag::init1[]
 typealias Rand<A> = (RNG) -> Pair<A, RNG>
@@ -48,9 +48,9 @@ object Listing_6_4 {
             i / (Int.MAX_VALUE.toDouble() + 1)
         }
 
-    val randIntDouble: Rand<Pair<Int, Double>> = both(intR, doubleR)
+    val intDoubleR: Rand<Pair<Int, Double>> = both(intR, doubleR)
 
-    val randDoubleInt: Rand<Pair<Double, Int>> = both(doubleR, intR)
+    val doubleIntR: Rand<Pair<Double, Int>> = both(doubleR, intR)
     //end::init7[]
 
     //tag::init8[]

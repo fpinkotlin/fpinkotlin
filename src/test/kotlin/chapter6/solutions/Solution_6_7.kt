@@ -12,35 +12,35 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A> sequence(fs: List<Rand<A>>): Rand<List<A>> = { rng ->
+fun <A> sequence(fs: List<Rand<A>>): Rand<List<A>> =
+    foldRight(fs, unit(List.empty()), { f, acc ->
+        map2(f, acc, { h, t -> Cons(h, t) })
+    })
+
+fun <A> sequence2(fs: List<Rand<A>>): Rand<List<A>> = { rng ->
     when (fs) {
         is Nil -> unit(List.empty<A>())(rng)
         is Cons -> {
             val (a, nrng) = fs.head(rng)
-            val (xa, frng) = (sequence(fs.tail))(nrng)
+            val (xa, frng) = (sequence2(fs.tail))(nrng)
             Pair(Cons(a, xa), frng)
         }
     }
 }
 //end::init[]
 
-fun <A> sequence2(fs: List<Rand<A>>): Rand<List<A>> =
-    foldRight(fs, unit(List.empty()), { f, acc ->
-        map2(f, acc, { h, t -> Cons(h, t) })
-    })
-
 
 fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> {
     fun go(c: Int): List<Rand<Int>> =
         if (c == 0) Nil
         else Cons({ r -> Pair(1, r) }, go(c - 1))
-    return (sequence2(go(count)))(rng)
+    return sequence(go(count))(rng)
 }
 
 class Solution_6_7 : WordSpec({
     "sequence" should {
 
-        "combine the results of many actions using recursion" {
+        "combine the results of many actions using foldRight and map2" {
 
             val combined: Rand<List<Int>> =
                 sequence(List.of(unit(1), unit(2), unit(3), unit(4)))
@@ -48,12 +48,12 @@ class Solution_6_7 : WordSpec({
             combined(rng1).first shouldBe List.of(1, 2, 3, 4)
         }
 
-        "combine the results of many actions using foldRight and map2" {
+        "combine the results of many actions using recursion" {
 
-            val combined2: Rand<List<Int>> =
+            val combined: Rand<List<Int>> =
                 sequence2(List.of(unit(1), unit(2), unit(3), unit(4)))
 
-            combined2(rng1).first shouldBe List.of(1, 2, 3, 4)
+            combined(rng1).first shouldBe List.of(1, 2, 3, 4)
         }
     }
 

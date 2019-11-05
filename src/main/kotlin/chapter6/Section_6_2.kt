@@ -1,6 +1,6 @@
 package chapter6
 
-import chapter6.Listing_6_1.RNG
+import chapter6.Section_6_1.RNG
 import chapter6.Listing_6_2.SimpleRNG
 
 object Listing_6_2 {

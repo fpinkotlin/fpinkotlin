@@ -2,7 +2,7 @@ package chapter6
 
 import kotlin.random.Random
 
-object Listing_6_1 {
+object Section_6_1 {
 
     //tag::init[]
     fun rollDie(): Int { // <1>

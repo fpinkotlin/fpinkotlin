@@ -1,8 +1,8 @@
 package chapter6
 
-import chapter6.Listing_6_1.RNG
+import chapter6.Section_6_1.RNG
 
-object Listing_6_3 {
+object Section_6_3 {
 
     class FooState
     class Bar
