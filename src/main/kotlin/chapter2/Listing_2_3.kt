@@ -6,13 +6,13 @@ object Listing_2_3 {
     object Example {
 
         private fun abs(n: Int): Int =
-                if (n < 0) -n
-                else n
+            if (n < 0) -n
+            else n
 
         private fun factorial(i: Int): Int { //<1>
             fun go(n: Int, acc: Int): Int =
-                    if (n <= 0) acc
-                    else go(n - 1, n * acc)
+                if (n <= 0) acc
+                else go(n - 1, n * acc)
             return go(i, 1)
         }
 

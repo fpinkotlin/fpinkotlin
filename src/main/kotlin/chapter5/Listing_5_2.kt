@@ -17,8 +17,8 @@ sealed class Stream<out A> {
         //tag::of[]
 
         fun <A> of(vararg xs: A): Stream<A> =
-                if (xs.isEmpty()) empty()
-                else cons({ xs[0] }, { of(*xs.sliceArray(1 until xs.size)) })
+            if (xs.isEmpty()) empty()
+            else cons({ xs[0] }, { of(*xs.sliceArray(1 until xs.size)) })
         //end::of[]
         //tag::empty[]
 

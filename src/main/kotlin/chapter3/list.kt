@@ -20,20 +20,20 @@ sealed class List<out A> { // <1>
         //end::of[]
         //tag::sum[]
         fun sum(ints: List<Int>): Int =
-                when (ints) {
-                    is Nil -> 0
-                    is Cons -> ints.head + sum(ints.tail)
-                }
+            when (ints) {
+                is Nil -> 0
+                is Cons -> ints.head + sum(ints.tail)
+            }
 
         //end::sum[]
         //tag::product[]
         fun product(doubles: List<Double>): Double =
-                when (doubles) {
-                    is Nil -> 1.0
-                    is Cons ->
-                        if (doubles.head == 0.0) 0.0
-                        else doubles.head * product(doubles.tail)
-                }
+            when (doubles) {
+                is Nil -> 1.0
+                is Cons ->
+                    if (doubles.head == 0.0) 0.0
+                    else doubles.head * product(doubles.tail)
+            }
 
         //end::product[]
         //tag::empty[]

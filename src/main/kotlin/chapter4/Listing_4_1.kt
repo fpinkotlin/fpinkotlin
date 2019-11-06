@@ -16,11 +16,11 @@ object Listing_4_1 {
 
     //tag::init2[]
     fun failingFn2(i: Int): Int =
-            try {
-                val x = 42 + 5
-                x + (throw Exception("boom!")) as Int // <1>
-            } catch (e: Exception) {
-                43 // <2>
-            }
+        try {
+            val x = 42 + 5
+            x + (throw Exception("boom!")) as Int // <1>
+        } catch (e: Exception) {
+            43 // <2>
+        }
     //end::init2[]
 }

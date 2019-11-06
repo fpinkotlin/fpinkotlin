@@ -14,7 +14,7 @@ object Listing_4_2_2 {
 
     //tag::init[]
     fun mean(xs: List<Double>, onEmpty: Double) =
-            if (xs.isEmpty()) onEmpty // <1>
-            else xs.sum() / xs.size() // <2>
+        if (xs.isEmpty()) onEmpty // <1>
+        else xs.sum() / xs.size() // <2>
     //end::init[]
 }

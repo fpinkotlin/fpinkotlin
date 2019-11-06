@@ -3,8 +3,8 @@ package chapter2
 object Listing_2_1_1 {
     //tag::abs[]
     private fun abs(n: Int): Int =
-            if (n < 0) -n
-            else n
+        if (n < 0) -n
+        else n
     //end::abs[]
 
     //tag::formatabs[]

@@ -12,26 +12,26 @@ object Listing_4_6 {
 
     //tag::mean[]
     fun mean(xs: List<Double>): Either<String, Double> =
-            if (xs.isEmpty())
-                Left("mean of empty list!")
-            else Right(xs.sum() / xs.size())
+        if (xs.isEmpty())
+            Left("mean of empty list!")
+        else Right(xs.sum() / xs.size())
     //end::mean[]
 
     //tag::safediv[]
     fun safeDiv(x: Int, y: Int): Either<Exception, Int> =
-            try {
-                Right(x / y)
-            } catch (e: Exception) {
-                Left(e)
-            }
+        try {
+            Right(x / y)
+        } catch (e: Exception) {
+            Left(e)
+        }
     //end::safediv[]
 
     //tag::try[]
     fun <A> Try(a: () -> A): Either<Exception, A> =
-            try {
-                Right(a())
-            } catch (e: Exception) {
-                Left(e)
-            }
+        try {
+            Right(a())
+        } catch (e: Exception) {
+            Left(e)
+        }
     //end::try[]
 }

@@ -7,10 +7,10 @@ import chapter4.Some
 object Listing_5_2_1 {
     //tag::init[]
     fun <A> Stream<A>.headOption(): Option<A> =
-            when (this) {
-                is Empty -> None
-                is Cons -> Some(h()) // <1>
-            }
+        when (this) {
+            is Empty -> None
+            is Cons -> Some(h()) // <1>
+        }
     //end::init[]
 
     val tl: Stream<String> = TODO()

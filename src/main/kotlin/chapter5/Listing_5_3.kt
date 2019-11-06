@@ -6,6 +6,7 @@ import chapter5.Stream.Companion.cons
 //tag::imports[]
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
+
 //end::imports[]
 
 object Listing_5_3 {
@@ -20,23 +21,23 @@ object Listing_5_3 {
 
     //tag::exists1[]
     fun <A> Stream<A>.exists(p: (A) -> Boolean): Boolean =
-            when (this) {
-                is Cons -> p(this.h()) || this.t().exists(p)
-                else -> false
-            }
+        when (this) {
+            is Cons -> p(this.h()) || this.t().exists(p)
+            else -> false
+        }
     //end::exists1[]
 
     //tag::foldright[]
     fun <A, B> Stream<A>.foldRight(z: () -> B, f: (A, () -> B) -> B): B = // <1>
-            when (this) {
-                is Cons -> f(this.h(), { t().foldRight(z, f) }) // <2>
-                else -> z()
-            }
+        when (this) {
+            is Cons -> f(this.h()) { t().foldRight(z, f) } // <2>
+            else -> z()
+        }
     //end::foldright[]
 
     //tag::exists2[]
     fun <A> Stream<A>.exists2(p: (A) -> Boolean): Boolean =
-            foldRight({ false }, { a, b -> p(a) || b() })
+        foldRight({ false }, { a, b -> p(a) || b() })
     //end::exists2[]
 
     val listing = {
@@ -56,7 +57,7 @@ object Listing_5_3 {
         ConsL(12, Stream.of(4).map { it + 10 }.filter { it % 2 == 0 }.toList()) // <5>
 
         ConsL(12, ConsL(14, Stream.empty<Int>().map { it + 10 }
-                .filter { it % 2 == 0 }.toList())) // <6>
+            .filter { it % 2 == 0 }.toList())) // <6>
 
         ConsL(12, ConsL(14, NilL)) // <7>
         //end::trace[]
@@ -64,6 +65,6 @@ object Listing_5_3 {
 
     //tag::find[]
     fun <A> Stream<A>.find(p: (A) -> Boolean): Option<A> =
-            filter(p).headOption()
+        filter(p).headOption()
     //end::find[]
 }

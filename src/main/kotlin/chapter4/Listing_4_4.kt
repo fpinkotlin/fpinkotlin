@@ -44,11 +44,11 @@ object Listing_4_4 {
 
     //tag::try[]
     fun <A> Try(a: () -> A): Option<A> = // <2>
-            try {
-                Some(a()) // <3>
-            } catch (e: Throwable) { // <4>
-                None
-            }
+        try {
+            Some(a()) // <3>
+        } catch (e: Throwable) { // <4>
+            None
+        }
     //end::try[]
     //end::quote2[]
 
@@ -58,7 +58,7 @@ object Listing_4_4 {
 
     //tag::parseints[]
     fun parseInts(xs: List<String>): Option<List<Int>> =
-            sequence(xs.map { str -> Try { str.toInt() } })
+        sequence(xs.map { str -> Try { str.toInt() } })
     //end::parseints[]
 
 }

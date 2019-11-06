@@ -14,9 +14,10 @@ object Listing_4_3 {
 
     //tag::init[]
     data class Employee(
-            val name: String,
-            val department: String,
-            val manager: Option<String>)
+        val name: String,
+        val department: String,
+        val manager: Option<String>
+    )
 
     fun lookupByName(name: String): Option<Employee> = TODO()
 
@@ -25,9 +26,9 @@ object Listing_4_3 {
 
     //tag::init2[]
     val dept: String = lookupByName("Tim")
-            .map { it.department }
-            .filter { it != "Accounts" }
-            .getOrElse { "Unemployed" }
+        .map { it.department }
+        .filter { it != "Accounts" }
+        .getOrElse { "Unemployed" }
     //end::init2[]
 
     //tag::init3[]
@@ -36,7 +37,7 @@ object Listing_4_3 {
 
     //tag::init4[]
     val manager: String = lookupByName("Tim")
-            .flatMap { it.manager }
-            .getOrElse { "Unemployed" }
+        .flatMap { it.manager }
+        .getOrElse { "Unemployed" }
     //end::init4[]
 }

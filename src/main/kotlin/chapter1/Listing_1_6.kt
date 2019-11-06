@@ -10,7 +10,7 @@ object Listing_1_6 {
 
     //tag::init[]
     fun List<Charge>.coalesce(): List<Charge> =
-            this.groupBy { it.cc }.values
-                    .map { it.reduce { a, b -> a.combine(b) } }
+        this.groupBy { it.cc }.values
+            .map { it.reduce { a, b -> a.combine(b) } }
     //end::init[]
 }

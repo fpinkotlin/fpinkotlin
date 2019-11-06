@@ -5,7 +5,6 @@ object Listing_5_4 {
     fun ones(): Stream<Int> = Stream.cons({ 1 }, { ones() })
     //end::ones[]
 
-
     fun <A> Stream<A>.tails(): Stream<Stream<A>> = TODO()
 
     fun <A> Stream<A>.exists(p: (A) -> Boolean): Boolean = TODO()
@@ -14,7 +13,7 @@ object Listing_5_4 {
 
     //tag::hassubsequence[]
     fun <A> Stream<A>.hasSubsequence(s: Stream<A>): Boolean =
-            this.tails().exists { it.startsWith(s) }
+        this.tails().exists { it.startsWith(s) }
     //end::hassubsequence[]
 
 }

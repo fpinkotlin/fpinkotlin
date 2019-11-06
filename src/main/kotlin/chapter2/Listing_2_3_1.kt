@@ -1,7 +1,7 @@
 package chapter2
 
 object Listing_2_3_1 {
-    fun factorial(i: Int): Int  = TODO()
+    fun factorial(i: Int): Int = TODO()
 
     fun abs(n: Int): Int = TODO()
 

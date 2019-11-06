@@ -20,7 +20,7 @@ object Section_6_6 {
     //tag::init1[]
     val ns: State<RNG, List<Int>> =
         flatMap(int) { x -> // <1>
-            flatMap(int) { y -> // <1>
+            flatMap(int) { y ->
                 map(ints(x)) { xs -> //<2>
                     xs.map { it % y } // <3>
                 }
@@ -32,7 +32,7 @@ object Section_6_6 {
     val ns2: State<RNG, List<Int>> =
         State.fx(Id.monad()) {
             val (x: Int) = int // <1>
-            val (y: Int) = int // <1>
+            val (y: Int) = int
             val (xs: List<Int>) = ints(x) // <2>
             xs.map { it % y } // <3>
         }
@@ -40,7 +40,8 @@ object Section_6_6 {
 
     //tag::init3[]
     fun <S> modify(f: (S) -> S): State<S, Unit> =
-        State.fx(Id.monad()) { // <1>
+        State.fx(Id.monad()) {
+            // <1>
             val (s: S) = get<S>() // <2>
             val (_) = set(f(s)) // <3>
         }
