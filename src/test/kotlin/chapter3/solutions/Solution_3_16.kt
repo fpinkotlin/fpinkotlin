@@ -7,7 +7,7 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun doubleToString(xs: List<Double>): List<String> =
-        foldRight(xs, List.empty(), { d, ds -> Cons(d.toString(), ds) })
+    foldRight(xs, List.empty(), { d, ds -> Cons(d.toString(), ds) })
 // end::init[]
 
 class Solution_3_16 : WordSpec({

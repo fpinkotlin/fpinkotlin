@@ -7,7 +7,7 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> append(a1: List<A>, a2: List<A>): List<A> =
-        foldRight(a1, a2, { x, y -> Cons(x, y) })
+    foldRight(a1, a2, { x, y -> Cons(x, y) })
 // end::init[]
 
 class Solution_3_13 : WordSpec({

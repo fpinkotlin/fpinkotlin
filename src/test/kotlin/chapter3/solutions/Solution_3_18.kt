@@ -7,7 +7,7 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> filter(xs: List<A>, f: (A) -> Boolean): List<A> =
-        foldRight(xs, List.empty(), { a, ls -> if (f(a)) Cons(a, ls) else ls })
+    foldRight(xs, List.empty(), { a, ls -> if (f(a)) Cons(a, ls) else ls })
 // end::init[]
 
 class Solution_3_18 : WordSpec({

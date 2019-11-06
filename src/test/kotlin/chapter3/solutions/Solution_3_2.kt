@@ -9,12 +9,13 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> setHead(xs: List<A>, x: A): List<A> =
-        when (xs) {
-            is Nil ->
-                throw IllegalStateException(
-                        "Cannot replace `head` of a Nil list")
-            is Cons -> Cons(x, xs.tail)
-        }
+    when (xs) {
+        is Nil ->
+            throw IllegalStateException(
+                "Cannot replace `head` of a Nil list"
+            )
+        is Cons -> Cons(x, xs.tail)
+    }
 // end::init[]
 
 class Solution_3_2 : WordSpec({

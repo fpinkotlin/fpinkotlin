@@ -8,9 +8,9 @@ import io.kotlintest.specs.WordSpec
 
 //tag::init[]
 fun <A, B, C> map2(
-        a: Option<A>,
-        b: Option<B>,
-        f: (A, B) -> C
+    a: Option<A>,
+    b: Option<B>,
+    f: (A, B) -> C
 ): Option<C> = TODO()
 //end::init[]
 

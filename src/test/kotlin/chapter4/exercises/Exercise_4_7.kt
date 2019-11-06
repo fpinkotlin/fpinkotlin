@@ -11,8 +11,8 @@ class Exercise_4_7 : WordSpec({
 
     //tag::init[]
     fun <E, A, B> traverse(
-            xs: List<A>,
-            f: (A) -> Either<E, B>
+        xs: List<A>,
+        f: (A) -> Either<E, B>
     ): Either<E, List<B>> = TODO()
 
     fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> = TODO()

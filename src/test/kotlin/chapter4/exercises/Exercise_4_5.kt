@@ -16,11 +16,11 @@ class Exercise_4_5 : WordSpec({
     fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()
 
     fun <A> Try(a: () -> A): Option<A> =
-            try {
-                Some(a())
-            } catch (e: Throwable) {
-                None
-            }
+        try {
+            Some(a())
+        } catch (e: Throwable) {
+            None
+        }
 
     "traverse" should {
         "!return some option of a transformed list if all transformations succeed" {

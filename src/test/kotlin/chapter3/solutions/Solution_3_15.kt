@@ -7,7 +7,7 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun increment(xs: List<Int>): List<Int> =
-        foldRight(xs, List.empty(), { i: Int, ls -> Cons(i + 1, ls) })
+    foldRight(xs, List.empty(), { i: Int, ls -> Cons(i + 1, ls) })
 // end::init[]
 
 class Solution_3_15 : WordSpec({

@@ -15,14 +15,14 @@ class Exercise_2_1 : WordSpec({
     "fib" should {
         "!return the nth fibonacci number" {
             persistentMapOf(
-                    Pair(1, 1),
-                    Pair(2, 1),
-                    Pair(3, 2),
-                    Pair(4, 3),
-                    Pair(5, 5),
-                    Pair(6, 8),
-                    Pair(7, 13),
-                    Pair(8, 21)
+                Pair(1, 1),
+                Pair(2, 1),
+                Pair(3, 2),
+                Pair(4, 3),
+                Pair(5, 5),
+                Pair(6, 8),
+                Pair(7, 13),
+                Pair(8, 21)
             ).forEach { (n, num) ->
                 fib(n) shouldBe num
             }

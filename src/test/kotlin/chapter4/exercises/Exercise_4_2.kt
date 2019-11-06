@@ -12,8 +12,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 fun mean(xs: List<Double>): Option<Double> =
-        if (xs.isEmpty()) None
-        else Some(xs.sum() / xs.size())
+    if (xs.isEmpty()) None
+    else Some(xs.sum() / xs.size())
 
 //tag::init[]
 fun variance(xs: List<Double>): Option<Double> = TODO()

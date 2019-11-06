@@ -6,9 +6,9 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> =
-        flatMap(xa) { a ->
-            if (f(a)) List.of(a) else List.empty()
-        }
+    flatMap(xa) { a ->
+        if (f(a)) List.of(a) else List.empty()
+    }
 // end::init[]
 
 class Solution_3_20 : WordSpec({

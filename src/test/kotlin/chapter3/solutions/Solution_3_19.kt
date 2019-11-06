@@ -7,12 +7,12 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> =
-        foldRight(xa, List.empty(), { a, lb -> append(f(a), lb) })
+    foldRight(xa, List.empty(), { a, lb -> append(f(a), lb) })
 
 fun <A, B> flatMap2(xa: List<A>, f: (A) -> List<B>): List<B> =
-        foldRight(xa, List.empty(), { a, xb ->
-            foldRight(f(a), xb, { b, lb -> Cons(b, lb) })
-        })
+    foldRight(xa, List.empty(), { a, xb ->
+        foldRight(f(a), xb, { b, lb -> Cons(b, lb) })
+    })
 // end::init[]
 
 class Solution_3_19 : WordSpec({

@@ -25,9 +25,11 @@ class Exercise_5_15 : WordSpec({
     "Stream.tails" should {
         "!return the stream of suffixes of the input sequence" {
             Stream.of(1, 2, 3).tails().toList().map { it.toList() } shouldBe
-                    List.of(ConsL(1, ConsL(2, ConsL(3, NilL))),
-                            ConsL(2, ConsL(3, NilL)),
-                            ConsL(3, NilL))
+                    List.of(
+                        ConsL(1, ConsL(2, ConsL(3, NilL))),
+                        ConsL(2, ConsL(3, NilL)),
+                        ConsL(3, NilL)
+                    )
         }
     }
 })

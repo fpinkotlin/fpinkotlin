@@ -9,11 +9,11 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> tail(xs: List<A>): List<A> =
-        when (xs) {
-            is Cons -> xs.tail
-            is Nil ->
-                throw IllegalStateException("Nil cannot have a `tail`")
-        }
+    when (xs) {
+        is Cons -> xs.tail
+        is Nil ->
+            throw IllegalStateException("Nil cannot have a `tail`")
+    }
 // end::init[]
 
 class Solution_3_1 : WordSpec({

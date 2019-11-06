@@ -11,12 +11,12 @@ class Solution_5_16 : WordSpec({
 
     //tag::scanright[]
     fun <A, B> Stream<A>.scanRight(z: B, f: (A, () -> B) -> B): Stream<B> =
-            foldRight({ Pair(z, Stream.of(z)) },
-                    { a: A, p0: () -> Pair<B, Stream<B>> ->
-                        val p1: Pair<B, Stream<B>> by lazy { p0() }
-                        val b2: B = f(a) { p1.first }
-                        Pair<B, Stream<B>>(b2, cons({ b2 }, { p1.second }))
-                    }).second
+        foldRight({ Pair(z, Stream.of(z)) },
+            { a: A, p0: () -> Pair<B, Stream<B>> ->
+                val p1: Pair<B, Stream<B>> by lazy { p0() }
+                val b2: B = f(a) { p1.first }
+                Pair<B, Stream<B>>(b2, cons({ b2 }, { p1.second }))
+            }).second
     //end::scanright[]
 
     "Stream.scanRight" should {

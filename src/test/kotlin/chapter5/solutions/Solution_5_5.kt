@@ -12,8 +12,8 @@ class Solution_5_5 : WordSpec({
 
     //tag::init[]
     fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
-            foldRight({ empty() },
-                    { h, t -> if (p(h)) cons({ h }, t) else t() })
+        foldRight({ empty() },
+            { h, t -> if (p(h)) cons({ h }, t) else t() })
     //end::init[]
 
     "Stream.takeWhile" should {

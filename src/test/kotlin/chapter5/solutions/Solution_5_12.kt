@@ -10,24 +10,24 @@ class Solution_5_12 : WordSpec({
 
     //tag::fibs[]
     fun fibs(): Stream<Int> =
-            unfold(Pair(0, 1), { (curr, next) ->
-                Some(Pair(curr, Pair(next, curr + next)))
-            })
+        unfold(Pair(0, 1), { (curr, next) ->
+            Some(Pair(curr, Pair(next, curr + next)))
+        })
     //end::fibs[]
 
     //tag::from[]
     fun from(n: Int): Stream<Int> =
-            unfold(n, { a -> Some(Pair(a, a + 1)) })
+        unfold(n, { a -> Some(Pair(a, a + 1)) })
     //end::from[]
 
     //tag::constant[]
     fun <A> constant(n: A): Stream<A> =
-            unfold(n, { a -> Some(Pair(a, a)) })
+        unfold(n, { a -> Some(Pair(a, a)) })
     //end::constant[]
 
     //tag::ones[]
     fun ones(): Stream<Int> =
-            unfold(1, { Some(Pair(1, 1)) })
+        unfold(1, { Some(Pair(1, 1)) })
     //end::ones[]
 
     "fibs" should {

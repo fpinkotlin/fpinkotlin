@@ -8,10 +8,10 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun maximum(tree: Tree<Int>): Int =
-        when (tree) {
-            is Leaf -> tree.value
-            is Branch -> maxOf(maximum(tree.left), maximum(tree.right))
-        }
+    when (tree) {
+        is Leaf -> tree.value
+        is Branch -> maxOf(maximum(tree.left), maximum(tree.right))
+    }
 // end::init[]
 
 class Solution_3_25 : WordSpec({

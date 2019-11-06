@@ -13,27 +13,27 @@ class Solution_4_5 : WordSpec({
 
     //tag::init[]
     fun <A, B> traverse(
-            xa: List<A>,
-            f: (A) -> Option<B>
+        xa: List<A>,
+        f: (A) -> Option<B>
     ): Option<List<B>> =
-            when (xa) {
-                is Nil -> Some(Nil)
-                is Cons ->
-                    map2(f(xa.head), traverse(xa.tail, f)) { b, xb ->
-                        Cons(b, xb)
-                    }
-            }
+        when (xa) {
+            is Nil -> Some(Nil)
+            is Cons ->
+                map2(f(xa.head), traverse(xa.tail, f)) { b, xb ->
+                    Cons(b, xb)
+                }
+        }
 
     fun <A> sequence(xs: List<Option<A>>): Option<List<A>> =
-            traverse(xs) { it }
+        traverse(xs) { it }
     //end::init[]
 
     fun <A> Try(a: () -> A): Option<A> =
-            try {
-                Some(a())
-            } catch (e: Throwable) {
-                None
-            }
+        try {
+            Some(a())
+        } catch (e: Throwable) {
+            None
+        }
 
     "traverse" should {
         "return some option of a transformed list if all transformations succeed" {

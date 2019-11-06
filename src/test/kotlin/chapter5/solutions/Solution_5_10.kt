@@ -11,7 +11,7 @@ class Solution_5_10 : WordSpec({
     //tag::init[]
     fun fibs(): Stream<Int> {
         fun go(curr: Int, nxt: Int): Stream<Int> =
-                cons({ curr }, { go(nxt, curr + nxt) })
+            cons({ curr }, { go(nxt, curr + nxt) })
         return go(0, 1)
     }
     //end::init[]

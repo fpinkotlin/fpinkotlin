@@ -10,7 +10,7 @@ class Solution_5_9 : WordSpec({
 
     //tag::init[]
     fun from(n: Int): Stream<Int> =
-            cons({ n }, { from(n + 1) })
+        cons({ n }, { from(n + 1) })
     //end::init[]
 
     "from" should {

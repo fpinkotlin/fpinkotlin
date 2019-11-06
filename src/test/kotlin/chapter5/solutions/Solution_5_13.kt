@@ -13,84 +13,99 @@ import io.kotlintest.specs.WordSpec
 
 //tag::map[]
 fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> =
-        unfold(this,
-                { s: Stream<A> ->
-                    when (s) {
-                        is Cons -> Some(Pair(f(s.h()), s.t()))
-                        else -> None
-                    }
-                })
+    unfold(this,
+        { s: Stream<A> ->
+            when (s) {
+                is Cons -> Some(Pair(f(s.h()), s.t()))
+                else -> None
+            }
+        })
 //end::map[]
 
 //tag::take[]
 fun <A> Stream<A>.take(n: Int): Stream<A> =
-        unfold(this,
-                { s: Stream<A> ->
-                    when (s) {
-                        is Cons ->
-                            if (n > 0)
-                                Some(Pair(s.h(), s.t().take(n - 1)))
-                            else None
-                        else -> None
-                    }
-                })
+    unfold(this,
+        { s: Stream<A> ->
+            when (s) {
+                is Cons ->
+                    if (n > 0)
+                        Some(Pair(s.h(), s.t().take(n - 1)))
+                    else None
+                else -> None
+            }
+        })
 //end::take[]
 
 //tag::takewhile[]
 fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
-        unfold(this,
-                { s: Stream<A> ->
-                    when (s) {
-                        is Cons ->
-                            if (p(s.h()))
-                                Some(Pair(s.h(), s.t()))
-                            else None
-                        else -> None
-                    }
-                })
+    unfold(this,
+        { s: Stream<A> ->
+            when (s) {
+                is Cons ->
+                    if (p(s.h()))
+                        Some(Pair(s.h(), s.t()))
+                    else None
+                else -> None
+            }
+        })
 //end::takewhile[]
 
 //tag::zipwith[]
 fun <A, B, C> Stream<A>.zipWith(
-        that: Stream<B>, f: (A, B) -> C): Stream<C> =
-        unfold(Pair(this, that)) { (ths: Stream<A>, tht: Stream<B>) ->
-            when (ths) {
-                is Cons ->
-                    when (tht) {
-                        is Cons ->
-                            Some(Pair(f(ths.h(), tht.h()),
-                                    Pair(ths.t(), tht.t())))
-                        else -> None
-                    }
-                else -> None
-            }
+    that: Stream<B>, f: (A, B) -> C
+): Stream<C> =
+    unfold(Pair(this, that)) { (ths: Stream<A>, tht: Stream<B>) ->
+        when (ths) {
+            is Cons ->
+                when (tht) {
+                    is Cons ->
+                        Some(
+                            Pair(
+                                f(ths.h(), tht.h()),
+                                Pair(ths.t(), tht.t())
+                            )
+                        )
+                    else -> None
+                }
+            else -> None
         }
+    }
 //end::zipwith[]
 
 //tag::zipall[]
 fun <A, B> Stream<A>.zipAll(
-        that: Stream<B>): Stream<Pair<Option<A>, Option<B>>> =
-        unfold(Pair(this, that)) { (ths, tht) ->
-            when (ths) {
-                is Cons -> when (tht) {
-                    is Cons ->
-                        Some(Pair(
-                                Pair(Some(ths.h()), Some(tht.h())),
-                                Pair(ths.t(), tht.t())))
-                    else ->
-                        Some(Pair(
-                                Pair(Some(ths.h()), None),
-                                Pair(ths.t(), empty<B>())))
-                }
-                else -> when (tht) {
-                    is Cons ->
-                        Some(Pair(
-                                Pair(None, Some(tht.h())),
-                                Pair(empty<A>(), tht.t())))
-                    else -> None
-                }
+    that: Stream<B>
+): Stream<Pair<Option<A>, Option<B>>> =
+    unfold(Pair(this, that)) { (ths, tht) ->
+        when (ths) {
+            is Cons -> when (tht) {
+                is Cons ->
+                    Some(
+                        Pair(
+                            Pair(Some(ths.h()), Some(tht.h())),
+                            Pair(ths.t(), tht.t())
+                        )
+                    )
+                else ->
+                    Some(
+                        Pair(
+                            Pair(Some(ths.h()), None),
+                            Pair(ths.t(), empty<B>())
+                        )
+                    )
+            }
+            else -> when (tht) {
+                is Cons ->
+                    Some(
+                        Pair(
+                            Pair(None, Some(tht.h())),
+                            Pair(empty<A>(), tht.t())
+                        )
+                    )
+                else -> None
             }
         }
+    }
 //end::zipall[]
 
 class Solution_5_13 : WordSpec({
@@ -146,23 +161,26 @@ class Solution_5_13 : WordSpec({
     "Stream.zipAll" should {
         "combine two streams of equal length" {
             Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3)).toList() shouldBe List.of(
-                    Pair(Some(1), Some(1)),
-                    Pair(Some(2), Some(2)),
-                    Pair(Some(3), Some(3)))
+                Pair(Some(1), Some(1)),
+                Pair(Some(2), Some(2)),
+                Pair(Some(3), Some(3))
+            )
         }
         "combine two streams until the first is exhausted" {
             Stream.of(1, 2, 3, 4).zipAll(Stream.of(1, 2, 3)).toList() shouldBe List.of(
-                    Pair(Some(1), Some(1)),
-                    Pair(Some(2), Some(2)),
-                    Pair(Some(3), Some(3)),
-                    Pair(Some(4), None))
+                Pair(Some(1), Some(1)),
+                Pair(Some(2), Some(2)),
+                Pair(Some(3), Some(3)),
+                Pair(Some(4), None)
+            )
         }
         "combine two streams until the second is exhausted" {
             Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3, 4)).toList() shouldBe List.of(
-                    Pair(Some(1), Some(1)),
-                    Pair(Some(2), Some(2)),
-                    Pair(Some(3), Some(3)),
-                    Pair(None, Some(4)))
+                Pair(Some(1), Some(1)),
+                Pair(Some(2), Some(2)),
+                Pair(Some(3), Some(3)),
+                Pair(None, Some(4))
+            )
         }
     }
 })

@@ -9,7 +9,7 @@ class Solution_5_8 : WordSpec({
 
     //tag::init[]
     fun <A> constant(a: A): Stream<A> =
-            Stream.cons({ a }, { constant(a) })
+        Stream.cons({ a }, { constant(a) })
     //end::init[]
 
     "constants" should {

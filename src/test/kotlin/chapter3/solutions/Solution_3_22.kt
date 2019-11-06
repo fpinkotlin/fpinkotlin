@@ -8,15 +8,16 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
-        when (xa) {
+    when (xa) {
+        is Nil -> Nil
+        is Cons -> when (xb) {
             is Nil -> Nil
-            is Cons -> when (xb) {
-                is Nil -> Nil
-                is Cons -> Cons(
-                        f(xa.head, xb.head),
-                        zipWith(xa.tail, xb.tail, f))
-            }
+            is Cons -> Cons(
+                f(xa.head, xb.head),
+                zipWith(xa.tail, xb.tail, f)
+            )
         }
+    }
 
 // end::init[]
 

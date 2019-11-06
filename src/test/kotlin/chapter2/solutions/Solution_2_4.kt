@@ -6,7 +6,7 @@ import io.kotlintest.specs.WordSpec
 class Solution_2_4 : WordSpec({
     // tag::init[]
     fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C =
-            { a: A, b: B -> f(a)(b) }
+        { a: A, b: B -> f(a)(b) }
     // end::init[]
 
     "uncurry" should {

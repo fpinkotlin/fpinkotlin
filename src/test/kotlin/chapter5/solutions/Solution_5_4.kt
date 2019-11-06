@@ -7,7 +7,7 @@ import io.kotlintest.specs.WordSpec
 
 //tag::init[]
 fun <A> Stream<A>.forAll(p: (A) -> Boolean): Boolean =
-        foldRight({ true }, { a, b -> p(a) && b() })
+    foldRight({ true }, { a, b -> p(a) && b() })
 //end::init[]
 
 class Solution_5_4 : WordSpec({

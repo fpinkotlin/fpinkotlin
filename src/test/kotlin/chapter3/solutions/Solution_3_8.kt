@@ -7,7 +7,7 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> length(xs: List<A>): Int =
-        foldRight(xs, 0, { _, acc -> 1 + acc })
+    foldRight(xs, 0, { _, acc -> 1 + acc })
 // end::init[]
 
 class Solution_3_8 : WordSpec({

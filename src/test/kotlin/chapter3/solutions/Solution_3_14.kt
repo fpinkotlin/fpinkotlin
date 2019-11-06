@@ -7,12 +7,12 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A> concat(xxs: List<List<A>>): List<A> =
-        foldRight(xxs, List.empty(), { xs1: List<A>, xs2: List<A> ->
-            foldRight(xs1, xs2, { a, ls -> Cons(a, ls) })
-        })
+    foldRight(xxs, List.empty(), { xs1: List<A>, xs2: List<A> ->
+        foldRight(xs1, xs2, { a, ls -> Cons(a, ls) })
+    })
 
 fun <A> concat2(xxs: List<List<A>>): List<A> =
-        foldRight(xxs, List.empty(), { xs1, xs2 -> append(xs1, xs2) })
+    foldRight(xxs, List.empty(), { xs1, xs2 -> append(xs1, xs2) })
 // end::init[]
 
 class Solution_3_14 : WordSpec({

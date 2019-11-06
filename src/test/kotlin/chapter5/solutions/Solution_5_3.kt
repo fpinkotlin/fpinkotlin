@@ -13,13 +13,13 @@ class Solution_5_3 : WordSpec({
 
     //tag::init[]
     fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
-            when (this) {
-                is Empty -> empty()
-                is Cons ->
-                    if (p(this.h()))
-                        cons(this.h, { this.t().takeWhile(p) })
-                    else empty()
-            }
+        when (this) {
+            is Empty -> empty()
+            is Cons ->
+                if (p(this.h()))
+                    cons(this.h, { this.t().takeWhile(p) })
+                else empty()
+        }
     //end::init[]
 
     "Stream.takeWhile" should {

@@ -13,9 +13,9 @@ val <T> List<T>.head: T
 
 fun <A> isSorted(aa: List<A>, ordered: (A, A) -> Boolean): Boolean {
     tailrec fun go(x: A, xs: List<A>): Boolean =
-            if (xs.isEmpty()) true
-            else if (!ordered(x, xs.head)) false
-            else go(xs.head, xs.tail)
+        if (xs.isEmpty()) true
+        else if (!ordered(x, xs.head)) false
+        else go(xs.head, xs.tail)
 
     return aa.isEmpty() || go(aa.head, aa.tail)
 }

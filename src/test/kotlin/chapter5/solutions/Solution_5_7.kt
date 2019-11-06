@@ -12,25 +12,25 @@ class Solution_5_7 : WordSpec({
 
     //tag::map[]
     fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> =
-            this.foldRight({ empty<B>() }, { h, t -> cons({ f(h) }, t) })
+        this.foldRight({ empty<B>() }, { h, t -> cons({ f(h) }, t) })
     //end::map[]
 
     //tag::filter[]
     fun <A> Stream<A>.filter(f: (A) -> Boolean): Stream<A> =
-            this.foldRight({ empty<A>() }, { h, t ->
-                if (f(h)) cons({ h }, t)
-                else t()
-            })
+        this.foldRight({ empty<A>() }, { h, t ->
+            if (f(h)) cons({ h }, t)
+            else t()
+        })
     //end::filter[]
 
     //tag::append[]
     fun <A> Stream<A>.append(sa: () -> Stream<A>): Stream<A> =
-            foldRight(sa, { h, t -> cons({ h }, t) })
+        foldRight(sa, { h, t -> cons({ h }, t) })
     //end::append[]
 
     //tag::flatmap[]
     fun <A, B> Stream<A>.flatMap(f: (A) -> Stream<B>): Stream<B> =
-            foldRight({ empty<B>() }, { h, t -> f(h).append(t) })
+        foldRight({ empty<B>() }, { h, t -> f(h).append(t) })
     //end::flatmap[]
 
     "Stream.map" should {

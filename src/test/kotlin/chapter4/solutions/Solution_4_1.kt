@@ -8,47 +8,47 @@ import io.kotlintest.specs.WordSpec
 
 //tag::init[]
 fun <A, B> Option<A>.map(f: (A) -> B): Option<B> =
-        when (this) {
-            is None -> None
-            is Some -> Some(f(this.get))
-        }
+    when (this) {
+        is None -> None
+        is Some -> Some(f(this.get))
+    }
 
 fun <A> Option<A>.getOrElse(default: () -> A): A =
-        when (this) {
-            is None -> default()
-            is Some -> this.get
-        }
+    when (this) {
+        is None -> default()
+        is Some -> this.get
+    }
 
 fun <A, B> Option<A>.flatMap(f: (A) -> Option<B>): Option<B> =
-        this.map(f).getOrElse { None }
+    this.map(f).getOrElse { None }
 
 fun <A> Option<A>.orElse(ob: () -> Option<A>): Option<A> =
-        this.map { Some(it) }.getOrElse { ob() }
+    this.map { Some(it) }.getOrElse { ob() }
 
 fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> =
-        this.flatMap { a -> if (f(a)) Some(a) else None }
+    this.flatMap { a -> if (f(a)) Some(a) else None }
 //end::init[]
 
 //tag::alternate[]
 fun <A, B> Option<A>.flatMap_2(f: (A) -> Option<B>): Option<B> =
-        when (this) {
-            is None -> None
-            is Some -> f(this.get)
-        }
+    when (this) {
+        is None -> None
+        is Some -> f(this.get)
+    }
 
 fun <A> Option<A>.orElse_2(ob: () -> Option<A>): Option<A> =
-        when (this) {
-            is None -> ob()
-            is Some -> this
-        }
+    when (this) {
+        is None -> ob()
+        is Some -> this
+    }
 
 fun <A> Option<A>.filter_2(f: (A) -> Boolean): Option<A> =
-        when (this) {
-            is None -> None
-            is Some ->
-                if (f(this.get)) this
-                else None
-        }
+    when (this) {
+        is None -> None
+        is Some ->
+            if (f(this.get)) this
+            else None
+    }
 //end::alternate[]
 
 class Solution_4_1 : WordSpec({

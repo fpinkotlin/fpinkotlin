@@ -14,13 +14,13 @@ class Solution_5_15 : WordSpec({
 
     //tag::tails[]
     fun <A> Stream<A>.tails(): Stream<Stream<A>> =
-            unfold(this) { s: Stream<A> ->
-                when (s) {
-                    is Cons ->
-                        Some(Pair(s, s.t()))
-                    else -> None
-                }
+        unfold(this) { s: Stream<A> ->
+            when (s) {
+                is Cons ->
+                    Some(Pair(s, s.t()))
+                else -> None
             }
+        }
     //end::tails[]
 
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = when (this) {
@@ -31,9 +31,11 @@ class Solution_5_15 : WordSpec({
     "Stream.tails" should {
         "return the stream of suffixes of the input sequence" {
             Stream.of(1, 2, 3).tails().toList().map { it.toList() } shouldBe
-                    List.of(ConsL(1, ConsL(2, ConsL(3, NilL))),
-                            ConsL(2, ConsL(3, NilL)),
-                            ConsL(3, NilL))
+                    List.of(
+                        ConsL(1, ConsL(2, ConsL(3, NilL))),
+                        ConsL(2, ConsL(3, NilL)),
+                        ConsL(3, NilL)
+                    )
         }
     }
 })

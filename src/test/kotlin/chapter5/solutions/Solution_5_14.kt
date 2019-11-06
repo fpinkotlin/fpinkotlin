@@ -9,9 +9,9 @@ class Solution_5_14 : WordSpec({
 
     //tag::startswith[]
     fun <A> Stream<A>.startsWith(that: Stream<A>): Boolean =
-            this.zipAll(that)
-                    .takeWhile { !it.second.isEmpty() }
-                    .forAll { it.first == it.second }
+        this.zipAll(that)
+            .takeWhile { !it.second.isEmpty() }
+            .forAll { it.first == it.second }
     //end::startswith[]
 
     "Stream.startsWith" should {
