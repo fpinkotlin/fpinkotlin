@@ -8,10 +8,10 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 class Solution_6_9 : WordSpec({
-    //tag::init[]
+    //tag::init1[]
     fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> =
         flatMap(ra) { a -> unit(f(a)) }
-    //end::init[]
+    //end::init1[]
 
     "mapF" should {
         "map over a value using flatMap" {
@@ -20,12 +20,14 @@ class Solution_6_9 : WordSpec({
         }
     }
 
+    //tag::init2[]
     fun <A, B, C> map2F(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> =
         flatMap(ra) { a ->
             map(rb) { b ->
                 f(a, b)
             }
         }
+    //end::init2[]
 
     "map2F" should {
         "combine the results of two actions" {

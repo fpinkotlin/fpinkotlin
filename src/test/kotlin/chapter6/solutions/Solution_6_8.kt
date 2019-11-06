@@ -12,7 +12,6 @@ fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> =
         val (a, rng2) = f(rng)
         g(a)(rng2)
     }
-//end::init[]
 
 fun nonNegativeIntLessThan(n: Int): Rand<Int> =
     flatMap(::nonNegativeInt) { i ->
@@ -20,6 +19,7 @@ fun nonNegativeIntLessThan(n: Int): Rand<Int> =
         if (i + (n - 1) - mod >= 0) unit(mod)
         else nonNegativeIntLessThan(n)
     }
+//end::init[]
 
 class Solution_6_8 : WordSpec({
     "flatMap" should {
