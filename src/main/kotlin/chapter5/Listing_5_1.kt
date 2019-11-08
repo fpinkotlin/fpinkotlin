@@ -29,8 +29,11 @@ object Listing_5_1 {
 
     val a = 10
     //tag::init4[]
-    fun <A> if2(cond: Boolean, onTrue: () -> A, onFalse: () -> A): A = //<1>
-        if (cond) onTrue() else onFalse()
+    fun <A> if2(
+        cond: Boolean,
+        onTrue: () -> A, //<1>
+        onFalse: () -> A
+    ): A = if (cond) onTrue() else onFalse()
 
     val y = if2((a < 22),
         { println("a") }, // <2>

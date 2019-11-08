@@ -6,7 +6,6 @@ import chapter5.Stream.Companion.cons
 //tag::imports[]
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
-
 //end::imports[]
 
 object Listing_5_3 {
@@ -40,7 +39,7 @@ object Listing_5_3 {
         foldRight({ false }, { a, b -> p(a) || b() })
     //end::exists2[]
 
-    val listing = {
+    val trace = {
         //tag::trace[]
         Stream.of(1, 2, 3, 4).map { it + 10 }.filter { it % 2 == 0 }.toList()
 
