@@ -7,9 +7,9 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 class Exercise_6_9 : WordSpec({
-    //tag::init[]
+    //tag::init1[]
     fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> = TODO()
-    //end::init[]
+    //end::init1[]
 
     "mapF" should {
         "!map over a value using flatMap" {
@@ -18,9 +18,9 @@ class Exercise_6_9 : WordSpec({
         }
     }
 
-    //tag::init[]
+    //tag::init2[]
     fun <A, B, C> map2F(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> = TODO()
-    //end::init[]
+    //end::init2[]
 
     "map2F" should {
         "!combine the results of two actions" {
