@@ -15,7 +15,9 @@ class Exercise_4_7 : WordSpec({
         f: (A) -> Either<E, B>
     ): Either<E, List<B>> = TODO()
 
-    fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> = TODO()
+    fun <E, A> sequence(
+        es: List<Either<E, A>>
+    ): Either<E, List<A>> = TODO()
     //end::init[]
 
     fun <A> Try(a: () -> A): Either<String, A> = TODO()

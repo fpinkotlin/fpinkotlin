@@ -18,11 +18,13 @@ fun <A> Option<A>.orElse(ob: () -> Option<A>): Option<A> = TODO() // <4>
 fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> = TODO() // <5>
 //end::init[]
 
+//tag::alternate[]
 fun <A, B> Option<A>.flatMap_2(f: (A) -> Option<B>): Option<B> = TODO()
 
 fun <A> Option<A>.orElse_2(ob: () -> Option<A>): Option<A> = TODO()
 
 fun <A> Option<A>.filter_2(f: (A) -> Boolean): Option<A> = TODO()
+//end::alternate[]
 
 class Exercise_4_1 : WordSpec({
 
