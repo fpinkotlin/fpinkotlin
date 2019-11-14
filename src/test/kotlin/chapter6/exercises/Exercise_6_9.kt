@@ -8,7 +8,10 @@ import io.kotlintest.specs.WordSpec
 
 class Exercise_6_9 : WordSpec({
     //tag::init1[]
-    fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> = TODO()
+    fun <A, B> mapF(
+        ra: Rand<A>,
+        f: (A) -> B
+    ): Rand<B> = TODO()
     //end::init1[]
 
     "mapF" should {
@@ -19,7 +22,10 @@ class Exercise_6_9 : WordSpec({
     }
 
     //tag::init2[]
-    fun <A, B, C> map2F(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> = TODO()
+    fun <A, B, C> map2F(
+        ra: Rand<A>,
+        rb: Rand<B>, f: (A, B) -> C
+    ): Rand<C> = TODO()
     //end::init2[]
 
     "map2F" should {

@@ -14,7 +14,10 @@ import io.kotlintest.specs.WordSpec
 class Exercise_5_16 : WordSpec({
 
     //tag::scanright[]
-    fun <A, B> Stream<A>.scanRight(z: B, f: (A, () -> B) -> B): Stream<B> = TODO()
+    fun <A, B> Stream<A>.scanRight(
+        z: B,
+        f: (A, () -> B) -> B
+    ): Stream<B> = TODO()
     //end::scanright[]
 
     "Stream.scanRight" should {

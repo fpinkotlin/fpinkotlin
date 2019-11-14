@@ -13,7 +13,10 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A, S> unfold(z: S, f: (S) -> Option<Pair<A, S>>): Stream<A> = TODO()
+fun <A, S> unfold(
+    z: S,
+    f: (S) -> Option<Pair<A, S>>
+): Stream<A> = TODO()
 //end::init[]
 
 /**

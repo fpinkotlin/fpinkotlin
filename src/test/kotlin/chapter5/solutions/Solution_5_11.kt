@@ -12,9 +12,13 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A, S> unfold(z: S, f: (S) -> Option<Pair<A, S>>): Stream<A> =
+fun <A, S> unfold(
+    z: S,
+    f: (S) -> Option<Pair<A, S>>
+): Stream<A> =
     f(z).map { pair ->
-        cons({ pair.first }, { unfold(pair.second, f) })
+        cons({ pair.first },
+            { unfold(pair.second, f) })
     }.getOrElse {
         empty()
     }

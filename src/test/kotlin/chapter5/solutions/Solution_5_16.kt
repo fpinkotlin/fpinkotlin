@@ -10,7 +10,10 @@ import io.kotlintest.specs.WordSpec
 class Solution_5_16 : WordSpec({
 
     //tag::scanright[]
-    fun <A, B> Stream<A>.scanRight(z: B, f: (A, () -> B) -> B): Stream<B> =
+    fun <A, B> Stream<A>.scanRight(
+        z: B,
+        f: (A, () -> B) -> B
+    ): Stream<B> =
         foldRight({ Pair(z, Stream.of(z)) },
             { a: A, p0: () -> Pair<B, Stream<B>> ->
                 val p1: Pair<B, Stream<B>> by lazy { p0() }
