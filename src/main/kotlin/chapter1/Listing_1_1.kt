@@ -8,15 +8,15 @@ object Listing_1_1 {
     data class Coffee(val price: Float = 2.50F)
 
     //tag::init[]
-    class Cafe { // <1>
+    class Cafe {
 
-        fun buyCoffee(cc: CreditCard): Coffee { // <2>
+        fun buyCoffee(cc: CreditCard): Coffee {
 
-            val cup = Coffee() // <3>
+            val cup = Coffee() // <1>
 
-            cc.charge(cup.price) // <4>
+            cc.charge(cup.price) // <2>
 
-            return cup // <5>
+            return cup // <3>
         }
     }
     //end::init[]
