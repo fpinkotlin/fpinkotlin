@@ -4,21 +4,20 @@ import chapter6.Section_6_1.RNG
 
 object Section_6_3 {
 
-    class FooState
-    class Bar
+    class Repository
 
     //tag::init[]
-    class Foo1 {
-        private var s: FooState = TODO()
-        fun bar(): Bar = TODO()
-        fun baz(): Int = TODO()
+    class MutatingSequencer {
+        private var repo: Repository = TODO()
+        fun nextInt(): Int = TODO()
+        fun nextDouble(): Double = TODO()
     }
     //end::init[]
 
     //tag::init2[]
-    interface Foo2 {
-        fun bar(): Pair<Bar, Foo2>
-        fun baz(): Pair<Int, Foo2>
+    interface StateActionSequencer {
+        fun nextInt(): Pair<Int, StateActionSequencer>
+        fun nextDouble(): Pair<Double, StateActionSequencer>
     }
     //end::init2[]
 

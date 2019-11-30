@@ -5,7 +5,6 @@ import chapter3.List
 import chapter3.solutions.foldRight
 import chapter6.RNG
 import chapter6.rng1
-import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 

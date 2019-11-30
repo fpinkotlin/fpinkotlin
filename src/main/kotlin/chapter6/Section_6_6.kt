@@ -9,18 +9,26 @@ import chapter6.Section_6_1.RNG
 
 object Section_6_6 {
 
-    val int: State<RNG, Int> = TODO()
+    //tag::init0[]
+    val int: State<RNG, Int> = TODO() // <1>
 
-    fun ints(x: Int): State<RNG, List<Int>> = TODO()
+    fun ints(x: Int): State<RNG, List<Int>> = TODO() // <2>
 
-    fun <A, B> flatMap(f: State<RNG, A>, g: (A) -> State<RNG, B>): State<RNG, B> = TODO()
+    fun <A, B> flatMap(
+        s: State<RNG, A>,
+        f: (A) -> State<RNG, B>
+    ): State<RNG, B> = TODO() // <3>
 
-    fun <A, B> map(s: State<RNG, A>, f: (A) -> B): State<RNG, B> = TODO()
+    fun <A, B> map(
+        s: State<RNG, A>,
+        f: (A) -> B
+    ): State<RNG, B> = TODO() // <4>
+    //end::init0[]
 
     //tag::init1[]
     val ns: State<RNG, List<Int>> =
         flatMap(int) { x -> // <1>
-            flatMap(int) { y ->
+            flatMap(int) { y -> // <1>
                 map(ints(x)) { xs -> //<2>
                     xs.map { it % y } // <3>
                 }
@@ -30,11 +38,11 @@ object Section_6_6 {
 
     //tag::init2[]
     val ns2: State<RNG, List<Int>> =
-        State.fx(Id.monad()) {
-            val (x: Int) = int // <1>
-            val (y: Int) = int
-            val (xs: List<Int>) = ints(x) // <2>
-            xs.map { it % y } // <3>
+        State.fx(Id.monad()) { // <1>
+            val (x: Int) = int // <2>
+            val (y: Int) = int // <3>
+            val (xs: List<Int>) = ints(x) // <4>
+            xs.map { it % y } // <5>
         }
     //end::init2[]
 

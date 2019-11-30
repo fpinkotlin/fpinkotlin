@@ -1,9 +1,9 @@
 package chapter6
 
 import chapter6.Section_6_1.RNG
-import chapter6.Listing_6_2.SimpleRNG
+import chapter6.Section_6_2.SimpleRNG
 
-object Listing_6_2 {
+object Section_6_2 {
     //tag::init[]
     data class SimpleRNG(val seed: Long) : RNG {
         override fun nextInt(): Pair<Int, RNG> {

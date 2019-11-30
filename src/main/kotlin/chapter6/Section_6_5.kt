@@ -1,6 +1,6 @@
 package chapter6
 
-object Listing_6_5 {
+object Section_6_5 {
     //tag::init1[]
     fun <S, A, B> map(
         sa: (S) -> Pair<A, S>,
