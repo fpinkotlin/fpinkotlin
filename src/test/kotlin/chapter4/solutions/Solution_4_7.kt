@@ -28,7 +28,7 @@ class Solution_4_7 : WordSpec({
         traverse(es) { it }
     //end::init[]
 
-    fun <A> Try(a: () -> A): Either<String, A> =
+    fun <A> catches(a: () -> A): Either<String, A> =
         try {
             Right(a())
         } catch (e: Throwable) {
@@ -39,13 +39,13 @@ class Solution_4_7 : WordSpec({
         "return a right either of a transformed list if all transformations succeed" {
             val xa = List.of("1", "2", "3", "4", "5")
 
-            traverse(xa) { a -> Try { Integer.parseInt(a) } } shouldBe Right(List.of(1, 2, 3, 4, 5))
+            traverse(xa) { a -> catches { Integer.parseInt(a) } } shouldBe Right(List.of(1, 2, 3, 4, 5))
         }
 
         "return a left either if any transformations fail" {
             val xa = List.of("1", "2", "x", "4", "5")
 
-            traverse(xa) { a -> Try { Integer.parseInt(a) } } shouldBe Left("""For input string: "x"""")
+            traverse(xa) { a -> catches { Integer.parseInt(a) } } shouldBe Left("""For input string: "x"""")
         }
     }
     "sequence" should {

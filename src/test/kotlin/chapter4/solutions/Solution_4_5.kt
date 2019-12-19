@@ -28,7 +28,7 @@ class Solution_4_5 : WordSpec({
         traverse(xs) { it }
     //end::init[]
 
-    fun <A> Try(a: () -> A): Option<A> =
+    fun <A> catches(a: () -> A): Option<A> =
         try {
             Some(a())
         } catch (e: Throwable) {
@@ -38,12 +38,12 @@ class Solution_4_5 : WordSpec({
     "traverse" should {
         "return some option of a transformed list if all transformations succeed" {
             val xa = List.of(1, 2, 3, 4, 5)
-            traverse(xa) { a: Int -> Try { a.toString() } } shouldBe Some(List.of("1", "2", "3", "4", "5"))
+            traverse(xa) { a: Int -> catches { a.toString() } } shouldBe Some(List.of("1", "2", "3", "4", "5"))
         }
 
         "return a none option if any transformations fail" {
             val xa = List.of("1", "2", "x", "4")
-            traverse(xa) { a -> Try { a.toInt() } } shouldBe None
+            traverse(xa) { a -> catches { a.toInt() } } shouldBe None
         }
     }
 
