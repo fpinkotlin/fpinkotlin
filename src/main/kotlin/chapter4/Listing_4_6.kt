@@ -27,7 +27,7 @@ object Listing_4_6 {
     //end::safediv[]
 
     //tag::try[]
-    fun <A> Try(a: () -> A): Either<Exception, A> =
+    fun <A> catches(a: () -> A): Either<Exception, A> =
         try {
             Right(a())
         } catch (e: Exception) {

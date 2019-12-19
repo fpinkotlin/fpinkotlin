@@ -1,20 +1,25 @@
 package chapter4
 
-import arrow.core.Try
 import arrow.core.Either
 import arrow.core.extensions.fx
 import chapter4.Listing_4_4.insuranceRateQuote
 
 object Listing_4_7 {
     //tag::init[]
-    fun parseInsuranceRateQuote(
+    suspend fun String.parseToInt(): Either<Throwable, Int> = // <1>
+        Either.catch { this.toInt() } // <2>
+
+    suspend fun parseInsuranceRateQuote( // <3>
         age: String,
         numberOfSpeedingTickets: String
-    ): Either<Throwable, Double> =
-        Try.fx {
-            val (age) = Try { age.toInt() }
-            val (tickets) = Try { numberOfSpeedingTickets.toInt() }
-            insuranceRateQuote(age, tickets)
-        }.toEither()
+    ): Either<Throwable, Double> {
+        val ae = age.parseToInt() // <4>
+        val te = numberOfSpeedingTickets.parseToInt()
+        return Either.fx { // <5>
+            val (a) = ae // <6>
+            val (t) = te
+            insuranceRateQuote(a, t) // <7>
+        }
+    }
     //end::init[]
 }

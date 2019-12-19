@@ -27,9 +27,9 @@ object Listing_4_4 {
     //tag::quote2[]
     fun parseInsuranceQuote(age: String, speedingTickets: String): Option<Double> {
 
-        val optAge: Option<Int> = Try { age.toInt() }
+        val optAge: Option<Int> = catches { age.toInt() }
 
-        val optTickets: Option<Int> = Try { speedingTickets.toInt() }
+        val optTickets: Option<Int> = catches { speedingTickets.toInt() }
 
         //tag::secondsolution[]
         return map2(optAge, optTickets) { a, t ->
@@ -42,14 +42,14 @@ object Listing_4_4 {
     }
 
 
-    //tag::try[]
-    fun <A> Try(a: () -> A): Option<A> = // <2>
+    //tag::catches[]
+    fun <A> catches(a: () -> A): Option<A> = // <2>
         try {
             Some(a()) // <3>
         } catch (e: Throwable) { // <4>
             None
         }
-    //end::try[]
+    //end::catches[]
     //end::quote2[]
 
     fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()
@@ -58,7 +58,7 @@ object Listing_4_4 {
 
     //tag::parseints[]
     fun parseInts(xs: List<String>): Option<List<Int>> =
-        sequence(xs.map { str -> Try { str.toInt() } })
+        sequence(xs.map { str -> catches { str.toInt() } })
     //end::parseints[]
 
 }
