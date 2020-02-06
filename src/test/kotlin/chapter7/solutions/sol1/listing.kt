@@ -6,11 +6,13 @@ class Par<A>(val get: A)
 
 fun <A> unit(a: () -> A): Par<A> = Par(a())
 
-fun <A> map2(
+//tag::init[]
+fun <A, B, C> map2(
     sum: Par<A>,
-    sum1: Par<A>,
-    function: (A, A) -> A
-): Par<A> = TODO()
+    sum1: Par<B>,
+    function: (A, B) -> C
+): Par<C> = TODO()
+//end::init[]
 
 class Solution_7_1 : WordSpec({
     "Par.map2" should {

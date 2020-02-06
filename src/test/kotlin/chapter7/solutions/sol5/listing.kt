@@ -10,12 +10,10 @@ typealias Par<A> = (ExecutorService) -> Future<A>
 
 object Pars {
 
-    //tag::init[]
     fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> =
         { a: A ->
             lazyUnit { f(a) }
         }
-    //end::init[]
 
     fun <A> unit(a: A): Par<A> =
         { es: ExecutorService -> TODO() }

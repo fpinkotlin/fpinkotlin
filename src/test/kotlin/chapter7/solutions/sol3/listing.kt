@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.*
 
+//tag::init[]
 fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> =
     { es: ExecutorService ->
         val fa = a(es)
@@ -43,6 +44,7 @@ data class TimedMap2Future<A, B, C>(
 
     override fun isCancelled(): Boolean = TODO()
 }
+//end::init[]
 
 class Solution_7_3 : WordSpec({
 

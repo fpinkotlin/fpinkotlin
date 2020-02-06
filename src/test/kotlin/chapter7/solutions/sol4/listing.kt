@@ -6,27 +6,22 @@ import java.util.concurrent.Future
 
 typealias Par<A> = (ExecutorService) -> Future<A>
 
-object Pars {
+//tag::init[]
+fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> =
+    { a: A -> lazyUnit { f(a) } }
+//end::init[]
 
-    //tag::init[]
-    fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> =
-        { a: A ->
-            lazyUnit { f(a) }
-        }
-    //end::init[]
+fun <A> unit(a: A): Par<A> =
+    { es: ExecutorService -> TODO() }
 
-    fun <A> unit(a: A): Par<A> =
-        { es: ExecutorService -> TODO() }
+fun <A> fork(
+    a: () -> Par<A>
+): Par<A> =
+    { es: ExecutorService ->
+        es.submit(Callable<A> { a()(es).get() })
+    }
 
-    fun <A> fork(
-        a: () -> Par<A>
-    ): Par<A> =
-        { es: ExecutorService ->
-            es.submit(Callable<A> { a()(es).get() })
-        }
+fun <A> lazyUnit(a: () -> A): Par<A> =
+    fork { unit(a()) }
 
-    fun <A> lazyUnit(a: () -> A): Par<A> =
-        fork { unit(a()) }
-
-    fun <A> run(a: Par<A>): A = TODO()
-}
+fun <A> run(a: Par<A>): A = TODO()

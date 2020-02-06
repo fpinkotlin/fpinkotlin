@@ -2,6 +2,7 @@ package chapter7.solutions.sol2
 
 import io.kotlintest.specs.WordSpec
 
+//tag::init[]
 class Par<A>(val get: A) {
     companion object {
 
@@ -20,6 +21,7 @@ class Par<A>(val get: A) {
         fun <A> run(a: Par<A>): A = TODO()
     }
 }
+//end::init[]
 
 class Solution_7_2 : WordSpec({
 
