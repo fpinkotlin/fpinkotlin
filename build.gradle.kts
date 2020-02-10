@@ -13,7 +13,9 @@ dependencies {
     compile("io.arrow-kt:arrow-mtl:$arrowVersion")
     compile("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.2")
     runtime("org.slf4j:slf4j-simple:1.7.28")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
+
+    // need this at compile level for chapter 8
+    compile("io.kotlintest:kotlintest-runner-junit5:3.3.2")
 }
 
 repositories {
