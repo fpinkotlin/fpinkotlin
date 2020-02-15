@@ -19,3 +19,4 @@ val listing1 = {
     }
     //end::init1[]
 }
+
