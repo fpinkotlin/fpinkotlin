@@ -1,18 +1,18 @@
 package chapter8.sec2.listing12
 
-import chapter8.sec2.FailedCase
-import chapter8.sec2.SuccessCount
+typealias SuccessCount = Int
+typealias FailedCase = String
 
 //tag::init[]
 sealed class Result {
     abstract fun isFalsified(): Boolean
 }
 
-object Passed : Result() { // <1>
+object Passed : Result() {
     override fun isFalsified(): Boolean = false
 }
 
-data class Falsified( // <2>
+data class Falsified(
     val failure: FailedCase,
     val successes: SuccessCount
 ) : Result() {
