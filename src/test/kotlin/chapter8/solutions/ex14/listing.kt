@@ -13,20 +13,15 @@ fun List<Int>.prepend(i: Int) = listOf(i) + this
 //tag::init[]
 val maxProp = forAll(SGen.listOf(smallInt)) { ns ->
     val nss = ns.sorted()
-    //list may be empty
-    nss.isEmpty() ||
-            //list may have single element
-            nss.size == 1 ||
-            //list must be sorted
+    nss.isEmpty() || // <1>
+            nss.size == 1 || // <2>
             nss.zip(nss.prepend(Int.MIN_VALUE))
                 .foldRight(true, { p, b ->
                     val (pa, pb) = p
                     b && (pa >= pb)
-                }) &&
-            //list must contain all elements as unsorted list
-            nss.containsAll(ns) &&
-            //list must not contain elements not in unsorted list
-            !nss.exists { !ns.contains(it) }
+                }) && // <3>
+            nss.containsAll(ns) && // <4>
+            !nss.exists { !ns.contains(it) } // <5>
 }
 //end::init[]
 
