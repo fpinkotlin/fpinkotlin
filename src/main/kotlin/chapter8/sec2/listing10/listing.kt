@@ -1,9 +1,8 @@
 package chapter8.sec2.listing10
 
 import arrow.core.Either
-
-typealias SuccessCount = Int
-typealias FailedCase = String
+import chapter8.FailedCase
+import chapter8.SuccessCount
 
 //tag::init[]
 typealias TestCases = Int

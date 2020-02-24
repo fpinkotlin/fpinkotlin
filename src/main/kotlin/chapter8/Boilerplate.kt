@@ -1,7 +1,5 @@
 package chapter8
 
-import chapter6.Section_6_1
-
 interface RNG {
     fun nextInt(): Pair<Int, RNG>
 }
@@ -18,6 +16,11 @@ data class SimpleRNG(val seed: Long) : RNG {
 fun nonNegativeInt(rng: RNG): Pair<Int, RNG> {
     val (i1, rng2) = rng.nextInt()
     return Pair(if (i1 < 0) -(i1 + 1) else i1, rng2)
+}
+
+fun nextBoolean(rng: RNG): Pair<Boolean, RNG> {
+    val (i1, rng2) = rng.nextInt()
+    return Pair(i1 >= 0, rng2)
 }
 
 fun double(rng: RNG): Pair<Double, RNG> {

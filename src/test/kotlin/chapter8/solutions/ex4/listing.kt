@@ -2,11 +2,7 @@ package chapter8.solutions.ex4
 
 import chapter8.RNG
 import chapter8.State
-
-fun nonNegativeInt(rng: RNG): Pair<Int, RNG> {
-    val (i1, rng2) = rng.nextInt()
-    return Pair(if (i1 < 0) -(i1 + 1) else i1, rng2)
-}
+import chapter8.nonNegativeInt
 
 data class Gen<A>(val sample: State<RNG, A>) {
     companion object {

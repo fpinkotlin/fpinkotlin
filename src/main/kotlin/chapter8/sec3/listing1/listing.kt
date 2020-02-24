@@ -1,10 +1,7 @@
 package chapter8.sec3.listing1
 
-interface RNG {
-    fun nextInt(): Pair<Int, RNG>
-}
-
-data class State<S, out A>(val run: (S) -> Pair<A, S>)
+import chapter8.RNG
+import chapter8.State
 
 data class Gen<A>(val sample: State<RNG, A>)
 

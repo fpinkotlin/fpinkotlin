@@ -2,35 +2,13 @@ package chapter8.sec3.listing3
 
 import arrow.core.getOrElse
 import arrow.core.toOption
-import chapter8.RNG
-import chapter8.State
-import chapter8.nonNegativeInt
+import chapter8.*
 import kotlin.math.min
-
-typealias TestCases = Int
-
-sealed class Result {
-    abstract fun isFalsified(): Boolean
-}
-
-object Passed : Result() {
-    override fun isFalsified(): Boolean = false
-    override fun toString(): String = "Passed"
-}
-
-typealias SuccessCount = Int
-typealias FailedCase = String
-
-data class Falsified(
-    val failure: FailedCase,
-    val successes: SuccessCount
-) : Result() {
-    override fun isFalsified(): Boolean = true
-    override fun toString(): String = "Failed: $failure"
-}
 
 data class Gen<A>(val sample: State<RNG, A>) {
     companion object {
+        fun <A> unit(a: A): Gen<A> = Gen(State.unit(a))
+
         fun choose(start: Int, stopExclusive: Int): Gen<Int> =
             Gen(State { rng: RNG -> nonNegativeInt(rng) }
                 .map { (start + it) % (stopExclusive - start) })

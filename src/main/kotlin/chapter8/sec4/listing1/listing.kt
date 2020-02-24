@@ -1,9 +1,14 @@
 package chapter8.sec4.listing1
 
 import arrow.core.extensions.list.foldable.exists
+import chapter8.Falsified
+import chapter8.Passed
 import chapter8.RNG
 import chapter8.SimpleRNG
-import chapter8.sec3.listing3.*
+import chapter8.sec3.listing3.Gen
+import chapter8.sec3.listing3.Prop
+import chapter8.sec3.listing3.SGen
+import chapter8.sec3.listing3.forAll
 
 //tag::init2[]
 fun run(

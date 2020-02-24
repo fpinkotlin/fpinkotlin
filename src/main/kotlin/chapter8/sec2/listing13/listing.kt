@@ -1,27 +1,8 @@
 package chapter8.sec2.listing13
 
-interface RNG {
-    fun nextInt(): Pair<Int, RNG>
-}
-
-typealias SuccessCount = Int
-typealias FailedCase = String
-typealias TestCases = Int
-
-sealed class Result {
-    abstract fun isFalsified(): Boolean
-}
-
-object Passed : Result() {
-    override fun isFalsified(): Boolean = false
-}
-
-data class Falsified(
-    val failure: FailedCase,
-    val successes: SuccessCount
-) : Result() {
-    override fun isFalsified(): Boolean = true
-}
+import chapter8.RNG
+import chapter8.Result
+import chapter8.TestCases
 
 //tag::init[]
 data class Prop(val run: (TestCases, RNG) -> Result)

@@ -1,21 +1,25 @@
-package chapter8.sec2.listing12
+package chapter8
 
-import chapter8.FailedCase
-import chapter8.SuccessCount
+typealias MaxSize = Int
+typealias TestCases = Int
 
-//tag::init[]
 sealed class Result {
     abstract fun isFalsified(): Boolean
 }
 
 object Passed : Result() {
     override fun isFalsified(): Boolean = false
+    override fun toString(): String = "Passed"
 }
+
+typealias SuccessCount = Int
+typealias FailedCase = String
 
 data class Falsified(
     val failure: FailedCase,
     val successes: SuccessCount
 ) : Result() {
     override fun isFalsified(): Boolean = true
+    override fun toString(): String = "Failed: $failure"
 }
-//end::init[]
+

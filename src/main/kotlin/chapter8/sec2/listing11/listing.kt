@@ -1,10 +1,9 @@
 package chapter8.sec2.listing11
 
 import arrow.core.Option
-
-typealias SuccessCount = Int
-typealias FailedCase = String
-typealias TestCases = Int
+import chapter8.FailedCase
+import chapter8.SuccessCount
+import chapter8.TestCases
 
 //tag::init[]
 typealias Result = Option<Pair<FailedCase, SuccessCount>>
