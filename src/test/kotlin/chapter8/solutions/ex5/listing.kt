@@ -11,6 +11,7 @@ fun nextBoolean(rng: RNG): Pair<Boolean, RNG> {
 data class Gen<A>(val sample: State<RNG, A>) {
     companion object {
 
+        //tag::init[]
         fun <A> unit(a: A): Gen<A> = Gen(State.unit(a))
 
         fun boolean(): Gen<Boolean> =
@@ -18,5 +19,6 @@ data class Gen<A>(val sample: State<RNG, A>) {
 
         fun <A> listOfN(n: Int, ga: Gen<A>): Gen<List<A>> =
             Gen(State.sequence(List(n) { ga.sample }))
+        //end::init[]
     }
 }

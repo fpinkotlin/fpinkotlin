@@ -1,8 +1,8 @@
 package chapter8.sec2.listing6
 
 //tag::init[]
-class Prop {
-    fun check(): Unit = TODO()
-    fun and(p: Prop): Prop = TODO()
+interface Prop {
+    fun check(): Unit
+    fun and(p: Prop): Prop
 }
 //end::init[]

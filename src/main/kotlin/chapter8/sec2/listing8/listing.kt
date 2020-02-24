@@ -10,10 +10,8 @@ typealias SuccessCount = Int
 typealias FailedCase = String
 //end::failed[]
 
-class Prop {
-    fun check(): Either<Pair<FailedCase, SuccessCount>, SuccessCount> =
-        TODO()
-
-    fun and(p: Prop): Prop = TODO()
+interface Prop {
+    fun check(): Either<Pair<FailedCase, SuccessCount>, SuccessCount>
+    fun and(p: Prop): Prop
 }
 //end::init[]

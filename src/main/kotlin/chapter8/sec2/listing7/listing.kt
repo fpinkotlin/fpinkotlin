@@ -6,8 +6,8 @@ import arrow.core.Either
 //tag::init[]
 typealias SuccessCount = Int
 
-class Prop {
-    fun check(): Either<String, SuccessCount> = TODO()
-    fun and(p: Prop): Prop = TODO()
+interface Prop {
+    fun check(): Either<String, SuccessCount>
+    fun and(p: Prop): Prop
 }
 //end::init[]

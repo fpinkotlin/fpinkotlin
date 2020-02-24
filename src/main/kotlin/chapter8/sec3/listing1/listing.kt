@@ -1,11 +1,13 @@
-package chapter8.exercises.ex4
+package chapter8.sec3.listing1
 
-import chapter6.Section_6_1.RNG
+interface RNG {
+    fun nextInt(): Pair<Int, RNG>
+}
 
 data class State<S, out A>(val run: (S) -> Pair<A, S>)
 
 data class Gen<A>(val sample: State<RNG, A>)
 
 //tag::init[]
-fun choose(start: Int, stopExclusive: Int): Gen<Int> = TODO()
+data class SGen<A>(val forSize: (Int) -> Gen<A>)
 //end::init[]

@@ -14,8 +14,10 @@ data class Gen<A>(val sample: State<RNG, A>) {
         fun boolean(): Gen<Boolean> =
             Gen(State { rng -> nextBoolean(rng) })
 
+        //tag::init[]
         fun <A> union(ga: Gen<A>, gb: Gen<A>): Gen<A> =
             boolean().flatMap { if (it) ga else gb }
+        //end::init[]
     }
 
     fun <B> flatMap(f: (A) -> Gen<B>): Gen<B> =

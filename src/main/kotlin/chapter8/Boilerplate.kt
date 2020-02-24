@@ -1,7 +1,28 @@
 package chapter8
 
+import chapter6.Section_6_1
+
 interface RNG {
     fun nextInt(): Pair<Int, RNG>
+}
+
+data class SimpleRNG(val seed: Long) : RNG {
+    override fun nextInt(): Pair<Int, RNG> {
+        val newSeed = (seed * 0x5DEECE66DL + 0xBL) and 0xFFFFFFFFFFFFL
+        val nextRNG = SimpleRNG(newSeed)
+        val n = (newSeed ushr 16).toInt()
+        return Pair(n, nextRNG)
+    }
+}
+
+fun nonNegativeInt(rng: RNG): Pair<Int, RNG> {
+    val (i1, rng2) = rng.nextInt()
+    return Pair(if (i1 < 0) -(i1 + 1) else i1, rng2)
+}
+
+fun double(rng: RNG): Pair<Double, RNG> {
+    val (i, rng2) = nonNegativeInt(rng)
+    return Pair(i / (Int.MAX_VALUE.toDouble() + 1), rng2)
 }
 
 data class State<S, out A>(val run: (S) -> Pair<A, S>) {
