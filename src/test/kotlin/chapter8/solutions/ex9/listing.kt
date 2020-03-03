@@ -22,8 +22,8 @@ data class Falsified(
     override fun isFalsified(): Boolean = true
 }
 
+//tag::init[]
 data class Prop(val run: (TestCases, RNG) -> Result) {
-    //tag::init[]
     fun and(p: Prop) = Prop { n, rng ->
         when (val prop = run(n, rng)) {
             is Passed -> p.run(n, rng)
@@ -48,6 +48,6 @@ data class Prop(val run: (TestCases, RNG) -> Result) {
             is Passed -> prop
         }
     }
-    //end::init[]
 }
+//end::init[]
 
