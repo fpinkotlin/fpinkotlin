@@ -7,23 +7,23 @@ import chapter8.RNG
 import chapter8.SimpleRNG
 import chapter8.sec3.listing3.Gen
 import chapter8.sec3.listing3.Prop
+import chapter8.sec3.listing3.Prop.Companion.forAll
 import chapter8.sec3.listing3.SGen
-import chapter8.sec3.listing3.forAll
 
 //tag::init2[]
 fun run(
     p: Prop,
     maxSize: Int = 100, // <1>
     testCases: Int = 100, // <2>
-    rng: RNG = SimpleRNG(System.currentTimeMillis())
+    rng: RNG = SimpleRNG(System.currentTimeMillis()) // <3>
 ): Unit =
-    when (val result = p.run(maxSize, testCases, rng)) {
-        is Falsified -> // <3>
+    when (val result = p.check(maxSize, testCases, rng)) {
+        is Falsified -> // <4>
             println(
                 "Falsified after ${result.successes} passed tests: " +
                         result.failure
             )
-        is Passed -> // <4>
+        is Passed -> // <5>
             println("OK, passed $testCases tests.")
     }
 //end::init2[]

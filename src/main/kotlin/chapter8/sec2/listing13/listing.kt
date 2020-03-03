@@ -5,5 +5,5 @@ import chapter8.Result
 import chapter8.TestCases
 
 //tag::init[]
-data class Prop(val run: (TestCases, RNG) -> Result)
+data class Prop(val check: (TestCases, RNG) -> Result)
 //end::init[]

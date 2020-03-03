@@ -12,9 +12,9 @@ data class Gen<A>(val sample: State<RNG, A>) {
         Gen(sample.flatMap { a -> f(a).sample })
 }
 
+//tag::init[]
 data class SGen<A>(val forSize: (Int) -> Gen<A>) {
 
-    //tag::init[]
     operator fun invoke(i: Int): Gen<A> = forSize(i)
 
     fun <B> map(f: (A) -> B): SGen<B> =
@@ -22,5 +22,5 @@ data class SGen<A>(val forSize: (Int) -> Gen<A>) {
 
     fun <B> flatMap(f: (A) -> Gen<B>): SGen<B> =
         SGen<B> { i -> forSize(i).flatMap(f) }
-    //end::init[]
 }
+//end::init[]

@@ -4,15 +4,15 @@ import chapter8.FailedCase
 import chapter8.SuccessCount
 
 //tag::init[]
-sealed class Result {
+sealed class Result { // <1>
     abstract fun isFalsified(): Boolean
 }
 
-object Passed : Result() {
+object Passed : Result() { // <2>
     override fun isFalsified(): Boolean = false
 }
 
-data class Falsified(
+data class Falsified( // <3>
     val failure: FailedCase,
     val successes: SuccessCount
 ) : Result() {

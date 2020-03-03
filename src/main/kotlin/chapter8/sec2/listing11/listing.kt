@@ -8,5 +8,5 @@ import chapter8.TestCases
 //tag::init[]
 typealias Result = Option<Pair<FailedCase, SuccessCount>>
 
-data class Prop(val run: (TestCases) -> Result)
+data class Prop(val check: (TestCases) -> Result)
 //end::init[]

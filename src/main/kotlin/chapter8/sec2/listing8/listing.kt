@@ -12,6 +12,8 @@ typealias FailedCase = String
 
 interface Prop {
     fun check(): Either<Pair<FailedCase, SuccessCount>, SuccessCount>
+    //tag::and[]
     fun and(p: Prop): Prop
+    //end::and[]
 }
 //end::init[]

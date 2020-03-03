@@ -1,20 +1,27 @@
 package chapter8.solutions.ex13
 
-import chapter8.RNG
-import chapter8.State
+import arrow.core.extensions.list.foldable.exists
+import chapter8.sec3.listing3.Gen
+import chapter8.sec3.listing3.Prop
+import chapter8.sec3.listing3.SGen
+import chapter8.sec4.listing1.run
+import kotlin.math.max
 
-data class Gen<A>(val sample: State<RNG, A>) {
-    companion object {
-        fun <A> listOfN(n: Int, ga: Gen<A>): Gen<List<A>> =
-            Gen(State.sequence(List(n) { ga.sample }))
-    }
-}
+fun main() {
+    //tag::init1[]
+    fun <A> listOfNonEmpty(ga: Gen<A>): SGen<List<A>> =
+        SGen { i -> Gen.listOfN(max(1, i), ga) }
+    //end::init1[]
 
-data class SGen<A>(val forSize: (Int) -> Gen<A>) {
-    companion object {
-        //tag::init[]
-        fun <A> listOfNonEmpty(ga: Gen<A>): SGen<List<A>> =
-            SGen { i -> Gen.listOfN(kotlin.math.min(1, i), ga)}
-        //end::init[]
-    }
+    val smallInt = Gen.choose(-10, 10)
+
+    //tag::init2[]
+    val maxProp =
+        Prop.forAll(listOfNonEmpty(smallInt)) { ns: List<Int> ->
+            val mx =
+                ns.max() ?: throw IllegalStateException("max on empty list")
+            !ns.exists { it > mx }
+        }
+    //end::init2[]
+    run(maxProp)
 }

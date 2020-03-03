@@ -7,8 +7,8 @@ data class SGen<A>(val forSize: (Int) -> Gen<A>)
 
 data class State<S, out A>(val run: (S) -> Pair<A, S>)
 
+//tag::init[]
 data class Gen<A>(val sample: State<RNG, A>) {
-    //tag::init[]
     fun unsized(): SGen<A> = SGen { this }
-    //end::init[]
 }
+//end::init[]

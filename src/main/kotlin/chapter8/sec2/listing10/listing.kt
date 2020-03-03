@@ -9,5 +9,5 @@ typealias TestCases = Int
 
 typealias Result = Either<Pair<FailedCase, SuccessCount>, SuccessCount>
 
-data class Prop(val run: (TestCases) -> Result)
+data class Prop(val check: (TestCases) -> Result)
 //end::init[]

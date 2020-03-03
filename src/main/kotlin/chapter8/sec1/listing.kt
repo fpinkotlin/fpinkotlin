@@ -5,7 +5,7 @@ import arrow.core.lastOrNone
 import io.kotlintest.properties.Gen
 import io.kotlintest.properties.forAll
 
-val listing1 = {
+fun main() {
     //tag::init1[]
     val intList = Gen.list(Gen.choose(0, 100)) // <1>
 
@@ -14,8 +14,8 @@ val listing1 = {
                 (it.firstOption() == it.reversed().lastOrNone()) // <4>
     }
 
-    forAll(intList) {
-        it.reversed() == it // <5>
+    forAll(intList) { // <5>
+        it.reversed() == it
     }
     //end::init1[]
 }
