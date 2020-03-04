@@ -8,7 +8,7 @@ import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A> drop(l: List<A>, n: Int): List<A> =
+tailrec fun <A> drop(l: List<A>, n: Int): List<A> =
     if (n == 0) l
     else when (l) {
         is Cons -> drop(l.tail, n - 1)

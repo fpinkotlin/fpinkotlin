@@ -10,6 +10,9 @@ fun <A> append(a1: List<A>, a2: List<A>): List<A> =
     foldRight(a1, a2, { x, y -> Cons(x, y) })
 // end::init[]
 
+// Solution using foldLeft():
+//fun <A> append(a1: List<A>, a2: List<A>): List<A> = foldLeft(reverse(a1), a2, {y, x -> Cons(x, y)})
+
 class Solution_3_13 : WordSpec({
     "list append" should {
         "append two lists to each other" {
