@@ -81,10 +81,12 @@ object Listing_6_4 {
     //end::init10[]
 
     //tag::init11[]
-    fun rollDie(): Rand<Int> = nonNegativeIntLessThan(6)
+    fun rollDie(): Rand<Int> =
+        nonNegativeIntLessThan(6)
     //end::init11[]
 
     //tag::init12[]
-    fun rollDie_B(): Rand<Int> = map(nonNegativeIntLessThan(6)) { it + 1 }
+    fun rollDie_B(): Rand<Int> =
+        map(nonNegativeIntLessThan(6)) { it + 1 }
     //end::init12[]
 }
