@@ -29,3 +29,5 @@ ktlint {
     verbose.set(true)
     disabledRules.set(setOf("comment-spacing", "filename"))
 }
+
+test.dependsOn("ktlintCheck")
