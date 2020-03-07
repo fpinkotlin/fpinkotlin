@@ -25,7 +25,7 @@ class Exercise_4_3 : WordSpec({
         "!combine two option values using a binary function" {
             map2(a, b) { aa, bb ->
                 aa * bb
-            } shouldBeSome (100)
+            } shouldBe Some(100)
         }
 
         "!return none if either option is not defined" {

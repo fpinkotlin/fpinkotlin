@@ -6,5 +6,7 @@ import java.util.concurrent.Future
 typealias Par<A> = (ExecutorService) -> Future<A>
 
 //tag::init[]
-fun <A> join(a: Par<Par<A>>): Par<A> = TODO()
+fun <A> join(
+    a: Par<Par<A>>
+): Par<A> = TODO()
 //end::init[]

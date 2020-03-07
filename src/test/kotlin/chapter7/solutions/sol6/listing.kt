@@ -29,7 +29,11 @@ object Pars {
     fun <A> lazyUnit(a: () -> A): Par<A> =
         fork { unit(a()) }
 
-    fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> =
+    fun <A, B, C> map2(
+        a: Par<A>,
+        b: Par<B>,
+        f: (A, B) -> C
+    ): Par<C> =
         { es: ExecutorService ->
             val fa = a(es)
             val fb = b(es)
@@ -42,7 +46,9 @@ object Pars {
     val <T> List<T>.tail: List<T>
         get() = this.drop(1)
 
-    fun <A> List<A>.splitAt(idx: Int): Pair<PersistentList<A>, PersistentList<A>> =
+    fun <A> List<A>.splitAt(
+        idx: Int
+    ): Pair<PersistentList<A>, PersistentList<A>> =
         Pair(
             this.subList(0, idx).toPersistentList(),
             this.subList(idx, this.size).toPersistentList()
@@ -57,7 +63,9 @@ object Pars {
             ps.size == 1 -> map(ps.head) { listOf(it) }
             else -> {
                 val (l, r) = ps.splitAt(ps.size / 2)
-                map2(sequence(l), sequence(r)) { la, lb -> la + lb }
+                map2(sequence(l), sequence(r)) { la, lb ->
+                    la + lb
+                }
             }
         }
     }
@@ -75,6 +83,4 @@ object Pars {
         }
     }
     //end::init[]
-
-
 }

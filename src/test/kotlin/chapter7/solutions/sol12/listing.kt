@@ -15,7 +15,10 @@ fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> = TODO()
 fun <A, B> flatMap(pa: Par<A>, f: (A) -> Par<B>): Par<B> = TODO()
 
 //tag::init2[]
-fun <A, B> flatMapViaJoin(pa: Par<A>, f: (A) -> Par<B>): Par<B> =
+fun <A, B> flatMapViaJoin(
+    pa: Par<A>,
+    f: (A) -> Par<B>
+): Par<B> =
     join(map(pa, f))
 //end::init2[]
 
