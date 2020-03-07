@@ -1,4 +1,5 @@
 plugins {
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
     kotlin("jvm") version "1.3.21"
 }
 
@@ -22,4 +23,9 @@ dependencies {
 repositories {
     jcenter()
     maven("https://dl.bintray.com/kotlin/kotlinx")
+}
+
+ktlint {
+    verbose.set(true)
+    disabledRules.set(setOf("comment-spacing", "filename"))
 }
