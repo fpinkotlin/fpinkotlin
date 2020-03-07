@@ -2,7 +2,13 @@ package chapter8.sec2.listing14
 
 import arrow.core.getOrElse
 import arrow.core.toOption
-import chapter8.*
+import chapter8.Falsified
+import chapter8.Passed
+import chapter8.RNG
+import chapter8.Result
+import chapter8.SimpleRNG
+import chapter8.State
+import chapter8.TestCases
 
 data class Gen<A>(val sample: State<RNG, A>)
 
@@ -14,18 +20,22 @@ data class Prop(val check: (TestCases, RNG) -> Result) {
         fun <A> forAll(ga: Gen<A>, f: (A) -> Boolean): Prop =
             Prop { n: TestCases, rng: RNG ->
                 randomSequence(ga, rng).mapIndexed { i, a -> // <1>
-                    try {
-                        if (f(a)) Passed else Falsified(a.toString(), i) // <2>
-                    } catch (e: Exception) {
-                        Falsified(buildMessage(a, e), i) // <3>
-                    }
-                }.take(n)
+                        try {
+                            if (f(a)) Passed
+                            else Falsified(a.toString(), i) // <2>
+                        } catch (e: Exception) {
+                            Falsified(buildMessage(a, e), i) // <3>
+                        }
+                    }.take(n)
                     .find { it.isFalsified() }
                     .toOption()
                     .getOrElse { Passed }
             }
 
-        private fun <A> randomSequence(ga: Gen<A>, rng: RNG): Sequence<A> = // <4>
+        private fun <A> randomSequence(
+            ga: Gen<A>,
+            rng: RNG
+        ): Sequence<A> = // <4>
             sequence {
                 val (a: A, rng2: RNG) = ga.sample.run(rng)
                 yield(a)

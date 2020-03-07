@@ -5,4 +5,3 @@ interface Prop {
     fun and(p: Prop): Prop
 }
 //end::init[]
-

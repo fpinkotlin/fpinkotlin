@@ -32,4 +32,3 @@ fun <A> forAllPar(ga: Gen<A>, f: (A) -> Par<Boolean>): Prop =
         map2(ges, ga) { es, a -> es to a } // <4>
     ) { (es, a) -> f(a)(es).get() }
 //end::init1[]
-

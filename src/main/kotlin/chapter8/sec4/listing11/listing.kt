@@ -21,4 +21,3 @@ fun <A> forAllPar(ga: Gen<A>, f: (A) -> Par<Boolean>): Prop =
         f(a)(es).get()
     }
 //end::init2[]
-

@@ -8,7 +8,6 @@ import chapter8.sec3.listing3.Prop
 import chapter8.sec4.listing13.forAllPar
 import chapter8.sec4.listing9.equal
 
-
 //tag::init[]
 fun checkPar(p: Par<Boolean>): Prop =
     forAllPar(Gen.unit(Unit)) { p }
@@ -20,4 +19,3 @@ val p2 = checkPar(
     )
 )
 //end::init[]
-
