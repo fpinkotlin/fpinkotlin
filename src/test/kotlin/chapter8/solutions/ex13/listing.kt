@@ -9,7 +9,7 @@ import kotlin.math.max
 
 fun main() {
     //tag::init1[]
-    fun <A> listOfNonEmpty(ga: Gen<A>): SGen<List<A>> =
+    fun <A> nonEmptyListOf(ga: Gen<A>): SGen<List<A>> =
         SGen { i -> Gen.listOfN(max(1, i), ga) }
     //end::init1[]
 
@@ -17,7 +17,7 @@ fun main() {
 
     //tag::init2[]
     val maxProp =
-        Prop.forAll(listOfNonEmpty(smallInt)) { ns: List<Int> ->
+        Prop.forAll(nonEmptyListOf(smallInt)) { ns: List<Int> ->
             val mx =
                 ns.max() ?: throw IllegalStateException("max on empty list")
             !ns.exists { it > mx }

@@ -1,4 +1,4 @@
-package chapter8.solutions.ex7
+package chapter8.exercises.ex7
 
 import chapter8.RNG
 import chapter8.State
@@ -14,8 +14,7 @@ data class Gen<A>(val sample: State<RNG, A>) {
         fun <A> union(
             ga: Gen<A>,
             gb: Gen<A>
-        ): Gen<A> =
-            boolean().flatMap { if (it) ga else gb }
+        ): Gen<A> = TODO()
         //end::init[]
     }
 
