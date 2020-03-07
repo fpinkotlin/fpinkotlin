@@ -50,4 +50,3 @@ data class Prop(val run: (TestCases, RNG) -> Result) {
     }
 }
 //end::init[]
-
