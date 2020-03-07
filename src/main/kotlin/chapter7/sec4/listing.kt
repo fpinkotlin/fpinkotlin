@@ -1,7 +1,10 @@
 package chapter7.sec4
 
 import chapter7.sec3.Pars
-import java.util.concurrent.*
+import java.util.concurrent.Callable
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
 
 typealias Par<A> = (ExecutorService) -> Future<A>
 
@@ -97,4 +100,3 @@ val step8 = {
         { es -> pa()(es) }
     //end::init9[]
 }
-

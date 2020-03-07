@@ -99,4 +99,3 @@ fun main() {
     //got message: You're just repeating everything I say, aren't you?
     //end::client2[]
 }
-

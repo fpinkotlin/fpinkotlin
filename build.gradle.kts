@@ -31,7 +31,8 @@ ktlint {
         setOf(
             "comment-spacing",
             "filename",
-            "import-ordering"
+            "import-ordering",
+            "no-line-break-before-assignment"
         )
     )
 }
