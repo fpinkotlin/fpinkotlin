@@ -7,7 +7,11 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B = TODO()
+fun <A, B> fold(
+    ta: Tree<A>,
+    l: (A) -> B,
+    b: (B, B) -> B
+): B = TODO()
 
 fun <A> sizeF(ta: Tree<A>): Int = TODO()
 
@@ -15,25 +19,28 @@ fun maximumF(ta: Tree<Int>): Int = TODO()
 
 fun <A> depthF(ta: Tree<A>): Int = TODO()
 
-fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> = TODO()
+fun <A, B> mapF(
+    ta: Tree<A>,
+    f: (A) -> B
+): Tree<B> = TODO()
 // end::init[]
 
 class Exercise_3_28 : WordSpec({
     "tree fold" should {
 
-        val tree = Branch( //0
-            Branch(Leaf(1), Leaf(2)), //2
+        val tree = Branch(
+            Branch(Leaf(1), Leaf(2)),
             Branch(
-                Leaf(3), //2
+                Leaf(3),
                 Branch(
-                    Branch(Leaf(4), Leaf(5)), //4
+                    Branch(Leaf(4), Leaf(5)),
                     Branch(
-                        Leaf(21), //4
+                        Leaf(21),
                         Branch(Leaf(7), Leaf(8))
                     )
                 )
             )
-        ) //5
+        )
         "!generalise size" {
             sizeF(tree) shouldBe 15
         }
@@ -48,19 +55,19 @@ class Exercise_3_28 : WordSpec({
 
         "!generalise map" {
             mapF(tree) { it * 10 } shouldBe
-                    Branch( //0
-                        Branch(Leaf(10), Leaf(20)), //2
+                Branch(
+                    Branch(Leaf(10), Leaf(20)),
+                    Branch(
+                        Leaf(30),
                         Branch(
-                            Leaf(30), //2
+                            Branch(Leaf(40), Leaf(50)),
                             Branch(
-                                Branch(Leaf(40), Leaf(50)), //4
-                                Branch(
-                                    Leaf(210), //4
-                                    Branch(Leaf(70), Leaf(80))
-                                )
+                                Leaf(210),
+                                Branch(Leaf(70), Leaf(80))
                             )
                         )
                     )
+                )
         }
     }
 })
