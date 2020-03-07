@@ -52,27 +52,42 @@ class Exercise_4_6 : WordSpec({
 
     "either flatMap" should {
         "!apply a function yielding an either to a right either" {
-            right.flatMap { a -> Right(a.toString()) } shouldBe Right("1")
+            right.flatMap { a ->
+                Right(a.toString())
+            } shouldBe Right("1")
         }
         "!pass on the left value" {
-            left.flatMap { a -> Right(a.toString()) } shouldBe left
+            left.flatMap { a ->
+                Right(a.toString())
+            } shouldBe left
         }
     }
 
     "either map2" should {
         val right1: Right<Int> = Right(3)
         val right2: Right<Int> = Right(2)
-        val left1: Either<Throwable, Int> = Left(IllegalArgumentException("boom"))
-        val left2: Either<Throwable, Int> = Left(IllegalStateException("pow"))
+        val left1: Either<Throwable, Int> =
+            Left(IllegalArgumentException("boom"))
+        val left2: Either<Throwable, Int> =
+            Left(IllegalStateException("pow"))
 
         "!combine two either right values using a binary function" {
-            map2(right1, right2) { a, b -> (a * b).toString() } shouldBe Right("6")
+            map2(
+                right1,
+                right2
+            ) { a, b -> (a * b).toString() } shouldBe Right("6")
         }
         "!return left if either is left" {
-            map2(right1, left1) { a, b -> (a * b).toString() } shouldBe left1
+            map2(
+                right1,
+                left1
+            ) { a, b -> (a * b).toString() } shouldBe left1
         }
         "!return the first left if both are left" {
-            map2(left1, left2) { a, b -> (a * b).toString() } shouldBe left1
+            map2(
+                left1,
+                left2
+            ) { a, b -> (a * b).toString() } shouldBe left1
         }
     }
 })
