@@ -1,14 +1,9 @@
 package chapter5.exercises
 
 import chapter3.List
-import chapter3.solutions.reverse
-import chapter5.Cons
-import chapter5.Empty
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
-import chapter3.Cons as ConsL
-import chapter3.Nil as NilL
 
 /**
  * Re-enable the tests by removing the `!` prefix!

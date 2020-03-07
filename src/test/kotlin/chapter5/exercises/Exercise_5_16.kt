@@ -1,9 +1,7 @@
 package chapter5.exercises
 
 import chapter3.List
-import chapter5.Boilerplate.foldRight
 import chapter5.Stream
-import chapter5.Stream.Companion.cons
 import chapter5.solutions.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -22,7 +20,10 @@ class Exercise_5_16 : WordSpec({
 
     "Stream.scanRight" should {
         "!behave like foldRight" {
-            Stream.of(1, 2, 3).scanRight(0, { a, b -> a + b() }).toList() shouldBe List.of(6, 5, 3, 0)
+            Stream.of(1, 2, 3)
+                .scanRight(0, { a, b ->
+                    a + b()
+                }).toList() shouldBe List.of(6, 5, 3, 0)
         }
     }
 })

@@ -2,11 +2,7 @@ package chapter5.exercises
 
 import chapter3.List
 import chapter3.Nil
-import chapter5.Cons
-import chapter5.Empty
 import chapter5.Stream
-import chapter5.Stream.Companion.cons
-import chapter5.Stream.Companion.empty
 import chapter5.solutions.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec

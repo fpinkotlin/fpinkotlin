@@ -24,7 +24,10 @@ class Solution_5_16 : WordSpec({
 
     "Stream.scanRight" should {
         "behave like foldRight" {
-            Stream.of(1, 2, 3).scanRight(0, { a, b -> a + b() }).toList() shouldBe List.of(6, 5, 3, 0)
+            Stream.of(1, 2, 3)
+                .scanRight(0, { a, b ->
+                    a + b()
+                }).toList() shouldBe List.of(6, 5, 3, 0)
         }
     }
 })
