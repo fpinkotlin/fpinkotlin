@@ -25,5 +25,4 @@ class Exercise_2_5 : WordSpec({
             fahrenheit2celsius(68.0) shouldBe "20.0 degrees celsius"
         }
     }
-
 })
