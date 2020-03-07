@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
     kotlin("jvm") version "1.3.21"
@@ -23,6 +25,10 @@ dependencies {
 repositories {
     jcenter()
     maven("https://dl.bintray.com/kotlin/kotlinx")
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions.suppressWarnings = true
 }
 
 ktlint {
