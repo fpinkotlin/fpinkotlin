@@ -27,7 +27,13 @@ repositories {
 
 ktlint {
     verbose.set(true)
-    disabledRules.set(setOf("comment-spacing", "filename"))
+    disabledRules.set(
+        setOf(
+            "comment-spacing",
+            "filename",
+            "import-ordering"
+        )
+    )
 }
 
 test.dependsOn("ktlintCheck")
