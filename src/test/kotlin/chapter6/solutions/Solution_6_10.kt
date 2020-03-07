@@ -26,7 +26,9 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
                 }
             }
 
-        fun <S, A> sequence(fs: List<State<S, A>>): State<S, List<A>> =
+        fun <S, A> sequence(
+            fs: List<State<S, A>>
+        ): State<S, List<A>> =
             foldRight(fs, unit(List.empty<A>()),
                 { f, acc ->
                     map2(f, acc) { h, t -> Cons(h, t) }
@@ -36,7 +38,6 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
 
     fun <B> map(f: (A) -> B): State<S, B> =
         flatMap { a -> unit<S, B>(f(a)) }
-
 
     fun <B> flatMap(f: (A) -> State<S, B>): State<S, B> =
         State { s: S ->
@@ -54,7 +55,8 @@ class Solution_6_10 : WordSpec({
     }
     "map" should {
         "transform a state" {
-            State.unit<RNG, Int>(1).map { it.toString() }.run(rng1) shouldBe Pair("1", rng1)
+            State.unit<RNG, Int>(1).map { it.toString() }
+                .run(rng1) shouldBe Pair("1", rng1)
         }
     }
     "flatMap" should {
@@ -69,7 +71,10 @@ class Solution_6_10 : WordSpec({
         "combine the results of two actions" {
 
             val combined: State<RNG, String> =
-                State.map2(State.unit(1.0), State.unit(1)) { d: Double, i: Int ->
+                State.map2(
+                    State.unit(1.0),
+                    State.unit(1)
+                ) { d: Double, i: Int ->
                     ">>> $d double; $i int"
                 }
 

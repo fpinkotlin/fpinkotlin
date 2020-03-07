@@ -41,18 +41,33 @@ fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> {
 class Solution_6_7 : WordSpec({
     "sequence" should {
 
-        "combine the results of many actions using foldRight and map2" {
+        "combine the results of many actions using" +
+            "foldRight and map2" {
 
-            val combined: Rand<List<Int>> =
-                sequence2(List.of(unit(1), unit(2), unit(3), unit(4)))
+                val combined: Rand<List<Int>> =
+                    sequence2(
+                        List.of(
+                            unit(1),
+                            unit(2),
+                            unit(3),
+                            unit(4)
+                        )
+                    )
 
-            combined(rng1).first shouldBe List.of(1, 2, 3, 4)
-        }
+                combined(rng1).first shouldBe List.of(1, 2, 3, 4)
+            }
 
         "combine the results of many actions using recursion" {
 
             val combined: Rand<List<Int>> =
-                sequence(List.of(unit(1), unit(2), unit(3), unit(4)))
+                sequence(
+                    List.of(
+                        unit(1),
+                        unit(2),
+                        unit(3),
+                        unit(4)
+                    )
+                )
 
             combined(rng1).first shouldBe List.of(1, 2, 3, 4)
         }
@@ -60,8 +75,8 @@ class Solution_6_7 : WordSpec({
 
     "ints" should {
         "generate a list of ints of a specified length" {
-            ints2(4, rng1).first shouldBe List.of(1, 1, 1, 1)
+            ints2(4, rng1).first shouldBe
+                List.of(1, 1, 1, 1)
         }
     }
-
 })

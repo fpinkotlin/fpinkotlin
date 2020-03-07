@@ -10,31 +10,41 @@ import io.kotlintest.specs.WordSpec
 class Exercise_6_3 : WordSpec({
 
     //tag::init[]
-    fun intDouble(rng: RNG): Pair<Pair<Int, Double>, RNG> = TODO()
+    fun intDouble(
+        rng: RNG
+    ): Pair<Pair<Int, Double>, RNG> = TODO()
 
-    fun doubleInt(rng: RNG): Pair<Pair<Double, Int>, RNG> = TODO()
+    fun doubleInt(
+        rng: RNG
+    ): Pair<Pair<Double, Int>, RNG> = TODO()
 
-    fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> = TODO()
+    fun double3(
+        rng: RNG
+    ): Pair<Triple<Double, Double, Double>, RNG> = TODO()
     //end::init[]
 
     "intDouble" should {
 
-        val doubleBelowOne = Int.MAX_VALUE.toDouble() / (Int.MAX_VALUE.toDouble() + 1)
+        val doubleBelowOne =
+            Int.MAX_VALUE.toDouble() / (Int.MAX_VALUE.toDouble() + 1)
 
         val unusedRng = object : RNG {
             override fun nextInt(): Pair<Int, RNG> = TODO()
         }
 
         val rng3 = object : RNG {
-            override fun nextInt(): Pair<Int, RNG> = Pair(Int.MAX_VALUE, unusedRng)
+            override fun nextInt(): Pair<Int, RNG> =
+                Pair(Int.MAX_VALUE, unusedRng)
         }
 
         val rng2 = object : RNG {
-            override fun nextInt(): Pair<Int, RNG> = Pair(Int.MAX_VALUE, rng3)
+            override fun nextInt(): Pair<Int, RNG> =
+                Pair(Int.MAX_VALUE, rng3)
         }
 
         val rng = object : RNG {
-            override fun nextInt(): Pair<Int, RNG> = Pair(Int.MAX_VALUE, rng2)
+            override fun nextInt(): Pair<Int, RNG> =
+                Pair(Int.MAX_VALUE, rng2)
         }
 
         "!generate a pair of int and double" {

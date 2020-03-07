@@ -7,7 +7,10 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
+fun ints(
+    count: Int,
+    rng: RNG
+): Pair<List<Int>, RNG> = TODO()
 //end::init[]
 
 /**
@@ -18,7 +21,8 @@ class Exercise_6_4 : WordSpec({
     "ints" should {
         "!generate a list of ints of a specified length" {
 
-            ints(5, rng1) shouldBe Pair(List.of(1, 1, 1, 1, 1), rng1)
+            ints(5, rng1) shouldBe
+                Pair(List.of(1, 1, 1, 1, 1), rng1)
         }
     }
 })
