@@ -15,7 +15,7 @@ object Listing_2_1_1 {
     //end::formatabs[]
 
     //tag::main[]
-    fun main(args: Array<String>): Unit {
+    fun main(args: Array<String>) {
         println(formatAbs(-42))
     }
     //end::main[]
