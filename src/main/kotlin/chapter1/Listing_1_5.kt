@@ -23,14 +23,12 @@ object Listing_1_5 {
             val purchases: List<Pair<Coffee, Charge>> =
                 List(n) { buyCoffee(cc) } // <1>
 
-            val (coffees, charges) =
-                purchases.unzip() // <2>
+            val (coffees, charges) = purchases.unzip() // <2>
 
             return Pair(
                 coffees,
-                charges.reduce { c1, c2 ->
-                    c1.combine(c2)
-                }) // <3>
+                charges.reduce { c1, c2 -> c1.combine(c2) }
+            ) // <3>
         }
     }
     //end::init[]

@@ -12,9 +12,7 @@ import io.kotlintest.specs.WordSpec
 class Exercise_5_5 : WordSpec({
 
     //tag::init[]
-    fun <A> Stream<A>.takeWhile(
-        p: (A) -> Boolean
-    ): Stream<A> = TODO()
+    fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> = TODO()
     //end::init[]
 
     "Stream.takeWhile" should {

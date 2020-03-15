@@ -7,10 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-tailrec fun <A> startsWith(
-    l1: List<A>,
-    l2: List<A>
-): Boolean =
+tailrec fun <A> startsWith(l1: List<A>, l2: List<A>): Boolean =
     when (l1) {
         is Nil -> l2 == Nil
         is Cons -> when (l2) {
@@ -30,7 +27,6 @@ tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean =
                 true
             else hasSubsequence(xs.tail, sub)
     }
-
 // end::init[]
 
 class Solution_3_23 : WordSpec({

@@ -13,9 +13,7 @@ object Listing_4_4 {
     ): Option<C> = TODO()
 
     //tag::lift[]
-    fun <A, B> lift(
-        f: (A) -> B
-    ): (Option<A>) -> Option<B> =
+    fun <A, B> lift(f: (A) -> B): (Option<A>) -> Option<B> =
         { oa -> oa.map(f) }
     //end::lift[]
 

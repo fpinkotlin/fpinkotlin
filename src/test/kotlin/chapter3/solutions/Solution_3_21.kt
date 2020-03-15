@@ -7,10 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun add(
-    xa: List<Int>,
-    xb: List<Int>
-): List<Int> =
+fun add(xa: List<Int>, xb: List<Int>): List<Int> =
     when (xa) {
         is Nil -> Nil
         is Cons -> when (xb) {

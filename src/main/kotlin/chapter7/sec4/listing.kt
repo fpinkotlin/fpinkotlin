@@ -24,11 +24,7 @@ val step1 = {
 
 val step2 = {
     //tag::init2[]
-    fun <A> equal(
-        es: ExecutorService,
-        p1: Par<A>,
-        p2: Par<A>
-    ): Boolean =
+    fun <A> equal(es: ExecutorService, p1: Par<A>, p2: Par<A>): Boolean =
         p1(es).get() == p2(es).get()
     //end::init2[]
 }
@@ -56,13 +52,12 @@ val step4 = {
 }
 
 //tag::init7[]
-fun <A> fork(
-    a: () -> Par<A>
-): Par<A> = { es ->
-    es.submit(Callable<A> {
-        a()(es).get() // <1>
-    })
-}
+fun <A> fork(a: () -> Par<A>): Par<A> =
+    { es ->
+        es.submit(Callable<A> {
+            a()(es).get() // <1>
+        })
+    }
 //end::init7[]
 
 val step5 = {
@@ -73,11 +68,7 @@ val step5 = {
 }
 
 val step6 = {
-    fun <A> equal(
-        es: ExecutorService,
-        p1: Par<A>,
-        p2: Par<A>
-    ): Boolean =
+    fun <A> equal(es: ExecutorService, p1: Par<A>, p2: Par<A>): Boolean =
         p1(es).get() == p2(es).get()
 
     //tag::init6[]

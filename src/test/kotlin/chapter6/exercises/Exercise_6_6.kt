@@ -7,11 +7,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A, B, C> map2(
-    ra: Rand<A>,
-    rb: Rand<B>,
-    f: (A, B) -> C
-): Rand<C> = TODO()
+fun <A, B, C> map2(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> =
+    TODO()
 //end::init[]
 
 /**

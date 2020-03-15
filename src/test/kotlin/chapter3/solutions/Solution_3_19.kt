@@ -6,10 +6,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A, B> flatMap(
-    xa: List<A>,
-    f: (A) -> List<B>
-): List<B> =
+fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> =
     foldRight(
         xa,
         List.empty(),

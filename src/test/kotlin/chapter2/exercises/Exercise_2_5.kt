@@ -5,10 +5,7 @@ import io.kotlintest.specs.WordSpec
 
 class Exercise_2_5 : WordSpec({
     // tag::init[]
-    fun <A, B, C> compose(
-        f: (B) -> C,
-        g: (A) -> B
-    ): (A) -> C = TODO()
+    fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C = TODO()
     // end::init[]
 
     /**

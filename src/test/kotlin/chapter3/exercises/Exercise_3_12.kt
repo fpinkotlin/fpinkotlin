@@ -5,17 +5,9 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A, B> foldLeftR(
-    xs: List<A>,
-    z: B,
-    f: (B, A) -> B
-): B = TODO()
+fun <A, B> foldLeftR(xs: List<A>, z: B, f: (B, A) -> B): B = TODO()
 
-fun <A, B> foldRightL(
-    xs: List<A>,
-    z: B,
-    f: (A, B) -> B
-): B = TODO()
+fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B = TODO()
 // end::init[]
 
 class Exercise_3_12 : WordSpec({

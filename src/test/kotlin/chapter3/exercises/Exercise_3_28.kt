@@ -7,11 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A, B> fold(
-    ta: Tree<A>,
-    l: (A) -> B,
-    b: (B, B) -> B
-): B = TODO()
+fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B = TODO()
 
 fun <A> sizeF(ta: Tree<A>): Int = TODO()
 
@@ -19,10 +15,7 @@ fun maximumF(ta: Tree<Int>): Int = TODO()
 
 fun <A> depthF(ta: Tree<A>): Int = TODO()
 
-fun <A, B> mapF(
-    ta: Tree<A>,
-    f: (A) -> B
-): Tree<B> = TODO()
+fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> = TODO()
 // end::init[]
 
 class Exercise_3_28 : WordSpec({

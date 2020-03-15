@@ -7,11 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A> zipWith(
-    xa: List<A>,
-    xb: List<A>,
-    f: (A, A) -> A
-): List<A> =
+fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
     when (xa) {
         is Nil -> Nil
         is Cons -> when (xb) {

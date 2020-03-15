@@ -6,10 +6,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A> dropWhile(
-    l: List<A>,
-    f: (A) -> Boolean
-): List<A> = TODO()
+fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> = TODO()
 // end::init[]
 
 class Exercise_3_4 : WordSpec({

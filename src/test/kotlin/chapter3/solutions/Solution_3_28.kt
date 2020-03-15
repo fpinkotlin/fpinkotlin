@@ -7,11 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A, B> fold(
-    ta: Tree<A>,
-    l: (A) -> B,
-    b: (B, B) -> B
-): B =
+fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B =
     when (ta) {
         is Leaf -> l(ta.value)
         is Branch -> b(fold(ta.left, l, b), fold(ta.right, l, b))

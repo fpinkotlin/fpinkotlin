@@ -9,21 +9,14 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A> sequence(
-    fs: List<Rand<A>>
-): Rand<List<A>> = TODO()
+fun <A> sequence(fs: List<Rand<A>>): Rand<List<A>> = TODO()
 //end::init[]
 
 //tag::init2[]
-fun <A> sequence2(
-    fs: List<Rand<A>>
-): Rand<List<A>> = TODO()
+fun <A> sequence2(fs: List<Rand<A>>): Rand<List<A>> = TODO()
 //enc::init2[]
 
-fun ints2(
-    count: Int,
-    rng: RNG
-): Pair<List<Int>, RNG> = TODO()
+fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
 
 /**
  * TODO: Re-enable tests by removing `!` prefix!

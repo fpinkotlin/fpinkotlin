@@ -7,10 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A, B> flatMap(
-    f: Rand<A>,
-    g: (A) -> Rand<B>
-): Rand<B> = TODO()
+fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> = TODO()
 //end::init[]
 
 fun nonNegativeIntLessThan(n: Int): Rand<Int> = TODO()

@@ -11,10 +11,10 @@ val <T> List<T>.tail: List<T>
 val <T> List<T>.head: T
     get() = first()
 
-fun <A> isSorted(aa: List<A>, ordered: (A, A) -> Boolean): Boolean {
+fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean {
     tailrec fun go(x: A, xs: List<A>): Boolean =
         if (xs.isEmpty()) true
-        else if (!ordered(x, xs.head)) false
+        else if (!order(x, xs.head)) false
         else go(xs.head, xs.tail)
 
     return aa.isEmpty() || go(aa.head, aa.tail)

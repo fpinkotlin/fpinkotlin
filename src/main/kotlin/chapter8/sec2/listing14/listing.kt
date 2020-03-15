@@ -59,8 +59,7 @@ fun main() {
         return Pair(i1, rng2)
     }
 
-    fun integerGen(): Gen<Int> =
-        Gen(State { rng -> nextInt(rng) })
+    fun integerGen(): Gen<Int> = Gen(State { rng -> nextInt(rng) })
 
     //success
     println(

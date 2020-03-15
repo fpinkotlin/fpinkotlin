@@ -5,11 +5,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A> zipWith(
-    xa: List<A>,
-    xb: List<A>,
-    f: (A, A) -> A
-): List<A> = TODO()
+fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> = TODO()
 // end::init[]
 
 class Exercise_3_22 : WordSpec({

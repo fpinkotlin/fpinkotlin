@@ -4,17 +4,10 @@ import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-tailrec fun <A> startsWith(
-    l1: List<A>,
-    l2: List<A>
-): Boolean = TODO()
+tailrec fun <A> startsWith(l1: List<A>, l2: List<A>): Boolean = TODO()
 
 // tag::init[]
-tailrec fun <A> hasSubsequence(
-    xs: List<A>,
-    sub: List<A>
-): Boolean =
-    TODO()
+tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean = TODO()
 // end::init[]
 
 class Exercise_3_23 : WordSpec({

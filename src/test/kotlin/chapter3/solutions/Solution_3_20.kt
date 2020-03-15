@@ -5,10 +5,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun <A> filter2(
-    xa: List<A>,
-    f: (A) -> Boolean
-): List<A> =
+fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> =
     flatMap(xa) { a ->
         if (f(a)) List.of(a) else List.empty()
     }

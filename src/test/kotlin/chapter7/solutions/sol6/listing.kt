@@ -19,9 +19,7 @@ object Pars {
     fun <A> unit(a: A): Par<A> =
         { es: ExecutorService -> TODO() }
 
-    fun <A> fork(
-        a: () -> Par<A>
-    ): Par<A> =
+    fun <A> fork(a: () -> Par<A>): Par<A> =
         { es: ExecutorService ->
             es.submit(Callable<A> { a()(es).get() })
         }
@@ -29,11 +27,7 @@ object Pars {
     fun <A> lazyUnit(a: () -> A): Par<A> =
         fork { unit(a()) }
 
-    fun <A, B, C> map2(
-        a: Par<A>,
-        b: Par<B>,
-        f: (A, B) -> C
-    ): Par<C> =
+    fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> =
         { es: ExecutorService ->
             val fa = a(es)
             val fb = b(es)
@@ -71,10 +65,7 @@ object Pars {
     }
 
     //tag::init[]
-    fun <A> parFilter(
-        sa: List<A>,
-        f: (A) -> Boolean
-    ): Par<List<A>> {
+    fun <A> parFilter(sa: List<A>, f: (A) -> Boolean): Par<List<A>> {
         val pars: List<Par<A>> = sa.map { lazyUnit { it } }
         return map(sequence(pars)) { la: List<A> ->
             la.flatMap { a ->

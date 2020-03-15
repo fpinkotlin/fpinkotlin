@@ -2,21 +2,13 @@ package chapter4
 
 object Listing_4_3 {
 
-    fun <A, B> Option<A>.map(
-        f: (A) -> B
-    ): Option<B> = TODO()
+    fun <A, B> Option<A>.map(f: (A) -> B): Option<B> = TODO()
 
-    fun <A, B> Option<A>.flatMap(
-        f: (A) -> Option<B>
-    ): Option<B> = TODO()
+    fun <A, B> Option<A>.flatMap(f: (A) -> Option<B>): Option<B> = TODO()
 
-    fun <A> Option<A>.getOrElse(
-        default: () -> A
-    ): A = TODO()
+    fun <A> Option<A>.getOrElse(default: () -> A): A = TODO()
 
-    fun <A> Option<A>.filter(
-        f: (A) -> Boolean
-    ): Option<A> = TODO()
+    fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> = TODO()
 
     //tag::init[]
     data class Employee(

@@ -7,8 +7,7 @@ import chapter8.SuccessCount
 //tag::init[]
 typealias TestCases = Int
 
-typealias Result =
-    Either<Pair<FailedCase, SuccessCount>, SuccessCount>
+typealias Result = Either<Pair<FailedCase, SuccessCount>, SuccessCount>
 
 data class Prop(val check: (TestCases) -> Result)
 //end::init[]

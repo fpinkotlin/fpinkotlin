@@ -9,10 +9,7 @@ import io.kotlintest.specs.WordSpec
 
 class Solution_6_9 : WordSpec({
     //tag::init1[]
-    fun <A, B> mapF(
-        ra: Rand<A>,
-        f: (A) -> B
-    ): Rand<B> =
+    fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> =
         flatMap(ra) { a -> unit(f(a)) }
     //end::init1[]
 

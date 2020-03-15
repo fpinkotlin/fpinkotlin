@@ -7,10 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun ints(
-    count: Int,
-    rng: RNG
-): Pair<List<Int>, RNG> = TODO()
+fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
 //end::init[]
 
 /**

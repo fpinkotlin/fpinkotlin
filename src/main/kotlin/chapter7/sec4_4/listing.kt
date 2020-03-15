@@ -59,47 +59,40 @@ fun eval(es: ExecutorService, r: () -> Unit) {
 
 val listing1 = {
     //tag::init14[]
-    fun <A, B, C> map2(
-        pa: Par<A>,
-        pb: Par<B>,
-        f: (A, B) -> C
-    ): Par<C>
+    fun <A, B, C> map2(pa: Par<A>, pb: Par<B>, f: (A, B) -> C): Par<C>
     //end::init14[]
         = TODO()
 }
 
 //tag::init15[]
-fun <A, B, C> map2(
-    pa: Par<A>,
-    pb: Par<B>,
-    f: (A, B) -> C
-): Par<C> = { es: ExecutorService ->
-    object : Future<C>() {
-        override fun invoke(cb: (C) -> Unit) {
-            val ar = AtomicReference<Option<A>>(None) // <1>
-            val br = AtomicReference<Option<B>>(None)
-            val combiner =
-                Actor<Either<A, B>>(Strategy.from(es)) { eab -> // <2>
-                    when (eab) {
-                        is Left<A> -> // <3>
-                            br.get().fold(
-                                { ar.set(Some(eab.a)) },
-                                { b ->
-                                    eval(es) { cb((f(eab.a, b))) }
-                                }
-                            )
-                        is Right<B> -> // <4>
-                            ar.get().fold(
-                                { br.set(Some(eab.b)) },
-                                { a -> eval(es) { cb(f(a, eab.b)) } }
-                            )
+fun <A, B, C> map2(pa: Par<A>, pb: Par<B>, f: (A, B) -> C): Par<C> =
+    { es: ExecutorService ->
+        object : Future<C>() {
+            override fun invoke(cb: (C) -> Unit) {
+                val ar = AtomicReference<Option<A>>(None) // <1>
+                val br = AtomicReference<Option<B>>(None)
+                val combiner =
+                    Actor<Either<A, B>>(Strategy.from(es)) { eab -> // <2>
+                        when (eab) {
+                            is Left<A> -> // <3>
+                                br.get().fold(
+                                    { ar.set(Some(eab.a)) },
+                                    { b ->
+                                        eval(es) { cb((f(eab.a, b))) }
+                                    }
+                                )
+                            is Right<B> -> // <4>
+                                ar.get().fold(
+                                    { br.set(Some(eab.b)) },
+                                    { a -> eval(es) { cb(f(a, eab.b)) } }
+                                )
+                        }
                     }
-                }
-            pa(es).invoke { a: A -> combiner.send(Left(a)) } // <5>
-            pb(es).invoke { b: B -> combiner.send(Right(b)) }
+                pa(es).invoke { a: A -> combiner.send(Left(a)) } // <5>
+                pb(es).invoke { b: B -> combiner.send(Right(b)) }
+            }
         }
     }
-}
 //end::init15[]
 
 val <A> List<A>.head: A

@@ -10,17 +10,12 @@ import io.kotlintest.specs.WordSpec
 class Exercise_6_3 : WordSpec({
 
     //tag::init[]
-    fun intDouble(
-        rng: RNG
-    ): Pair<Pair<Int, Double>, RNG> = TODO()
+    fun intDouble(rng: RNG): Pair<Pair<Int, Double>, RNG> = TODO()
 
-    fun doubleInt(
-        rng: RNG
-    ): Pair<Pair<Double, Int>, RNG> = TODO()
+    fun doubleInt(rng: RNG): Pair<Pair<Double, Int>, RNG> = TODO()
 
-    fun double3(
-        rng: RNG
-    ): Pair<Triple<Double, Double, Double>, RNG> = TODO()
+    fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> =
+        TODO()
     //end::init[]
 
     "intDouble" should {

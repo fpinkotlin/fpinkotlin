@@ -1,2 +1,2 @@
 [*.{kt,kts}]
-max_line_length = 70
+max_line_length = 75

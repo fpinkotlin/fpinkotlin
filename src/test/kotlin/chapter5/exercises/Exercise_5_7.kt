@@ -13,27 +13,19 @@ import io.kotlintest.specs.WordSpec
 class Exercise_5_7 : WordSpec({
 
     //tag::map[]
-    fun <A, B> Stream<A>.map(
-        f: (A) -> B
-    ): Stream<B> = TODO()
+    fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> = TODO()
     //end::map[]
 
     //tag::filter[]
-    fun <A> Stream<A>.filter(
-        f: (A) -> Boolean
-    ): Stream<A> = TODO()
+    fun <A> Stream<A>.filter(f: (A) -> Boolean): Stream<A> = TODO()
     //end::filter[]
 
     //tag::append[]
-    fun <A> Stream<A>.append(
-        sa: () -> Stream<A>
-    ): Stream<A> = TODO()
+    fun <A> Stream<A>.append(sa: () -> Stream<A>): Stream<A> = TODO()
     //end::append[]
 
     //tag::flatmap[]
-    fun <A, B> Stream<A>.flatMap(
-        f: (A) -> Stream<B>
-    ): Stream<B> = TODO()
+    fun <A, B> Stream<A>.flatMap(f: (A) -> Stream<B>): Stream<B> = TODO()
     //end::flatmap[]
 
     "Stream.map" should {

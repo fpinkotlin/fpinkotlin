@@ -5,10 +5,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
-fun add(
-    xa: List<Int>,
-    xb: List<Int>
-): List<Int> = TODO()
+fun add(xa: List<Int>, xb: List<Int>): List<Int> = TODO()
 // end::init[]
 
 class Exercise_3_21 : WordSpec({

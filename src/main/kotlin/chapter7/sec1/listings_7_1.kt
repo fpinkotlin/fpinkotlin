@@ -4,10 +4,7 @@ import arrow.core.extensions.list.foldable.firstOption
 import arrow.core.extensions.list.foldable.foldLeft
 import arrow.core.getOrElse
 
-fun <A, B> parMap(
-    ps: List<A>,
-    f: (A) -> B
-): Par<List<B>> = TODO()
+fun <A, B> parMap(ps: List<A>, f: (A) -> B): Par<List<B>> = TODO()
 
 val inputList = emptyList<Int>()
 

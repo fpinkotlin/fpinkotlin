@@ -9,9 +9,7 @@ typealias Par<A> = (ExecutorService) -> Future<A>
 object Pars {
 
     //tag::init[]
-    fun <A, B> asyncF(
-        f: (A) -> B
-    ): (A) -> Par<B> = TODO()
+    fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> = TODO()
     //end::init[]
 
     fun <A> unit(a: () -> A): Par<A> =

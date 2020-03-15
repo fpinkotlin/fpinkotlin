@@ -15,11 +15,7 @@ import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
-fun <A, B, C> map2(
-    a: Par<A>,
-    b: Par<B>,
-    f: (A, B) -> C
-): Par<C> = TODO()
+fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> = TODO()
 
 data class TimedMap2Future<A, B, C>(
     val pa: Future<A>,
