@@ -21,5 +21,3 @@ object Section_6_1 {
     }
     //end::init3[]
 }
-
-

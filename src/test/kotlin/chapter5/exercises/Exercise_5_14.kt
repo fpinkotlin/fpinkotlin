@@ -15,10 +15,14 @@ class Exercise_5_14 : WordSpec({
 
     "Stream.startsWith" should {
         "!detect if one stream is a prefix of another" {
-            Stream.of(1, 2, 3).startsWith(Stream.of(1, 2)) shouldBe true
+            Stream.of(1, 2, 3).startsWith(
+                Stream.of(1, 2)
+            ) shouldBe true
         }
         "!detect if one stream is not a prefix of another" {
-            Stream.of(1, 2, 3).startsWith(Stream.of(2, 3)) shouldBe false
+            Stream.of(1, 2, 3).startsWith(
+                Stream.of(2, 3)
+            ) shouldBe false
         }
     }
 })

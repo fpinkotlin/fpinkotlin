@@ -15,5 +15,4 @@ object Listing_5_4 {
     fun <A> Stream<A>.hasSubsequence(s: Stream<A>): Boolean =
         this.tails().exists { it.startsWith(s) }
     //end::hassubsequence[]
-
 }

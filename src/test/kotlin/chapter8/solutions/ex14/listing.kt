@@ -28,4 +28,3 @@ val maxProp = forAll(SGen.listOf(smallInt)) { ns ->
 fun main() {
     run(maxProp)
 }
-

@@ -15,7 +15,9 @@ data class Gen<A>(val sample: State<RNG, A>) {
         ): Gen<A> {
             val (ga, p1) = pga
             val (gb, p2) = pgb
-            val prob = p1.absoluteValue / (p1.absoluteValue + p2.absoluteValue)
+            val prob =
+                p1.absoluteValue /
+                    (p1.absoluteValue + p2.absoluteValue)
             return Gen(State { rng: RNG -> double(rng) })
                 .flatMap { d ->
                     if (d < prob) ga else gb

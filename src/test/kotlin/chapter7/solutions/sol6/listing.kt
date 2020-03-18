@@ -19,9 +19,7 @@ object Pars {
     fun <A> unit(a: A): Par<A> =
         { es: ExecutorService -> TODO() }
 
-    fun <A> fork(
-        a: () -> Par<A>
-    ): Par<A> =
+    fun <A> fork(a: () -> Par<A>): Par<A> =
         { es: ExecutorService ->
             es.submit(Callable<A> { a()(es).get() })
         }
@@ -42,7 +40,9 @@ object Pars {
     val <T> List<T>.tail: List<T>
         get() = this.drop(1)
 
-    fun <A> List<A>.splitAt(idx: Int): Pair<PersistentList<A>, PersistentList<A>> =
+    fun <A> List<A>.splitAt(
+        idx: Int
+    ): Pair<PersistentList<A>, PersistentList<A>> =
         Pair(
             this.subList(0, idx).toPersistentList(),
             this.subList(idx, this.size).toPersistentList()
@@ -57,16 +57,15 @@ object Pars {
             ps.size == 1 -> map(ps.head) { listOf(it) }
             else -> {
                 val (l, r) = ps.splitAt(ps.size / 2)
-                map2(sequence(l), sequence(r)) { la, lb -> la + lb }
+                map2(sequence(l), sequence(r)) { la, lb ->
+                    la + lb
+                }
             }
         }
     }
 
     //tag::init[]
-    fun <A> parFilter(
-        sa: List<A>,
-        f: (A) -> Boolean
-    ): Par<List<A>> {
+    fun <A> parFilter(sa: List<A>, f: (A) -> Boolean): Par<List<A>> {
         val pars: List<Par<A>> = sa.map { lazyUnit { it } }
         return map(sequence(pars)) { la: List<A> ->
             la.flatMap { a ->
@@ -75,6 +74,4 @@ object Pars {
         }
     }
     //end::init[]
-
-
 }

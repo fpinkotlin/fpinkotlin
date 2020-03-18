@@ -24,7 +24,10 @@ fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
 class Solution_3_22 : WordSpec({
     "list zipWith" should {
         "apply a function to elements of two corresponding lists" {
-            zipWith(List.of(1, 2, 3), List.of(4, 5, 6)) { x, y -> x + y } shouldBe List.of(5, 7, 9)
+            zipWith(
+                List.of(1, 2, 3),
+                List.of(4, 5, 6)
+            ) { x, y -> x + y } shouldBe List.of(5, 7, 9)
         }
     }
 })

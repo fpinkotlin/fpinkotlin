@@ -1,7 +1,5 @@
 package chapter4
 
-import chapter3.List
-
 object Listing_4_3 {
 
     fun <A, B> Option<A>.map(f: (A) -> B): Option<B> = TODO()
@@ -21,7 +19,8 @@ object Listing_4_3 {
 
     fun lookupByName(name: String): Option<Employee> = TODO()
 
-    fun timDepartment(): Option<String> = lookupByName("Tim").map { it.department }
+    fun timDepartment(): Option<String> =
+        lookupByName("Tim").map { it.department }
     //end::init[]
 
     //tag::init2[]
@@ -32,7 +31,8 @@ object Listing_4_3 {
     //end::init2[]
 
     //tag::init3[]
-    val unwieldy: Option<Option<String>> = lookupByName("Tim").map { it.manager }
+    val unwieldy: Option<Option<String>> =
+        lookupByName("Tim").map { it.manager }
     //end::init3[]
 
     //tag::init4[]

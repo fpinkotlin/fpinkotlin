@@ -17,4 +17,3 @@ data class Gen<A>(val sample: State<RNG, A>) {
         SGen { i -> Gen.listOfN(i, this) }
     //end::init[]
 }
-

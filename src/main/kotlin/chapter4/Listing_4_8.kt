@@ -3,7 +3,11 @@ package chapter4
 object Listing_4_8 {
 
     // boilerplate developed in exercises
-    fun <E, A, B, C> map2(ae: Either<E, A>, be: Either<E, B>, f: (A, B) -> C): Either<E, C> = TODO()
+    fun <E, A, B, C> map2(
+        ae: Either<E, A>,
+        be: Either<E, B>,
+        f: (A, B) -> C
+    ): Either<E, C> = TODO()
 
     //tag::init[]
     data class Person(val name: Name, val age: Age)

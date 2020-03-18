@@ -10,4 +10,3 @@ data class Gen<A>(val sample: State<RNG, A>) {
     fun listOf(): SGen<List<A>> = TODO()
     //end::init[]
 }
-

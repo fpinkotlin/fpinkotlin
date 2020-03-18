@@ -11,7 +11,9 @@ fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> = TODO()
 class Exercise_3_20 : WordSpec({
     "list filter" should {
         "!filter out elements not compliant to predicate" {
-            filter2(List.of(1, 2, 3, 4, 5)) { it % 2 == 0 } shouldBe List.of(2, 4)
+            filter2(
+                List.of(1, 2, 3, 4, 5)
+            ) { it % 2 == 0 } shouldBe List.of(2, 4)
         }
     }
 })

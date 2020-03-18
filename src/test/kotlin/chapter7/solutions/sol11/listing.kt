@@ -7,28 +7,18 @@ import java.util.concurrent.Future
 typealias Par<A> = (ExecutorService) -> Future<A>
 
 //tag::init[]
-fun <A, B> chooser(
-    pa: Par<A>,
-    choices: (A) -> Par<B>
-): Par<B> =
+fun <A, B> chooser(pa: Par<A>, choices: (A) -> Par<B>): Par<B> =
     { es: ExecutorService ->
         choices(pa(es).get())(es)
     }
 //end::init[]
 
-fun <A> choice(
-    cond: Par<Boolean>,
-    t: Par<A>,
-    f: Par<A>
-): Par<A> =
+fun <A> choice(cond: Par<Boolean>, t: Par<A>, f: Par<A>): Par<A> =
     { es: ExecutorService ->
         chooser(cond, { if (it) t else f })(es)
     }
 
-fun <A> choiceN(
-    n: Par<Int>,
-    choices: List<Par<A>>
-): Par<A> =
+fun <A> choiceN(n: Par<Int>, choices: List<Par<A>>): Par<A> =
     { es: ExecutorService ->
         chooser(n, { choices[it] })(es)
     }

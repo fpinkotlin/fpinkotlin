@@ -7,4 +7,3 @@ val listing2 = {
     fun <A> listOf(a: Gen<A>): List<Gen<A>> = TODO()
     //end::init[]
 }
-

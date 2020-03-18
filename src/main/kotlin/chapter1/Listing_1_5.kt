@@ -15,13 +15,20 @@ object Listing_1_5 {
 
         fun buyCoffee(cc: CreditCard): Pair<Coffee, Charge> = TODO()
 
-        fun buyCoffees(cc: CreditCard, n: Int): Pair<List<Coffee>, Charge> {
+        fun buyCoffees(
+            cc: CreditCard,
+            n: Int
+        ): Pair<List<Coffee>, Charge> {
 
-            val purchases: List<Pair<Coffee, Charge>> = List(n) { buyCoffee(cc) } // <1>
+            val purchases: List<Pair<Coffee, Charge>> =
+                List(n) { buyCoffee(cc) } // <1>
 
             val (coffees, charges) = purchases.unzip() // <2>
 
-            return Pair(coffees, charges.reduce { c1, c2 -> c1.combine(c2) }) // <3>
+            return Pair(
+                coffees,
+                charges.reduce { c1, c2 -> c1.combine(c2) }
+            ) // <3>
         }
     }
     //end::init[]

@@ -52,7 +52,8 @@ fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
 
 //tag::zipwith[]
 fun <A, B, C> Stream<A>.zipWith(
-    that: Stream<B>, f: (A, B) -> C
+    that: Stream<B>,
+    f: (A, B) -> C
 ): Stream<C> =
     unfold(Pair(this, that)) { (ths: Stream<A>, tht: Stream<B>) ->
         when (ths) {
@@ -113,7 +114,8 @@ class Solution_5_13 : WordSpec({
     "Stream.map" should {
         "apply a function to each evaluated element in a stream" {
             val s = Stream.of(1, 2, 3, 4, 5)
-            s.map { "${(it * 2)}" }.toList() shouldBe List.of("2", "4", "6", "8", "10")
+            s.map { "${(it * 2)}" }.toList() shouldBe
+                List.of("2", "4", "6", "8", "10")
         }
         "return an empty stream if no elements are found" {
             empty<Int>().map { (it * 2).toString() } shouldBe empty()
@@ -144,7 +146,8 @@ class Solution_5_13 : WordSpec({
         }
         "return all elements if predicate always evaluates true" {
             val s = Stream.of(1, 2, 3, 4, 5)
-            s.takeWhile { true }.toList() shouldBe List.of(1, 2, 3, 4, 5)
+            s.takeWhile { true }.toList() shouldBe
+                List.of(1, 2, 3, 4, 5)
         }
         "return empty if predicate always evaluates false" {
             val s = Stream.of(1, 2, 3, 4, 5)
@@ -154,20 +157,26 @@ class Solution_5_13 : WordSpec({
 
     "Stream.zipWith" should {
         "apply a function to elements of two corresponding lists" {
-            Stream.of(1, 2, 3).zipWith(Stream.of(4, 5, 6)) { x, y -> x + y }.toList() shouldBe List.of(5, 7, 9)
+            Stream.of(1, 2, 3).zipWith(
+                Stream.of(4, 5, 6)
+            ) { x, y ->
+                x + y
+            }.toList() shouldBe List.of(5, 7, 9)
         }
     }
 
     "Stream.zipAll" should {
         "combine two streams of equal length" {
-            Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3)).toList() shouldBe List.of(
+            Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3))
+                .toList() shouldBe List.of(
                 Pair(Some(1), Some(1)),
                 Pair(Some(2), Some(2)),
                 Pair(Some(3), Some(3))
             )
         }
         "combine two streams until the first is exhausted" {
-            Stream.of(1, 2, 3, 4).zipAll(Stream.of(1, 2, 3)).toList() shouldBe List.of(
+            Stream.of(1, 2, 3, 4).zipAll(Stream.of(1, 2, 3))
+                .toList() shouldBe List.of(
                 Pair(Some(1), Some(1)),
                 Pair(Some(2), Some(2)),
                 Pair(Some(3), Some(3)),
@@ -175,7 +184,8 @@ class Solution_5_13 : WordSpec({
             )
         }
         "combine two streams until the second is exhausted" {
-            Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3, 4)).toList() shouldBe List.of(
+            Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3, 4))
+                .toList() shouldBe List.of(
                 Pair(Some(1), Some(1)),
                 Pair(Some(2), Some(2)),
                 Pair(Some(3), Some(3)),

@@ -18,7 +18,8 @@ sealed class Stream<out A> {
 
         fun <A> of(vararg xs: A): Stream<A> =
             if (xs.isEmpty()) empty()
-            else cons({ xs[0] }, { of(*xs.sliceArray(1 until xs.size)) })
+            else cons({ xs[0] },
+                { of(*xs.sliceArray(1 until xs.size)) })
         //end::of[]
         //tag::empty[]
 
@@ -28,8 +29,10 @@ sealed class Stream<out A> {
     //end::companion[]
 }
 
-data class Cons<out A>(val h: () -> A, val t: () -> Stream<A>) : Stream<A>()
+data class Cons<out A>(
+    val h: () -> A,
+    val t: () -> Stream<A>
+) : Stream<A>()
 
 object Empty : Stream<Nothing>()
 //end::init[]
-

@@ -29,4 +29,3 @@ data class Prop(val run: (TestCases, RNG) -> Result) {
     fun or(p: Prop): Prop = TODO()
 }
 //end::init[]
-

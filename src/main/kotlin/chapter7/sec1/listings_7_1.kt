@@ -4,10 +4,7 @@ import arrow.core.extensions.list.foldable.firstOption
 import arrow.core.extensions.list.foldable.foldLeft
 import arrow.core.getOrElse
 
-fun <A, B> parMap(
-    ps: List<A>,
-    f: (A) -> B
-): Par<List<B>> = TODO()
+fun <A, B> parMap(ps: List<A>, f: (A) -> B): Par<List<B>> = TODO()
 
 val inputList = emptyList<Int>()
 
@@ -50,6 +47,7 @@ class Par<A>(val get: A) // <1>
 fun <A> unit(a: () -> A): Par<A> = Par(a()) // <2>
 
 fun <A> get(a: Par<A>): A = a.get // <3>
+
 //end::init4[]
 //tag::map2[]
 fun map2(
@@ -66,7 +64,7 @@ fun <A> fork(a: () -> Par<A>): Par<A> = TODO()
 val listing = {
     //tag::lazyunit[]
     fun <A> unit(a: A): Par<A> = Par(a)
-    
+
     fun <A> lazyUnit(a: () -> A): Par<A> =
         fork { unit(a()) }
     //end::lazyunit[]
@@ -168,7 +166,6 @@ val sum4 = {
         //end::init10[]
     }
 }
-
 
 val sum5 = {
     //tag::init11[]

@@ -10,12 +10,14 @@ class Solution_2_4 : WordSpec({
     // end::init[]
 
     "uncurry" should {
-        """take a function accepting two values and then apply that
-           function to the components of the pair which is the second argument""" {
+        "take a function accepting two values and then apply that" +
+            "function to the components of the pair which is the" +
+            "second argument" {
 
-            val f: (Int, Int) -> String = uncurry<Int, Int, String> { a -> { b -> "$a:$b" } }
-            f(1, 2) shouldBe "1:2"
-            f(1, 3) shouldBe "1:3"
-        }
+                val f: (Int, Int) -> String =
+                    uncurry { a -> { b -> "$a:$b" } }
+                f(1, 2) shouldBe "1:2"
+                f(1, 3) shouldBe "1:3"
+            }
     }
 })

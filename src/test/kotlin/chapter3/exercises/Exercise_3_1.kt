@@ -1,6 +1,5 @@
 package chapter3.exercises
 
-import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
 import io.kotlintest.shouldBe
@@ -14,7 +13,8 @@ fun <A> tail(xs: List<A>): List<A> = TODO()
 class Exercise_3_1 : WordSpec({
     "list tail" should {
         "!return the the tail when present" {
-            tail(List.of(1, 2, 3, 4, 5)) shouldBe List.of(2, 3, 4, 5)
+            tail(List.of(1, 2, 3, 4, 5)) shouldBe
+                List.of(2, 3, 4, 5)
         }
 
         "!throw an illegal state exception when no tail is present" {

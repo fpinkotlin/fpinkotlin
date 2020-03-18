@@ -7,7 +7,12 @@ import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.concurrent.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Future
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 //tag::init[]
 fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> =
@@ -16,7 +21,6 @@ fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> =
         val fb = b(es)
         TimedMap2Future(fa, fb, f)
     }
-
 
 data class TimedMap2Future<A, B, C>(
     val pa: Future<A>,
