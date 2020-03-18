@@ -21,7 +21,8 @@ class Exercise_3_10 : WordSpec({
 
     "!list productL" should {
         "multiply all doubles" {
-            productL(List.of(1.0, 2.0, 3.0, 4.0, 5.0)) shouldBe 120.0
+            productL(List.of(1.0, 2.0, 3.0, 4.0, 5.0)) shouldBe
+                120.0
         }
     }
 

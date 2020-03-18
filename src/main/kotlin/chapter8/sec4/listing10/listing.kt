@@ -12,11 +12,8 @@ fun <A> weighted(
     pgb: Pair<Gen<A>, Double>
 ): Gen<A> = TODO()
 
-fun <A, B, C> map2(
-    ga: Gen<A>,
-    gb: Gen<B>,
-    f: (A, B) -> C
-): Gen<C> = TODO()
+fun <A, B, C> map2(ga: Gen<A>, gb: Gen<B>, f: (A, B) -> C): Gen<C> =
+    TODO()
 
 //tag::init1[]
 val ges: Gen<ExecutorService> = weighted( // <1>
@@ -32,4 +29,3 @@ fun <A> forAllPar(ga: Gen<A>, f: (A) -> Par<Boolean>): Prop =
         map2(ges, ga) { es, a -> es to a } // <4>
     ) { (es, a) -> f(a)(es).get() }
 //end::init1[]
-

@@ -22,4 +22,3 @@ data class Falsified(
     override fun isFalsified(): Boolean = true
     override fun toString(): String = "Failed: $failure"
 }
-

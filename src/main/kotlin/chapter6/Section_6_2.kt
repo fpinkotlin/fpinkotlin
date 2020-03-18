@@ -7,7 +7,9 @@ object Section_6_2 {
     //tag::init[]
     data class SimpleRNG(val seed: Long) : RNG {
         override fun nextInt(): Pair<Int, RNG> {
-            val newSeed = (seed * 0x5DEECE66DL + 0xBL) and 0xFFFFFFFFFFFFL // <1>
+            val newSeed =
+                (seed * 0x5DEECE66DL + 0xBL) and
+                    0xFFFFFFFFFFFFL // <1>
             val nextRNG = SimpleRNG(newSeed) // <2>
             val n = (newSeed ushr 16).toInt() // <3>
             return Pair(n, nextRNG) // <4>

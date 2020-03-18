@@ -7,10 +7,7 @@ import java.util.concurrent.Future
 typealias Par<A> = (ExecutorService) -> Future<A>
 
 //tag::init1[]
-fun <A> choiceN(
-    n: Par<Int>,
-    choices: List<Par<A>>
-): Par<A> =
+fun <A> choiceN(n: Par<Int>, choices: List<Par<A>>): Par<A> =
     { es: ExecutorService ->
         choices[n(es).get()].invoke(es)
     }
@@ -23,11 +20,7 @@ fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> =
     Pars.map2(pa, Pars.unit(Unit), { a, _ -> f(a) })
 
 //tag::init2[]
-fun <A> choice(
-    cond: Par<Boolean>,
-    t: Par<A>,
-    f: Par<A>
-): Par<A> =
+fun <A> choice(cond: Par<Boolean>, t: Par<A>, f: Par<A>): Par<A> =
     { es: ExecutorService ->
         choiceN(
             map(cond, { if (it) 1 else 0 }),

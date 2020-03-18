@@ -1,6 +1,5 @@
 package chapter3.exercises
 
-import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
 import io.kotlintest.shouldBe
@@ -15,7 +14,8 @@ class Exercise_3_5 : WordSpec({
 
     "list init" should {
         "!return all but the last element" {
-            init(List.of(1, 2, 3, 4, 5)) shouldBe List.of(1, 2, 3, 4)
+            init(List.of(1, 2, 3, 4, 5)) shouldBe
+                List.of(1, 2, 3, 4)
         }
 
         "!return Nil if only one element exists" {

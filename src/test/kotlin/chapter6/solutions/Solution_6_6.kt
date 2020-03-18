@@ -8,11 +8,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A, B, C> map2(
-    ra: Rand<A>,
-    rb: Rand<B>,
-    f: (A, B) -> C
-): Rand<C> =
+fun <A, B, C> map2(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> =
     { r1: RNG ->
         val (a, r2) = ra(r1)
         val (b, r3) = rb(r2)

@@ -11,6 +11,5 @@ data class Gen<A>(val sample: State<RNG, A>) {
     }
 
     fun <B> flatMap(f: (A) -> Gen<B>): Gen<B> = TODO()
-
 }
 //end::init[]

@@ -34,5 +34,4 @@ object ForComprehensionSidebar {
             }
         //end::binding[]
     }
-
 }

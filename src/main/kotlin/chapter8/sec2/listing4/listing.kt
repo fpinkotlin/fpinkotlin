@@ -9,4 +9,3 @@ val listing4 = {
     fun <A> forAll(a: Gen<A>, f: (A) -> Boolean): Prop = TODO()
     //end::init[]
 }
-

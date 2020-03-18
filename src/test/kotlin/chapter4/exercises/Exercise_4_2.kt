@@ -23,8 +23,10 @@ class Exercise_4_2 : WordSpec({
 
     "variance" should {
         "!determine the variance of a list of numbers" {
-            val ls = List.of(1.0, 1.1, 1.0, 3.0, 0.9, 0.4)
-            variance(ls).getOrElse { 0.0 } shouldBe (0.675).plusOrMinus(0.005)
+            val ls =
+                List.of(1.0, 1.1, 1.0, 3.0, 0.9, 0.4)
+            variance(ls).getOrElse { 0.0 } shouldBe
+                (0.675).plusOrMinus(0.005)
         }
     }
 })

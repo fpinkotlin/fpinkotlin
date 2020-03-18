@@ -14,11 +14,8 @@ fun check(p: () -> Boolean): Prop = Prop { _, _, _ ->
 
 val es = Executors.newCachedThreadPool()
 
-fun <A, B, C> map2(
-    pa: Par<A>,
-    pb: Par<B>,
-    f: (A, B) -> C
-): Par<C> = TODO()
+fun <A, B, C> map2(pa: Par<A>, pb: Par<B>, f: (A, B) -> C): Par<C> =
+    TODO()
 
 //tag::init[]
 fun <A> equal(p1: Par<A>, p2: Par<A>): Par<Boolean> =

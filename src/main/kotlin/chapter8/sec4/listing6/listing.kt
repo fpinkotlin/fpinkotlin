@@ -13,4 +13,3 @@ val listing5 = {
         }
     //end::init[]
 }
-

@@ -8,4 +8,3 @@ val listing = {
     map(unit(1)) { it + 1 } == unit(2)
     //end::init[]
 }
-

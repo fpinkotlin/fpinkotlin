@@ -1,6 +1,5 @@
 package chapter5.exercises
 
-import chapter5.Boilerplate.foldRight
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -19,9 +18,10 @@ class Exercise_5_4 : WordSpec({
             val s = Stream.of(1, 2, 3, 4, 5)
             s.forAll { it < 6 } shouldBe true
         }
-        "!stop evaluating if one element does not satisfy the predicate" {
-            val s = Stream.of(1, 2, 3, 4, 5)
-            s.forAll { it != 3 } shouldBe false
-        }
+        "!stop evaluating if one element does not satisfy" +
+            "the predicate" {
+                val s = Stream.of(1, 2, 3, 4, 5)
+                s.forAll { it != 3 } shouldBe false
+            }
     }
 })

@@ -7,11 +7,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-fun <A, B, C> map2(
-    ra: Rand<A>,
-    rb: Rand<B>,
-    f: (A, B) -> C
-): Rand<C> = TODO()
+fun <A, B, C> map2(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> =
+    TODO()
 //end::init[]
 
 /**
@@ -23,10 +20,13 @@ class Exercise_6_6 : WordSpec({
         "!combine the results of two actions" {
 
             val combined: Rand<String> =
-                map2(unit(1.0), unit(1), { d, i -> ">>> $d double; $i int" })
+                map2(
+                    unit(1.0),
+                    unit(1), { d, i ->
+                        ">>> $d double; $i int"
+                    })
 
             combined(rng1).first shouldBe ">>> 1.0 double; 1 int"
-
         }
     }
 })

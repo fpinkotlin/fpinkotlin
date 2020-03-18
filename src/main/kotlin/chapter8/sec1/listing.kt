@@ -19,4 +19,3 @@ fun main() {
     }
     //end::init1[]
 }
-

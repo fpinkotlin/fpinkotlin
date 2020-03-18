@@ -45,7 +45,9 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
                 }
             }
 
-        fun <S, A> sequence(fs: List<State<S, A>>): State<S, List<A>> =
+        fun <S, A> sequence(
+            fs: List<State<S, A>>
+        ): State<S, List<A>> =
             fs.foldRight(unit(emptyList())) { f, acc ->
                 map2(f, acc) { h, t -> listOf(h) + t }
             }
@@ -54,11 +56,9 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
     fun <B> map(f: (A) -> B): State<S, B> =
         flatMap { a -> unit<S, B>(f(a)) }
 
-
     fun <B> flatMap(f: (A) -> State<S, B>): State<S, B> =
         State { s: S ->
             val (a: A, s2: S) = this.run(s)
             f(a).run(s2)
         }
 }
-

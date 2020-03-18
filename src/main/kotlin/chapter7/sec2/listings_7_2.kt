@@ -6,27 +6,31 @@ val api = {
     //tag::init1a[]
     fun <A> unit(a: A): Par<A> // <1>
     //end::init1a[]
-            = TODO()
+        = TODO()
 
     //tag::init1b[]
-    fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> // <2>
+    fun <A, B, C> map2(
+        a: Par<A>,
+        b: Par<B>,
+        f: (A, B) -> C
+    ): Par<C> // <2>
     //end::init1b[]
-            = TODO()
+        = TODO()
 
     //tag::init1c[]
     fun <A> fork(a: () -> Par<A>): Par<A> // <3>
     //end::init1c[]
-            = TODO()
+        = TODO()
 
     //tag::init1d[]
     fun <A> lazyUnit(a: () -> A): Par<A> // <4>
     //end::init1d[]
-            = TODO()
+        = TODO()
 
     //tag::init1e[]
     fun <A> run(a: Par<A>): A // <5>
     //end::init1e[]
-            = TODO()
+        = TODO()
     //end::init1[]
 }
 
@@ -55,7 +59,6 @@ val runexec = {
     fun <A> run(es: ExecutorService, a: Par<A>): A = TODO()
     //end::runexec[]
 }
-
 
 // This typealias must live at the top level
 //tag::paralias[]

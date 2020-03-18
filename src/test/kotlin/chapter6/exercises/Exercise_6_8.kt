@@ -19,7 +19,10 @@ class Exercise_6_8 : WordSpec({
     "flatMap" should {
         "!pass along an RNG" {
 
-            val result = flatMap(unit(1), { i -> unit(i.toString()) })(rng1)
+            val result =
+                flatMap(
+                    unit(1),
+                    { i -> unit(i.toString()) })(rng1)
 
             result.first shouldBe "1"
             result.second shouldBe rng1
@@ -29,10 +32,10 @@ class Exercise_6_8 : WordSpec({
     "nonNegativeIntLessThan" should {
         "!return a non negative int less than n" {
 
-            val result = nonNegativeIntLessThan(10)(rng1)
+            val result =
+                nonNegativeIntLessThan(10)(rng1)
 
             result.first shouldBe 1
         }
-
     }
 })

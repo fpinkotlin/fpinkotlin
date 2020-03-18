@@ -20,8 +20,8 @@ fun run(
     when (val result = p.check(maxSize, testCases, rng)) {
         is Falsified -> // <4>
             println(
-                "Falsified after ${result.successes} passed tests: " +
-                        result.failure
+                "Falsified after ${result.successes}" +
+                    "passed tests: ${result.failure}"
             )
         is Passed -> // <5>
             println("OK, passed $testCases tests.")
@@ -33,7 +33,8 @@ fun main() {
     val smallInt = Gen.choose(-10, 10)
 
     val maxProp = forAll(SGen.listOf(smallInt)) { ns ->
-        val mx = ns.max() ?: throw IllegalStateException("max on empty list")
+        val mx = ns.max()
+            ?: throw IllegalStateException("max on empty list")
         !ns.exists { it > mx } // <1>
     }
     //end::init1[]

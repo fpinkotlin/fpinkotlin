@@ -19,11 +19,10 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
         ): State<S, C> = TODO()
 
         fun <S, A> sequence(fs: List<State<S, A>>):
-                State<S, List<A>> = TODO()
+            State<S, List<A>> = TODO()
     }
 
     fun <B> map(f: (A) -> B): State<S, B> = TODO()
-
 
     fun <B> flatMap(f: (A) -> State<S, B>): State<S, B> = TODO()
 }
@@ -40,7 +39,9 @@ class Exercise_6_10 : WordSpec({
     }
     "map" should {
         "!transform a state" {
-            State.unit<RNG, Int>(1).map { it.toString() }.run(rng1) shouldBe Pair("1", rng1)
+            State.unit<RNG, Int>(1)
+                .map { it.toString() }
+                .run(rng1) shouldBe Pair("1", rng1)
         }
     }
     "flatMap" should {
@@ -55,7 +56,10 @@ class Exercise_6_10 : WordSpec({
         "!combine the results of two actions" {
 
             val combined: State<RNG, String> =
-                State.map2(State.unit(1.0), State.unit(1)) { d: Double, i: Int ->
+                State.map2(
+                    State.unit(1.0),
+                    State.unit(1)
+                ) { d: Double, i: Int ->
                     ">>> $d double; $i int"
                 }
 

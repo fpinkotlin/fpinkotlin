@@ -2,12 +2,18 @@ package chapter7.exercises.ex3
 
 import chapter7.sec3.Par
 import chapter7.sec3.Pars
+import chapter7.solutions.sol3.map2
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.concurrent.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Future
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> = TODO()
 
@@ -28,15 +34,12 @@ data class TimedMap2Future<A, B, C>(
     override fun isCancelled(): Boolean = TODO()
 }
 
-class Exercise_7_3 : WordSpec ({
+class Exercise_7_3 : WordSpec({
 
-    val es: ExecutorService = ThreadPoolExecutor(
-        1,
-        1,
-        5,
-        TimeUnit.SECONDS,
-        LinkedBlockingQueue()
-    )
+    val es: ExecutorService =
+        ThreadPoolExecutor(
+            1, 1, 5, TimeUnit.SECONDS, LinkedBlockingQueue()
+        )
 
     "map2" should {
         "allow two futures to run within a given timeout" {
@@ -50,7 +53,7 @@ class Exercise_7_3 : WordSpec ({
                 Pars.unit("1")
             }
             val pc: Par<Long> =
-                chapter7.solutions.sol3.map2(pa, pb) { a: Int, b: String ->
+                map2(pa, pb) { a: Int, b: String ->
                     a + b.toLong()
                 }
 
@@ -70,7 +73,7 @@ class Exercise_7_3 : WordSpec ({
                 Pars.unit("1")
             }
             val pc: Par<Long> =
-                chapter7.solutions.sol3.map2(pa, pb) { a: Int, b: String ->
+                map2(pa, pb) { a: Int, b: String ->
                     a + b.toLong()
                 }
 
@@ -92,7 +95,7 @@ class Exercise_7_3 : WordSpec ({
                 Pars.unit("1")
             }
             val pc: Par<Long> =
-                chapter7.solutions.sol3.map2(pa, pb) { a: Int, b: String ->
+                map2(pa, pb) { a: Int, b: String ->
                     a + b.toLong()
                 }
 

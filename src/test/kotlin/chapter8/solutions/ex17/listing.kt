@@ -20,6 +20,6 @@ val listing = {
     }
     //end::init[]
 
-    val f = { i: Int -> i < 3}
+    val f = { i: Int -> i < 3 }
     listOf(1, 2, 3).takeWhile(f).forAll(f)
 }

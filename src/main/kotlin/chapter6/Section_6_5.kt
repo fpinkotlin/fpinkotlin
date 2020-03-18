@@ -5,9 +5,8 @@ object Section_6_5 {
     fun <S, A, B> map(
         sa: (S) -> Pair<A, S>,
         f: (A) -> (B)
-    ): (S) -> Pair<B, S>
+    ): (S) -> Pair<B, S> = TODO()
     //end::init1[]
-            = TODO()
 
     //tag::init3[]
     data class State<S, out A>(val run: (S) -> Pair<A, S>)

@@ -18,8 +18,8 @@ fun main() {
     //tag::init2[]
     val maxProp =
         Prop.forAll(nonEmptyListOf(smallInt)) { ns: List<Int> ->
-            val mx =
-                ns.max() ?: throw IllegalStateException("max on empty list")
+            val mx = ns.max()
+                ?: throw IllegalStateException("max on empty list")
             !ns.exists { it > mx }
         }
     //end::init2[]

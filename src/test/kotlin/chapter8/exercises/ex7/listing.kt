@@ -11,10 +11,7 @@ data class Gen<A>(val sample: State<RNG, A>) {
             Gen(State { rng -> nextBoolean(rng) })
 
         //tag::init[]
-        fun <A> union(
-            ga: Gen<A>,
-            gb: Gen<A>
-        ): Gen<A> = TODO()
+        fun <A> union(ga: Gen<A>, gb: Gen<A>): Gen<A> = TODO()
         //end::init[]
     }
 

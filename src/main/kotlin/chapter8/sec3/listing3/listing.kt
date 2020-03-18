@@ -2,7 +2,14 @@ package chapter8.sec3.listing3
 
 import arrow.core.getOrElse
 import arrow.core.toOption
-import chapter8.*
+import chapter8.Falsified
+import chapter8.Passed
+import chapter8.RNG
+import chapter8.Result
+import chapter8.State
+import chapter8.TestCases
+import chapter8.double
+import chapter8.nonNegativeInt
 import kotlin.math.absoluteValue
 import kotlin.math.min
 
@@ -23,7 +30,9 @@ data class Gen<A>(val sample: State<RNG, A>) {
         ): Gen<A> {
             val (ga, p1) = pga
             val (gb, p2) = pgb
-            val prob = p1.absoluteValue / (p1.absoluteValue + p2.absoluteValue)
+            val prob =
+                p1.absoluteValue /
+                    (p1.absoluteValue + p2.absoluteValue)
             return Gen(State { rng: RNG -> double(rng) })
                 .flatMap { d ->
                     if (d < prob) ga else gb
@@ -62,9 +71,10 @@ data class Prop(val check: (MaxSize, TestCases, RNG) -> Result) {
 
                 val casePerSize = (n + (max - 1)) / max // <2>
 
-                val props = generateSequence(0) { it + 1 } // <3>
-                    .take(min(n, max) + 1)
-                    .map { i -> forAll(g(i), f) } // <4>
+                val props =
+                    generateSequence(0) { it + 1 } // <3>
+                        .take(min(n, max) + 1)
+                        .map { i -> forAll(g(i), f) } // <4>
 
                 val prop = props.map { p ->
                     Prop { max, _, rng ->
@@ -74,22 +84,29 @@ data class Prop(val check: (MaxSize, TestCases, RNG) -> Result) {
 
                 prop.check(max, n, rng) // <6>
             }
+
         //tag::ignore[]
         fun <A> forAll(ga: Gen<A>, f: (A) -> Boolean): Prop =
             Prop { _, n, rng ->
                 randomSequence(ga, rng).mapIndexed { i, a ->
-                    try {
-                        if (f(a)) Passed else Falsified(a.toString(), i)
-                    } catch (e: Exception) {
-                        Falsified(buildMessage(a, e), i)
-                    }
-                }.take(n)
+                        try {
+                            if (f(a)) Passed else Falsified(
+                                a.toString(),
+                                i
+                            )
+                        } catch (e: Exception) {
+                            Falsified(buildMessage(a, e), i)
+                        }
+                    }.take(n)
                     .find { it.isFalsified() }
                     .toOption()
                     .getOrElse { Passed }
             }
 
-        private fun <A> randomSequence(ga: Gen<A>, rng: RNG): Sequence<A> =
+        private fun <A> randomSequence(
+            ga: Gen<A>,
+            rng: RNG
+        ): Sequence<A> =
             sequence {
                 val (a: A, rng2: RNG) = ga.sample.run(rng)
                 yield(a)

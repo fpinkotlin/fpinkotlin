@@ -64,5 +64,4 @@ object Section_6_6 {
     fun <S> set(s: S): State<S, Unit> =
         State { Tuple2(s, Unit) }
     //end::init5[]
-
 }

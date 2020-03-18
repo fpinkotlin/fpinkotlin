@@ -18,7 +18,8 @@ class Solution_5_10 : WordSpec({
 
     "fibs" should {
         "return a Stream of fibonacci sequence numbers" {
-            fibs().take(10).toList() shouldBe List.of(0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
+            fibs().take(10).toList() shouldBe
+                List.of(0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
         }
     }
 })
