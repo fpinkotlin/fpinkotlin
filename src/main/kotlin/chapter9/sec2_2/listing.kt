@@ -101,6 +101,5 @@ abstract class Example : Parsers<ParseError> {
         char('a').many().slice().map { it.length } product
             char('a').many1().slice().map { it.length }
         //end::init13[]
-
     }
 }

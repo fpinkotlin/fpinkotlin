@@ -25,4 +25,3 @@ abstract class Listing : Parsers<ParseError> {
         //end::init2[]
     }
 }
-
