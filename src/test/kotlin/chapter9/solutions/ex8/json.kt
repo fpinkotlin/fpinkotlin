@@ -31,6 +31,30 @@ abstract class Listing : Parsers<ParseError> {
     //   "Related companies": [ "HPQ", "IBM", "YHOO", "DELL", "GOOG" ]
     // }
 
+    fun thru(s: String): Parser<String> =
+        ".*?${Pattern.quote(s)}".rp
+
+    val quoted: Parser<String> =
+        "\"".sp skipL thru("\"").map { it.dropLast(1) }
+
+    val doubleString: Parser<String> =
+        "[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?".rp
+
+    val double: Parser<Double> = doubleString.map { it.toDouble() }
+    
+    val lit: Parser<JSON> =
+        JNull.parser or
+            double.map { JNumber(it) } or
+            JBoolean(true).parser or
+            JBoolean(false).parser or
+            quoted.map { JString(it) }
+
+
+    val value: Parser<JSON> = lit or obj() or array()
+
+    val keyval: Parser<Pair<String, JSON>> =
+        quoted product (":".sp skipL value)
+
     val whitespace: Parser<String> = """\s*""".rp
 
     val eof: Parser<String> = """\z""".rp
@@ -42,38 +66,7 @@ abstract class Listing : Parsers<ParseError> {
         stop: Parser<String>,
         p: Parser<A>
     ) = start skipL (p skipR stop)
-
-    fun thru(s: String): Parser<String> =
-        ".*?${Pattern.quote(s)}".rp
-
-    val quoted: Parser<String> =
-        "\"".sp skipL thru("\"").map { it.dropLast(1) }
-
-    val doubleString: Parser<String> =
-        "[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?".rp
-
-    val double: Parser<Double> = doubleString.map { it.toDouble() }
-
-    private fun JSON.parser(): Parser<JSON> = Parser(this)
-
-    val lit: Parser<JSON> =
-        JNull.parser() or
-            double.map { JNumber(it) } or
-            JBoolean(true).parser() or
-            JBoolean(false).parser() or
-            quoted.map { JString(it) }
-
-    fun <A> sep1(p: Parser<A>, p2: Parser<String>): Parser<List<A>> =
-        map2(p, (p2 skipL p).many()) { a, b -> a cons b }
-
-    infix fun <A> Parser<A>.sep(p: Parser<String>): Parser<List<A>> =
-        sep1(this, p) or succeed(emptyList())
-
-    val value: Parser<JSON> = lit or obj() or array()
-
-    val keyval: Parser<Pair<String, JSON>> =
-        quoted product (":".sp skipL value)
-
+    
     fun array(): Parser<JArray> =
         surround("[".sp, "]".sp,
             (value sep ",".sp).map { vs -> JArray(vs) })

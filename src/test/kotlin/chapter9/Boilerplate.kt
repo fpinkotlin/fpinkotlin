@@ -1,6 +1,7 @@
 package chapter9
 
 import arrow.core.Either
+import chapter9.solutions.ex8.JSON
 
 object ParseError
 
@@ -51,6 +52,15 @@ interface Parsers<PE> {
 
     infix fun <B> Parser<String>.skipL(p: Parser<B>): Parser<B> =
         map2(this.slice(), p) { _, b -> b }
+
+    private fun <A> sep1(p: Parser<A>, p2: Parser<String>): Parser<List<A>> =
+        map2(p, (p2 skipL p).many()) { a, b -> a cons b }
+
+    infix fun <A> Parser<A>.sep(p: Parser<String>): Parser<List<A>> =
+        sep1(this, p) or succeed(emptyList())
+
+    val JSON.parser: Parser<JSON>
+        get() = Parser(this)
 
     //sp for string parser
     val String.sp: Parser<String>
