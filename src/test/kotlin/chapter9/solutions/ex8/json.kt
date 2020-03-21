@@ -53,7 +53,7 @@ abstract class Listing : Parsers<ParseError> {
         regex(".*?" + Pattern.quote(s))
 
     val quoted: Parser<String> =
-        string("\"") skipL thru("\"").map { it.dropLast(1) })
+        string("\"") skipL thru("\"").map { it.dropLast(1) }
 
     val doubleString: Parser<String> =
         regex("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?")
