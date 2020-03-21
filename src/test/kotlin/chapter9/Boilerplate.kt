@@ -52,4 +52,11 @@ interface Parsers<PE> {
     infix fun <B> Parser<String>.skipL(p: Parser<B>): Parser<B> =
         map2(this.slice(), p) { _, b -> b }
 
+    //sp for string parser
+    val String.sp: Parser<String>
+        get() = Parser(this)
+
+    //rp for regex parser
+    val String.rp: Parser<String>
+        get() = regex(this)
 }
