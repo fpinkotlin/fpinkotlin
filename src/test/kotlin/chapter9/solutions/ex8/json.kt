@@ -41,14 +41,13 @@ abstract class Listing : Parsers<ParseError> {
         "[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?".rp
 
     val double: Parser<Double> = doubleString.map { it.toDouble() }
-    
+
     val lit: Parser<JSON> =
         JNull.parser or
             double.map { JNumber(it) } or
             JBoolean(true).parser or
             JBoolean(false).parser or
             quoted.map { JString(it) }
-
 
     val value: Parser<JSON> = lit or obj() or array()
 
@@ -66,7 +65,7 @@ abstract class Listing : Parsers<ParseError> {
         stop: Parser<String>,
         p: Parser<A>
     ) = start skipL (p skipR stop)
-    
+
     fun array(): Parser<JArray> =
         surround("[".sp, "]".sp,
             (value sep ",".sp).map { vs -> JArray(vs) })
