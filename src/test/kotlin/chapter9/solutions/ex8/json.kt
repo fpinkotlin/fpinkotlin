@@ -49,7 +49,8 @@ abstract class Listing : Parsers<ParseError> {
         p: Parser<A>
     ) = skipL(start, skipR(p, stop))
 
-    fun thru(s: String): Parser<String> = regex(".*?" + Pattern.quote(s))
+    fun thru(s: String): Parser<String> =
+        regex(".*?" + Pattern.quote(s))
 
     val quoted: Parser<String> =
         skipL(string("\""), thru("\"").map { it.dropLast(1) })
@@ -62,27 +63,19 @@ abstract class Listing : Parsers<ParseError> {
     private fun JSON.parser(): Parser<JSON> = Parser(this)
 
     val lit: Parser<JSON> =
-        or(
-            or(
-                or(
-                    or(
-                        JNull.parser(),
-                        double.map { JNumber(it) }
-                    ),
-                    JBoolean(true).parser()
-                ),
-                JBoolean(false).parser()
-            ),
+        JNull.parser() or
+            double.map { JNumber(it) } or
+            JBoolean(true).parser() or
+            JBoolean(false).parser() or
             quoted.map { JString(it) }
-        )
 
     fun <A> sep1(p: Parser<A>, p2: Parser<String>): Parser<List<A>> =
         map2(p, skipL(p2, p).many()) { a, b -> a cons b }
 
     fun <A> sep(p1: Parser<A>, p2: Parser<String>): Parser<List<A>> =
-        or(sep1(p1, p2), succeed(emptyList()))
+        sep1(p1, p2) or succeed(emptyList())
 
-    val value: Parser<JSON> = or(or(lit, obj()), array())
+    val value: Parser<JSON> = lit or obj() or array()
 
     val keyval: Parser<Pair<String, JSON>> =
         quoted product skipL(string(":"), value)
@@ -94,6 +87,5 @@ abstract class Listing : Parsers<ParseError> {
         sep(keyval, string(",")).map { kvs -> JObject(kvs.toMap()) })
 
     fun <PE> jsonParser(parsers: Parsers<PE>): Parser<JSON> =
-        root(skipL(whitespace, or(obj(), array())))
-
+        root(skipL(whitespace, obj() or array()))
 }

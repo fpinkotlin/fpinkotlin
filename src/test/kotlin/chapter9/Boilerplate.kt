@@ -20,12 +20,10 @@ interface Parsers<PE> {
 
     fun <A, B> Parser<A>.flatMap(f: (A) -> Parser<B>): Parser<B>
 
-    fun <A> or(a1: Parser<out A>, a2: Parser<out A>): Parser<A>
-
-
+    infix fun <A> Parser<out A>.or(p: Parser<out A>): Parser<A>
 
     infix fun Char.or(other: Char): Parser<Char> =
-        or(char(this), char(other))
+        char(this) or char(other)
 
     fun <A> Parser<A>.many(): Parser<List<A>>
 
