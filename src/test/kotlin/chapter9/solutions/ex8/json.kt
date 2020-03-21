@@ -80,11 +80,13 @@ abstract class Listing : Parsers<ParseError> {
     val keyval: Parser<Pair<String, JSON>> =
         quoted product (string(":") skipL value)
 
-    fun array(): Parser<JArray> = surround(string("["), string("]"),
-        (value sep string(",")).map { vs -> JArray(vs) })
+    fun array(): Parser<JArray> =
+        surround(string("["), string("]"),
+            (value sep string(",")).map { vs -> JArray(vs) })
 
-    fun obj(): Parser<JObject> = surround(string("{"), string("}"),
-        (keyval sep string(",")).map { kvs -> JObject(kvs.toMap()) })
+    fun obj(): Parser<JObject> =
+        surround(string("{"), string("}"),
+            (keyval sep string(",")).map { kvs -> JObject(kvs.toMap()) })
 
     fun <PE> jsonParser(parsers: Parsers<PE>): Parser<JSON> =
         root(whitespace skipL (obj() or array()))
