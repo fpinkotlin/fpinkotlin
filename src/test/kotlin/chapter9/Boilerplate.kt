@@ -22,8 +22,7 @@ interface Parsers<PE> {
 
     infix fun <A> Parser<out A>.or(p: Parser<out A>): Parser<A>
 
-    infix fun Char.or(other: Char): Parser<Char> =
-        char(this) or char(other)
+    //other combinators
 
     fun <A> Parser<A>.many(): Parser<List<A>>
 
@@ -46,4 +45,11 @@ interface Parsers<PE> {
     ): Parser<C>
 
     infix fun <T> T.cons(la: List<T>): List<T> = listOf(this) + la
+
+    infix fun <A> Parser<A>.skipR(p: Parser<String>): Parser<A> =
+        map2(this, p.slice()) { a, _ -> a }
+
+    infix fun <B> Parser<String>.skipL(p: Parser<B>): Parser<B> =
+        map2(this.slice(), p) { _, b -> b }
+
 }

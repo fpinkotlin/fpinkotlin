@@ -31,12 +31,6 @@ abstract class Listing : Parsers<ParseError> {
     //   "Related companies": [ "HPQ", "IBM", "YHOO", "DELL", "GOOG" ]
     // }
 
-    infix fun <A> Parser<A>.skipR(p: Parser<String>): Parser<A> =
-        map2(this, p.slice()) { a, _ -> a }
-
-    infix fun <B> Parser<String>.skipL(p: Parser<B>): Parser<B> =
-        map2(this.slice(), p) { _, b -> b }
-
     val whitespace: Parser<String> = regex("""\s*""")
 
     val eof: Parser<String> = regex("""\z""")
