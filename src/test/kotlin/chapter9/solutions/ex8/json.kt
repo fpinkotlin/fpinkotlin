@@ -31,29 +31,29 @@ abstract class Listing : Parsers<ParseError> {
     //   "Related companies": [ "HPQ", "IBM", "YHOO", "DELL", "GOOG" ]
     // }
 
-    fun <A> skipR(p1: Parser<A>, p2: Parser<String>): Parser<A> =
-        map2(p1, p2.slice()) { a, _ -> a }
+    infix fun <A> Parser<A>.skipR(p: Parser<String>): Parser<A> =
+        map2(this, p.slice()) { a, _ -> a }
 
-    fun <B> skipL(p1: Parser<String>, p2: Parser<B>): Parser<B> =
-        map2(p1.slice(), p2) { _, b -> b }
+    infix fun <B> Parser<String>.skipL(p: Parser<B>): Parser<B> =
+        map2(this.slice(), p) { _, b -> b }
 
     val whitespace: Parser<String> = regex("""\s*""")
 
     val eof: Parser<String> = regex("""\z""")
 
-    fun <A> root(p: Parser<A>): Parser<A> = skipR(p, eof)
+    fun <A> root(p: Parser<A>): Parser<A> = p skipR eof
 
     fun <A> surround(
         start: Parser<String>,
         stop: Parser<String>,
         p: Parser<A>
-    ) = skipL(start, skipR(p, stop))
+    ) = start skipL (p skipR stop)
 
     fun thru(s: String): Parser<String> =
         regex(".*?" + Pattern.quote(s))
 
     val quoted: Parser<String> =
-        skipL(string("\""), thru("\"").map { it.dropLast(1) })
+        string("\"") skipL thru("\"").map { it.dropLast(1) })
 
     val doubleString: Parser<String> =
         regex("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?")
@@ -70,22 +70,22 @@ abstract class Listing : Parsers<ParseError> {
             quoted.map { JString(it) }
 
     fun <A> sep1(p: Parser<A>, p2: Parser<String>): Parser<List<A>> =
-        map2(p, skipL(p2, p).many()) { a, b -> a cons b }
+        map2(p, (p2 skipL p).many()) { a, b -> a cons b }
 
-    fun <A> sep(p1: Parser<A>, p2: Parser<String>): Parser<List<A>> =
-        sep1(p1, p2) or succeed(emptyList())
+    infix fun <A> Parser<A>.sep(p: Parser<String>): Parser<List<A>> =
+        sep1(this, p) or succeed(emptyList())
 
     val value: Parser<JSON> = lit or obj() or array()
 
     val keyval: Parser<Pair<String, JSON>> =
-        quoted product skipL(string(":"), value)
+        quoted product (string(":") skipL value)
 
     fun array(): Parser<JArray> = surround(string("["), string("]"),
-        sep(value, string(",")).map { vs -> JArray(vs) })
+        (value sep string(",")).map { vs -> JArray(vs) })
 
     fun obj(): Parser<JObject> = surround(string("{"), string("}"),
-        sep(keyval, string(",")).map { kvs -> JObject(kvs.toMap()) })
+        (keyval sep string(",")).map { kvs -> JObject(kvs.toMap()) })
 
     fun <PE> jsonParser(parsers: Parsers<PE>): Parser<JSON> =
-        root(skipL(whitespace, obj() or array()))
+        root(whitespace skipL (obj() or array()))
 }
