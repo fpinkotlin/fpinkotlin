@@ -29,8 +29,8 @@ class Solution_7_2 : WordSpec({
         "create a computation that immediately results in a value" {
             Par.unit { 1 }
         }
-        "combine the results of two parallel computations with" +
-            "a binary function" {
+        """combine the results of two parallel computations with
+            a binary function""" {
                 Par.map2(
                     Par.unit(1),
                     Par.unit(2)
@@ -42,8 +42,8 @@ class Solution_7_2 : WordSpec({
         "wrap expression a for concurrent evaluation by run" {
             Par.lazyUnit { 1 }
         }
-        "fully evaluate a given Par spawning computations" +
-            "and extracting value" {
+        """fully evaluate a given Par spawning computations
+            and extracting value""" {
                 Par.run(Par.unit { 1 })
             }
     }

@@ -10,9 +10,9 @@ class Solution_2_3 : WordSpec({
     // end::init[]
 
     "curry" should {
-        "break down a function that takes multiple arguments" +
-            "into a series of functions that each take only" +
-            "one argument" {
+        """break down a function that takes multiple arguments
+            into a series of functions that each take only
+            one argument""" {
 
                 val f: (Int) -> (Int) -> String =
                     curry { a: Int, b: Int -> "$a:$b" }

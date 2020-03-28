@@ -17,8 +17,8 @@ fun <A, S> unfold(z: S, f: (S) -> Option<Pair<A, S>>): Stream<A> = TODO()
  */
 class Exercise_5_11 : WordSpec({
     "unfold" should {
-        "!return a stream based on an initial state and a function" +
-            "applied to each subsequent element" {
+        """!return a stream based on an initial state and a function
+            applied to each subsequent element""" {
                 unfold(0, { s: Int ->
                     Some(Pair(s, s + 1))
                 }).take(5).toList() shouldBe

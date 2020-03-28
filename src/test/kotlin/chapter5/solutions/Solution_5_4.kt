@@ -17,8 +17,8 @@ class Solution_5_4 : WordSpec({
             val s = Stream.of(1, 2, 3, 4, 5)
             s.forAll { it < 6 } shouldBe true
         }
-        "stop evaluating if one element does not satisfy" +
-            "the predicate" {
+        """stop evaluating if one element does not satisfy
+            the predicate""" {
                 val s = Stream.of(1, 2, 3, 4, 5)
                 s.forAll { it != 3 } shouldBe false
             }

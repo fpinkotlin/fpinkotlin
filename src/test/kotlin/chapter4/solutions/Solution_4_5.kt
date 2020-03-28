@@ -36,8 +36,8 @@ class Solution_4_5 : WordSpec({
         }
 
     "traverse" should {
-        "return some option of a transformed list if all" +
-            "transformations succeed" {
+        """return some option of a transformed list if all
+            transformations succeed""" {
                 val xa = List.of(1, 2, 3, 4, 5)
                 traverse(xa) { a: Int ->
                     catches { a.toString() }
