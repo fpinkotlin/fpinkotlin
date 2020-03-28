@@ -40,8 +40,8 @@ class Exercise_6_7 : WordSpec({
                 List.of(1, 2, 3, 4)
         }
 
-        "!combine the results of many actions using" +
-            "foldRight and map2" {
+        """!combine the results of many actions using
+            foldRight and map2""" {
 
                 val combined2: Rand<List<Int>> =
                     sequence2(

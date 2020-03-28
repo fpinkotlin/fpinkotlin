@@ -41,8 +41,8 @@ fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> {
 class Solution_6_7 : WordSpec({
     "sequence" should {
 
-        "combine the results of many actions using" +
-            "foldRight and map2" {
+        """combine the results of many actions using
+            foldRight and map2""" {
 
                 val combined: Rand<List<Int>> =
                     sequence2(

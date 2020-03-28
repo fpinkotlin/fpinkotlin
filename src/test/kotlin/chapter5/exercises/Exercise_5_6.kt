@@ -17,8 +17,8 @@ class Exercise_5_6 : WordSpec({
     //end::init[]
 
     "Stream.headOption" should {
-        "!return some first element from the stream if it" +
-            "is not empty" {
+        """!return some first element from the stream if it
+            is not empty""" {
                 val s = Stream.of(1, 2, 3, 4)
                 s.headOption() shouldBe Some(1)
             }

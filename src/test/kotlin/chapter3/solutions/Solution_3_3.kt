@@ -28,8 +28,8 @@ class Solution_3_3 : WordSpec({
             drop(List.of(1, 2, 3, 4, 5), 5) shouldBe Nil
         }
 
-        "throw an illegal state exception when dropped elements" +
-            "exceed capacity" {
+        """throw an illegal state exception when dropped elements
+            exceed capacity""" {
                 shouldThrow<IllegalStateException> {
                     drop(List.of(1, 2, 3, 4, 5), 6)
                 }
