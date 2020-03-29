@@ -3,10 +3,7 @@ package chapter5.exercises
 import chapter3.List
 import chapter4.Option
 import chapter4.Some
-import chapter4.solutions.getOrElse
-import chapter4.solutions.map
 import chapter5.Stream
-import chapter5.solutions.take
 import chapter5.solutions.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec

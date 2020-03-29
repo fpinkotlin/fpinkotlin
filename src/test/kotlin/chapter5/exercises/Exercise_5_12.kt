@@ -2,7 +2,6 @@ package chapter5.exercises
 
 import chapter3.List
 import chapter5.Stream
-import chapter5.solutions.take
 import chapter5.solutions.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
