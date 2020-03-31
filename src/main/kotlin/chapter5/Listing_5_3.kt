@@ -45,33 +45,33 @@ object Listing_5_3 {
     val trace = {
         //tag::trace[]
         Stream.of(1, 2, 3, 4).map { it + 10 }
-            .filter { it % 2 == 0 }.map( it * 3 ).toList()
+            .filter { it % 2 == 0 }.map { it * 3 }.toList()
 
         cons({ 11 }, { Stream.of(2, 3, 4) })
-            .filter { it % 2 == 0 }.map( it * 3 ).toList() // <1>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList() // <1>
 
         Stream.of(2, 3, 4).map { it + 10 }
-            .filter { it % 2 == 0 }.map( it * 3 ).toList() // <2>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList() // <2>
 
         cons({ 12 }, { Stream.of(3, 4) })
-            .filter { it % 2 == 0 }.map( it * 3 ).toList() // <3>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList() // <3>
 
         ConsL(36, Stream.of(3, 4).map { it + 10 }
-            .filter { it % 2 == 0 }.map( it * 3 ).toList()) // <4>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList()) // <4>
 
         ConsL(
             36, cons({ 13 }, { Stream.of(4) })
-                .filter { it % 2 == 0 }.map( it * 3 ).toList()
+                .filter { it % 2 == 0 }.map { it * 3 }.toList()
         )
 
         ConsL(36, Stream.of(4).map { it + 10 }
-            .filter { it % 2 == 0 }.map( it * 3 ).toList()) // <5>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList()) // <5>
 
         ConsL(36, cons({ 14 })
-            .filter { it % 2 == 0 }.map( it * 3 ).toList()) // <5>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList()) // <5>
 
         ConsL(36, ConsL(42, Stream.empty<Int>().map { it + 10 }
-            .filter { it % 2 == 0 }.map( it * 3 ).toList())) // <6>
+            .filter { it % 2 == 0 }.map { it * 3 }.toList())) // <6>
 
         ConsL(36, ConsL(42, NilL)) // <7>
         //end::trace[]
