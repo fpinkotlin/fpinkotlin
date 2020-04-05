@@ -26,16 +26,12 @@ abstract class Parsers<PE> {
 
     internal abstract fun <A> slice(p: Parser<A>): Parser<String>
 
-    internal abstract fun <A> tag(msg: String, pa: Parser<A>): Parser<A>
-
-    internal abstract fun <A> scope(msg: String, pa: Parser<A>): Parser<A>
+    internal abstract fun <A> succeed(a: A): Parser<A>
 
     internal abstract fun <A, B> flatMap(
         p1: Parser<A>,
         f: (A) -> Parser<B>
     ): Parser<B>
-
-    internal abstract fun <A> attempt(p: Parser<A>): Parser<A>
 
     internal abstract fun <A> or(
         p1: Parser<out A>,
@@ -45,8 +41,6 @@ abstract class Parsers<PE> {
     // other combinators
 
     internal abstract fun char(c: Char): Parser<Char>
-
-    internal abstract fun <A> succeed(a: A): Parser<A>
 
     internal abstract fun <A> many(p: Parser<A>): Parser<List<A>>
 
