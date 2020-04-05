@@ -11,6 +11,6 @@ abstract class Listing : Parsers<ParseError> {
         = TODO()
 
     //tag::init2[]
-    fun regex(r: Regex): Parser<String> = TODO()
+    fun regex(r: String): Parser<String> = TODO()
     //end::init2[]
 }

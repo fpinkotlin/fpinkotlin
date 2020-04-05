@@ -7,6 +7,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 class Exercise_6_9 : WordSpec({
+
     //tag::init1[]
     fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> = TODO()
     //end::init1[]

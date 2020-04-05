@@ -6,14 +6,14 @@ import chapter6.rng1
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::init[]
-fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
-//end::init[]
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_4 : WordSpec({
+
+    //tag::init[]
+    fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
+    //end::init[]
 
     "ints" should {
         "!generate a list of ints of a specified length" {

@@ -20,16 +20,17 @@ data class Machine(
 )
 //end::init1[]
 
-//tag::init2[]
-fun simulateMachine(
-    inputs: List<Input>
-): State<Machine, Tuple2<Int, Int>> = TODO()
-//end::init2[]
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Solution_6_11 : WordSpec({
+
+    //tag::init2[]
+    fun simulateMachine(
+        inputs: List<Input>
+    ): State<Machine, Tuple2<Int, Int>> = TODO()
+    //end::init2[]
+
     "simulateMachine" should {
         "!allow the purchase of a single candy" {
             val actions = persistentListOf(Coin)

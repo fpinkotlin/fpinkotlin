@@ -2,9 +2,9 @@ package chapter9.sec2_1
 
 import arrow.core.Either
 
-class Parser<A>(a: A)
-
 interface Parsers<PE> {
+
+    interface Parser<A>
 
     fun char(c: Char): Parser<Char>
 

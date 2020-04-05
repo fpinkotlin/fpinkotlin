@@ -6,16 +6,17 @@ import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::init[]
-fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> = TODO()
-//end::init[]
-
-fun nonNegativeIntLessThan(n: Int): Rand<Int> = TODO()
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_8 : WordSpec({
+
+    //tag::init[]
+    fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> = TODO()
+    //end::init[]
+
+    fun nonNegativeIntLessThan(n: Int): Rand<Int> = TODO()
+
     "flatMap" should {
         "!pass along an RNG" {
 

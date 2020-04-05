@@ -3,9 +3,9 @@ package chapter9.sec1_3
 import arrow.core.Either
 import arrow.core.Right
 
-class Parser<A>
-
 interface Parsers<PE> {
+
+    interface Parser<A>
 
     fun <A> run(p: Parser<A>, input: String): Either<PE, A>
 
@@ -21,9 +21,10 @@ object ParseError
 abstract class Example : Parsers<ParseError> {
     init {
         //tag::init2[]
+        run(listOfN(3, "ab" or "cad"), "ababab") == Right("ababab")
+        run(listOfN(3, "ab" or "cad"), "cadcadcad") == Right("cadcadcad")
         run(listOfN(3, "ab" or "cad"), "ababcad") == Right("ababcad")
         run(listOfN(3, "ab" or "cad"), "cadabab") == Right("cadabab")
-        run(listOfN(3, "ab" or "cad"), "ababab") == Right("ababab")
         //end::init2[]
     }
 }

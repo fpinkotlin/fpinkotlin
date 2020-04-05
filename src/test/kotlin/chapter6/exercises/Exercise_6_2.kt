@@ -5,14 +5,14 @@ import chapter6.unusedRng
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::init[]
-fun double(rng: RNG): Pair<Double, RNG> = TODO()
-//end::init[]
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_2 : WordSpec({
+
+    //tag::init[]
+    fun double(rng: RNG): Pair<Double, RNG> = TODO()
+    //end::init[]
 
     "double" should {
 

@@ -3,10 +3,10 @@ package chapter9.sec1_2
 import arrow.core.Either
 import arrow.core.Right
 
-class Parser<A>(a: A)
-
 //tag::init1[]
 interface Parsers<PE> {
+
+    interface Parser<A>
 
     fun string(s: String): Parser<String> // <1>
 

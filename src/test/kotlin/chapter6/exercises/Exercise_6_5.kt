@@ -5,14 +5,14 @@ import chapter6.Rand
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::init[]
-val doubleR: Rand<Double> = TODO()
-//end::init[]
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_5 : WordSpec({
+
+    //tag::init[]
+    val doubleR: Rand<Double> = TODO()
+    //end::init[]
 
     "doubleR" should {
 

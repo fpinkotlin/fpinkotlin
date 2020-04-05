@@ -6,7 +6,7 @@ import chapter8.sec3.listing3.Gen
 import chapter8.sec3.listing3.Prop
 import chapter8.sec3.listing3.Prop.Companion.forAll
 
-class Parser<A>(a: A)
+interface Parser<A>
 
 interface Parsers<PE> {
 
@@ -99,7 +99,7 @@ abstract class Example : Parsers<ParseError> {
 
         //tag::init13[]
         char('a').many().slice().map { it.length } product
-            char('a').many1().slice().map { it.length }
+            char('b').many1().slice().map { it.length }
         //end::init13[]
     }
 }

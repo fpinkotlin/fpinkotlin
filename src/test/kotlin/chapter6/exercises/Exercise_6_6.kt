@@ -6,17 +6,20 @@ import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::init[]
-fun <A, B, C> map2(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> =
-    TODO()
-//end::init[]
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_6 : WordSpec({
-    "map2" should {
 
+    //tag::init[]
+    fun <A, B, C> map2(
+        ra: Rand<A>,
+        rb: Rand<B>,
+        f: (A, B) -> C
+    ): Rand<C> = TODO()
+    //end::init[]
+
+    "map2" should {
         "!combine the results of two actions" {
 
             val combined: Rand<String> =

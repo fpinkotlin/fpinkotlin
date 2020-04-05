@@ -1,12 +1,16 @@
 package chapter9.sec4_1
 
-import chapter9.sec2_1.Parser
-import chapter9.sec2_1.Parsers
+import chapter9.sec6_4.Parser
 
+object ParseError
+
+interface Parsers<PE>
+
+abstract class ParsersImpl<PE> : Parsers<PE>
 //tag::init1[]
-fun <PE> jsonParser( // <1>
-    parsers: Parsers<PE> // <2>
-): Parser<JSON> = TODO() // <3>
+object JSONParser : ParsersImpl<ParseError>() { // <1>
+    val jsonParser: Parser<JSON> = TODO() // <2>
+}
 //end::init1[]
 
 //tag::init2[]

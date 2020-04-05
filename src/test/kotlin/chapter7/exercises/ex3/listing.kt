@@ -2,7 +2,6 @@ package chapter7.exercises.ex3
 
 import chapter7.sec3.Par
 import chapter7.sec3.Pars
-import chapter7.solutions.sol3.map2
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
@@ -14,8 +13,6 @@ import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
-
-fun <A, B, C> map2(a: Par<A>, b: Par<B>, f: (A, B) -> C): Par<C> = TODO()
 
 data class TimedMap2Future<A, B, C>(
     val pa: Future<A>,
@@ -35,6 +32,12 @@ data class TimedMap2Future<A, B, C>(
 }
 
 class Exercise_7_3 : WordSpec({
+
+    fun <A, B, C> map2(
+        a: Par<A>,
+        b: Par<B>,
+        f: (A, B) -> C
+    ): Par<C> = TODO()
 
     val es: ExecutorService =
         ThreadPoolExecutor(

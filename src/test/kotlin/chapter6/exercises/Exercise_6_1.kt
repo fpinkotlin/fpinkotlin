@@ -5,14 +5,14 @@ import chapter6.unusedRng
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-//tag::init[]
-fun nonNegativeInt(rng: RNG): Pair<Int, RNG> = TODO()
-//end::init[]
-
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_1 : WordSpec({
+
+    //tag::init[]
+    fun nonNegativeInt(rng: RNG): Pair<Int, RNG> = TODO()
+    //end::init[]
 
     "nonNegativeInt" should {
 

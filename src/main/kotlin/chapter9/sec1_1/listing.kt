@@ -4,9 +4,9 @@ import arrow.core.Either
 import arrow.core.Right
 
 //tag::init3[]
-class Parser<A> // <1>
+interface Parsers<PE> { // <1>
 
-interface Parsers<PE> { // <2>
+    interface Parser<A> // <2>
 
     //tag::init1[]
     fun char(c: Char): Parser<Char>
@@ -25,7 +25,7 @@ interface Parsers<PE> { // <2>
 
     //end::orstringparser[]
     //tag::orparser[]
-    fun <A> or(a1: Parser<A>, a2: Parser<A>): Parser<A>
+    fun <A> or(pa: Parser<A>, pb: Parser<A>): Parser<A>
     //end::orparser[]
 }
 //end::init3[]

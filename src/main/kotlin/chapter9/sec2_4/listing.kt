@@ -1,8 +1,16 @@
 package chapter9.sec2_4
 
-import chapter9.sec2_2.ParseError
-import chapter9.sec2_2.Parser
-import chapter9.sec2_2.Parsers
+interface Parser<A>
+
+object ParseError
+
+interface Parsers<PE> {
+    fun <A, B> Parser<A>.map(f: (A) -> B): Parser<B>
+    infix fun <T> T.cons(la: List<T>): List<T>
+    infix fun <A> Parser<A>.or(that: Parser<A>): Parser<A>
+    fun <A> succeed(a: A): Parser<A>
+    fun <A> Parser<A>.defer(): () -> Parser<A>
+}
 
 abstract class Listing : Parsers<ParseError> {
     //tag::init1[]
@@ -20,6 +28,14 @@ abstract class Listing : Parsers<ParseError> {
     //end::init1[]
 
     //tag::init2[]
-    fun <A> or(pa: Parser<A>, pb: () -> Parser<A>): Parser<A> = TODO()
+    fun <A> many(pa: Parser<A>): Parser<List<A>> =
+        map2(pa, many(pa).defer()) { a, la -> // <1>
+            a cons la
+        } or succeed(emptyList())
     //end::init2[]
+
+    //tag::init3[]
+    fun <A> or(pa: Parser<A>, pb: () -> Parser<A>): Parser<A>
+    //end::init3[]
+        = TODO()
 }

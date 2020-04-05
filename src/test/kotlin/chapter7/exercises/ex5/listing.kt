@@ -5,6 +5,8 @@ import java.util.concurrent.Future
 
 typealias Par<A> = (ExecutorService) -> Future<A>
 
-//tag::init1[]
-fun <A> sequence(ps: List<Par<A>>): List<Par<A>> = TODO()
-//end::init1[]
+object Listing {
+    //tag::init1[]
+    fun <A> sequence(ps: List<Par<A>>): List<Par<A>> = TODO()
+    //end::init1[]
+}
