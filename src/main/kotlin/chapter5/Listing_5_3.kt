@@ -72,7 +72,7 @@ object Listing_5_3 {
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList()) // <6>
 
-        ConsL(36, cons({ 14 })
+        ConsL(36, cons({ 14 }, { Stream.empty<Int>() })
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList()) // <7>
 
