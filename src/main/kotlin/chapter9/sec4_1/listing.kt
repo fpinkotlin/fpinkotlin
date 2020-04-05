@@ -22,4 +22,4 @@ sealed class JSON {
     data class JArray(val get: List<JSON>) : JSON()
     data class JObject(val get: Map<String, JSON>) : JSON()
 }
-//tag::init2[]
+//end::init2[]
