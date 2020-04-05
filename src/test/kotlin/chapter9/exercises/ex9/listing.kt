@@ -37,7 +37,6 @@ abstract class Parsers<PE> {
     ): Parser<A>
 
     // other combinators here
-
 }
 
 abstract class ParsersDsl<PE> : Parsers<PE>() {
