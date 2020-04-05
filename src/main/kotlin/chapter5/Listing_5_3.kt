@@ -48,7 +48,7 @@ object Listing_5_3 {
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList()
 
-        cons({ 11 }, { Stream.of(2, 3, 4) })
+        cons({ 11 }, { Stream.of(2, 3, 4).map { it + 10 } })
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList() // <1>
 
@@ -56,7 +56,7 @@ object Listing_5_3 {
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList() // <2>
 
-        cons({ 12 }, { Stream.of(3, 4) })
+        cons({ 12 }, { Stream.of(3, 4).map { it + 10 } })
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList() // <3>
 
@@ -64,7 +64,7 @@ object Listing_5_3 {
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList()) // <4>
 
-        ConsL(36, cons({ 13 }, { Stream.of(4) })
+        ConsL(36, cons({ 13 }, { Stream.of(4).map { it + 10 } })
                 .filter { it % 2 == 0 }
                 .map { it * 3 }.toList()) // <5>
 
@@ -72,7 +72,7 @@ object Listing_5_3 {
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList()) // <6>
 
-        ConsL(36, cons({ 14 })
+        ConsL(36, cons({ 14 }, { Stream.empty<Int>().map { it + 10 } })
             .filter { it % 2 == 0 }
             .map { it * 3 }.toList()) // <7>
 
