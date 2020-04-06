@@ -19,7 +19,7 @@ class Exercise_6_7 : WordSpec({
 
     //tag::init2[]
     fun <A> sequence2(fs: List<Rand<A>>): Rand<List<A>> = TODO()
-    //enc::init2[]
+    //end::init2[]
 
     fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
 

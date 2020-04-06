@@ -28,7 +28,7 @@ object Listing_6_4 {
 
     //tag::init5[]
     fun nonNegativeEven(): Rand<Int> =
-        map(::nonNegativeInt) { it - 1 % 2 }
+        map(::nonNegativeInt) { it - (it % 2) }
     //end::init5[]
 
     fun <A, B, C> map2(
@@ -73,7 +73,7 @@ object Listing_6_4 {
     fun nonNegativeIntLessThan(n: Int): Rand<Int> =
         { rng ->
             val (i, rng2) = nonNegativeInt(rng)
-            val mod = i % 2
+            val mod = i % n
             if (i + (n - 1) - mod >= 0)
                 Pair(mod, rng2)
             else nonNegativeIntLessThan(n)(rng2)
