@@ -4,7 +4,7 @@ object Section_6_5 {
     //tag::init1[]
     fun <S, A, B> map(
         sa: (S) -> Pair<A, S>,
-        f: (A) -> (B)
+        f: (A) -> B
     ): (S) -> Pair<B, S> = TODO()
     //end::init1[]
 
