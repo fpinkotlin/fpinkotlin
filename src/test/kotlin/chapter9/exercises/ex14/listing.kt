@@ -1,7 +1,6 @@
 package chapter9.exercises.ex14
 
 import arrow.core.Option
-import arrow.core.lastOrNone
 import chapter9.solutions.final.Location
 
 //tag::init[]
