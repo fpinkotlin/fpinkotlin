@@ -3,10 +3,69 @@ package chapter9.solutions.final
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.Some
+import arrow.core.getOrElse
 import arrow.core.lastOrNone
 import arrow.core.toOption
 
-data class ParseError(val stack: List<Pair<Location, String>>)
+data class ParseError(
+    val stack: List<Pair<Location, String>> = emptyList()
+) {
+
+    fun push(loc: Location, msg: String): ParseError =
+        this.copy(stack = listOf(Pair(loc, msg)) + stack)
+
+    fun label(s: String): ParseError =
+        ParseError(latestLoc()
+            .map { Pair(it, s) }
+            .toList())
+
+    private fun latest(): Option<Pair<Location, String>> =
+        stack.lastOrNone()
+
+    private fun latestLoc(): Option<Location> = latest().map { it.first }
+
+    /**
+     * Display collapsed error stack - any adjacent stack elements with the
+     * same location are combined on one line. For the bottommost error, we
+     * display the full line, with a caret pointing to the column of the
+     * error.
+     * Example:
+     * 1.1 file 'companies.json'; array
+     * 5.1 object
+     * 5.2 key-value
+     * 5.10 ':'
+     * { "MSFT" ; 24,
+     *          ^
+     */
+    override fun toString(): String =
+        if (stack.isEmpty()) "no error message"
+        else {
+            val collapsed = collapseStack(stack)
+            val context =
+                collapsed.lastOrNone()
+                    .map { "\n\n" + it.first.line }
+                    .getOrElse { "" } +
+                    collapsed.lastOrNone()
+                        .map { "\n" + it.first.col }
+                        .getOrElse { "" }
+
+            collapsed.joinToString { (loc, msg) ->
+                "${loc.line}.${loc.col} $msg"
+            } + context
+        }
+
+    /* Builds a collapsed version of the given error stack -
+     * messages at the same location have their messages merged,
+     * separated by semicolons.
+     */
+    private fun collapseStack(
+        stk: List<Pair<Location, String>>
+    ): List<Pair<Location, String>> =
+        stk.groupBy { it.first }
+            .mapValues { it.value.joinToString() }
+            .toList()
+            .sortedBy { it.first.offset }
+}
 
 typealias State = Location
 
@@ -69,8 +128,8 @@ abstract class Parsers<PE> {
     internal abstract fun <A> attempt(p: Parser<A>): Parser<A>
 
     internal abstract fun <A> or(
-        p1: Parser<out A>,
-        p2: () -> Parser<out A>
+        pa: Parser<out A>,
+        pb: () -> Parser<out A>
     ): Parser<A>
 
     // other combinators
@@ -240,9 +299,6 @@ open class ParsersImpl<PE> : Parsers<PE>() {
         }
 
     infix fun <T> T.cons(la: List<T>): List<T> = listOf(this) + la
-
-    private fun ParseError.push(loc: Location, msg: String): ParseError =
-        this.copy(stack = Pair(loc, msg) cons this.stack)
 
     private fun <A> Result<A>.mapError(
         f: (ParseError) -> ParseError
