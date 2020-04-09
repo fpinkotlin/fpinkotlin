@@ -9,7 +9,7 @@ import chapter8.sec4.listing10.map2
 
 //tag::init1[]
 fun <A, B> combine(ga: Gen<A>, gb: Gen<B>): Gen<Pair<A, B>> =
-    map2(ga, gb) { es, a -> es to a }
+    map2(ga, gb) { a, b -> a to b }
 //end::init1[]
 
 //tag::init2[]

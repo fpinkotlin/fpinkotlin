@@ -9,7 +9,7 @@ data class Gen<A>(val sample: State<RNG, A>) {
         //tag::init[]
         fun choose(start: Int, stopExclusive: Int): Gen<Int> =
             Gen(State { rng: RNG -> nonNegativeInt(rng) }
-                .map { (start + it) % (stopExclusive - start) })
+                .map { start + (it % (stopExclusive - start)) })
         //end::init[]
     }
 }
