@@ -16,6 +16,7 @@ dependencies {
     compile("io.arrow-kt:arrow-mtl:$arrowVersion")
     compile("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.2")
     compile("io.github.microutils:kotlin-logging:1.7.8")
+    compile("org.awaitility:awaitility:4.0.2")
     runtime("org.slf4j:slf4j-simple:1.7.28")
 
     // need this at compile level for chapter 8
