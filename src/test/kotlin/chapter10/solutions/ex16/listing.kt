@@ -1,11 +1,12 @@
-package chapter10.solutions.ex12
+package chapter10.solutions.ex16
 
 import arrow.Kind
+import chapter10.Cons
+import chapter10.List
 import chapter10.Monoid
 import chapter10.dual
 import chapter10.endoMonoid
 
-//tag::init1[]
 interface Foldable<F> {
 
     fun <A, B> foldRight(fa: Kind<F, A>, z: B, f: (A, B) -> B): B =
@@ -16,5 +17,9 @@ interface Foldable<F> {
 
     fun <A, B> foldMap(fa: Kind<F, A>, m: Monoid<B>, f: (A) -> B): B =
         foldRight(fa, m.zero, { a, b -> m.op(f(a), b) })
+
+    //tag::init1[]
+    fun <A> toList(fa: Kind<F, A>): List<A> =
+        foldLeft(fa, List.empty(), { la, a -> Cons(a, la) })
+    //end::init1[]
 }
-//end::init1[]

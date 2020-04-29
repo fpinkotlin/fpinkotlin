@@ -47,4 +47,3 @@ class Exercise7 : WordSpec({
         }
     }
 })
-

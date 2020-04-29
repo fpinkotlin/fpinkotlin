@@ -1,11 +1,9 @@
 package chapter10.solutions.ex4
 
 import chapter10.Monoid
-import chapter10.intAddition
-import chapter10.intMultiplication
-import chapter8.Falsified
+import chapter10.intAdditionMonoid
+import chapter10.intMultiplicationMonoid
 import chapter8.Passed
-import chapter8.Result
 import chapter8.SimpleRNG
 import chapter8.sec3.listing3.Gen
 import chapter8.sec3.listing3.Prop.Companion.forAll
@@ -29,7 +27,7 @@ fun <A> monoidLaws(m: Monoid<A>, gen: Gen<A>) =
 //end::init1[]
 
 //tag::init2[]
-class Exercise4 : WordSpec ({
+class Exercise4 : WordSpec({
     val max = 100
     val count = 100
     val rng = SimpleRNG(42)
@@ -37,13 +35,12 @@ class Exercise4 : WordSpec ({
 
     "law of associativity" should {
         "be upheld using existing monoids" {
-            monoidLaws(intAddition, intGen)
+            monoidLaws(intAdditionMonoid, intGen)
                 .check(max, count, rng) shouldBe Passed
 
-            monoidLaws(intMultiplication, intGen)
+            monoidLaws(intMultiplicationMonoid, intGen)
                 .check(max, count, rng) shouldBe Passed
         }
     }
 })
 //end::init2[]
-

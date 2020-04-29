@@ -42,7 +42,7 @@ val m = object : Monoid<Option<TrackingState>> {
 
 fun ordered(ints: Sequence<Int>): Boolean =
     foldMap(ints, m) { i: Int -> Some(TrackingState(i, i, true)) }
-         .map { it.third }
+        .map { it.third }
         .getOrElse { true }
 //end::init1[]
 

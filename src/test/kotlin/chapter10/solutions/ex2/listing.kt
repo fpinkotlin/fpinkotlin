@@ -4,8 +4,6 @@ import arrow.core.None
 import arrow.core.Option
 import arrow.core.orElse
 import chapter10.Monoid
-import io.kotlintest.properties.assertAll
-import io.kotlintest.specs.WordSpec
 
 //tag::init1[]
 fun <A> optionMonoid(): Monoid<Option<A>> = object : Monoid<Option<A>> {
