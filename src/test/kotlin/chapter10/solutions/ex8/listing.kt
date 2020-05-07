@@ -56,10 +56,9 @@ class Exercise8 : WordSpec() {
                 //tag::init2[]
                 parFoldMap(
                     listOf("lorem", "ipsum", "dolar", "sit"),
-                    par(stringMonoid) // <3>
-                ) { it.toUpperCase() }(es).invoke { cb ->
-                    result.set(cb)
-                }
+                    par(stringMonoid), // <3>
+                    { it.toUpperCase() }
+                )(es).invoke { cb -> result.set(cb) } // <4>
                 //end::init2[]
 
                 await().until {

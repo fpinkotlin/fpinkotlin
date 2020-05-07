@@ -12,8 +12,8 @@ fun <A, B> functionMonoid(b: Monoid<B>): Monoid<(A) -> B> =
         override fun op(f: (A) -> B, g: (A) -> B): (A) -> B =
             { a: A -> b.op(f(a), g(a)) }
 
-        override val zero: (A) -> B
-            get() = { a -> b.zero }
+        override val zero: (A) -> B =
+            { a -> b.zero }
     }
 //end::init1[]
 

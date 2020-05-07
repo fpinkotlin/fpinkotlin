@@ -1,6 +1,6 @@
 package chapter10.sec4
 
-import chapter10.sec1_1.stringMonoid
+import chapter10.sec1.stringMonoid
 
 //tag::init1[]
 sealed class WC

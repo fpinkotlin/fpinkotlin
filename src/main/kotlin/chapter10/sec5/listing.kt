@@ -1,7 +1,7 @@
 package chapter10.sec5
 
 import arrow.Kind
-import chapter10.sec1_1.Monoid
+import chapter10.sec1.Monoid
 
 val ints = listOf(1, 2, 3, 4)
 val listing = {

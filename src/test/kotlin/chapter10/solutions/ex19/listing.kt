@@ -23,7 +23,7 @@ object ListFoldable : Foldable<ForList> {
     ): B =
         fa.fix().foldRight(z, f)
 
-    fun <A> bin(la: List<A>): Map<A, Int> =
+    fun <A> bag(la: List<A>): Map<A, Int> =
         foldMap(la, mapMergeMonoid<A, Int>(intAdditionMonoid)) { a: A ->
             mapOf(a to 1)
         }
@@ -31,10 +31,10 @@ object ListFoldable : Foldable<ForList> {
 //end::init1[]
 
 class Exercise19 : WordSpec({
-    "bin" should {
+    "bag" should {
         "bin the contents of a list into a map" {
             assertAll(Gen.list(Gen.choose(0, 10))) { ls ->
-                val actual = ListFoldable.bin(ls.asConsList())
+                val actual = ListFoldable.bag(ls.asConsList())
                 val expected =
                     ls.groupBy { it }.mapValues { it.value.count() }
                 actual shouldBe expected

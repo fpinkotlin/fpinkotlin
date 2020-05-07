@@ -1,4 +1,4 @@
-package chapter10.sec3_1
+package chapter10.sec3
 
 import arrow.core.extensions.list.foldable.foldLeft
 

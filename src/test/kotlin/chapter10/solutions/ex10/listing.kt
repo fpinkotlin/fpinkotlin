@@ -22,9 +22,8 @@ val wcMonoid: Monoid<WC> = object : Monoid<WC> {
                 is Part ->
                     Part(
                         a1.ls,
-                        a1.words +
-                            (if ((a1.rs + a2.ls).isEmpty()) 0 else 1) +
-                            a2.words,
+                        a1.words + a2.words +
+                            (if ((a1.rs + a2.ls).isEmpty()) 0 else 1),
                         a2.rs
                     )
             }

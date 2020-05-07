@@ -1,7 +1,7 @@
-package chapter10.sec2_1
+package chapter10.sec2
 
 import arrow.core.extensions.list.foldable.foldLeft
-import chapter10.sec1_1.Monoid
+import chapter10.sec1.Monoid
 
 val listing1 = {
     //tag::init1[]

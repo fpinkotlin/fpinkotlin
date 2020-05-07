@@ -1,7 +1,7 @@
 package chapter10.sec6
 
 import arrow.core.extensions.set.foldable.foldLeft
-import chapter10.sec1_1.Monoid
+import chapter10.sec1.Monoid
 
 //tag::init1[]
 fun <K, V> mapMergeMonoid(v: Monoid<V>): Monoid<Map<K, V>> =
@@ -16,16 +16,14 @@ fun <K, V> mapMergeMonoid(v: Monoid<V>): Monoid<Map<K, V>> =
                 )
             })
 
-        override val zero: Map<K, V>
-            get() = emptyMap()
+        override val zero: Map<K, V> = emptyMap()
     }
 //end::init1[]
 
 val intAdditionMonoid: Monoid<Int> = object : Monoid<Int> {
     override fun op(a1: Int, a2: Int): Int = a1 + a2
 
-    override val zero: Int
-        get() = 0
+    override val zero: Int = 0
 }
 
 //tag::init2[]

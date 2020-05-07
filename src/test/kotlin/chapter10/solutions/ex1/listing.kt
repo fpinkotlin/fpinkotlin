@@ -7,31 +7,31 @@ import io.kotlintest.specs.WordSpec
 
 //tag::init1[]
 val intAddition: Monoid<Int> = object : Monoid<Int> {
+
     override fun op(a1: Int, a2: Int): Int = a1 + a2
 
-    override val zero: Int
-        get() = 0
+    override val zero: Int = 0
 }
 
 val intMultiplication: Monoid<Int> = object : Monoid<Int> {
+
     override fun op(a1: Int, a2: Int): Int = a1 * a2
 
-    override val zero: Int
-        get() = 1
+    override val zero: Int = 1
 }
 
 val booleanOr: Monoid<Boolean> = object : Monoid<Boolean> {
+
     override fun op(a1: Boolean, a2: Boolean): Boolean = a1 || a2
 
-    override val zero: Boolean
-        get() = false
+    override val zero: Boolean = false
 }
 
 val booleanAnd: Monoid<Boolean> = object : Monoid<Boolean> {
+
     override fun op(a1: Boolean, a2: Boolean): Boolean = a1 && a2
 
-    override val zero: Boolean
-        get() = true
+    override val zero: Boolean = true
 }
 //end::init1[]
 

@@ -36,8 +36,7 @@ val m = object : Monoid<Option<TrackingState>> {
                 }
         }
 
-    override val zero: Option<TrackingState>
-        get() = None
+    override val zero: Option<TrackingState> = None
 }
 
 fun ordered(ints: Sequence<Int>): Boolean =
