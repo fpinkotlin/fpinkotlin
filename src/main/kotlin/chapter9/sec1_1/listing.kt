@@ -48,7 +48,7 @@ abstract class Example : Parsers<ParseError> {
         run(or(string("abra"), string("cadabra")), "abra") ==
             Right("abra")
         run(or(string("abra"), string("cadabra")), "cadabra") ==
-            Right("abra")
+            Right("cadabra")
         //end::init6[]
     }
 }

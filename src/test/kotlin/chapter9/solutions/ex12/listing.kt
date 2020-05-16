@@ -30,8 +30,7 @@ abstract class Solution : ParserDsl<ParseError>() {
                     Success(s, s.length)
                 is Some ->
                     Failure(
-                        state.advanceBy(idx.t).toError("'$s'")
-                            .tag("expected"),
+                        state.advanceBy(idx.t).toError("'$s'"),
                         idx.t != 0
                     )
             }

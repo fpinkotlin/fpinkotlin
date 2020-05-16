@@ -43,7 +43,7 @@ abstract class ParsersDsl<PE> : Parsers<PE>() {
     // syntactic sugar here
 }
 
-abstract class Listing : ParsersDsl<ParseError>() {
+abstract class JSONParsers : ParsersDsl<ParseError>() {
     val jsonParser: Parser<JSON> = TODO()
 }
 //end::init[]

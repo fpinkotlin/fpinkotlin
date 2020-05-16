@@ -116,7 +116,7 @@ abstract class ParsersDsl<PE> : Parsers<PE>() {
     infix fun <T> T.cons(la: List<T>): List<T> = listOf(this) + la
 }
 
-abstract class Listing : ParsersDsl<ParseError>() {
+abstract class JSONParsers : ParsersDsl<ParseError>() {
 
     // {
     //   "Company name" : "Microsoft Corporation",

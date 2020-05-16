@@ -6,6 +6,14 @@ import chapter9.Parsers
 
 interface Listing : Parsers<ParseError> {
 
+    fun listing0() {
+        //tag::init0[]
+        val spaces = string(" ").many()
+
+        string("abra") product spaces product string("cadabra")
+        //end::init0[]
+    }
+
     override
     //tag::init1[]
     fun <A> tag(msg: String, p: Parser<A>): Parser<A>
