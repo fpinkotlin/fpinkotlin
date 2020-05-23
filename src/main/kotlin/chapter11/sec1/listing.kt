@@ -11,6 +11,8 @@ import chapter10.List
 import chapter10.ListOf
 import chapter10.fix
 import chapter4.Option
+import chapter7.sec3.Par
+import chapter7.sec3.Pars
 import chapter8.sec3.listing3.Gen
 import chapter9.Parser
 
@@ -28,6 +30,8 @@ fun <A, B> map(ga: Gen<A>, f: (A) -> B): Gen<B>
 fun <A, B> map(ga: Parser<A>, f: (A) -> B): Parser<B>
 //end::init3[]
     = TODO()
+
+fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> = TODO()
 
 //tag::init4[]
 interface Functor<F> {
@@ -62,3 +66,22 @@ val listFunctor = object : Functor<ForList> {
         fa.fix().map(f)
 }
 //end::init5[]
+
+val listing = {
+    val x = Pars.unit("a")
+    //tag::init6[]
+    map(x) { a -> a } == x
+    //end::init6[]
+}
+
+interface Functor2<F> {
+    //tag::distribute2[]
+    fun <A, B> distribute(fab: Kind<F, Pair<A, B>>): Pair<Kind<F, A>, Kind<F, B>>
+    //end::distribute2[]
+        = TODO()
+
+    //tag::codistribute2[]
+    fun <A, B> codistribute(e: Either<Kind<F, A>, Kind<F, B>>): Kind<F, Either<A, B>>
+    //end::codistribute2[]
+        = TODO()
+}
