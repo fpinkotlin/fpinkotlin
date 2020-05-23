@@ -39,6 +39,9 @@ sealed class List<out A> : ListOf<A> {
             is Nil -> z
             is Cons -> f(this.head, this.tail.foldRight(z, f))
         }
+
+    fun <B> flatMap(f: (A) -> List<B>): List<B> =
+        foldRight(empty(), { a, acc -> append(f(a), acc) })
 }
 
 object Nil : List<Nothing>()
