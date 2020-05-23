@@ -2,8 +2,6 @@ package chapter11
 
 import arrow.Kind
 import chapter11.sec1.Functor
-import chapter9.sec5_1.Listing.Location
-import chapter9.sec6_4.Result
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
@@ -36,20 +34,3 @@ typealias ParOf<A> = Kind<ForPar, A>
 
 fun <A> ParOf<A>.fix(): Par<A> = this as Par<A>
 
-// Parser HKT
-
-class Parser<A>(parse: (Location) -> Result<A>) : ParserOf<A> {
-    companion object {
-        fun <A> succeed(a: A): Parser<A> = TODO()
-        fun <A, B> flatMap(pa: Parser<A>, f: (A) -> Parser<B>): Parser<B> =
-            TODO()
-    }
-}
-
-class ForParser private constructor() {
-    companion object
-}
-
-typealias ParserOf<A> = Kind<ForParser, A>
-
-fun <A> ParserOf<A>.fix() = this as Parser<A>
