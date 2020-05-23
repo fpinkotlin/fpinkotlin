@@ -1,5 +1,12 @@
 package chapter11.solutions.ex1
 
+import arrow.Kind
+import arrow.core.ForListK
+import arrow.core.ForSequenceK
+import arrow.core.ListK
+import arrow.core.ListKOf
+import arrow.core.SequenceK
+import arrow.core.fix
 import chapter10.ForList
 import chapter10.ForOption
 import chapter10.List
@@ -57,6 +64,28 @@ object Monads {
             f: (A) -> ListOf<B>
         ): ListOf<B> =
             fa.fix().flatMap { f(it).fix() }
+    }
+
+    val listKMonad = object : Monad<ForListK> {
+        override fun <A> unit(a: A): ListKOf<A> = ListK.empty()
+
+        override fun <A, B> flatMap(
+            fa: ListKOf<A>,
+            f: (A) -> ListKOf<B>
+        ): ListKOf<B> =
+            fa.fix().flatMap(f)
+    }
+
+    val sequenceKMonad = object : Monad<ForSequenceK> {
+        override fun <A> unit(a: A): Kind<ForSequenceK, A> =
+            SequenceK.empty()
+
+        override fun <A, B> flatMap(
+            fa: Kind<ForSequenceK, A>,
+            f: (A) -> Kind<ForSequenceK, B>
+        ): Kind<ForSequenceK, B> {
+            return fa.fix().flatMap(f)
+        }
     }
 }
 //tag::init1[]
