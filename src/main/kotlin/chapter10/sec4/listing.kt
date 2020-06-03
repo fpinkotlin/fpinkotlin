@@ -21,7 +21,7 @@ val sidebar = {
     val y = ""
 
     //tag::init3[]
-    M.op(f(x), f(y)) == f(N.op(x, y))
+    M.combine(f(x), f(y)) == f(N.combine(x, y))
     //end::init3[]
 }
 

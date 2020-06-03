@@ -8,17 +8,17 @@ import chapter10.Monoid
 //tag::init1[]
 fun <A> optionMonoid(): Monoid<Option<A>> = object : Monoid<Option<A>> {
 
-    override fun op(a1: Option<A>, a2: Option<A>): Option<A> =
+    override fun combine(a1: Option<A>, a2: Option<A>): Option<A> =
         a1.orElse { a2 }
 
-    override val zero: Option<A> = None
+    override val nil: Option<A> = None
 }
 
 fun <A> dual(m: Monoid<A>): Monoid<A> = object : Monoid<A> {
 
-    override fun op(a1: A, a2: A): A = m.op(a2, a1)
+    override fun combine(a1: A, a2: A): A = m.combine(a2, a1)
 
-    override val zero: A = m.zero
+    override val nil: A = m.nil
 }
 
 fun <A> firstOptionMonoid() = optionMonoid<A>()

@@ -21,8 +21,8 @@ fun <A> monoidLaws(m: Monoid<A>, gen: Gen<A>) =
             }
         }
     ) { (a, b, c) ->
-        m.op(a, m.op(b, c)) == m.op(m.op(a, b), c) &&
-            m.op(m.zero, a) == m.op(a, m.zero)
+        m.combine(a, m.combine(b, c)) == m.combine(m.combine(a, b), c) &&
+            m.combine(m.nil, a) == m.combine(a, m.nil)
     }
 //end::init1[]
 

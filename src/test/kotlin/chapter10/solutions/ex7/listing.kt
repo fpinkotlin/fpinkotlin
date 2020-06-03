@@ -11,11 +11,11 @@ fun <A, B> foldMap(la: List<A>, m: Monoid<B>, f: (A) -> B): B =
     when {
         la.size >= 2 -> {
             val (la1, la2) = la.splitAt(la.size / 2)
-            m.op(foldMap(la1, m, f), foldMap(la2, m, f))
+            m.combine(foldMap(la1, m, f), foldMap(la2, m, f))
         }
         la.size == 1 ->
             f(la.first())
-        else -> m.zero
+        else -> m.nil
     }
 //end::init1[]
 

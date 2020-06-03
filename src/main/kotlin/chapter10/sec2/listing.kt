@@ -29,6 +29,6 @@ val listing2 = {
 
 //tag::init5[]
 fun <A> concatenate(la: List<A>, m: Monoid<A>): A =
-    la.foldLeft(m.zero, m::op)
+    la.foldLeft(m.nil, m::combine)
 //end::init5[]
 

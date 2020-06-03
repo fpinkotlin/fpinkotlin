@@ -19,7 +19,7 @@ object OptionFoldable : Foldable<ForOption> {
         f: (A) -> B
     ): B =
         when (val o = fa.fix()) {
-            is None -> m.zero
+            is None -> m.nil
             is Some -> f(o.get)
         }
 }

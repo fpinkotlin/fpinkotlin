@@ -23,7 +23,7 @@ object TreeFoldable : Foldable<ForTree> {
             is Leaf ->
                 f(t.value)
             is Branch ->
-                m.op(foldMap(t.left, m, f), foldMap(t.right, m, f))
+                m.combine(foldMap(t.left, m, f), foldMap(t.right, m, f))
         }
 }
 //end::init1[]

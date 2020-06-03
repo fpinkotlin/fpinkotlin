@@ -19,12 +19,12 @@ class Exercise17 : WordSpec({
         "!comply with the law of associativity" {
             assertAll<Pair<Int, String>> { p ->
                 val product =
-                    productMonoid(intAdditionMonoid, stringMonoid).op(p, p)
-                product.first shouldBe intAdditionMonoid.op(
+                    productMonoid(intAdditionMonoid, stringMonoid).combine(p, p)
+                product.first shouldBe intAdditionMonoid.combine(
                     p.first,
                     p.first
                 )
-                product.second shouldBe stringMonoid.op(p.second, p.second)
+                product.second shouldBe stringMonoid.combine(p.second, p.second)
             }
         }
     }

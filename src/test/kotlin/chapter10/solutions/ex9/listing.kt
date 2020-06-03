@@ -15,7 +15,7 @@ import kotlin.math.min
 typealias TrackingState = Triple<Int, Int, Boolean>
 
 val m = object : Monoid<Option<TrackingState>> {
-    override fun op(
+    override fun combine(
         a1: Option<TrackingState>,
         a2: Option<TrackingState>
     ): Option<TrackingState> =
@@ -36,7 +36,7 @@ val m = object : Monoid<Option<TrackingState>> {
                 }
         }
 
-    override val zero: Option<TrackingState> = None
+    override val nil: Option<TrackingState> = None
 }
 
 fun ordered(ints: Sequence<Int>): Boolean =

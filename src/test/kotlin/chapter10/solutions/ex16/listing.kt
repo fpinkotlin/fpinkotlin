@@ -16,7 +16,7 @@ interface Foldable<F> {
         foldMap(fa, dual(endoMonoid())) { a: A -> { b: B -> f(b, a) } }(z)
 
     fun <A, B> foldMap(fa: Kind<F, A>, m: Monoid<B>, f: (A) -> B): B =
-        foldRight(fa, m.zero, { a, b -> m.op(f(a), b) })
+        foldRight(fa, m.nil, { a, b -> m.combine(f(a), b) })
 
     //tag::init1[]
     fun <A> toList(fa: Kind<F, A>): List<A> =

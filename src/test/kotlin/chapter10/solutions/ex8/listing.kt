@@ -16,13 +16,13 @@ import java.util.concurrent.atomic.AtomicReference
 //tag::init1[]
 fun <A> par(m: Monoid<A>): Monoid<Par<A>> = object : Monoid<Par<A>> {
 
-    override fun op(pa1: Par<A>, pa2: Par<A>): Par<A> =
+    override fun combine(pa1: Par<A>, pa2: Par<A>): Par<A> =
         map2(pa1, pa2) { a1: A, a2: A -> // <1>
-            m.op(a1, a2)
+            m.combine(a1, a2)
         }
 
-    override val zero: Par<A>
-        get() = unit(m.zero) // <2>
+    override val nil: Par<A>
+        get() = unit(m.nil) // <2>
 }
 
 fun <A, B> parFoldMap(
@@ -33,11 +33,11 @@ fun <A, B> parFoldMap(
     when {
         la.size >= 2 -> {
             val (la1, la2) = la.splitAt(la.size / 2)
-            pm.op(parFoldMap(la1, pm, f), parFoldMap(la2, pm, f))
+            pm.combine(parFoldMap(la1, pm, f), parFoldMap(la2, pm, f))
         }
         la.size == 1 ->
             unit(f(la.first()))
-        else -> pm.zero
+        else -> pm.nil
     }
 //end::init1[]
 

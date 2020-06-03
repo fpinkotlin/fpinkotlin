@@ -17,7 +17,7 @@ class Exercise18 : WordSpec({
     "functionMonoid" should {
         "!combine the results of two functions using another monoid" {
             assertAll<Int> { i ->
-                fm.op(
+                fm.combine(
                     { a -> "x$a" },
                     { a -> "y$a" })(i) shouldBe "x${i}y$i"
             }
