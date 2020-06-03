@@ -8,7 +8,6 @@ interface Semigroup<A> {
 
 //tag::init2[]
 interface Monoid<A> : Semigroup<A> {
-    override fun op(a1: A, a2: A): A
     val zero: A
 }
 //end::init2[]
