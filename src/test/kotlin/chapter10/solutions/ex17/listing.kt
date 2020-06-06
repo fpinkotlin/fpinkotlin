@@ -14,7 +14,10 @@ fun <A, B> productMonoid(
 ): Monoid<Pair<A, B>> =
     object : Monoid<Pair<A, B>> {
         override fun combine(a1: Pair<A, B>, a2: Pair<A, B>): Pair<A, B> =
-            Pair(ma.combine(a1.first, a2.first), mb.combine(a1.second, a2.second))
+            Pair(
+                ma.combine(a1.first, a2.first),
+                mb.combine(a1.second, a2.second)
+            )
 
         override val nil: Pair<A, B>
             get() = Pair(ma.nil, mb.nil)
@@ -26,12 +29,16 @@ class Exercise17 : WordSpec({
         "comply with the law of associativity" {
             assertAll<Pair<Int, String>> { p ->
                 val product =
-                    productMonoid(intAdditionMonoid, stringMonoid).combine(p, p)
+                    productMonoid(intAdditionMonoid, stringMonoid)
+                        .combine(p, p)
                 product.first shouldBe intAdditionMonoid.combine(
                     p.first,
                     p.first
                 )
-                product.second shouldBe stringMonoid.combine(p.second, p.second)
+                product.second shouldBe stringMonoid.combine(
+                    p.second,
+                    p.second
+                )
             }
         }
     }

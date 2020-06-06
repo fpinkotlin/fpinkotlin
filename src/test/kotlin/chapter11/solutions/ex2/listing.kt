@@ -1,7 +1,6 @@
 package chapter11.solutions.ex2
 
 import arrow.Kind2
-import chapter11.Monad
 
 data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A>
 
