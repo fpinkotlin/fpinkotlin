@@ -23,6 +23,12 @@ sealed class List<out A> : ListOf<A> {
 
         fun <A> append(a1: List<A>, a2: List<A>): List<A> =
             a1.foldRight(a2, { x, y -> Cons(x, y) })
+
+        fun <A> fill(n: Int, a: A): List<A> =
+            when (n) {
+                0 -> empty<A>()
+                else -> Cons(a, fill(n - 1, a))
+            }
     }
 
     fun <B> foldLeft(z: B, f: (B, A) -> B): B =

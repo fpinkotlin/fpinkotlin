@@ -24,7 +24,7 @@ interface Monad<F> : Functor<F> {
             }
         )
 
-    //tag::init[]
+    //tag::init1[]
     fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> =
         when (n) {
             0 -> unit(List.empty())
@@ -33,5 +33,10 @@ interface Monad<F> : Functor<F> {
                     Cons(m, ml)
                 }
         }
-    //end::init[]
+    //end::init1[]
+
+    //tag::init2[]
+    fun <A> _replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> =
+        sequence(List.fill(n, ma))
+    //end::init2[]
 }
