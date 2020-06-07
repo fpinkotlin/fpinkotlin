@@ -12,13 +12,13 @@ class Par<A>(val get: A) {
             a1: Par<A>,
             a2: Par<B>,
             f: (A, B) -> C
-        ): Par<C> = TODO()
+        ): Par<C> = Par(f(a1.get, a2.get))
 
-        fun <A> fork(f: () -> Par<A>): Par<A> = TODO()
+        fun <A> fork(f: () -> Par<A>): Par<A> = f()
 
-        fun <A> lazyUnit(a: () -> A): Par<A> = TODO()
+        fun <A> lazyUnit(a: () -> A): Par<A> = Par(a())
 
-        fun <A> run(a: Par<A>): A = TODO()
+        fun <A> run(a: Par<A>): A = a.get
     }
 }
 //end::init[]

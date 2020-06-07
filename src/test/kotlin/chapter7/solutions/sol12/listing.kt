@@ -1,26 +1,32 @@
 package chapter7.solutions.sol12
 
+import kotlinx.collections.immutable.PersistentMap
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
 typealias Par<A> = (ExecutorService) -> Future<A>
 
-//tag::init1[]
-fun <A> join(a: Par<Par<A>>): Par<A> =
-    { es: ExecutorService -> a(es).get()(es) }
-//end::init1[]
+//tag::init[]
+fun <A, B> chooser(pa: Par<A>, choices: (A) -> Par<B>): Par<B> =
+    { es: ExecutorService ->
+        choices(pa(es).get())(es)
+    }
+//end::init[]
 
-fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> = TODO()
+fun <A> choice(cond: Par<Boolean>, t: Par<A>, f: Par<A>): Par<A> =
+    { es: ExecutorService ->
+        chooser(cond, { if (it) t else f })(es)
+    }
 
-fun <A, B> flatMap(pa: Par<A>, f: (A) -> Par<B>): Par<B> = TODO()
+fun <A> choiceN(n: Par<Int>, choices: List<Par<A>>): Par<A> =
+    { es: ExecutorService ->
+        chooser(n, { choices[it] })(es)
+    }
 
-//tag::init2[]
-fun <A, B> flatMapViaJoin(pa: Par<A>, f: (A) -> Par<B>): Par<B> =
-    join(map(pa, f))
-//end::init2[]
-
-//tag::init3[]
-fun <A> joinViaFlatMap(a: Par<Par<A>>): Par<A> =
-    flatMap(a, { it })
-//end::init3[]
-
+fun <K, V> choiceMap(
+    key: Par<K>,
+    choices: PersistentMap<K, Par<V>>
+): Par<V> =
+    { es: ExecutorService ->
+        chooser(key, { choices.getValue(it) })(es)
+    }

@@ -7,6 +7,6 @@ typealias Par<A> = (ExecutorService) -> Future<A>
 
 object Listing {
     //tag::init1[]
-    fun <A> sequence(ps: List<Par<A>>): List<Par<A>> = TODO()
+    fun <A> sequence(ps: List<Par<A>>): Par<List<A>> = TODO()
     //end::init1[]
 }

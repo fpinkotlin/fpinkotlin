@@ -42,7 +42,7 @@ interface Callable<A> {
 interface Future<A> {
     fun get(): A
     fun get(timeout: Long, timeUnit: TimeUnit): A
-    fun cancel(evenIfRunnning: Boolean): Boolean
+    fun cancel(evenIfRunning: Boolean): Boolean
     fun isDone(): Boolean
     fun isCancelled(): Boolean
 }
