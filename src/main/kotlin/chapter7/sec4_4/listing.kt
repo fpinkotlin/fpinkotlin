@@ -77,9 +77,7 @@ fun <A, B, C> map2(pa: Par<A>, pb: Par<B>, f: (A, B) -> C): Par<C> =
                             is Left<A> -> // <3>
                                 br.get().fold(
                                     { ar.set(Some(eab.a)) },
-                                    { b ->
-                                        eval(es) { cb((f(eab.a, b))) }
-                                    }
+                                    { b -> eval(es) { cb(f(eab.a, b)) } }
                                 )
                             is Right<B> -> // <4>
                                 ar.get().fold(

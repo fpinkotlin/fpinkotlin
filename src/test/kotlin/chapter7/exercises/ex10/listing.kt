@@ -5,11 +5,6 @@ import java.util.concurrent.Future
 
 typealias Par<A> = (ExecutorService) -> Future<A>
 
-object Listing {
-    //tag::init[]
-    fun <K, V> choiceMap(
-        key: Par<K>,
-        choices: Map<K, Par<V>>
-    ): Par<V> = TODO()
-    //end::init[]
-}
+fun <A> choiceN(n: Par<Int>, choices: List<Par<A>>): Par<A> = TODO()
+
+fun <A> choice(cond: Par<Boolean>, t: Par<A>, f: Par<A>): Par<A> = TODO()

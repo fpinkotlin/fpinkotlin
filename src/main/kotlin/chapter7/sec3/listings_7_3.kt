@@ -21,7 +21,7 @@ object Pars {
 
         override fun get(timeout: Long, timeUnit: TimeUnit): A = a
 
-        override fun cancel(evenIfRunnning: Boolean): Boolean = false
+        override fun cancel(evenIfRunning: Boolean): Boolean = false
 
         override fun isDone(): Boolean = true
 

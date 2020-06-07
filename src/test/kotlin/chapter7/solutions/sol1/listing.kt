@@ -11,7 +11,7 @@ fun <A, B, C> map2(
     sum: Par<A>,
     sum1: Par<B>,
     function: (A, B) -> C
-): Par<C> = TODO()
+): Par<C> = Par(function(sum.get, sum1.get))
 //end::init[]
 
 class Solution_7_1 : WordSpec({
