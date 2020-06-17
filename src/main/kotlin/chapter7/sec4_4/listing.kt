@@ -7,6 +7,7 @@ import arrow.core.None
 import arrow.core.Option
 import arrow.core.Some
 import java.util.concurrent.Callable
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -33,6 +34,16 @@ fun <A> run(es: ExecutorService, pa: Par<A>): A {
     return ref.get() // <5>
 }
 //end::init11[]
+
+//tag::init20[]
+fun <A> run2(es: ExecutorService, pa: Par<A>): A {
+    val ref = CompletableFuture<A>() // <1>
+    pa(es).invoke { a: A ->
+        ref.complete(a) // <2>
+    }
+    return ref.get() // <3>
+}
+//end::init20[]
 
 //tag::init12[]
 fun <A> unit(a: A): Par<A> =
@@ -137,4 +148,10 @@ fun main() {
 
     println(x)
     //end::init16[]
+
+    val p1: Par<List<Double>> =
+        parMap((1..10).toList()) { sqrt(it.toDouble()) }
+    val x1: List<Double> =
+        run2(Executors.newFixedThreadPool(2), p1)
+    println(x1)
 }
