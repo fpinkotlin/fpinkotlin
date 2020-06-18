@@ -3,7 +3,7 @@ package chapter11.solutions.ex4
 import arrow.Kind
 import chapter10.Cons
 import chapter10.List
-import chapter11.sec1.Functor
+import chapter11.Functor
 
 interface Monad<F> : Functor<F> {
 

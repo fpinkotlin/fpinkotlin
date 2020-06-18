@@ -1,11 +1,17 @@
 package chapter11
 
 import arrow.Kind
+import arrow.core.Left
+import arrow.core.Right
 import chapter10.Cons
 import chapter10.List
-import chapter11.sec1.Functor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
+
+interface Functor<F> {
+    fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B>
+}
+
 
 interface Monad<F> : Functor<F> {
 
@@ -45,6 +51,14 @@ interface Monad<F> : Functor<F> {
                     Cons(m, ml)
                 }
         }
+
+    fun <A, B, C> compose(
+        f: (A) -> Kind<F, B>,
+        g: (B) -> Kind<F, C>
+    ): (A) -> Kind<F, C>
+
+    fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
+        flatMap(mma) { ma -> ma }
 }
 
 // Par HKT
