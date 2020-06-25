@@ -1,25 +1,17 @@
 package chapter8.solutions.ex17
 
-import arrow.core.extensions.list.foldable.forAll
-import chapter7.sec4.Par
-import chapter7.sec4.fork
-import chapter7.sec4.unit
-import chapter8.sec3.listing3.Gen
-import chapter8.sec4.listing10.forAllPar
-import chapter8.sec4.listing9.equal
+/*
+//tag::rel[]
+l.takeWhile(f) + l.dropWhile(f) == l
+//end::rel[]
+*/
 
-val listing = {
-
-    val pint: Gen<Par<Int>> =
-        Gen.choose(0, 10)
-            .map { unit(it) }
-
-    //tag::init[]
-    forAllPar(pint) { x ->
-        equal(fork { x }, x)
-    }
-    //end::init[]
-
+fun main() {
+    //tag::list[]
+    val l = listOf(1, 2, 3, 4, 5)
     val f = { i: Int -> i < 3 }
-    listOf(1, 2, 3).takeWhile(f).forAll(f)
+    val res0 = l.takeWhile(f) + l.dropWhile(f)
+
+    assert(res0 == l)
+    //end::list[]
 }
