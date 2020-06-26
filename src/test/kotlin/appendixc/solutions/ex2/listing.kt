@@ -1,7 +1,7 @@
 package appendixc.solutions.ex2
 
 import chapter8.RNG
-import chapter8.SimpleRNG
+//import chapter8.SimpleRNG
 import chapter8.solutions.ex10.State
 
 //tag::init1[]
