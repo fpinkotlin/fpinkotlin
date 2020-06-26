@@ -1,23 +1,25 @@
 package chapter8.solutions.ex16
 
-import arrow.core.extensions.list.foldable.foldLeft
+import arrow.core.extensions.list.foldable.forAll
 import chapter7.sec4.Par
 import chapter7.sec4.fork
 import chapter7.sec4.unit
 import chapter8.sec3.listing3.Gen
-import chapter8.sec4.listing9.map2
+import chapter8.sec4.listing10.forAllPar
+import chapter8.sec4.listing9.equal
 
-//tag::init[]
-val pint2: Gen<Par<Int>> =
-    Gen.choose(0, 20).flatMap { n ->
-        Gen.listOfN(n, Gen.choose(-100, 100)).map { ls ->
-            ls.foldLeft(unit(0)) { pint, i ->
-                fork {
-                    map2(pint, unit(i)) { a, b ->
-                        a + b
-                    }
-                }
-            }
-        }
+val listing = {
+
+    val pint: Gen<Par<Int>> =
+        Gen.choose(0, 10)
+            .map { unit(it) }
+
+    //tag::init[]
+    forAllPar(pint) { x ->
+        equal(fork { x }, x)
     }
-//end::init[]
+    //end::init[]
+
+    val f = { i: Int -> i < 3 }
+    listOf(1, 2, 3).takeWhile(f).forAll(f)
+}

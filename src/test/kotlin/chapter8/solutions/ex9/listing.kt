@@ -31,7 +31,7 @@ data class Prop(val run: (TestCases, RNG) -> Result) {
         }
     }
 
-    fun or(other: Prop): Prop = Prop { n, rng ->
+    fun or(other: Prop) = Prop { n, rng ->
         when (val prop = run(n, rng)) {
             is Falsified ->
                 other.tag(prop.failure).run(n, rng)
