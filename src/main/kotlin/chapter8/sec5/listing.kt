@@ -12,13 +12,13 @@ val listing = {
     val isEven = { i: Int -> i % 2 == 0 }
 
     val takeWhileProp =
-            Prop.forAll(Gen.listOfN(n, ga)) { ns ->
-                ns.takeWhile(isEven).forAll(isEven)
-            }
+        Prop.forAll(Gen.listOfN(n, ga)) { ns ->
+            ns.takeWhile(isEven).forAll(isEven)
+        }
     //end::init1[]
 
     //tag::init2[]
     fun genStringIntFn(g: Gen<Int>): Gen<(String) -> Int> =
-            g.map { i -> { _: String -> i } }
+        g.map { i -> { _: String -> i } }
     //end::init2[]
 }

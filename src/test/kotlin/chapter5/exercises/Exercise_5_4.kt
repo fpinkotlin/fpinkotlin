@@ -20,8 +20,8 @@ class Exercise_5_4 : WordSpec({
         }
         """!stop evaluating if one element does not satisfy
             the predicate""" {
-                val s = Stream.of(1, 2, 3, 4, 5)
-                s.forAll { it != 3 } shouldBe false
-            }
+            val s = Stream.of(1, 2, 3, 4, 5)
+            s.forAll { it != 3 } shouldBe false
+        }
     }
 })

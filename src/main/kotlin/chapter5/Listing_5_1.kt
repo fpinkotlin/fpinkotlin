@@ -25,12 +25,14 @@ object Listing_5_1 {
     //end::init2[]
 
     val input = ""
+
     //tag::init3[]
     val result =
         if (input.isEmpty()) exitProcess(-1) else input
     //end::init3[]
 
     val a = 10
+
     //tag::init4[]
     fun <A> if2(
         cond: Boolean,

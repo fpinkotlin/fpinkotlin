@@ -21,9 +21,9 @@ class Solution_5_6 : WordSpec({
     "Stream.headOption" should {
         """return some first element from the stream if it
             is not empty""" {
-                val s = Stream.of(1, 2, 3, 4)
-                s.headOption() shouldBe Some(1)
-            }
+            val s = Stream.of(1, 2, 3, 4)
+            s.headOption() shouldBe Some(1)
+        }
 
         "return none if the stream is empty" {
             Stream.empty<Int>().headOption() shouldBe None

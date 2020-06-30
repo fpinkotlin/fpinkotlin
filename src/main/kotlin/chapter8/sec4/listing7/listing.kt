@@ -32,7 +32,7 @@ fun run(
         is Falsified ->
             println(
                 "Falsified after ${result.successes} passed tests: " +
-                        result.failure
+                    result.failure
             )
         is Passed ->
             println("OK, passed $testCases tests.")

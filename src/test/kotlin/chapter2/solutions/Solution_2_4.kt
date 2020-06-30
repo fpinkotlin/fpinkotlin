@@ -14,10 +14,10 @@ class Solution_2_4 : WordSpec({
             function to the components of the pair which is the
             second argument""" {
 
-                val f: (Int, Int) -> String =
-                    uncurry { a -> { b -> "$a:$b" } }
-                f(1, 2) shouldBe "1:2"
-                f(1, 3) shouldBe "1:3"
-            }
+            val f: (Int, Int) -> String =
+                uncurry { a -> { b -> "$a:$b" } }
+            f(1, 2) shouldBe "1:2"
+            f(1, 3) shouldBe "1:3"
+        }
     }
 })

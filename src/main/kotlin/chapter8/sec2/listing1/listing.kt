@@ -11,7 +11,7 @@ val listing1 = {
 
     forAll(intList) {
         (it.reversed().reversed() == it) and
-                (it.firstOption() == it.reversed().lastOrNone())
+            (it.firstOption() == it.reversed().lastOrNone())
     }
     //end::init[]
 }

@@ -23,9 +23,9 @@ class Exercise_3_3 : WordSpec({
 
         """!throw an illegal state exception when dropped elements
             exceed capacity""" {
-                shouldThrow<IllegalStateException> {
-                    drop(List.of(1, 2, 3, 4, 5), 6)
-                }
+            shouldThrow<IllegalStateException> {
+                drop(List.of(1, 2, 3, 4, 5), 6)
             }
+        }
     }
 })

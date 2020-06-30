@@ -6,6 +6,7 @@ import chapter5.Stream.Companion.cons
 //tag::imports[]
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
+
 //end::imports[]
 
 object Listing_5_3 {
@@ -65,8 +66,9 @@ object Listing_5_3 {
             .map { it * 3 }.toList()) // <4>
 
         ConsL(36, cons({ 13 }, { Stream.of(4).map { it + 10 } })
-                .filter { it % 2 == 0 }
-                .map { it * 3 }.toList()) // <5>
+            .filter { it % 2 == 0 }
+            .map { it * 3 }.toList()
+        ) // <5>
 
         ConsL(36, Stream.of(4).map { it + 10 }
             .filter { it % 2 == 0 }
@@ -74,7 +76,8 @@ object Listing_5_3 {
 
         ConsL(36, cons({ 14 }, { Stream.empty<Int>().map { it + 10 } })
             .filter { it % 2 == 0 }
-            .map { it * 3 }.toList()) // <7>
+            .map { it * 3 }.toList()
+        ) // <7>
 
         ConsL(36, ConsL(42, Stream.empty<Int>().map { it + 10 }
             .filter { it % 2 == 0 }

@@ -69,13 +69,13 @@ class Solution_4_1 : WordSpec({
     "Option.flatMap" should {
         """apply a function yielding an option to an option of
             some value""" {
-                some.flatMap { a ->
-                    Some(a.toString())
-                } shouldBe Some("10")
-                some.flatMap_2 { a ->
-                    Some(a.toString())
-                } shouldBe Some("10")
-            }
+            some.flatMap { a ->
+                Some(a.toString())
+            } shouldBe Some("10")
+            some.flatMap_2 { a ->
+                Some(a.toString())
+            } shouldBe Some("10")
+        }
         "pass over an option of none" {
             none.flatMap { a ->
                 Some(a.toString())

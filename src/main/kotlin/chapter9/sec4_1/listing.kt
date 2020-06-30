@@ -7,6 +7,7 @@ object ParseError
 interface Parsers<PE>
 
 abstract class ParsersImpl<PE> : Parsers<PE>
+
 //tag::init1[]
 object JSONParser : ParsersImpl<ParseError>() { // <1>
     val jsonParser: Parser<JSON> = TODO() // <2>

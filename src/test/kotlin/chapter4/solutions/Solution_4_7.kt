@@ -38,15 +38,15 @@ class Solution_4_7 : WordSpec({
     "traverse" should {
         """return a right either of a transformed list if all
             transformations succeed""" {
-                val xa =
-                    List.of("1", "2", "3", "4", "5")
+            val xa =
+                List.of("1", "2", "3", "4", "5")
 
-                traverse(xa) { a ->
-                    catches { Integer.parseInt(a) }
-                } shouldBe Right(
-                    List.of(1, 2, 3, 4, 5)
-                )
-            }
+            traverse(xa) { a ->
+                catches { Integer.parseInt(a) }
+            } shouldBe Right(
+                List.of(1, 2, 3, 4, 5)
+            )
+        }
 
         "return a left either if any transformations fail" {
             val xa =
@@ -69,10 +69,10 @@ class Solution_4_7 : WordSpec({
 
         """convert a list containing any left eithers into a
             left either""" {
-                val xe: List<Either<String, Int>> =
-                    List.of(Right(1), Left("boom"), Right(3))
+            val xe: List<Either<String, Int>> =
+                List.of(Right(1), Left("boom"), Right(3))
 
-                sequence(xe) shouldBe Left("boom")
-            }
+            sequence(xe) shouldBe Left("boom")
+        }
     }
 })

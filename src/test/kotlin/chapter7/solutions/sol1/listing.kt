@@ -18,7 +18,7 @@ class Solution_7_1 : WordSpec({
     "Par.map2" should {
         """declare a valid signature that combines two Pars by
             applying another function""" {
-                map2(unit { 1 }, unit { 2 }) { i, j -> i + j }
-            }
+            map2(unit { 1 }, unit { 2 }) { i, j -> i + j }
+        }
     }
 })

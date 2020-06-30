@@ -20,10 +20,10 @@ class Exercise_5_11 : WordSpec({
     "unfold" should {
         """!return a stream based on an initial state and a function
             applied to each subsequent element""" {
-                unfold(0, { s: Int ->
-                    Some(Pair(s, s + 1))
-                }).take(5).toList() shouldBe
-                    List.of(0, 1, 2, 3, 4)
-            }
+            unfold(0, { s: Int ->
+                Some(Pair(s, s + 1))
+            }).take(5).toList() shouldBe
+                List.of(0, 1, 2, 3, 4)
+        }
     }
 })

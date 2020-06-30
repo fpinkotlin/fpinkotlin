@@ -8,6 +8,7 @@ data class Gen<A>(val sample: State<RNG, A>) : GenOf<A> {
     companion object {
         fun <A> unit(a: A): Gen<A> = Gen(State.unit(a))
     }
+
     fun <A, B> flatMap(f: (A) -> Gen<B>): Gen<B> = TODO()
 }
 

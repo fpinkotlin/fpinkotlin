@@ -70,6 +70,7 @@ val step3 = {
 
 val step4 = {
     fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> = TODO()
+
     //tag::init5[]
     fun sortPar(parList: Par<List<Int>>): Par<List<Int>> =
         map(parList) { it.sorted() }
@@ -87,6 +88,7 @@ val step5 = {
 
 val step6 = {
     fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> = TODO()
+
     //tag::init7[]
     fun <A, B> parMap(
         ps: List<A>,
@@ -101,6 +103,7 @@ val step6 = {
 val step7 = {
     fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> = TODO()
     fun <A> sequence(ps: List<Par<A>>): Par<List<A>> = TODO()
+
     //tag::init8[]
     fun <A, B> parMap(
         ps: List<A>,

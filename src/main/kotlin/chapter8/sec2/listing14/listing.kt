@@ -20,13 +20,13 @@ data class Prop(val check: (TestCases, RNG) -> Result) {
         fun <A> forAll(ga: Gen<A>, f: (A) -> Boolean): Prop =
             Prop { n: TestCases, rng: RNG ->
                 randomSequence(ga, rng).mapIndexed { i, a -> // <1>
-                        try {
-                            if (f(a)) Passed
-                            else Falsified(a.toString(), i) // <2>
-                        } catch (e: Exception) {
-                            Falsified(buildMessage(a, e), i) // <3>
-                        }
-                    }.take(n)
+                    try {
+                        if (f(a)) Passed
+                        else Falsified(a.toString(), i) // <2>
+                    } catch (e: Exception) {
+                        Falsified(buildMessage(a, e), i) // <3>
+                    }
+                }.take(n)
                     .find { it.isFalsified() }
                     .toOption()
                     .getOrElse { Passed }

@@ -40,7 +40,7 @@ object ListFoldable : Foldable<ForList> {
         f: (A, B) -> B
     ): B =
     //end::foldright[]
-    //tag::foldrightimpl[]
+        //tag::foldrightimpl[]
         fa.fix().foldRight(z, f)
     //end::foldrightimpl[]
 }

@@ -16,7 +16,8 @@ data class ParseError(val stack: List<Pair<Location, String>> = emptyList()) {
             .map { Pair(it, s) }
             .toList())
 
-    private fun latest(): Option<Pair<Location, String>> = stack.lastOrNone()
+    private fun latest(): Option<Pair<Location, String>> =
+        stack.lastOrNone()
 
     private fun latestLoc(): Option<Location> = latest().map { it.first }
 

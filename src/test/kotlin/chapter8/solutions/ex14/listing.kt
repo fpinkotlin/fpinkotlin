@@ -14,14 +14,14 @@ fun List<Int>.prepend(i: Int) = listOf(i) + this
 val maxProp = forAll(SGen.listOf(smallInt)) { ns ->
     val nss = ns.sorted()
     nss.isEmpty() or // <1>
-            (nss.size == 1) or // <2>
-            nss.zip(nss.prepend(Int.MIN_VALUE))
-                .foldRight(true, { p, b ->
-                    val (pa, pb) = p
-                    b && (pa >= pb)
-                }) and // <3>
-            nss.containsAll(ns) and // <4>
-            !nss.exists { !ns.contains(it) } // <5>
+        (nss.size == 1) or // <2>
+        nss.zip(nss.prepend(Int.MIN_VALUE))
+            .foldRight(true, { p, b ->
+                val (pa, pb) = p
+                b && (pa >= pb)
+            }) and // <3>
+        nss.containsAll(ns) and // <4>
+        !nss.exists { !ns.contains(it) } // <5>
 }
 //end::init[]
 

@@ -44,18 +44,18 @@ class Solution_6_7 : WordSpec({
         """combine the results of many actions using
             foldRight and map2""" {
 
-                val combined: Rand<List<Int>> =
-                    sequence2(
-                        List.of(
-                            unit(1),
-                            unit(2),
-                            unit(3),
-                            unit(4)
-                        )
+            val combined: Rand<List<Int>> =
+                sequence2(
+                    List.of(
+                        unit(1),
+                        unit(2),
+                        unit(3),
+                        unit(4)
                     )
+                )
 
-                combined(rng1).first shouldBe List.of(1, 2, 3, 4)
-            }
+            combined(rng1).first shouldBe List.of(1, 2, 3, 4)
+        }
 
         "combine the results of many actions using recursion" {
 

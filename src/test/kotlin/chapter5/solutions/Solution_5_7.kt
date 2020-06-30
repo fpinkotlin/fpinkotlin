@@ -52,10 +52,10 @@ class Solution_5_7 : WordSpec({
     "Stream.filter" should {
         """return all elements of a stream that conform
             to a predicate""" {
-                val s = Stream.of(1, 2, 3, 4, 5)
-                s.filter { it % 2 == 0 }.toList() shouldBe
-                    List.of(2, 4)
-            }
+            val s = Stream.of(1, 2, 3, 4, 5)
+            s.filter { it % 2 == 0 }.toList() shouldBe
+                List.of(2, 4)
+        }
         "return no elements of an empty stream" {
             empty<Int>().filter { it % 2 == 0 }
                 .toList() shouldBe List.empty()
@@ -82,21 +82,21 @@ class Solution_5_7 : WordSpec({
     "Stream.flatMap" should {
         """apply a function that can fail to each evaluated
             element in a stream""" {
-                val s = Stream.of(1, 2, 3, 4, 5)
-                s.flatMap { Stream.of("$it", "${it * 2}") }
-                    .toList() shouldBe
-                    List.of(
-                        "1",
-                        "2",
-                        "2",
-                        "4",
-                        "3",
-                        "6",
-                        "4",
-                        "8",
-                        "5",
-                        "10"
-                    )
-            }
+            val s = Stream.of(1, 2, 3, 4, 5)
+            s.flatMap { Stream.of("$it", "${it * 2}") }
+                .toList() shouldBe
+                List.of(
+                    "1",
+                    "2",
+                    "2",
+                    "4",
+                    "3",
+                    "6",
+                    "4",
+                    "8",
+                    "5",
+                    "10"
+                )
+        }
     }
 })
