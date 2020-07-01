@@ -22,7 +22,7 @@ class Exercise4 : WordSpec({
     val intGen = Gen.choose(-10000, 10000)
 
     "law of associativity" should {
-        "be upheld using existing monoids" {
+        "!be upheld using existing monoids" {
             monoidLaws(intAdditionMonoid, intGen)
                 .check(max, count, rng) shouldBe Passed
 

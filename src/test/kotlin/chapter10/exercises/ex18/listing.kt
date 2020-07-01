@@ -11,11 +11,10 @@ fun <A, B> functionMonoid(b: Monoid<B>): Monoid<(A) -> B> = TODO()
 //end::init1[]
 
 class Exercise18 : WordSpec({
-
-    val fm = functionMonoid<Int, String>(stringMonoid)
-
     "functionMonoid" should {
         "!combine the results of two functions using another monoid" {
+            val fm = functionMonoid<Int, String>(stringMonoid)
+
             assertAll<Int> { i ->
                 fm.combine(
                     { a -> "x$a" },

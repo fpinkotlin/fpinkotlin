@@ -11,7 +11,7 @@ data class JBoolean(val get: Boolean) : JSON()
 data class JArray(val get: List<JSON>) : JSON()
 data class JObject(val get: Map<String, JSON>) : JSON()
 
-object JSONParser : ParserDsl<ParseError>() {
+class JSONParser : ParserDsl<ParseError>() {
 
     // {
     //   "Company name" : "Microsoft Corporation",
@@ -76,10 +76,11 @@ object JSONParser : ParserDsl<ParseError>() {
         root(whitespace() skipL (obj() or array()))
 }
 
-object Example : ParserDsl<ParseError>() {
+class Example : ParserDsl<ParseError>() {
     val parser = char('a') product char('b').defer()
 }
 
 fun main() {
-    println(Example.run(Example.parser, "a"))
+    val example = Example()
+    println(example.run(example.parser, "a"))
 }

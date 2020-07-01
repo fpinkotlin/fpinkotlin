@@ -9,12 +9,11 @@ import io.kotlintest.specs.WordSpec
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise_6_5 : WordSpec({
+    "!doubleR" should {
 
-    //tag::init[]
-    val doubleR: Rand<Double> = TODO()
-    //end::init[]
-
-    "doubleR" should {
+        //tag::init[]
+        val doubleR: Rand<Double> = TODO()
+        //end::init[]
 
         val unusedRng = object : RNG {
             override fun nextInt(): Pair<Int, RNG> = TODO()
