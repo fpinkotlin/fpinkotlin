@@ -1,8 +1,11 @@
 package chapter11
 
 import arrow.Kind
-import arrow.core.Left
-import arrow.core.Right
+import arrow.Kind2
+import arrow.core.ForListK
+import arrow.core.ListK
+import arrow.core.ListKOf
+import arrow.core.fix
 import chapter10.Cons
 import chapter10.List
 import java.util.concurrent.ExecutorService
@@ -11,7 +14,6 @@ import java.util.concurrent.Future
 interface Functor<F> {
     fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B>
 }
-
 
 interface Monad<F> : Functor<F> {
 
@@ -77,3 +79,55 @@ class ForPar private constructor() {
 typealias ParOf<A> = Kind<ForPar, A>
 
 fun <A> ParOf<A>.fix(): Par<A> = this as Par<A>
+
+val listKMonad = object : Monad<ForListK> {
+    override fun <A> unit(a: A): ListKOf<A> = ListK.empty()
+
+    override fun <A, B> flatMap(
+        fa: ListKOf<A>,
+        f: (A) -> ListKOf<B>
+    ): ListKOf<B> =
+        fa.fix().flatMap(f)
+
+    override fun <A, B, C> compose(
+        f: (A) -> Kind<ForListK, B>,
+        g: (B) -> Kind<ForListK, C>
+    ): (A) -> Kind<ForListK, C> = TODO()
+}
+
+data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A> {
+
+    companion object {
+        fun <S, A> unit(a: A): State<S, A> =
+            State { s: S -> Pair(a, s) }
+    }
+
+    fun <B> map(f: (A) -> B): State<S, B> =
+        flatMap { a: A -> unit<S, B>(f(a)) }
+
+    fun <B> flatMap(f: (A) -> State<S, B>): State<S, B> =
+        State { s1: S ->
+            val (a: A, s2: S) = this.run(s1)
+            f(a).run(s2)
+        }
+}
+
+sealed class ForState private constructor() {
+    companion object
+}
+
+typealias StateOf<S, A> = Kind2<ForState, S, A>
+
+fun <S, A> StateOf<S, A>.fix() = this as State<S, A>
+
+typealias StatePartialOf<S> = Kind<ForState, S>
+
+interface StateMonad<S> : Monad<StatePartialOf<S>> {
+
+    override fun <A> unit(a: A): StateOf<S, A>
+
+    override fun <A, B> flatMap(
+        fa: StateOf<S, A>,
+        f: (A) -> StateOf<S, B>
+    ): StateOf<S, B>
+}

@@ -2,6 +2,7 @@ package chapter11.sec4
 
 import arrow.Kind
 import arrow.core.None
+import arrow.core.Option
 import arrow.core.Some
 import chapter11.Gen
 
@@ -50,23 +51,23 @@ val genOrder3: Gen<Order> =
 
 val listing1 = {
     val x = Gen.unit<Int>(1)
-    fun f(i: Int) = Gen.unit<Int>(i)
-    fun g(i: Int) = Gen.unit<Int>(i)
+    val f: (Int) -> Gen<Int> = { i -> Gen.unit(i) }
+    val g: (Int) -> Gen<Int> = { i -> Gen.unit(i) }
 
     //tag::init5[]
-    x.flatMap { a -> f(a) }.flatMap { b -> g(b) } ==
-        x.flatMap { a -> f(a).flatMap { b -> g(b) } }
+    x.flatMap(f).flatMap(g) ==
+        x.flatMap { a -> f(a).flatMap(g) }
     //end::init5[]
 }
 
-fun f(i: Int) = Some(i)
-fun g(i: Int) = Some(i)
-fun h(i: Int) = Some(i)
+val f: (Int) -> Option<Int> = { i -> Some(i) }
+val g: (Int) -> Option<Int> = { i -> Some(i) }
+val h: (Int) -> Option<Int> = { i -> Some(i) }
 
 val listing2 = {
     //tag::init6[]
-    None.flatMap { a -> f(a) }.flatMap { b -> g(b) } ==
-        None.flatMap { a -> f(a).flatMap { b -> g(b) } }
+    None.flatMap(f).flatMap(g) ==
+        None.flatMap { a -> f(a).flatMap(g) }
     //end::init6[]
 }
 
@@ -81,13 +82,14 @@ val listing4 = {
     val x = Some(v)
 
     //tag::init8[]
-    x.flatMap { a -> f(a) }.flatMap { b -> g(b) } ==
-        x.flatMap { a -> f(a).flatMap { b -> g(b) } } // <1>
+    x.flatMap(f).flatMap(g) == x.flatMap { a -> f(a).flatMap(g) } // <1>
 
-    Some(v).flatMap { a -> f(a) }.flatMap { b -> g(b) } ==
-        Some(v).flatMap { a -> f(a).flatMap { b -> g(b) } } // <2>
+    Some(v).flatMap(f).flatMap(g) ==
+        Some(v).flatMap { a -> f(a).flatMap(g) } // <2>
 
-    f(v).flatMap { g(it) } == f(v).flatMap { g(it) } // <3>
+    f(v).flatMap(g) == { a: Int -> f(a).flatMap(g) }(v) // <3>
+
+    f(v).flatMap(g) == f(v).flatMap(g) // <4>
     //end::init8[]
 }
 
@@ -175,25 +177,19 @@ interface Listing<F, A> : Monad<F> {
 
 interface Listing2<F, A> : Monad<F> {
 
-    val fx: (A) -> Kind<F, A>
+    val f: (A) -> Kind<F, A>
     val x: Kind<F, A>
-    val v: A
+    val a: A
 
     fun listing() {
         //tag::init22[]
-        compose(fx, { a: A -> unit(a) }) == fx
-        compose({ a: A -> unit(a) }, fx) == fx
+        compose(f, { a: A -> unit(a) }) == f
+        compose({ a: A -> unit(a) }, f) == f
         //end::init22[]
 
         //tag::init23[]
         flatMap(x) { a -> unit(a) } == x
-        flatMap(unit(v), fx) == fx(v)
-
-        fx(v) == x
-
-        flatMap(x) {a -> unit(a)} ==
-            flatMap(unit(v), fx)
+        flatMap(unit(a), f) == f(a)
         //end::init23[]
-
     }
 }

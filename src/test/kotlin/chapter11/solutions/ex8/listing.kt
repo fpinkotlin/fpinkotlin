@@ -14,7 +14,6 @@ interface Monad<F> : Functor<F> {
 
     //tag::init[]
     fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B> =
-        compose<Unit, A, B>({ fa }, f)(Unit)
+        compose<Unit, A, B>({ _ -> fa }, f)(Unit)
     //end::init[]
-
 }

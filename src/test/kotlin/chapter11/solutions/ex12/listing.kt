@@ -16,5 +16,4 @@ interface Monad<F> : Functor<F> {
     fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
         flatMap(mma) { ma -> ma }
     //end::init[]
-
 }

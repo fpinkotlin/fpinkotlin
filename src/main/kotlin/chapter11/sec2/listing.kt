@@ -3,6 +3,7 @@ package chapter11.sec2
 import arrow.Kind
 import chapter11.ForGen
 import chapter11.Gen
+import chapter11.Gen.Companion.unit
 import chapter11.GenOf
 import chapter11.fix
 import chapter11.sec1.Functor
@@ -21,7 +22,7 @@ fun <A, B> map(fa: Option<A>, f: (A) -> B): Option<B> = TODO()
 
 //tag::init6[]
 fun <A, B> map(fa: Gen<A>, f: (A) -> B): Gen<B> =
-    flatMap(fa) { a -> Gen.unit(f(a)) }
+    flatMap(fa) { a -> unit(f(a)) }
 //end::init6[]
 
 //tag::init1[]
@@ -73,12 +74,20 @@ interface Mon<F> { // <1>
 interface Monad<F> : Functor<F> { // <1>
 
     fun <A> unit(a: A): Kind<F, A>
+
     fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
 
-    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =//<2>
+    override fun <A, B> map(
+        fa: Kind<F, A>,
+        f: (A) -> B
+    ): Kind<F, B> = //<2>
         flatMap(fa) { a -> unit(f(a)) }
 
-    fun <A, B, C> map2(fa: Kind<F, A>, fb: Kind<F, B>, f: (A, B) -> C) =
+    fun <A, B, C> map2(
+        fa: Kind<F, A>,
+        fb: Kind<F, B>,
+        f: (A, B) -> C
+    ) =
         flatMap(fa) { a -> map(fb) { b -> f(a, b) } }
 }
 //end::init7[]
@@ -86,15 +95,15 @@ interface Monad<F> : Functor<F> { // <1>
 //tag::init8[]
 object Monads {
 
-    val genMonad = object : Monad<ForGen> {
+    val genMonad = object : Monad<ForGen> { // <1>
 
-        override fun <A> unit(a: A): GenOf<A> = Gen.unit(a)
+        override fun <A> unit(a: A): GenOf<A> = Gen.unit(a) // <2>
 
         override fun <A, B> flatMap(
             fa: GenOf<A>,
             f: (A) -> GenOf<B>
         ): GenOf<B> =
-            fa.fix().flatMap { a: A -> f(a).fix() } // <1>
+            fa.fix().flatMap { a: A -> f(a).fix() } // <3>
     }
 }
 //end::init8[]

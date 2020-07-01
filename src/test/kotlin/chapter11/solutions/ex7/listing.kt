@@ -15,5 +15,4 @@ interface Monad<F> : Functor<F> {
     ): (A) -> Kind<F, C> =
         { a: A -> flatMap(f(a)) { b: B -> g(b) } }
     //end::init[]
-
 }

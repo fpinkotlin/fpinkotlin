@@ -15,6 +15,7 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
         fun <S, A> unit(a: A): State<S, A> =
             State { s: S -> Pair(a, s) }
 
+        //tag::ignore[]
         fun <S, A, B, C> map2(
             ra: State<S, A>,
             rb: State<S, B>,
@@ -32,6 +33,7 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
                     map2(f, acc) { h, t -> Cons(h, t) }
                 }
             )
+        //end::ignore[]
     }
 
     fun <B> map(f: (A) -> B): State<S, B> =

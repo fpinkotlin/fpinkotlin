@@ -48,8 +48,7 @@ object Section_6_6 {
 
     //tag::init3[]
     fun <S> modify(f: (S) -> S): State<S, Unit> =
-        State.fx(Id.monad()) {
-            // <1>
+        State.fx(Id.monad()) { // <1>
             val (s: S) = get<S>() // <2>
             val (_) = set(f(s)) // <3>
         }

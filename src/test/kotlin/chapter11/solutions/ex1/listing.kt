@@ -13,6 +13,7 @@ import chapter10.List
 import chapter10.ListOf
 import chapter10.Option
 import chapter10.OptionOf
+import chapter10.Some
 import chapter10.fix
 import chapter11.ForPar
 import chapter11.Par
@@ -24,6 +25,7 @@ import chapter11.sec2.Monad
 object Monads {
 
     val parMonad = object : Monad<ForPar> {
+
         override fun <A> unit(a: A): ParOf<A> = Par.unit(a)
 
         override fun <A, B> flatMap(
@@ -34,7 +36,8 @@ object Monads {
     }
 
     val optionMonad = object : Monad<ForOption> {
-        override fun <A> unit(a: A): OptionOf<A> = TODO()
+
+        override fun <A> unit(a: A): OptionOf<A> = Some(a)
 
         override fun <A, B> flatMap(
             fa: OptionOf<A>,
@@ -44,7 +47,8 @@ object Monads {
     }
 
     val listMonad = object : Monad<ForList> {
-        override fun <A> unit(a: A): ListOf<A> = List.empty()
+
+        override fun <A> unit(a: A): ListOf<A> = List.of(a)
 
         override fun <A, B> flatMap(
             fa: ListOf<A>,
@@ -54,7 +58,8 @@ object Monads {
     }
 
     val listKMonad = object : Monad<ForListK> {
-        override fun <A> unit(a: A): ListKOf<A> = ListK.empty()
+
+        override fun <A> unit(a: A): ListKOf<A> = ListK.just(a)
 
         override fun <A, B> flatMap(
             fa: ListKOf<A>,
@@ -64,8 +69,9 @@ object Monads {
     }
 
     val sequenceKMonad = object : Monad<ForSequenceK> {
+
         override fun <A> unit(a: A): Kind<ForSequenceK, A> =
-            SequenceK.empty()
+            SequenceK.just(a)
 
         override fun <A, B> flatMap(
             fa: Kind<ForSequenceK, A>,
