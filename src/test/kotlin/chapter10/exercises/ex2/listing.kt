@@ -7,7 +7,9 @@ import chapter10.Monoid
 fun <A> optionMonoid(): Monoid<Option<A>> = TODO()
 //end::init1[]
 
+//tag::init2[]
 fun <A> dual(m: Monoid<A>): Monoid<A> = TODO()
+//end::init2[]
 
 fun <A> firstOptionMonoid() = optionMonoid<A>()
 
