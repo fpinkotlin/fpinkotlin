@@ -6,7 +6,9 @@ import arrow.core.lastOrNone
 import chapter9.solutions.final.Location
 
 //tag::init[]
-data class ParseError(val stack: List<Pair<Location, String>> = emptyList()) {
+data class ParseError(
+    val stack: List<Pair<Location, String>> = emptyList()
+) {
 
     fun push(loc: Location, msg: String): ParseError =
         this.copy(stack = listOf(Pair(loc, msg)) + stack)

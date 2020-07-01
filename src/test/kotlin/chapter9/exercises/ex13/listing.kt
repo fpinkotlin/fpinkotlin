@@ -1,6 +1,5 @@
 package chapter9.exercises.ex13
 
-import chapter9.solutions.final.Location
 import chapter9.solutions.final.Parser
 import chapter9.solutions.final.Parsers
 import chapter9.solutions.final.Result

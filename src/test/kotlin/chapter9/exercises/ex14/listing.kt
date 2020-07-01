@@ -4,7 +4,9 @@ import arrow.core.Option
 import chapter9.solutions.final.Location
 
 //tag::init[]
-data class ParseError(val stack: List<Pair<Location, String>> = emptyList()) {
+data class ParseError(
+    val stack: List<Pair<Location, String>> = emptyList()
+) {
 
     fun push(loc: Location, msg: String): ParseError = TODO()
 

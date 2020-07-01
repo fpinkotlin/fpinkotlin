@@ -1,16 +1,11 @@
 package chapter9.exercises.ex11
 
-import arrow.core.None
 import arrow.core.Option
-import arrow.core.Some
-import arrow.core.toOption
 import chapter9.solutions.ex11.State
-import chapter9.solutions.final.Failure
 import chapter9.solutions.final.Location
 import chapter9.solutions.final.ParseError
 import chapter9.solutions.final.Parser
 import chapter9.solutions.final.ParserDsl
-import chapter9.solutions.final.Success
 
 typealias State = Location
 
