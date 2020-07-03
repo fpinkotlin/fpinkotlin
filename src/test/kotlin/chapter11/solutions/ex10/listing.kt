@@ -1,55 +1,38 @@
 package chapter11.solutions.ex10
 
-import arrow.Kind
+import arrow.core.ForOption
+import arrow.core.None
+import arrow.core.Some
 import chapter11.Monad
 
-interface Listing<F, A> : Monad<F> {
+interface Listing<A> : Monad<ForOption> {
 
-    //tag::init0[]
-    val f: (A) -> Kind<F, A>
-    val x: Kind<F, A>
     val v: A
-    //end::init0[]
 
-    fun listing() {
+    fun exercise() {
 
-        val left1 =
-            //tag::initl1[]
-            compose(f, { a: A -> unit(a) })(v) == f(v)
-        //end::initl1[]
-        val left2 =
-            //tag::initl2[]
-            { b: A -> flatMap(f(b), { a: A -> unit(a) }) }(v) == f(v)
-        //end::initl2[]
-        val left3 =
-            //tag::initl3[]
-            flatMap(f(v)) { a: A -> unit(a) } == f(v)
-        //end::initl3[]
-        val left4 =
-            //tag::initl4[]
-            flatMap(x) { a: A -> unit(a) } == x
-        //end::initl4[]
+        //left identity for None
+        //tag::init1[]
+        flatMap(None) { a: A -> Some(a) } == None
+        None == None
+        //end::init1[]
 
-        val right1 =
-            //tag::initr1[]
-            compose({ a: A -> unit(a) }, f)(v) == f(v)
-        //end::initr1[]
-        val right2 =
-            //tag::initr2[]
-            { b: A -> flatMap({ a: A -> unit(a) }(b), f) }(v) == f(v)
-        //end::initr2[]
-        val right3 =
-            //tag::initr3[]
-            { b: A -> flatMap(unit(b), f) }(v) == f(v)
-        //end::initr3[]
-        val right4 =
-            //tag::initr4[]
-            flatMap(unit(v), f) == f(v)
-        //end::initr4[]
+        //left identity for Some
+        //tag::init2[]
+        flatMap(Some(v)) { a: A -> Some(a) } == Some(v)
+        Some(v) == Some(v)
+        //end::init2[]
 
-        //tag::init[]
-        flatMap(x) { a -> unit(a) } == x
-        flatMap(unit(v), f) == f(v)
-        //end::init[]
+        //right identity for None
+        //tag::init3[]
+        flatMap(Some(None)) { a -> Some(a) } == Some(None)
+        Some(None) == Some(None)
+        //end::init3[]
+
+        //right identity for Some
+        //tag::init4[]
+        flatMap(Some(Some(v))) { a -> Some(a) } == Some(Some(v))
+        Some(Some(v)) == Some(Some(v))
+        //end::init4[]
     }
 }

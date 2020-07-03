@@ -1,18 +1,7 @@
 package chapter11.exercises.ex19
 
-import chapter11.sec5_2.State
-
-fun <S, A> unit(a: A): State<S, A> =
-    State { s: S -> Pair(a, s) }
-
-fun <S> getState(): State<S, S> =
-    State { s -> Pair(s, s) }
-
-fun <S> setState(s: S): State<S, Unit> =
-    State { Pair(Unit, s) }
+fun <A> prefixWith(la: List<A>, prefix: String): List<String> = TODO()
 
 fun main() {
-    //tag::init[]
-    TODO("Express laws in terms of flatMap, unit, getState and setState")
-    //end::init[]
+    println(prefixWith(listOf(1, 2, 3, 4, 5), "before"))
 }

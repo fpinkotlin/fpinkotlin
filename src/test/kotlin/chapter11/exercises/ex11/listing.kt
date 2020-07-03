@@ -1,12 +1,18 @@
 package chapter11.exercises.ex11
 
-import arrow.core.ForOption
-import chapter11.Monad
+import arrow.Kind
+import chapter11.Functor
 
-interface Listing<A> : Monad<ForOption> {
+interface Monad<F> : Functor<F> {
 
-    val v: A
+    fun <A> unit(a: A): Kind<F, A>
 
-    fun exercise() {
-    }
+    fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
+
+    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
+        flatMap(fa) { a -> unit(f(a)) }
+
+    //tag::init[]
+    fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> = TODO()
+    //end::init[]
 }

@@ -1,43 +1,20 @@
 package chapter11.solutions.ex18
 
-import arrow.Kind
-import chapter10.List
-import chapter11.State
-import chapter11.StateMonad
-import chapter11.StateOf
-import chapter11.StatePartialOf
-import chapter11.fix
+import chapter11.sec5_2.State
 
-val intMonad: StateMonad<Int> = object : StateMonad<Int> {
-    override fun <A> unit(a: A): StateOf<Int, A> =
-        State { s -> Pair(a, s) }
+fun <S, A> unit(a: A): State<S, A> =
+    State { s: S -> Pair(a, s) }
 
-    override fun <A, B> flatMap(
-        fa: StateOf<Int, A>,
-        f: (A) -> StateOf<Int, B>
-    ): StateOf<Int, B> =
-        fa.fix().flatMap { a -> f(a).fix() }
+fun <S> getState(): State<S, S> =
+    State { s -> Pair(s, s) }
 
-    override fun <A, B, C> compose(
-        f: (A) -> Kind<StatePartialOf<Int>, B>,
-        g: (B) -> Kind<StatePartialOf<Int>, C>
-    ): (A) -> Kind<StatePartialOf<Int>, C> =
-        { a -> f(a).fix().flatMap { b -> g(b).fix() } }
-}
+fun <S> setState(s: S): State<S, Unit> =
+    State { Pair(Unit, s) }
 
 fun main() {
-
-    val stateA: State<Int, Int> = State { a: Int -> Pair(a, 10 + a) }
-    val stateB: State<Int, Int> = State { b: Int -> Pair(b, 10 * b) }
-
     //tag::init[]
-    val replicateIntState: StateOf<Int, List<Int>> =
-        intMonad.replicateM(5, stateA)
+    getState<Int>().flatMap { a -> setState(a) } == unit<Int, Unit>(Unit)
 
-    val map2IntState: StateOf<Int, Int> =
-        intMonad.map2(stateA, stateB) { a, b -> a * b }
-
-    val sequenceIntState: StateOf<Int, List<Int>> =
-        intMonad.sequence(List.of(stateA, stateB))
+    setState<Int>(1).flatMap { _ -> getState<Int>() } == unit<Int, Int>(1)
     //end::init[]
 }

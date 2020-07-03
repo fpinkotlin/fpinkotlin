@@ -1,27 +1,29 @@
 package chapter11.exercises.ex13
 
 import arrow.Kind
-import chapter11.Functor
+import chapter11.Monad
 
-interface Monad<F> : Functor<F> {
+interface Listing<F, A> : Monad<F> {
 
-    fun <A> unit(a: A): Kind<F, A>
+    //tag::initA[]
+    val f: (A) -> Kind<F, A>
+    val g: (A) -> Kind<F, A>
+    val x: Kind<F, A>
+    val y: Kind<F, Kind<F, Kind<F, A>>>
+    val z: (Kind<F, Kind<F, A>>) -> Kind<F, Kind<F, A>>
+    //end::initA[]
 
-    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
-        flatMap(fa) { a -> unit(f(a)) }
+    fun associative() {
+        //tag::init1[]
+        flatMap(flatMap(x, f), g) ==
+            flatMap(x) { a -> flatMap(f(a), g) }
+        //end::init1[]
 
-    fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
-        flatMap(mma) { ma -> ma }
+        TODO("Express in terms of join, map and unit using substitution")
 
-    //tag::init1[]
-    fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B> =
-        TODO()
-    //end::init1[]
-
-    //tag::init2[]
-    fun <A, B, C> compose(
-        f: (A) -> Kind<F, B>,
-        g: (B) -> Kind<F, C>
-    ): (A) -> Kind<F, C> = TODO()
-    //end::init2[]
+        //tag::init5[]
+        join(unit(x)) ==
+            join(map(x) { unit(it) })
+        //end::init5[]
+    }
 }

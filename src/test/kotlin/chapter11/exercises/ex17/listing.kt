@@ -1,40 +1,40 @@
 package chapter11.exercises.ex17
 
 import arrow.Kind
-import chapter11.Functor
+import chapter10.List
+import chapter11.State
+import chapter11.StateMonad
+import chapter11.StateOf
+import chapter11.StatePartialOf
+import chapter11.fix
 
-interface Monad<F> : Functor<F> {
-    fun <A> unit(a: A): Kind<F, A>
-    fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
+val intMonad: StateMonad<Int> = object : StateMonad<Int> {
+    override fun <A> unit(a: A): StateOf<Int, A> =
+        State { s -> Pair(a, s) }
+
+    override fun <A, B> flatMap(
+        fa: StateOf<Int, A>,
+        f: (A) -> StateOf<Int, B>
+    ): StateOf<Int, B> =
+        fa.fix().flatMap { a -> f(a).fix() }
+
+    override fun <A, B, C> compose(
+        f: (A) -> Kind<StatePartialOf<Int>, B>,
+        g: (B) -> Kind<StatePartialOf<Int>, C>
+    ): (A) -> Kind<StatePartialOf<Int>, C> =
+        { a -> f(a).fix().flatMap { b -> g(b).fix() } }
 }
-
-//tag::init1[]
-data class Id<out A>(val a: A) : IdOf<A> {
-    companion object {
-        fun <A> unit(a: A): Id<A> = TODO()
-    }
-
-    fun <B> flatMap(f: (A) -> Id<B>): Id<B> = TODO()
-    fun <B> map(f: (A) -> B): Id<B> = TODO()
-}
-//end::init1[]
-
-class ForId private constructor() {
-    companion object
-}
-
-typealias IdOf<A> = Kind<ForId, A>
-
-fun <A> IdOf<A>.fix() = this as Id<A>
-
-//tag::init2[]
-val idMonad: Monad<ForId> = TODO()
-//end::init2[]
 
 fun main() {
-    val id: Id<String> = idMonad.flatMap(Id("Hello, ")) { a: String ->
-        idMonad.flatMap(Id("monad!")) { b: String ->
-            Id(a + b)
-        }
-    }.fix()
+
+    val stateA: State<Int, Int> = State { a: Int -> Pair(a, 10 + a) }
+    val stateB: State<Int, Int> = State { b: Int -> Pair(b, 10 * b) }
+
+    //tag::init[]
+    val replicateIntState: StateOf<Int, List<Int>> = TODO()
+
+    val map2IntState: StateOf<Int, Int> = TODO()
+
+    val sequenceIntState: StateOf<Int, List<Int>> = TODO()
+    //end::init[]
 }

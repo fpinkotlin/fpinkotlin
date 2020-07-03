@@ -1,38 +1,19 @@
 package chapter11.solutions.ex11
 
-import arrow.core.ForOption
-import arrow.core.None
-import arrow.core.Some
-import chapter11.Monad
+import arrow.Kind
+import chapter11.Functor
 
-interface Listing<A> : Monad<ForOption> {
+interface Monad<F> : Functor<F> {
 
-    val v: A
+    fun <A> unit(a: A): Kind<F, A>
 
-    fun exercise() {
+    fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
 
-        //left identity for None
-        //tag::init1[]
-        flatMap(None) { a: A -> Some(a) } == None
-        None == None
-        //end::init1[]
+    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
+        flatMap(fa) { a -> unit(f(a)) }
 
-        //left identity for Some
-        //tag::init2[]
-        flatMap(Some(v)) { a: A -> Some(a) } == Some(v)
-        Some(v) == Some(v)
-        //end::init2[]
-
-        //right identity for None
-        //tag::init3[]
-        flatMap(Some(None)) { a -> Some(a) } == Some(None)
-        Some(None) == Some(None)
-        //end::init3[]
-
-        //right identity for Some
-        //tag::init4[]
-        flatMap(Some(Some(v))) { a -> Some(a) } == Some(Some(v))
-        Some(Some(v)) == Some(Some(v))
-        //end::init4[]
-    }
+    //tag::init[]
+    fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
+        flatMap(mma) { ma -> ma }
+    //end::init[]
 }
