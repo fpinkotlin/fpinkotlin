@@ -1,4 +1,4 @@
-package chapter11.solutions.ex18
+package chapter11.exercises.ex18
 
 import arrow.Kind
 import chapter10.List
@@ -31,13 +31,10 @@ fun main() {
     val stateB: State<Int, Int> = State { b: Int -> Pair(b, 10 * b) }
 
     //tag::init[]
-    val replicateIntState: StateOf<Int, List<Int>> =
-        intMonad.replicateM(5, stateA)
+    val replicateIntState: StateOf<Int, List<Int>> = TODO()
 
-    val map2IntState: StateOf<Int, Int> =
-        intMonad.map2(stateA, stateB) { a, b -> a * b }
+    val map2IntState: StateOf<Int, Int> = TODO()
 
-    val sequenceIntState: StateOf<Int, List<Int>> =
-        intMonad.sequence(List.of(stateA, stateB))
+    val sequenceIntState: StateOf<Int, List<Int>> = TODO()
     //end::init[]
 }
