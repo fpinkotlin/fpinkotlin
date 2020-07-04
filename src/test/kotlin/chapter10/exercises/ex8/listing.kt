@@ -30,18 +30,18 @@ class Exercise8 : WordSpec() {
         es.shutdown()
 
     init {
-        "!balanced folding parForMap" should {
-            "fold a list in parallel" {
+        "balanced folding parForMap" should {
+            "!fold a list in parallel" {
                 //tag::init2[]
                 parFoldMap(
-                    listOf("lorem", "ipsum", "dolar", "sit"),
+                    listOf("lorem", "ipsum", "dolor", "sit"),
                     par(stringMonoid), // <3>
                     { it.toUpperCase() }
                 )(es).invoke { cb -> result.set(cb) } // <4>
                 //end::init2[]
 
                 await().until {
-                    result.get() == "LOREMIPSUMDOLARSIT"
+                    result.get() == "LOREMIPSUMDOLORSIT"
                 }
             }
         }

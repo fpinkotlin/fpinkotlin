@@ -22,7 +22,8 @@ fun <A> monoidLaws(m: Monoid<A>, gen: Gen<A>) =
         }
     ) { (a, b, c) ->
         m.combine(a, m.combine(b, c)) == m.combine(m.combine(a, b), c) &&
-            m.combine(m.nil, a) == m.combine(a, m.nil)
+            m.combine(m.nil, a) == m.combine(a, m.nil) &&
+                m.combine(m.nil, a) == a
     }
 //end::init1[]
 
