@@ -2,13 +2,7 @@ package chapter11.sec5_2
 
 import arrow.Kind
 import arrow.Kind2
-import arrow.core.ForOption
-import arrow.core.Option
 import arrow.core.extensions.list.foldable.foldLeft
-import arrow.core.extensions.option.monad.monad
-import arrow.core.fix
-import arrow.typeclasses.MonadFx
-import arrow.typeclasses.MonadSyntax
 import chapter11.sec2.Monad
 
 //tag::init1[]
