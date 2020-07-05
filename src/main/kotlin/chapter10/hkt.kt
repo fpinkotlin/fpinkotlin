@@ -65,7 +65,7 @@ sealed class ListHK<out A> {
 //end::init8[]
 
 //tag::init9[]
-object ListHFoldable : Foldable<ForListHK> {
+object ListHKFoldable : Foldable<ForListHK> {
     override fun <A, B> foldRight(
         fa: ListHKOf<A>,
         z: B,
