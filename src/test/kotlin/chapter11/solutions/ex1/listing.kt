@@ -11,7 +11,6 @@ import chapter10.ForList
 import chapter10.ForOption
 import chapter10.List
 import chapter10.ListOf
-import chapter10.Option
 import chapter10.OptionOf
 import chapter10.Some
 import chapter10.fix
@@ -32,7 +31,7 @@ object Monads {
             fa: ParOf<A>,
             f: (A) -> ParOf<B>
         ): ParOf<B> =
-            Par.flatMap(fa.fix()) { f(it).fix() }
+            fa.fix().flatMap { f(it).fix() }
     }
 
     val optionMonad = object : Monad<ForOption> {
@@ -43,7 +42,7 @@ object Monads {
             fa: OptionOf<A>,
             f: (A) -> OptionOf<B>
         ): OptionOf<B> =
-            Option.flatMap(fa.fix()) { f(it).fix() }
+            fa.fix().flatMap { f(it).fix() }
     }
 
     val listMonad = object : Monad<ForList> {
