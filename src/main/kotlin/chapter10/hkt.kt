@@ -1,6 +1,7 @@
 package chapter10
 
 import arrow.Kind
+import arrow.higherkind
 
 /*
 //tag::init1[]
@@ -40,7 +41,7 @@ object ListFoldable : Foldable<ForList> {
         f: (A, B) -> B
     ): B =
     //end::foldright[]
-    //tag::foldrightimpl[]
+        //tag::foldrightimpl[]
         fa.fix().foldRight(z, f)
     //end::foldrightimpl[]
 }
@@ -56,3 +57,19 @@ interface Foldable<F> {
 fun <A> ListOf<A>.fix() = this as List<A>
 //end::init7[]
 
+//tag::init8[]
+@higherkind
+sealed class ListHK<out A> {
+    fun <B> foldRight(z: B, f: (A, B) -> B): B = TODO()
+}
+//end::init8[]
+
+//tag::init9[]
+object ListHFoldable : Foldable<ForListHK> {
+    override fun <A, B> foldRight(
+        fa: ListHKOf<A>,
+        z: B,
+        f: (A, B) -> B
+    ): B = fa.fix().foldRight(z, f)
+}
+//end::init9[]
