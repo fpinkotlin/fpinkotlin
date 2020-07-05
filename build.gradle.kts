@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
     kotlin("jvm") version "1.3.21"
+    kotlin("kapt") version "1.3.21"
 }
 
 val test by tasks.getting(Test::class) {
@@ -21,6 +22,7 @@ dependencies {
 
     // need this at compile level for chapter 8
     compile("io.kotlintest:kotlintest-runner-junit5:3.3.2")
+    kapt("io.arrow-kt:arrow-meta:$arrowVersion")
 }
 
 repositories {
@@ -44,4 +46,6 @@ ktlint {
     )
 }
 
-test.dependsOn("ktlintCheck")
+kapt {
+    useBuildCache = false
+}
