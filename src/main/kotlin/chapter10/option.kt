@@ -1,15 +1,8 @@
 package chapter10
 
-import arrow.Kind
+import arrow.higherkind
 
-class ForOption private constructor() {
-    companion object
-}
-
-typealias OptionOf<A> = Kind<ForOption, A>
-
-fun <A> OptionOf<A>.fix() = this as Option<A>
-
+@higherkind
 sealed class Option<out A> : OptionOf<A> {
     companion object {
         fun <A> empty(): Option<A> = None

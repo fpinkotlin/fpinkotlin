@@ -1,15 +1,8 @@
 package chapter10
 
-import arrow.Kind
+import arrow.higherkind
 
-class ForTree private constructor() {
-    companion object
-}
-
-typealias TreeOf<A> = Kind<ForTree, A>
-
-fun <A> TreeOf<A>.fix() = this as Tree<A>
-
+@higherkind
 sealed class Tree<out A> : TreeOf<A>
 
 data class Leaf<A>(val value: A) : Tree<A>()
