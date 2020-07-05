@@ -49,4 +49,4 @@ val intState = object : Monad<ForIntState> {
     ): IntStateOf<B> =
         fa.fix().flatMap { a: A -> f(a).fix() }
 }
-//tag::init4[]
+//end::init4[]

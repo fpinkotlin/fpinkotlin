@@ -20,4 +20,4 @@ object Monads {
 
     val sequenceKMonad: Monad<ForSequenceK> = TODO()
 }
-//tag::init1[]
+//end::init1[]

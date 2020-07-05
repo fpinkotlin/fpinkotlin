@@ -81,4 +81,4 @@ object Monads {
         }
     }
 }
-//tag::init1[]
+//end::init1[]
