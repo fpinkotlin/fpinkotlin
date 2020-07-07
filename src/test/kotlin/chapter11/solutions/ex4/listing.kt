@@ -13,7 +13,11 @@ interface Monad<F> : Functor<F> {
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
         flatMap(fa) { a -> unit(f(a)) }
 
-    fun <A, B, C> map2(fa: Kind<F, A>, fb: Kind<F, B>, f: (A, B) -> C) =
+    fun <A, B, C> map2(
+        fa: Kind<F, A>,
+        fb: Kind<F, B>,
+        f: (A, B) -> C
+    ): Kind<F, C> =
         flatMap(fa) { a -> map(fb) { b -> f(a, b) } }
 
     fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> =
