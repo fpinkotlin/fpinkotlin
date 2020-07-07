@@ -87,7 +87,7 @@ interface Monad<F> : Functor<F> { // <1>
         fa: Kind<F, A>,
         fb: Kind<F, B>,
         f: (A, B) -> C
-    ) =
+    ): Kind<F, C> =
         flatMap(fa) { a -> map(fb) { b -> f(a, b) } }
 }
 //end::init7[]
