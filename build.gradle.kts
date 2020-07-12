@@ -15,6 +15,7 @@ dependencies {
     compile(kotlin("stdlib"))
     compile("io.arrow-kt:arrow-core-data:$arrowVersion")
     compile("io.arrow-kt:arrow-mtl:$arrowVersion")
+    compile("io.arrow-kt:arrow-syntax:$arrowVersion")
     compile("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.2")
     compile("io.github.microutils:kotlin-logging:1.7.8")
     compile("org.awaitility:awaitility:4.0.2")
