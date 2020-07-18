@@ -12,12 +12,25 @@ interface Functor<F> {
 
 interface Applicative<F> : Functor<F> {
 
+    override fun <A, B> map(
+        fa: Kind<F, A>,
+        f: (A) -> B
+    ): Kind<F, B> =
+        map2(fa, unit(Unit)) { a, _ -> f(a) }
+
     fun <A, B> apply(
         fab: Kind<F, (A) -> B>,
         fa: Kind<F, A>
     ): Kind<F, B>
 
     fun <A> unit(a: A): Kind<F, A>
+
+    fun <A, B, C> map2(
+        fa: Kind<F, A>,
+        fb: Kind<F, B>,
+        f: (A, B) -> C
+    ): Kind<F, C> =
+        apply(apply(unit(f.curried()), fa), fb)
 
     fun <A, B, C, D> map3(
         fa: Kind<F, A>,
@@ -35,6 +48,25 @@ interface Applicative<F> : Functor<F> {
         f: (A, B, C, D) -> E
     ): Kind<F, E> =
         apply(apply(apply(apply(unit(f.curried()), fa), fb), fc), fd)
+}
+
+interface Traversable<F> : Functor<F> {
+
+    fun <G, A, B> traverse(
+        fa: Kind<F, A>,
+        AG: Applicative<G>,
+        f: (A) -> Kind<G, B>
+    ): Kind<G, Kind<F, B>> =
+        sequence(map(fa, f), AG)
+
+    fun <G, A> sequence(
+        fga: Kind<F, Kind<G, A>>,
+        AG: Applicative<G>
+    ): Kind<G, Kind<F, A>> = // <2>
+        traverse(fga, AG) { it }
+
+    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
+        TODO()
 }
 
 // List
@@ -78,6 +110,9 @@ sealed class List<out A> : ListOf<A> {
 
     fun <B> flatMap(f: (A) -> List<B>): List<B> =
         foldRight(empty(), { a, acc -> append(f(a), acc) })
+
+    fun <B> map(f: (A) -> B): List<B> =
+        flatMap { of(f(it)) }
 }
 
 object Nil : List<Nothing>()
@@ -114,3 +149,8 @@ interface EitherMonad<E> : Monad<EitherPartialOf<E>> {
 }
 
 interface EitherApplicative<E> : Applicative<EitherPartialOf<E>>
+
+//tag::init[]
+@higherkind
+data class Tree<out A>(val head: A, val tail: List<Tree<A>>) : TreeOf<A>
+//end::init[]
