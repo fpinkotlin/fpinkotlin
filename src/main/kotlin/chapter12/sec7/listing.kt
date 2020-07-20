@@ -50,17 +50,16 @@ interface Applicative<F> : Functor<F> {
     ): Kind<F, C>
 }
 
-class ForConst private constructor() {
+//tag::init6[]
+class ForConst private constructor() { // <1>
     companion object
 }
 
+typealias ConstOf<A, T> = Kind2<ForConst, A, T> // <1>
 
+typealias ConstPartialOf<A> = Kind<ForConst, A> // <1>
 
-//tag::init6[]
-typealias ConstOf<A, T> = Kind2<ForConst, A, T>
-typealias ConstPartialOf<A> = Kind<ForConst, A>
-
-data class Const<M, out A>(val value: M) : ConstOf<M, A>
+data class Const<M, out A>(val value: M) : ConstOf<M, A>  // <2>
 //end::init6[]
 
 fun <A, T> ConstOf<A, T>.fix(): Const<A, T> = this as Const<A, T>
