@@ -113,6 +113,9 @@ sealed class List<out A> : ListOf<A> {
 
     fun <B> map(f: (A) -> B): List<B> =
         flatMap { of(f(it)) }
+
+    fun reverse(): List<A> =
+        foldLeft(empty(), { t: List<A>, h: A -> Cons(h, t) })
 }
 
 object Nil : List<Nothing>()

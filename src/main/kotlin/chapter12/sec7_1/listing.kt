@@ -1,4 +1,4 @@
-package chapter12.sec7
+package chapter12.sec7_1
 
 import arrow.Kind
 import arrow.Kind2

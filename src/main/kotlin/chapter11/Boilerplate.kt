@@ -31,6 +31,12 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A> {
     companion object {
         fun <S, A> unit(a: A): State<S, A> =
             State { s: S -> Pair(a, s) }
+
+        fun <S> get(): State<S, S> =
+            State { s -> Pair(s, s) }
+
+        fun <S> set(s: S): State<S, Unit> =
+            State { Pair(Unit, s) }
     }
 
     fun <B> map(f: (A) -> B): State<S, B> =
