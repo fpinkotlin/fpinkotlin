@@ -2,14 +2,11 @@ package chapter12.sec7_2
 
 import arrow.Kind
 import chapter10.Foldable
-import chapter10.None
-import chapter10.Option
-import chapter10.Some
 import chapter11.State
+import chapter11.StateMonad
 import chapter11.StateOf
 import chapter11.StatePartialOf
 import chapter11.fix
-import chapter11.sec2.Monad
 import chapter12.Cons
 import chapter12.Functor
 import chapter12.List
@@ -25,7 +22,7 @@ interface Applicative<F> : Functor<F> {
 }
 
 //tag::init1[]
-fun <S> stateMonad() = object : Monad<StatePartialOf<S>> {
+fun <S> stateMonad() = object : StateMonad<S> {
     override fun <A> unit(a: A): StateOf<S, A> =
         State { s -> Pair(a, s) }
 
@@ -34,11 +31,17 @@ fun <S> stateMonad() = object : Monad<StatePartialOf<S>> {
         f: (A) -> StateOf<S, B>
     ): StateOf<S, B> =
         fa.fix().flatMap { f(it).fix() }
+
+    override fun <A, B, C> compose(
+        f: (A) -> StateOf<S, B>,
+        g: (B) -> StateOf<S, C>
+    ): (A) -> StateOf<S, C> =
+        { a -> join(map(f(a), g)) }
 }
 //end::init1[]
 
 //tag::init2[]
-fun <S> stateMonadApplicative(m: Monad<StatePartialOf<S>>) =
+fun <S> stateMonadApplicative(m: StateMonad<S>) =
     object : Applicative<StatePartialOf<S>> {
 
         override fun <A> unit(a: A): Kind<StatePartialOf<S>, A> =
