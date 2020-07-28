@@ -21,7 +21,8 @@ interface Applicative<F> : Functor<F> {
     fun <A, B> apply(
         fab: Kind<F, (A) -> B>,
         fa: Kind<F, A>
-    ): Kind<F, B>
+    ): Kind<F, B> =
+        map2(fa, fab) { a, f -> f(a) }
 
     fun <A> unit(a: A): Kind<F, A>
 
@@ -68,6 +69,15 @@ interface Traversable<F> : Functor<F> {
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
         TODO()
 }
+
+@higherkind
+class Product<F, G, A>(val value: Pair<Kind<F, A>, Kind<G, A>>) : ProductOf<F, G, A>
+
+@higherkind
+class Composite<F, G, A>(val value: Kind<F, Kind<G, A>>) : CompositeOf<F, G, A>
+
+@higherkind
+class Fusion<F, G, H, B>(val value: Pair<Kind<G, Kind<F, B>>, Kind<H, Kind<F, B>>>): FusionOf<F, G, H, B>
 
 // List
 

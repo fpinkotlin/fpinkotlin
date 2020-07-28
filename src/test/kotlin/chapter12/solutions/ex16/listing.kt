@@ -15,7 +15,8 @@ import io.kotlintest.specs.WordSpec
 
 interface Traversable<F> : Functor<F>, Foldable<F> {
 
-    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> = TODO()
+    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
+        TODO()
 
     override fun <A, B> foldRight(
         fa: Kind<F, A>,
@@ -40,10 +41,9 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         fa: Kind<F, A>,
         f: (A) -> State<S, B>
     ): State<S, Kind<F, B>> =
-        traverse(
-            fa,
-            stateMonadApplicative(stateMonad<S>())
-        ) { a -> f(a).fix() }.fix()
+        traverse(fa, stateMonadApplicative(stateMonad<S>())) { a ->
+            f(a).fix()
+        }.fix()
 
     fun <S, A, B> mapAccum(
         fa: Kind<F, A>,

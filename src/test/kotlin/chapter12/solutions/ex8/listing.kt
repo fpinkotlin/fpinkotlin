@@ -1,22 +1,28 @@
 package chapter12.solutions.ex8
 
-import arrow.Kind
 import chapter12.Applicative
+import chapter12.Product
+import chapter12.ProductOf
+import chapter12.ProductPartialOf
+import chapter12.fix
 
 //tag::init1[]
-
 fun <F, G> product(
-    af: Applicative<F>,
-    ag: Applicative<G>
-): Applicative<Pair<F, G>> = object : Applicative<Pair<F, G>> {
-    override fun <A, B> apply(
-        fab: Kind<Pair<F, G>, (A) -> B>,
-        fa: Kind<Pair<F, G>, A>
-    ): Kind<Pair<F, G>, B> {
-        TODO()
-    }
+    AF: Applicative<F>,
+    AG: Applicative<G>
+): Applicative<ProductPartialOf<F, G>> =
+    object : Applicative<ProductPartialOf<F, G>> {
+        override fun <A, B> apply(
+            fgab: ProductOf<F, G, (A) -> B>,
+            fga: ProductOf<F, G, A>
+        ): ProductOf<F, G, B> {
+            val (fab, gab) = fgab.fix().value
+            val (fa, ga) = fga.fix().value
+            return Product(Pair(AF.apply(fab, fa), AG.apply(gab, ga)))
+        }
 
-    override fun <A> unit(a: A): Kind<Pair<F, G>, A> = TODO()
-}
+        override fun <A> unit(a: A): ProductOf<F, G, A> =
+            Product(Pair(AF.unit(a), AG.unit(a)))
+    }
 
 //end::init1[]

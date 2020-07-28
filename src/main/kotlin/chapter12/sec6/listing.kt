@@ -1,7 +1,6 @@
 package chapter12.sec6
 
 import arrow.Kind
-import arrow.typeclasses.Applicative
 import chapter12.Functor
 import chapter12.List
 
