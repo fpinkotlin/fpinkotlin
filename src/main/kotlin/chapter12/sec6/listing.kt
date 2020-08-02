@@ -18,19 +18,19 @@ interface Applicative<F> : Functor<F> {
 }
 
 //tag::init3[]
-interface Traversable<F> : Functor<F> {
+interface Traversable<F> : Functor<F> { // <1>
 
     fun <G, A, B> traverse(
         fa: Kind<F, A>,
-        AG: Applicative<G>, // <1>
+        AG: Applicative<G>, // <2>
         f: (A) -> Kind<G, B>
     ): Kind<G, Kind<F, B>> =
         sequence(map(fa, f), AG)
 
     fun <G, A> sequence(
         fga: Kind<F, Kind<G, A>>,
-        AG: Applicative<G> // <1>
-    ): Kind<G, Kind<F, A>> = // <2>
+        AG: Applicative<G> // <2>
+    ): Kind<G, Kind<F, A>> = // <3>
         traverse(fga, AG) { it }
 }
 //end::init3[]

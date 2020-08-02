@@ -21,9 +21,7 @@ fun <F, G> compose(
         ): Kind<H, CompositeOf<F, G, B>> =
             AH.map(
                 TF.traverse(fa.fix().value, AH) { ga: Kind<G, A> ->
-                    TG.traverse(ga, AH) { a: A ->
-                        f(a)
-                    }
+                    TG.traverse(ga, AH) { a: A -> f(a) }
                 }
             ) { Composite(it) }
     }

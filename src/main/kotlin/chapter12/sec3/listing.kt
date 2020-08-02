@@ -125,6 +125,7 @@ fun listing5() {
 
     //tag::init5[]
     val F: Applicative<ForParser> = TODO()
+
     val date: Parser<Date> = TODO()
     val temp: Parser<Double> = TODO()
 
@@ -135,15 +136,14 @@ fun listing5() {
 
 fun listing6() {
     data class Row(val date: Date, val temp: Double)
+
     fun <A> Parser<A>.sep(s: String): Parser<List<Row>> = TODO()
 
     //tag::init6[]
     val F: Monad<ForParser> = TODO()
-    val d: Parser<Date> = TODO()
-    val temp: Parser<Double> = TODO()
 
     val header: Parser<Parser<Row>> = TODO()
     val rows: Parser<List<Row>> =
-        F.flatMap(header) { row -> row.sep("\n") }.fix()
+        F.flatMap(header) { row: Parser<Row> -> row.sep("\n") }.fix()
     //end::init6[]
 }

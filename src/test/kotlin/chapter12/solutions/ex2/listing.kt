@@ -25,8 +25,7 @@ interface Applicative<F> : Functor<F> {
         fa: Kind<F, A>,
         fb: Kind<F, B>,
         f: (A, B) -> C
-    ): Kind<F, C> = // <2>
-        apply(map(fa, f.curried()), fb)
-    //apply(apply(unit(f.curried()), fa), fb)
+    ): Kind<F, C> = // <3>
+        apply(apply(unit(f.curried()), fa), fb)
 }
 //end::init1[]

@@ -19,6 +19,7 @@ interface Listing<F, A> : Applicative<F> {
     fun listing() {
         //tag::init1[]
         map(v, id) == v
+
         map(map(v, g), f) == map(v, (f compose g))
         //end::init1[]
     }
@@ -38,6 +39,7 @@ interface Listing<F, A> : Applicative<F> {
     fun listing2() {
         //tag::init4[]
         map2(unit(Unit), fa) { _, a -> a }
+
         map2(fa, unit(Unit)) { a, _ -> a }
         //end::init4[]
     }
@@ -60,6 +62,10 @@ interface Listing<F, A> : Applicative<F> {
         product(product(fa, fb), fc) ==
             map(product(fa, product(fb, fc)), ::assoc)
         //end::init9[]
+
+        //tag::init14[]
+        product(product(fa, fb), fc) == product(fa, product(fb, fc))
+        //end::init14[]
     }
 
     //tag::init12[]
@@ -104,20 +110,20 @@ interface Listing4<A> : Monoid<A> {
     val c: A
     fun listing() {
         //tag::init6[]
-        combine(a, combine(b, c)) == combine(combine(a, b), c)
+        combine(combine(a, b), c) == combine(a, combine(b, c))
         //end::init6[]
     }
 }
 
 val listing4 = {
     //tag::init10[]
-    val F: Applicative<ForOption> = TODO()
+    val A: Applicative<ForOption> = TODO()
 
     data class Employee(val name: String, val id: Int)
     data class Pay(val rate: Double, val daysPerYear: Int)
 
     fun format(oe: Option<Employee>, op: Option<Pay>): Option<String> =
-        F.map2(oe, op) { e, p ->
+        A.map2(oe, op) { e, p ->
             "${e.name} makes ${p.rate * p.daysPerYear}"
         }.fix()
 

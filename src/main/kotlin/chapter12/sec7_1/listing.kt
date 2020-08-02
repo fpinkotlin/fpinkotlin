@@ -100,7 +100,7 @@ interface Traversable<F> : Functor<F>, Foldable<F> { // <1>
         f: (A) -> M
     ): M =
         traverse(fa, monoidApplicative(m)) { a ->
-            Const<M, A>(f(a))
-        }.fix().value // <2>
+            Const<M, A>(f(a)) // <2>
+        }.fix().value // <3>
 }
 //end::init8[]

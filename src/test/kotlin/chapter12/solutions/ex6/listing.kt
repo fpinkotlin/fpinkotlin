@@ -13,44 +13,46 @@ import java.time.Instant
 import java.util.Date
 
 //tag::init1[]
-interface ValidationApplicative<E> : Applicative<ValidationPartialOf<E>>
+fun <E> validationApplicative() =
+    object : Applicative<ValidationPartialOf<E>> {
 
-fun <E> validationApplicative() = object : ValidationApplicative<E> {
+        override fun <A, B> apply(
+            fab: ValidationOf<E, (A) -> B>,
+            fa: ValidationOf<E, A>
+        ): ValidationOf<E, B> =
+            map2(fab, fa) { f, a -> f(a) }
 
-    override fun <A, B> apply(
-        fab: ValidationOf<E, (A) -> B>,
-        fa: ValidationOf<E, A>
-    ): ValidationOf<E, B> =
-        map2(fab, fa) { f, a -> f(a) }
+        override fun <A> unit(a: A): ValidationOf<E, A> =
+            Success(a)
 
-    override fun <A> unit(a: A): ValidationOf<E, A> =
-        Success(a)
+        override fun <A, B> map(
+            fa: ValidationOf<E, A>,
+            f: (A) -> B
+        ): ValidationOf<E, B> =
+            apply(unit(f), fa)
 
-    override fun <A, B> map(
-        fa: ValidationOf<E, A>,
-        f: (A) -> B
-    ): ValidationOf<E, B> =
-        apply(unit(f), fa)
-
-    fun <A, B, C> map2(
-        fa: ValidationOf<E, A>,
-        fb: ValidationOf<E, B>,
-        f: (A, B) -> C
-    ): ValidationOf<E, C> {
-        val va = fa.fix()
-        val vb = fb.fix()
-        return when (va) {
-            is Success -> when (vb) {
-                is Success -> Success(f(va.a, vb.a))
-                is Failure -> vb
-            }
-            is Failure -> when (vb) {
-                is Success -> va
-                is Failure -> Failure(va.head, va.tail + vb.head + vb.tail)
+        fun <A, B, C> map2(
+            fa: ValidationOf<E, A>,
+            fb: ValidationOf<E, B>,
+            f: (A, B) -> C
+        ): ValidationOf<E, C> {
+            val va = fa.fix()
+            val vb = fb.fix()
+            return when (va) {
+                is Success -> when (vb) {
+                    is Success -> Success(f(va.a, vb.a))
+                    is Failure -> vb
+                }
+                is Failure -> when (vb) {
+                    is Success -> va
+                    is Failure -> Failure(
+                        va.head,
+                        va.tail + vb.head + vb.tail
+                    )
+                }
             }
         }
     }
-}
 //end::init1[]
 
 class ValidationSpec : WordSpec({

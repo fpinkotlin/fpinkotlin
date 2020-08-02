@@ -46,12 +46,12 @@ val streamApplicative = object : Applicative<ForStream> {
     override fun <A> unit(a: A): StreamOf<A> =
         Stream.continually(a) // <1>
 
-    fun <A, B, C> map2(
-        sa: Stream<A>,
-        sb: Stream<B>,
+    override fun <A, B, C> map2(
+        sa: StreamOf<A>,
+        sb: StreamOf<B>,
         f: (A, B) -> C
-    ): Stream<C> =
-        sa.zip(sb).map { (a, b) -> f(a, b) } // <2>
+    ): StreamOf<C> =
+        sa.fix().zip(sb.fix()).map { (a, b) -> f(a, b) } // <2>
 }
 //end::init1[]
 
@@ -86,8 +86,8 @@ fun <E> eitherApplicative(): EitherApplicative<E> = TODO()
 
 val listing2 = {
     //tag::init3[]
-    val F = eitherApplicative<String>()
-    F.map3(
+    val A = eitherApplicative<String>()
+    A.map3(
         validName(name),
         validDateOfBirth(dob),
         validPhone(phone)

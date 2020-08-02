@@ -2,8 +2,8 @@ package chapter12.sec7_2
 
 import arrow.Kind
 import chapter10.Foldable
+import chapter11.Monad
 import chapter11.State
-import chapter11.StateMonad
 import chapter11.StateOf
 import chapter11.StatePartialOf
 import chapter11.fix
@@ -22,7 +22,10 @@ interface Applicative<F> : Functor<F> {
 }
 
 //tag::init1[]
+typealias StateMonad<S> = Monad<StatePartialOf<S>>
+
 fun <S> stateMonad() = object : StateMonad<S> {
+
     override fun <A> unit(a: A): StateOf<S, A> =
         State { s -> Pair(a, s) }
 

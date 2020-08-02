@@ -12,6 +12,7 @@ fun <F, G> product(
     AG: Applicative<G>
 ): Applicative<ProductPartialOf<F, G>> =
     object : Applicative<ProductPartialOf<F, G>> {
+
         override fun <A, B> apply(
             fgab: ProductOf<F, G, (A) -> B>,
             fga: ProductOf<F, G, A>

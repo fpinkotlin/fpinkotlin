@@ -8,7 +8,10 @@ import arrow.core.ListKOf
 import arrow.core.fix
 import arrow.higherkind
 import chapter10.Cons
+import chapter10.ForList
 import chapter10.List
+import chapter10.ListOf
+import chapter10.fix
 import chapter8.RNG
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
@@ -21,6 +24,7 @@ data class Gen<A>(val sample: State<RNG, A>) : GenOf<A> {
         fun double(rng: IntRange): Gen<Double> = TODO()
         fun choose(start: Int, end: Int): Gen<Int> = TODO()
     }
+
     fun <B> flatMap(f: (A) -> Gen<B>): Gen<B> = TODO()
     fun <B> map(f: (A) -> B): Gen<B> = TODO()
 }
@@ -30,10 +34,13 @@ class Par<A>(run: (ExecutorService) -> Future<A>) : ParOf<A> {
     companion object {
         fun <A> unit(a: A): Par<A> = TODO()
     }
+
     fun <B> flatMap(f: (A) -> Par<B>): Par<B> = TODO()
 }
 
-class ForState private constructor() { companion object }
+class ForState private constructor() {
+    companion object
+}
 typealias StateOf<S, A> = Kind2<ForState, S, A>
 typealias StatePartialOf<S> = Kind<ForState, S>
 
@@ -62,7 +69,6 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A> {
             f(a).run(s2)
         }
 }
-
 
 interface Functor<F> {
     fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B>
@@ -131,12 +137,20 @@ val listKMonad = object : Monad<ForListK> {
     ): (A) -> Kind<ForListK, C> = TODO()
 }
 
-interface StateMonad<S> : Monad<StatePartialOf<S>> {
-
-    override fun <A> unit(a: A): StateOf<S, A>
+val listMonad = object : Monad<ForList> {
+    override fun <A> unit(a: A): ListOf<A> = List.of(a)
 
     override fun <A, B> flatMap(
-        fa: StateOf<S, A>,
-        f: (A) -> StateOf<S, B>
-    ): StateOf<S, B>
+        fa: ListOf<A>,
+        f: (A) -> ListOf<B>
+    ): ListOf<B> =
+        fa.fix().flatMap { a -> f(a).fix() }
+
+    override fun <A, B, C> compose(
+        f: (A) -> ListOf<B>,
+        g: (B) -> ListOf<C>
+    ): (A) -> ListOf<C> =
+        { a -> f(a).fix().flatMap { b -> g(b).fix() } }
 }
+
+typealias StateMonad<S> = Monad<StatePartialOf<S>>

@@ -4,8 +4,6 @@ import arrow.Kind
 import chapter10.Foldable
 import chapter12.Applicative
 import chapter12.Functor
-import chapter12.Fusion
-import chapter12.FusionOf
 import chapter12.Product
 import chapter12.ProductOf
 import chapter12.ProductPartialOf
@@ -55,11 +53,9 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         AH: Applicative<H>,
         f: (A) -> Kind<G, B>,
         g: (A) -> Kind<H, B>
-    ): FusionOf<F, G, H, B> =
-        Fusion(
-            traverse(ta, AG product AH) { a ->
-                Product(Pair(f(a), g(a)))
-            }.fix().value
-        )
+    ): Pair<Kind<G, Kind<F, B>>, Kind<H, Kind<F, B>>> =
+        traverse(ta, AG product AH) { a ->
+            Product(Pair(f(a), g(a)))
+        }.fix().value
     //end::init[]
 }
