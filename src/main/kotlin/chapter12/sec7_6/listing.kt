@@ -8,6 +8,7 @@ import chapter10.Some
 import chapter10.fix
 import chapter11.Monad
 import chapter11.listMonad
+import chapter12.assertEqual
 
 //tag::init1[]
 data class OptionT<M, A>(
@@ -24,14 +25,15 @@ data class OptionT<M, A>(
 }
 //end::init1[]
 
-val listing = {
+fun main() {
     //tag::init2[]
     val F = listMonad
-    val loi = List.of(Some(1), None, Some(2))
-    val los: List<Option<String>> =
-        OptionT(loi, F).flatMap { i: Int ->
-            OptionT(F.unit(Some("$i")), F)
+    val ls = List.of(Some(1), None, Some(2)) // <1>
+    val xs: List<Option<String>> =
+        OptionT(ls, F).flatMap { i: Int -> // <2>
+            OptionT(F.unit(Some("${i * 2}")), F) // <3>
         }.value.fix()
-    assert(los == List.of(Some("1"), Some("2")))
+
+    assertEqual(xs, List.of(Some("2"), None, Some("4")))
     //end::init2[]
 }
