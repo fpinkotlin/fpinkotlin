@@ -2,46 +2,60 @@ package chapter12.solutions.ex17
 
 import arrow.Kind
 import chapter10.Foldable
-import chapter11.State
-import chapter11.fix
+import chapter12.Applicative
 import chapter12.Functor
-import chapter12.sec7_2.Applicative
-import chapter12.sec7_2.stateMonad
-import chapter12.sec7_2.stateMonadApplicative
+import chapter12.Product
+import chapter12.ProductOf
+import chapter12.ProductPartialOf
+import chapter12.fix
+
+infix fun <F, G> Applicative<F>.product(
+    ag: Applicative<G>
+): Applicative<ProductPartialOf<F, G>> =
+    object : Applicative<ProductPartialOf<F, G>> {
+        override fun <A, B> apply(
+            fgab: ProductOf<F, G, (A) -> B>,
+            fga: ProductOf<F, G, A>
+        ): ProductOf<F, G, B> {
+            val (fab, gab) = fgab.fix().value
+            val (fa, ga) = fga.fix().value
+            return Product(
+                Pair(
+                    this@product.apply(fab, fa),
+                    ag.apply(gab, ga)
+                )
+            )
+        }
+
+        override fun <A> unit(a: A): ProductOf<F, G, A> =
+            Product(Pair(this@product.unit(a), ag.unit(a)))
+    }
 
 interface Traversable<F> : Functor<F>, Foldable<F> {
+
+    fun <G, A> sequence(
+        fga: Kind<F, Kind<G, A>>,
+        AG: Applicative<G>
+    ): Kind<G, Kind<F, A>> =
+        traverse(fga, AG) { it }
 
     fun <G, A, B> traverse(
         fa: Kind<F, A>,
         AG: Applicative<G>,
         f: (A) -> Kind<G, B>
-    ): Kind<G, Kind<F, B>> = TODO()
-
-    fun <S, A, B> traverseS(
-        fa: Kind<F, A>,
-        f: (A) -> State<S, B>
-    ): State<S, Kind<F, B>> =
-        traverse(
-            fa,
-            stateMonadApplicative(stateMonad<S>())
-        ) { a -> f(a).fix() }.fix()
-
-    fun <S, A, B> mapAccum(
-        fa: Kind<F, A>,
-        s: S,
-        f: (A, S) -> Pair<B, S>
-    ): Pair<Kind<F, B>, S> =
-        traverseS(fa) { a: A ->
-            State.get<S>().flatMap { s1 ->
-                val (b, s2) = f(a, s1)
-                State.set(s2).map { _ -> b }
-            }
-        }.run(s)
+    ): Kind<G, Kind<F, B>> =
+        sequence(map(fa, f), AG)
 
     //tag::init[]
-    fun <A, B> foldLeft(fa: Kind<F, A>, z: B, f: (B, A) -> B): B =
-        mapAccum(fa, z) { a, b ->
-            Pair(Unit, f(b, a))
-        }.second
+    fun <G, H, A, B> fuse(
+        ta: Kind<F, A>,
+        AG: Applicative<G>,
+        AH: Applicative<H>,
+        f: (A) -> Kind<G, B>,
+        g: (A) -> Kind<H, B>
+    ): Pair<Kind<G, Kind<F, B>>, Kind<H, Kind<F, B>>> =
+        traverse(ta, AG product AH) { a ->
+            Product(Pair(f(a), g(a)))
+        }.fix().value
     //end::init[]
 }

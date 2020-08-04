@@ -1,29 +1,13 @@
 package chapter12.solutions.ex14
 
-import arrow.Kind
-import arrow.core.Id
-import arrow.core.fix
-import arrow.typeclasses.Applicative
-import arrow.typeclasses.internal.IdBimonad
-import chapter12.Functor
+import chapter10.Monoid
 
-//tag::init1[]
-interface Traversable<F> : Functor<F> {
-
-    fun <G, A, B> traverse(
-        fa: Kind<F, A>,
-        AG: Applicative<G>,
-        f: (A) -> Kind<G, B>
-    ): Kind<G, Kind<F, B>> =
-        sequence(map(fa, f), AG)
-
-    fun <G, A> sequence(
-        fga: Kind<F, Kind<G, A>>,
-        AG: Applicative<G>
-    ): Kind<G, Kind<F, A>> =
-        traverse(fga, AG) { it }
-
-    override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
-        traverse(fa, IdBimonad) { Id(f(it)) }.fix().extract()
+//tag::init[]
+data class Iterator<A>(val a: A, val f: (A) -> A, val n: Int) {
+    fun <B> foldMap(fn: (A) -> B, m: Monoid<B>): B {
+        tailrec fun iterate(len: Int, nil: B, aa: A): B =
+            if (len <= 0) nil else iterate(len - 1, fn(aa), f(a))
+        return iterate(n, m.nil, a)
+    }
 }
-//end::init1[]
+//end::init[]

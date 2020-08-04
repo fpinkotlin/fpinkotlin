@@ -1,46 +1,36 @@
 package chapter12.solutions.ex11
 
-import chapter11.Monad
-import chapter12.Composite
-import chapter12.CompositeOf
-import chapter12.CompositePartialOf
-import chapter12.fix
+import arrow.Kind
+import arrow.core.extensions.set.foldable.foldLeft
+import arrow.syntax.function.curried
+import chapter12.Functor
 
-interface Listing<F, G> {
+interface Applicative<F> : Functor<F> {
+
+    override fun <A, B> map(
+        fa: Kind<F, A>,
+        f: (A) -> B
+    ): Kind<F, B> =
+        map2(fa, unit(Unit)) { a, _ -> f(a) }
+
+    fun <A, B> apply(
+        fab: Kind<F, (A) -> B>,
+        fa: Kind<F, A>
+    ): Kind<F, B>
+
+    fun <A> unit(a: A): Kind<F, A>
+
+    fun <A, B, C> map2(
+        fa: Kind<F, A>,
+        fb: Kind<F, B>,
+        f: (A, B) -> C
+    ): Kind<F, C> =
+        apply(apply(unit(f.curried()), fa), fb)
 
     //tag::init1[]
-    fun <F, G> compose(
-        mf: Monad<F>,
-        mg: Monad<G>
-    ): Monad<CompositePartialOf<F, G>> =
-        object : Monad<CompositePartialOf<F, G>> {
-            override fun <A> unit(a: A): CompositeOf<F, G, A> =
-                Composite(mf.unit(mg.unit(a)))
-
-            override fun <A, B> flatMap(
-                mna: CompositeOf<F, G, A>,
-                f: (A) -> CompositeOf<F, G, B>
-            ): CompositeOf<F, G, B> =
-                TODO("Simply can't be done!")
-
-            override fun <A, B, C> compose(
-                f: (A) -> CompositeOf<F, G, B>,
-                g: (B) -> CompositeOf<F, G, C>
-            ): (A) -> CompositeOf<F, G, C> = TODO()
+    fun <K, V> sequence(mkv: Map<K, Kind<F, V>>): Kind<F, Map<K, V>> =
+        mkv.entries.foldLeft(unit(emptyMap())) { facc, (k, fv) ->
+            map2(facc, fv) { acc, v -> acc + (k to v) }
         }
     //end::init1[]
 }
-
-/*
-//tag::init2[]
-fun <A, B> flatMap(
-    mna: CompositeOf<F, G, A>,
-    f: (A) -> CompositeOf<F, G, B>
-): CompositeOf<F, G, B> =
-        mf.flatMap(mna.fix().value) { na: Kind<G, A> ->
-            mg.flatMap(na) { a: A ->
-                f(a)
-            }
-        }
-//end::init2[]
-*/
