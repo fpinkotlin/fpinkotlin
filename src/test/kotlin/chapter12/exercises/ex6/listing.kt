@@ -1,58 +1,19 @@
-package chapter12.solutions.ex6
+package chapter12.exercises.ex6
 
+import chapter12.exercises.ex3.Applicative
 import chapter12.sec4.Failure
 import chapter12.sec4.Success
 import chapter12.sec4.Validation
 import chapter12.sec4.ValidationOf
 import chapter12.sec4.ValidationPartialOf
 import chapter12.sec4.fix
-import chapter12.exercises.ex3.Applicative
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import java.time.Instant
 import java.util.Date
 
 //tag::init1[]
-fun <E> validationApplicative() =
-    object : Applicative<ValidationPartialOf<E>> {
-
-        override fun <A, B> apply(
-            fab: ValidationOf<E, (A) -> B>,
-            fa: ValidationOf<E, A>
-        ): ValidationOf<E, B> =
-            map2(fab, fa) { f, a -> f(a) }
-
-        override fun <A> unit(a: A): ValidationOf<E, A> =
-            Success(a)
-
-        override fun <A, B> map(
-            fa: ValidationOf<E, A>,
-            f: (A) -> B
-        ): ValidationOf<E, B> =
-            apply(unit(f), fa)
-
-        fun <A, B, C> map2(
-            fa: ValidationOf<E, A>,
-            fb: ValidationOf<E, B>,
-            f: (A, B) -> C
-        ): ValidationOf<E, C> {
-            val va = fa.fix()
-            val vb = fb.fix()
-            return when (va) {
-                is Success -> when (vb) {
-                    is Success -> Success(f(va.a, vb.a))
-                    is Failure -> vb
-                }
-                is Failure -> when (vb) {
-                    is Success -> va
-                    is Failure -> Failure(
-                        va.head,
-                        va.tail + vb.head + vb.tail
-                    )
-                }
-            }
-        }
-    }
+fun <E> validation(): Applicative<ValidationPartialOf<E>> = TODO()
 //end::init1[]
 
 class ValidationSpec : WordSpec({
@@ -71,7 +32,7 @@ class ValidationSpec : WordSpec({
 
         fun <A> invalidInput(input: A) = Failure("invalid: $input")
 
-        val F = chapter12.exercises.ex6.validation<String>()
+        val F = validation<String>()
 
         val name = "Claire"
         val dob = Date.from(Instant.now())

@@ -1,7 +1,6 @@
-package chapter12.solutions.ex3
+package chapter12.exercises.ex3
 
 import arrow.Kind
-import arrow.syntax.function.curried
 import chapter12.Functor
 
 interface Applicative<F> : Functor<F> {
@@ -19,8 +18,7 @@ interface Applicative<F> : Functor<F> {
         fb: Kind<F, B>,
         fc: Kind<F, C>,
         f: (A, B, C) -> D
-    ): Kind<F, D> =
-        apply(apply(apply(unit(f.curried()), fa), fb), fc)
+    ): Kind<F, D> = TODO()
 
     fun <A, B, C, D, E> map4(
         fa: Kind<F, A>,
@@ -28,7 +26,6 @@ interface Applicative<F> : Functor<F> {
         fc: Kind<F, C>,
         fd: Kind<F, D>,
         f: (A, B, C, D) -> E
-    ): Kind<F, E> =
-        apply(apply(apply(apply(unit(f.curried()), fa), fb), fc), fd)
+    ): Kind<F, E> = TODO()
     //end::init1[]
 }

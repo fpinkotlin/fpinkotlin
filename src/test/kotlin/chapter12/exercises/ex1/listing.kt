@@ -1,4 +1,4 @@
-package chapter12.solutions.ex1
+package chapter12.exercises.ex1
 
 import arrow.Kind
 import chapter12.Cons
@@ -33,16 +33,13 @@ interface Applicative<F> : Functor<F> {
         )
 
     //tag::init1[]
-    fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> =
-        traverse(lfa) { it }
+    fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> = TODO()
 
-    fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> =
-        sequence(List.fill(n, ma))
+    fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> = TODO()
 
     fun <A, B> product(
         ma: Kind<F, A>,
         mb: Kind<F, B>
-    ): Kind<F, Pair<A, B>> =
-        map2(ma, mb) { a, b -> Pair(a, b) }
+    ): Kind<F, Pair<A, B>> = TODO()
     //end::init1[]
 }

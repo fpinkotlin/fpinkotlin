@@ -1,4 +1,4 @@
-package chapter12.solutions.ex16
+package chapter12.exercises.ex16
 
 import arrow.Kind
 import arrow.core.ForListK
@@ -7,10 +7,10 @@ import chapter10.Foldable
 import chapter11.State
 import chapter11.fix
 import chapter12.Functor
-import chapter12.exercises.ex16.Traversable
 import chapter12.sec7_2.Applicative
 import chapter12.sec7_2.stateMonad
 import chapter12.sec7_2.stateMonadApplicative
+import chapter12.solutions.ex16.Traversable
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
@@ -64,10 +64,7 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         }.second.reversed()
 
     //tag::init[]
-    fun <A> reverse(ta: Kind<F, A>): Kind<F, A> =
-        mapAccum(ta, toList(ta).reversed()) { _, ls ->
-            Pair(ls.first(), ls.drop(1))
-        }.first
+    fun <A> reverse(ta: Kind<F, A>): Kind<F, A> = TODO()
     //end::init[]
 }
 

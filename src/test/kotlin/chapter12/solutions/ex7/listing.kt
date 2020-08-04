@@ -10,7 +10,7 @@ interface Listing<F, A> : Monad<F> {
     val f: (A, A) -> Kind<F, A>
     val ka: (A) -> Kind<F, A>
 
-    fun listing2() {
+    fun listing1() {
         //tag::init1[]
         map2(unit(Unit), fa) { _, a -> a }
         //end::init1[]

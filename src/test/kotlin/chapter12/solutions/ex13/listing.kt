@@ -1,11 +1,6 @@
 package chapter12.solutions.ex13
 
 import arrow.Kind
-import arrow.core.ForMapK
-import arrow.core.MapK
-import arrow.core.MapKOf
-import arrow.core.MapKPartialOf
-import arrow.core.fix
 import chapter10.ForOption
 import chapter10.None
 import chapter10.OptionOf
