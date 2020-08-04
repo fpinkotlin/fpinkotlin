@@ -15,7 +15,7 @@ data class OptionT<M, A>(
     val value: Kind<M, Option<A>>, // <1>
     val MM: Monad<M> // <2>
 ) {
-    fun <B> flatMap(f: (A) -> OptionT<M, B>): OptionT<M, B> =
+    fun <B> flatMap(f: (A) -> OptionT<M, B>): OptionT<M, B> = // <3>
         OptionT(MM.flatMap(value) { oa: Option<A> ->
             when (oa) {
                 is None -> MM.unit(None)

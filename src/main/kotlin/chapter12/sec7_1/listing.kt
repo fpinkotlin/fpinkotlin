@@ -81,7 +81,7 @@ fun <M> monoidApplicative(m: Monoid<M>): Applicative<ConstPartialOf<M>> =
             mb: ConstOf<M, B>,
             f: (A, B) -> C // <2>
         ): ConstOf<M, C> =
-            Const(m.combine(ma.fix().value, ma.fix().value))
+            Const(m.combine(ma.fix().value, ma.fix().value)) // <3>
     }
 //end::init7[]
 

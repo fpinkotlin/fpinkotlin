@@ -15,4 +15,4 @@ fun <A> listTraversable(): Traversable<ForList> = TODO()
 
 //tag::init3[]
 fun <A> treeTraversable(): Traversable<ForTree> = TODO()
-//tag::init3[]
+//end::init3[]
