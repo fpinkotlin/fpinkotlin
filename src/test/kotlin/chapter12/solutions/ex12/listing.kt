@@ -67,4 +67,4 @@ fun <A> treeTraversable() = object : Traversable<ForTree> {
         }
     }
 }
-//tag::init3[]
+//end::init3[]
