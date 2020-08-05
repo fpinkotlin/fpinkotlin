@@ -1,11 +1,32 @@
 package chapter12.solutions.ex13
 
 import arrow.Kind
+import arrow.core.ForId
 import arrow.core.Id
+import arrow.core.IdOf
+import arrow.core.extensions.id.apply.map2
 import arrow.core.fix
-import arrow.typeclasses.Applicative
-import arrow.typeclasses.internal.IdBimonad
+import arrow.syntax.function.tupled
+import chapter12.Applicative
 import chapter12.Functor
+
+val idApplicative: Applicative<ForId> =
+    object : Applicative<ForId> {
+        override fun <A> unit(a: A): IdOf<A> = Id(a)
+
+        override fun <A, B, C> map2(
+            fa: IdOf<A>,
+            fb: IdOf<B>,
+            f: (A, B) -> C
+        ): IdOf<C> =
+            fa.fix().map2(fb, f.tupled())
+
+        override fun <A, B> map(
+            fa: IdOf<A>,
+            f: (A) -> B
+        ): IdOf<B> =
+            fa.fix().map(f)
+    }
 
 //tag::init1[]
 interface Traversable<F> : Functor<F> {
@@ -24,6 +45,6 @@ interface Traversable<F> : Functor<F> {
         traverse(fga, AG) { it }
 
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
-        traverse(fa, IdBimonad) { Id(f(it)) }.fix().extract()
+        traverse(fa, idApplicative) { Id(f(it)) }.fix().extract()
 }
 //end::init1[]

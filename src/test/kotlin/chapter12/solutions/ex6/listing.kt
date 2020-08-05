@@ -6,14 +6,14 @@ import chapter12.sec4.Validation
 import chapter12.sec4.ValidationOf
 import chapter12.sec4.ValidationPartialOf
 import chapter12.sec4.fix
-import chapter12.exercises.ex3.Applicative
+import chapter12.Applicative
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import java.time.Instant
 import java.util.Date
 
 //tag::init1[]
-fun <E> validationApplicative() =
+fun <E> validation() =
     object : Applicative<ValidationPartialOf<E>> {
 
         override fun <A, B> apply(
@@ -31,7 +31,7 @@ fun <E> validationApplicative() =
         ): ValidationOf<E, B> =
             apply(unit(f), fa)
 
-        fun <A, B, C> map2(
+        override fun <A, B, C> map2(
             fa: ValidationOf<E, A>,
             fb: ValidationOf<E, B>,
             f: (A, B) -> C
@@ -71,7 +71,7 @@ class ValidationSpec : WordSpec({
 
         fun <A> invalidInput(input: A) = Failure("invalid: $input")
 
-        val F = chapter12.exercises.ex6.validation<String>()
+        val F = validation<String>()
 
         val name = "Claire"
         val dob = Date.from(Instant.now())

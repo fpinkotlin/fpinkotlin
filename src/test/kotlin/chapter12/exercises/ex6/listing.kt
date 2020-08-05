@@ -17,7 +17,7 @@ fun <E> validation(): Applicative<ValidationPartialOf<E>> = TODO()
 //end::init1[]
 
 class ValidationSpec : WordSpec({
-    "validation" should {
+    "!validation" should {
 
         data class WebForm(val f1: String, val f2: Date, val f3: String)
 

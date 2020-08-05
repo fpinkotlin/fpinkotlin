@@ -1,23 +1,48 @@
 package chapter12.solutions.ex15
 
 import arrow.Kind
+import arrow.core.ForId
 import arrow.core.ForListK
+import arrow.core.Id
+import arrow.core.IdOf
+import arrow.core.ListK
+import arrow.core.ListKOf
+import arrow.core.extensions.id.apply.map2
+import arrow.core.fix
 import arrow.core.k
+import arrow.syntax.function.tupled
 import chapter10.Foldable
 import chapter11.State
 import chapter11.fix
 import chapter12.Functor
-import chapter12.exercises.ex15.Traversable
 import chapter12.sec7_2.Applicative
 import chapter12.sec7_2.stateMonad
 import chapter12.sec7_2.stateMonadApplicative
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
+val idApplicative: Applicative<ForId> =
+    object : Applicative<ForId> {
+        override fun <A> unit(a: A): IdOf<A> = Id(a)
+
+        override fun <A, B, C> map2(
+            fa: IdOf<A>,
+            fb: IdOf<B>,
+            f: (A, B) -> C
+        ): IdOf<C> =
+            fa.fix().map2(fb, f.tupled())
+
+        override fun <A, B> map(
+            fa: IdOf<A>,
+            f: (A) -> B
+        ): IdOf<B> =
+            fa.fix().map(f)
+    }
+
 interface Traversable<F> : Functor<F>, Foldable<F> {
 
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
-        TODO()
+        traverse(fa, idApplicative) { Id(f(it)) }.fix().extract()
 
     override fun <A, B> foldRight(
         fa: Kind<F, A>,
@@ -71,15 +96,25 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
     //end::init[]
 }
 
-class Exercise16 : WordSpec({
+val T = object : Traversable<ForListK> {
+    override fun <G, A, B> traverse(
+        fa: ListKOf<A>,
+        AG: Applicative<G>,
+        f: (A) -> Kind<G, B>
+    ): Kind<G, ListKOf<B>> =
+        fa.fix().foldLeft(AG.unit(ListK.empty<B>())) { acc, a ->
+            AG.map2(acc, f(a)) { lb: List<B>, b: B -> ListK(lb + b) }
+        }
+}
 
-    val T = object : Traversable<ForListK> {}
+class Exercise16 : WordSpec({
 
     val x = listOf(1, 2, 3, 4, 5).k()
     val y = listOf(6, 7, 8, 9, 10).k()
 
     "reverse" should {
         "reverse the order of any traversable functor" {
+            //turns a List into a Arrow LiskK by using the .k() extension
             T.reverse(
                 listOf(1, 2, 3, 4, 5).k()
             ) shouldBe listOf(5, 4, 3, 2, 1)

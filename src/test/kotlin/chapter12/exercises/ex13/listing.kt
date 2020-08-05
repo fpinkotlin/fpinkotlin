@@ -1,8 +1,11 @@
 package chapter12.exercises.ex13
 
 import arrow.Kind
-import arrow.typeclasses.Applicative
+import arrow.core.ForId
+import chapter12.Applicative
 import chapter12.Functor
+
+val idApplicative: Applicative<ForId> = TODO()
 
 //tag::init1[]
 interface Traversable<F> : Functor<F> {
