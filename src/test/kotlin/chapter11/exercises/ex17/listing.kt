@@ -17,12 +17,6 @@ val intMonad: StateMonad<Int> = object : StateMonad<Int> {
         f: (A) -> StateOf<Int, B>
     ): StateOf<Int, B> =
         fa.fix().flatMap { a -> f(a).fix() }
-
-    override fun <A, B, C> compose(
-        f: (A) -> Kind<StatePartialOf<Int>, B>,
-        g: (B) -> Kind<StatePartialOf<Int>, C>
-    ): (A) -> Kind<StatePartialOf<Int>, C> =
-        { a -> f(a).fix().flatMap { b -> g(b).fix() } }
 }
 
 fun main() {

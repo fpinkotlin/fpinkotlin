@@ -21,11 +21,6 @@ interface Listing<F, G> {
                 f: (A) -> CompositeOf<F, G, B>
             ): CompositeOf<F, G, B> =
                 TODO("Simply can't be done!")
-
-            override fun <A, B, C> compose(
-                f: (A) -> CompositeOf<F, G, B>,
-                g: (B) -> CompositeOf<F, G, C>
-            ): (A) -> CompositeOf<F, G, C> = TODO()
         }
     //end::init1[]
 }

@@ -77,6 +77,7 @@ interface Functor<F> {
 interface Monad<F> : Functor<F> {
 
     fun <A> unit(a: A): Kind<F, A>
+
     fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
 
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
@@ -116,7 +117,8 @@ interface Monad<F> : Functor<F> {
     fun <A, B, C> compose(
         f: (A) -> Kind<F, B>,
         g: (B) -> Kind<F, C>
-    ): (A) -> Kind<F, C>
+    ): (A) -> Kind<F, C> =
+        { a -> flatMap(f(a)) { b -> g(b) } }
 
     fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
         flatMap(mma) { ma -> ma }
@@ -130,11 +132,6 @@ val listKMonad = object : Monad<ForListK> {
         f: (A) -> ListKOf<B>
     ): ListKOf<B> =
         fa.fix().flatMap(f)
-
-    override fun <A, B, C> compose(
-        f: (A) -> Kind<ForListK, B>,
-        g: (B) -> Kind<ForListK, C>
-    ): (A) -> Kind<ForListK, C> = TODO()
 }
 
 val listMonad = object : Monad<ForList> {
@@ -145,12 +142,6 @@ val listMonad = object : Monad<ForList> {
         f: (A) -> ListOf<B>
     ): ListOf<B> =
         fa.fix().flatMap { a -> f(a).fix() }
-
-    override fun <A, B, C> compose(
-        f: (A) -> ListOf<B>,
-        g: (B) -> ListOf<C>
-    ): (A) -> ListOf<C> =
-        { a -> f(a).fix().flatMap { b -> g(b).fix() } }
 }
 
 typealias StateMonad<S> = Monad<StatePartialOf<S>>

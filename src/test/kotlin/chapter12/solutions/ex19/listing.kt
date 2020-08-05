@@ -47,12 +47,5 @@ fun <G, H, A> composeM(
                     }
                 )
             )
-
-        override fun <A, B, C> compose(
-            f: (A) -> Kind<CompositePartialOf<G, H>, B>,
-            g: (B) -> Kind<CompositePartialOf<G, H>, C>
-        ): (A) -> Kind<CompositePartialOf<G, H>, C> {
-            TODO()
-        }
     }
 //end::init[]
