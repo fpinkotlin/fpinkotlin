@@ -9,6 +9,10 @@ import chapter12.CompositePartialOf
 import chapter12.Traversable
 import chapter12.fix
 
+fun <F> applicative() = object : Applicative<F> {
+    override fun <A> unit(a: A): Kind<F, A> = TODO()
+}
+
 //tag::init[]
 fun <G, H, A> composeM(
     MG: Monad<G>,
@@ -22,20 +26,27 @@ fun <G, H, A> composeM(
             Composite(MG.unit(MH.unit(a)))
 
         override fun <A, B> flatMap(
-            mna: CompositeOf<G, H, A>,
+            cgha: CompositeOf<G, H, A>,
             f: (A) -> CompositeOf<G, H, B>
-        ): CompositeOf<G, H, B> {
-            return Composite(
-                MG.map(mna.fix().value) { na: Kind<H, A> ->
-                    val traverse: Kind<H, Kind<H, B>> =
-                        TH.traverse<H, A, B>(na, AH) { a ->
-                            f(a).fix().value
-                            TODO("Deal with this incompatibility!")
-                        }
-                    MH.join(traverse)
-                }
+        ): CompositeOf<G, H, B> =
+            Composite( // <8>
+                MG.join( // <7>
+                    MG.map(cgha.fix().value) { ha -> // <6>
+                        MG.map( // <5>
+                            TH.sequence( // <4>
+                                MH.map( // <3>
+                                    AH.apply( // <2>
+                                        AH.unit(f), // <1>
+                                        ha
+                                    )
+                                ) { cghbc ->
+                                    cghbc.fix().value // <3>
+                                }, applicative() // <4>
+                            )
+                        ) { MH.join(it) } // <5>
+                    }
+                )
             )
-        }
 
         override fun <A, B, C> compose(
             f: (A) -> Kind<CompositePartialOf<G, H>, B>,
