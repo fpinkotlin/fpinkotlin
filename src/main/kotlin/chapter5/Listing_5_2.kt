@@ -9,8 +9,8 @@ sealed class Stream<out A> {
         //smart constructors
         //tag::cons[]
         fun <A> cons(hd: () -> A, tl: () -> Stream<A>): Stream<A> {
-            val head: A by lazy { hd() }
-            val tail: Stream<A> by lazy { tl() }
+            val head: A by lazy(hd)
+            val tail: Stream<A> by lazy(tl)
             return Cons({ head }, { tail })
         }
         //end::cons[]
