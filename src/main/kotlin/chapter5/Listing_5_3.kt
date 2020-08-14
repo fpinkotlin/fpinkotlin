@@ -21,7 +21,7 @@ object Listing_5_3 {
     //tag::exists1[]
     fun <A> Stream<A>.exists(p: (A) -> Boolean): Boolean =
         when (this) {
-            is Cons -> p(this.h()) || this.t().exists(p)
+            is Cons -> p(this.head()) || this.tail().exists(p)
             else -> false
         }
     //end::exists1[]
@@ -32,7 +32,7 @@ object Listing_5_3 {
         f: (A, () -> B) -> B
     ): B = // <1>
         when (this) {
-            is Cons -> f(this.h()) { t().foldRight(z, f) } // <2>
+            is Cons -> f(this.head()) { tail().foldRight(z, f) } // <2>
             else -> z()
         }
     //end::foldright[]

@@ -16,7 +16,7 @@ fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> =
     unfold(this,
         { s: Stream<A> ->
             when (s) {
-                is Cons -> Some(Pair(f(s.h()), s.t()))
+                is Cons -> Some(Pair(f(s.head()), s.tail()))
                 else -> None
             }
         })
@@ -29,7 +29,7 @@ fun <A> Stream<A>.take(n: Int): Stream<A> =
             when (s) {
                 is Cons ->
                     if (n > 0)
-                        Some(Pair(s.h(), s.t().take(n - 1)))
+                        Some(Pair(s.head(), s.tail().take(n - 1)))
                     else None
                 else -> None
             }
@@ -42,8 +42,8 @@ fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
         { s: Stream<A> ->
             when (s) {
                 is Cons ->
-                    if (p(s.h()))
-                        Some(Pair(s.h(), s.t()))
+                    if (p(s.head()))
+                        Some(Pair(s.head(), s.tail()))
                     else None
                 else -> None
             }
@@ -62,8 +62,8 @@ fun <A, B, C> Stream<A>.zipWith(
                     is Cons ->
                         Some(
                             Pair(
-                                f(ths.h(), tht.h()),
-                                Pair(ths.t(), tht.t())
+                                f(ths.head(), tht.head()),
+                                Pair(ths.tail(), tht.tail())
                             )
                         )
                     else -> None
@@ -83,15 +83,15 @@ fun <A, B> Stream<A>.zipAll(
                 is Cons ->
                     Some(
                         Pair(
-                            Pair(Some(ths.h()), Some(tht.h())),
-                            Pair(ths.t(), tht.t())
+                            Pair(Some(ths.head()), Some(tht.head())),
+                            Pair(ths.tail(), tht.tail())
                         )
                     )
                 else ->
                     Some(
                         Pair(
-                            Pair(Some(ths.h()), None),
-                            Pair(ths.t(), empty<B>())
+                            Pair(Some(ths.head()), None),
+                            Pair(ths.tail(), empty<B>())
                         )
                     )
             }
@@ -99,8 +99,8 @@ fun <A, B> Stream<A>.zipAll(
                 is Cons ->
                     Some(
                         Pair(
-                            Pair(None, Some(tht.h())),
-                            Pair(empty<A>(), tht.t())
+                            Pair(None, Some(tht.head())),
+                            Pair(empty<A>(), tht.tail())
                         )
                     )
                 else -> None

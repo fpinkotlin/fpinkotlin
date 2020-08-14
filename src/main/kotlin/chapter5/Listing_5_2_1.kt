@@ -9,7 +9,7 @@ object Listing_5_2_1 {
     fun <A> Stream<A>.headOption(): Option<A> =
         when (this) {
             is Empty -> None
-            is Cons -> Some(h()) // <1>
+            is Cons -> Some(head()) // <1>
         }
     //end::init[]
 

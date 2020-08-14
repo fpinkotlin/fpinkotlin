@@ -16,8 +16,8 @@ class Solution_5_3 : WordSpec({
         when (this) {
             is Empty -> empty()
             is Cons ->
-                if (p(this.h()))
-                    cons(this.h, { this.t().takeWhile(p) })
+                if (p(this.head()))
+                    cons(this.head, { this.tail().takeWhile(p) })
                 else empty()
         }
     //end::init[]

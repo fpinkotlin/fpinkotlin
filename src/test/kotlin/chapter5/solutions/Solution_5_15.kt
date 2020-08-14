@@ -17,7 +17,7 @@ class Solution_5_15 : WordSpec({
         unfold(this) { s: Stream<A> ->
             when (s) {
                 is Cons ->
-                    Some(Pair(s, s.t()))
+                    Some(Pair(s, s.tail()))
                 else -> None
             }
         }

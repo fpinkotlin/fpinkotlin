@@ -14,14 +14,14 @@ import chapter3.Nil as NilL
 //Unsafe! Naive solution could cause a stack overflow.
 fun <A> Stream<A>.toListUnsafe(): List<A> = when (this) {
     is Empty -> NilL
-    is Cons -> ConsL(this.h(), this.t().toListUnsafe())
+    is Cons -> ConsL(this.head(), this.tail().toListUnsafe())
 }
 
 //Use tailrec in combination with reverse for a safer implementation
 fun <A> Stream<A>.toList(): List<A> {
     tailrec fun go(xs: Stream<A>, acc: List<A>): List<A> = when (xs) {
         is Empty -> acc
-        is Cons -> go(xs.t(), ConsL(xs.h(), acc))
+        is Cons -> go(xs.tail(), ConsL(xs.head(), acc))
     }
     return reverse(go(this, NilL))
 }

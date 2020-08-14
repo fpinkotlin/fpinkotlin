@@ -7,7 +7,7 @@ import chapter4.solutions.map
 object Boilerplate {
     fun <A, B> Stream<A>.foldRight(z: () -> B, f: (A, () -> B) -> B): B =
         when (this) {
-            is Cons -> f(this.h()) { this.t().foldRight(z, f) }
+            is Cons -> f(this.head()) { this.tail().foldRight(z, f) }
             is Empty -> z()
         }
 

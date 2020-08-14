@@ -18,7 +18,7 @@ class Solution_5_2 : WordSpec({
             is Empty -> empty()
             is Cons ->
                 if (n == 0) empty()
-                else cons(xs.h, { go(xs.t(), n - 1) })
+                else cons(xs.head, { go(xs.tail(), n - 1) })
         }
         return go(this, n)
     }
@@ -30,7 +30,7 @@ class Solution_5_2 : WordSpec({
             is Empty -> empty()
             is Cons ->
                 if (n == 0) xs
-                else go(xs.t(), n - 1)
+                else go(xs.tail(), n - 1)
         }
         return go(this, n)
     }
