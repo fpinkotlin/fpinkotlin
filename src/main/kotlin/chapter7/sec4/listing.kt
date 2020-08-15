@@ -1,6 +1,7 @@
 package chapter7.sec4
 
 import chapter7.sec3.Pars
+import java.lang.AssertionError
 import java.util.concurrent.Callable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -20,13 +21,6 @@ val step1 = {
     //tag::init1[]
     map(unit(1)) { it + 1 } == unit(2)
     //end::init1[]
-}
-
-val step2 = {
-    //tag::init2[]
-    fun <A> equal(es: ExecutorService, p1: Par<A>, p2: Par<A>): Boolean =
-        p1(es).get() == p2(es).get()
-    //end::init2[]
 }
 
 val step3 = {
@@ -68,13 +62,19 @@ val step5 = {
 }
 
 val step6 = {
-    fun <A> equal(es: ExecutorService, p1: Par<A>, p2: Par<A>): Boolean =
-        p1(es).get() == p2(es).get()
+    //tag::init2[]
+    infix fun <A> Par<A>.shouldBe(other: Par<A>) = { es: ExecutorService ->
+        if (this(es).get() != other(es).get())
+            throw AssertionError("Par instances not equal")
+    }
+    //end::init2[]
 
     //tag::init6[]
-    val a = lazyUnit { 42 + 1 }
     val es = Executors.newFixedThreadPool(1)
-    equal(es, a, fork { a })
+
+    val a: Par<Int> = lazyUnit { 42 + 1 }
+    val b: Par<Int> = fork { a }
+    (a shouldBe b)(es)
     //end::init6[]
 }
 
