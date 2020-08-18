@@ -36,15 +36,20 @@ fun main() {
     //end::init4[]
 
     //tag::init5[]
-    val gen: Gen<List<Int>> =
+    val gen: Gen<Boolean> =
         Gen.listOfN(100, Gen.choose(1, 100)).flatMap { ls: List<Int> ->
             Gen.choose(1, 10).flatMap { threshold: Int ->
                 genIntBooleanFn(threshold).map { fn: (Int) -> Boolean ->
-                    ls.takeWhile(fn)
+                    ls.takeWhile(fn).forAll(fn)
                 }
             }
         }
     //end::init5[]
 
-    println(gen.sample.run(SimpleRNG(98)))
+    println(
+        //tag::init6[]
+        Prop.forAll(gen) { passed: Boolean -> passed }
+            .check(10, 100, SimpleRNG(100))
+        //end::init6[]
+    )
 }
