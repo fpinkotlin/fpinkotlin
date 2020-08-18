@@ -1,9 +1,9 @@
 package chapter8.sec5
 
 import arrow.core.extensions.list.foldable.forAll
-import chapter8.SimpleRNG
 import chapter8.sec3.listing3.Gen
 import chapter8.sec3.listing3.Prop
+import chapter8.sec4.listing1.run
 
 val listing = {
 
@@ -38,7 +38,7 @@ fun main() {
     //tag::init5[]
     val gen: Gen<Boolean> =
         Gen.listOfN(100, Gen.choose(1, 100)).flatMap { ls: List<Int> ->
-            Gen.choose(1, 10).flatMap { threshold: Int ->
+            Gen.choose(1, ls.size / 2).flatMap { threshold: Int ->
                 genIntBooleanFn(threshold).map { fn: (Int) -> Boolean ->
                     ls.takeWhile(fn).forAll(fn)
                 }
@@ -46,10 +46,7 @@ fun main() {
         }
     //end::init5[]
 
-    println(
-        //tag::init6[]
-        Prop.forAll(gen) { passed: Boolean -> passed }
-            .check(10, 100, SimpleRNG(100))
-        //end::init6[]
-    )
+    //tag::init6[]
+    run(Prop.forAll(gen) { success -> success })
+    //end::init6[]
 }
