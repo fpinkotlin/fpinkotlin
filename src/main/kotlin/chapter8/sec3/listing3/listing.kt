@@ -21,6 +21,8 @@ data class Gen<A>(val sample: State<RNG, A>) {
             Gen(State { rng: RNG -> nonNegativeInt(rng) }
                 .map { (start + it) % (stopExclusive - start) })
 
+        fun string(): Gen<String> = TODO()
+
         fun <A> listOfN(n: Int, ga: Gen<A>): Gen<List<A>> =
             Gen(State.sequence(List(n) { ga.sample }))
 
@@ -69,14 +71,14 @@ data class Prop(val check: (MaxSize, TestCases, RNG) -> Result) {
         fun <A> forAll(g: (Int) -> Gen<A>, f: (A) -> Boolean): Prop =
             Prop { max, n, rng ->
 
-                val casePerSize = (n + (max - 1)) / max // <2>
+                val casePerSize: Int = (n + (max - 1)) / max // <2>
 
-                val props =
+                val props: Sequence<Prop> =
                     generateSequence(0) { it + 1 } // <3>
                         .take(min(n, max) + 1)
                         .map { i -> forAll(g(i), f) } // <4>
 
-                val prop = props.map { p ->
+                val prop: Prop = props.map { p ->
                     Prop { max, _, rng ->
                         p.check(max, casePerSize, rng)
                     }
@@ -123,7 +125,7 @@ data class Prop(val check: (MaxSize, TestCases, RNG) -> Result) {
         //end::ignore[]
     }
 
-    fun and(p: Prop) =
+    fun and(p: Prop): Prop =
         Prop { max, n, rng -> // <7>
             when (val prop = check(max, n, rng)) {
                 is Passed -> p.check(max, n, rng)
