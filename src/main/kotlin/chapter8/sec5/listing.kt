@@ -22,21 +22,29 @@ val listing = {
     fun genStringIntFn(g: Gen<Int>): Gen<(String) -> Int> =
         g.map { i -> { _: String -> i } }
     //end::init2[]
+
+    //tag::init3[]
+    fun genIntBooleanFn(g: Gen<Boolean>): Gen<(Int) -> Boolean> =
+        g.map { b: Boolean -> { _: Int -> b } }
+    //end::init3[]
 }
 
 fun main() {
-    //tag::init3[]
-    fun genStringIntFn(g: Gen<Int>): Gen<(String) -> Int> =
-        g.map { i: Int ->
-            { s: String -> s.hashCode() + i }
-        }
+    //tag::init4[]
+    fun genIntBooleanFn(t: Int): Gen<(Int) -> Boolean> =
+        Gen.unit { i: Int -> i > t }
+    //end::init4[]
 
-    val gen: Gen<Int> =
-        Gen.string().flatMap { s ->
-            genStringIntFn(Gen.choose(0, 100))
-                .map { f: (String) -> Int -> f(s) }
+    //tag::init5[]
+    val gen: Gen<List<Int>> =
+        Gen.listOfN(100, Gen.choose(1, 100)).flatMap { ls: List<Int> ->
+            Gen.choose(1, 10).flatMap { threshold: Int ->
+                genIntBooleanFn(threshold).map { fn: (Int) -> Boolean ->
+                    ls.takeWhile(fn)
+                }
+            }
         }
-    //end::init3[]
+    //end::init5[]
 
-    println(gen.sample.run(SimpleRNG(1000)))
+    println(gen.sample.run(SimpleRNG(98)))
 }
