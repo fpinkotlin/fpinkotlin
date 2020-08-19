@@ -170,11 +170,5 @@ interface EitherApplicative<E> : Applicative<EitherPartialOf<E>>
 data class Tree<out A>(val head: A, val tail: List<Tree<A>>) : TreeOf<A>
 //end::init[]
 
-//tag::init2[]
-@higherkind
-data class Const<M, out A>(val value: M) : ConstOf<M, A>
-//end::init2[]
-
-
 fun assertEqual(o1: Any, o2: Any): Unit =
     if (o1 != o2) throw AssertionError("$o1 not equal to $o2") else Unit

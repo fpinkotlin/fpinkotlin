@@ -3,8 +3,10 @@ package chapter11.sec5_2
 import arrow.Kind
 import arrow.Kind2
 import arrow.core.extensions.list.foldable.foldLeft
+import arrow.higherkind
 import chapter11.sec2.Monad
 
+@higherkind
 //tag::init1[]
 data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A>
 //end::init1[]
@@ -32,32 +34,16 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A>
 }
 
 //tag::init2[]
-sealed class ForState private constructor() { // <1>
-    companion object
-}
+interface StateMonad<S> : Monad<StatePartialOf<S>> { // <1>
 
-typealias StateOf<S, A> = Kind2<ForState, S, A> // <2>
-
-fun <S, A> StateOf<S, A>.fix() = this as State<S, A> // <3>
-
-typealias StatePartialOf<S> = Kind<ForState, S> // <4>
-
-interface StateMonad<S> : Monad<StatePartialOf<S>> { // <5>
-
-    override fun <A> unit(a: A): StateOf<S, A> // <6>
+    override fun <A> unit(a: A): StateOf<S, A> // <2>
 
     override fun <A, B> flatMap(
         fa: StateOf<S, A>,
         f: (A) -> StateOf<S, B>
-    ): StateOf<S, B> // <6>
+    ): StateOf<S, B>
 }
 //end::init2[]
-
-//tag::init3[]
-interface Kind<out F, out A>
-typealias Kind2<F, A, B> = Kind<Kind<F, A>, B>
-typealias Kind3<F, A, B, C> = Kind<Kind2<F, A, B>, C>
-//end::init3[]
 
 //tag::init4[]
 val intStateMonad: StateMonad<Int> = object : StateMonad<Int> {

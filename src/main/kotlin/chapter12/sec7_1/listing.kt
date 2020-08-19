@@ -2,6 +2,7 @@ package chapter12.sec7_1
 
 import arrow.Kind
 import arrow.Kind2
+import arrow.higherkind
 import chapter10.Monoid
 import chapter12.Functor
 
@@ -51,18 +52,9 @@ interface Applicative<F> : Functor<F> {
 }
 
 //tag::init6[]
-class ForConst private constructor() { // <1>
-    companion object
-}
-
-typealias ConstOf<A, T> = Kind2<ForConst, A, T> // <1>
-
-typealias ConstPartialOf<A> = Kind<ForConst, A> // <1>
-
-data class Const<M, out A>(val value: M) : ConstOf<M, A>  // <2>
+@higherkind
+data class Const<M, out A>(val value: M) : ConstOf<M, A>
 //end::init6[]
-
-fun <A, T> ConstOf<A, T>.fix(): Const<A, T> = this as Const<A, T>
 
 //tag::init7[]
 fun <M> monoidApplicative(m: Monoid<M>): Applicative<ConstPartialOf<M>> =

@@ -39,8 +39,8 @@ typealias IntStateOf<A> = Kind<ForIntState, A>
 fun <A> IntStateOf<A>.fix() = this as IntState<A>
 
 //tag::init4[]
-val intState = object : Monad<ForIntState> {
-    override fun <A> unit(a: A): IntStateOf<A> =
+val intState = object : Monad<ForIntState> { // <1>
+    override fun <A> unit(a: A): IntStateOf<A> = // <2>
         IntState { s: Int -> Pair(a, s) }
 
     override fun <A, B> flatMap(
