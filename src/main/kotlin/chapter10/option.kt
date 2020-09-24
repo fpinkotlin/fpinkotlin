@@ -7,6 +7,7 @@ sealed class Option<out A> : OptionOf<A> {
     companion object {
         fun <A> empty(): Option<A> = None
     }
+
     fun <B> flatMap(f: (A) -> Option<B>): Option<B> =
         when (this) {
             is None -> None
