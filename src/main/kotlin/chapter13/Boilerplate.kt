@@ -1,6 +1,7 @@
 package chapter13
 
 import arrow.higherkind
+import chapter5.Stream
 
 data class IORef<A>(var value: A) {
     fun set(a: A): IO<A> = IO {value = a; a}
@@ -39,4 +40,15 @@ interface IO<A> : IOOf<A> {
             override fun run(): Pair<A, B> =
                 Pair(this@IO.run(), io.run())
         }
+}
+
+fun IntRange.toStream(): Stream<Int> {
+    fun stream(from: Int, to: Int): Stream<Int> =
+        when (from) {
+            this.last + 1 ->
+                Stream.empty()
+            else ->
+                Stream.cons({ from }, { stream(from + 1, to) })
+        }
+    return stream(this.first, this.last)
 }

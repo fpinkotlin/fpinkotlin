@@ -1,18 +1,18 @@
 package chapter13.sec2
 
 import arrow.Kind
+import chapter11.Functor
 import chapter13.ForIO
 import chapter13.IO
 import chapter13.IOOf
 import chapter13.IORef
 import chapter13.fix
+import chapter13.toStream
 import chapter5.Cons
 import chapter5.Empty
 import chapter5.Stream
 
-fun IntRange.toStream(): Stream<Int> = TODO()
-
-interface Monad<F> {
+interface Monad<F> : Functor<F> {
 
     fun <A> unit(a: A): Kind<F, A>
 
@@ -42,7 +42,13 @@ interface Monad<F> {
         f: (A) -> Kind<F, Unit>
     ): Kind<F, Unit>
 
-    fun <A> seq(fs: () -> Kind<F, A>): Kind<F, Unit>
+    fun <A> skip(fa: Kind<F, A>): Kind<F, Unit> = map(fa) { Unit }
+
+    fun <A> sequenceDiscard(sa: Stream<Kind<F, A>>): Kind<F, Unit> =
+        foreachM(sa) { a -> skip(a) }
+
+    fun <A> sequenceDiscard(vararg fa: Kind<F, A>): Kind<F, Unit> =
+        sequenceDiscard(Stream.of(*fa))
 
     fun <A> whenM(ok: Boolean, f: () -> Kind<F, A>): Kind<F, Boolean>
 }
@@ -57,6 +63,12 @@ val ioMonad = object : Monad<ForIO> {
         f: (A) -> IOOf<B>
     ): IOOf<B> =
         fa.fix().flatMap { a -> f(a).fix() }
+
+    override fun <A, B> map(
+        fa: Kind<ForIO, A>,
+        f: (A) -> B
+    ): Kind<ForIO, B> =
+        flatMap(fa.fix()) { a -> unit(f(a)) }
 
     //tag::init2[]
     override fun <A> doWhile( // <1>
@@ -106,13 +118,11 @@ val ioMonad = object : Monad<ForIO> {
     ): IOOf<Boolean> =
         if (ok) f().fix().map { true } else unit(false)
     //end::init2[]
-
-    override fun <A> seq(fs: () -> IOOf<A>): IOOf<Unit> = TODO()
 }
 
 object FactorialREPL {
 
-    val helpstring = """
+    private val help = """
         | The Amazing Factorial REPL, v0.1
         | q - quit
         | <number> - compute the factorial of the given number
@@ -130,16 +140,19 @@ object FactorialREPL {
         }
 
     val factorialREPL: IO<Unit> =
-        ioMonad.seq {
-            IO { println(helpstring) }.flatMap {
-                ioMonad.doWhile(IO { readLine().orEmpty() }) { line -> // <5>
-                    ioMonad.whenM(line != "q") {
-                        factorial(line.toInt()).flatMap { n ->
-                            IO { println("factorial: $n") }
-                        }
+        ioMonad.sequenceDiscard(
+            IO { println(help) }.fix(),
+            ioMonad.doWhile(IO { readLine().orEmpty() }) { line -> // <5>
+                ioMonad.whenM(line != "q") {
+                    factorial(line.toInt()).flatMap { n ->
+                        IO { println("factorial: $n") }
                     }
-                }.fix()
-            }
-        }.fix()
+                }
+            }.fix()
+        ).fix()
     //end::init1[]
+}
+
+fun main() {
+    FactorialREPL.factorialREPL.run()
 }
