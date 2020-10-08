@@ -1,6 +1,7 @@
 package chapter13
 
 import arrow.Kind
+import arrow.extension
 import arrow.higherkind
 import chapter12.Functor
 import chapter5.Cons
@@ -13,7 +14,13 @@ data class IORef<A>(var value: A) {
     fun modify(f: (A) -> A): IO<A> = get().flatMap { a -> set(f(a)) }
 }
 
-@higherkind
+class ForIO {
+    companion object
+}
+typealias IOOf<A> = Kind<ForIO, A>
+
+inline fun <A> IOOf<A>.fix(): IO<A> = this as IO<A>
+
 interface IO<A> : IOOf<A> {
 
     companion object {
@@ -25,9 +32,6 @@ interface IO<A> : IOOf<A> {
         operator fun <A> invoke(a: () -> A) = unit(a)
 
         fun ref(i: Int): IO<IORef<Int>> = IO { IORef(i) }
-
-        fun <A, B> forever(ioa: IO<A>): IOOf<B> =
-            ioMonad.forever(ioa.fix())
     }
 
     fun run(): A
@@ -47,17 +51,6 @@ interface IO<A> : IOOf<A> {
             override fun run(): Pair<A, B> =
                 Pair(this@IO.run(), io.run())
         }
-}
-
-fun IntRange.toStream(): Stream<Int> {
-    fun stream(from: Int, to: Int): Stream<Int> =
-        when (from) {
-            this.last + 1 ->
-                Stream.empty()
-            else ->
-                Stream.cons({ from }, { stream(from + 1, to) })
-        }
-    return stream(this.first, this.last)
 }
 
 interface Monad<F> : Functor<F> {
@@ -95,13 +88,11 @@ interface Monad<F> : Functor<F> {
     fun <A> sequenceDiscard(sa: Stream<Kind<F, A>>): Kind<F, Unit> =
         foreachM(sa) { a -> skip(a) }
 
-    fun <A> sequenceDiscard(vararg fa: Kind<F, A>): Kind<F, Unit> =
-        sequenceDiscard(Stream.of(*fa))
-
     fun <A> whenM(ok: Boolean, f: () -> Kind<F, A>): Kind<F, Boolean>
 }
 
-val ioMonad = object : Monad<ForIO> {
+@extension
+interface IOMonad : Monad<ForIO> {
 
     override fun <A> unit(a: A): IOOf<A> =
         IO.unit { a }.fix()
@@ -123,7 +114,7 @@ val ioMonad = object : Monad<ForIO> {
         cond: (A) -> IOOf<Boolean>
     ): IOOf<Unit> =
         fa.fix().flatMap { a: A ->
-            cond(a).fix().flatMap<Unit> { ok: Boolean ->
+            cond(a).fix().flatMap { ok: Boolean ->
                 if (ok) doWhile(fa, cond).fix() else unit(Unit).fix()
             }
         }
@@ -164,8 +155,22 @@ val ioMonad = object : Monad<ForIO> {
         f: () -> IOOf<A>
     ): IOOf<Boolean> =
         if (ok) f().fix().map { true } else unit(false)
+
+    fun <A> sequenceDiscard(vararg fa: IOOf<A>): IOOf<Unit> =
+        sequenceDiscard(Stream.of(*fa))
 }
 
 fun stdin(): IO<String> = IO { readLine().orEmpty() }
 
 fun stdout(msg: String): IO<Unit> = IO { println(msg) }
+
+fun IntRange.toStream(): Stream<Int> {
+    fun stream(from: Int, to: Int): Stream<Int> =
+        when (from) {
+            this.last + 1 ->
+                Stream.empty()
+            else ->
+                Stream.cons({ from }, { stream(from + 1, to) })
+        }
+    return stream(this.first, this.last)
+}

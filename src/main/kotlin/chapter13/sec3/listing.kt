@@ -2,13 +2,14 @@ package chapter13.sec3
 
 import chapter13.IO
 import chapter13.fix
+import chapter13.io.monad.monad
 import chapter13.stdout
 
 //tag::init1[]
 val p: IO<Unit> =
-    IO.forever<Unit, Unit>(
-        stdout("Still going...")
-    ).fix()
+    IO.monad() // <1>
+        .forever<Unit, Unit>(stdout("Still going...")) // <2>
+        .fix() // <3>
 //end::init1[]
 
 interface IO<A> {
