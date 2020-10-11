@@ -1,31 +1,20 @@
 package chapter13.solutions.ex2
 
-import chapter13.FlatMap
-import chapter13.Free
-import chapter13.Return
-import chapter13.Suspend
-import chapter13.fix
+import chapter13.boilerplate.free.FlatMap
+import chapter13.boilerplate.free.Free
+import chapter13.boilerplate.free.Return
+import chapter13.boilerplate.free.Suspend
+import chapter13.boilerplate.function.ForFunction0
+import chapter13.boilerplate.function.fix
 
-operator fun <A> Function0Of<A>.invoke(): A = this.fix().f()
-
-class ForFunction0 private constructor() {
-    companion object
-}
-typealias Function0Of<A> = arrow.Kind<ForFunction0, A>
-
-@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
-inline fun <A> Function0Of<A>.fix(): Function0<A> = this as Function0<A>
-
-data class Function0<out A>(internal val f: () -> A) : Function0Of<A>
-
+@Suppress("UNCHECKED_CAST")
 //tag::init1[]
 tailrec fun <A> runTrampoline(ffa: Free<ForFunction0, A>): A =
     when (ffa) {
         is Return -> ffa.a
-        is Suspend -> ffa.s.invoke()
+        is Suspend -> ffa.s.fix().f()
         is FlatMap<*, *, *> -> {
-            val sout: Free<ForFunction0, A> =
-                ffa.s.fix() as Free<ForFunction0, A>
+            val sout = ffa.s as Free<ForFunction0, A>
             val fout = ffa.f as (A) -> Free<ForFunction0, A>
             when (sout) {
                 is FlatMap<*, *, *> -> {
@@ -34,7 +23,7 @@ tailrec fun <A> runTrampoline(ffa: Free<ForFunction0, A>): A =
                     runTrampoline(sin.flatMap { a: A -> fin(a).flatMap(fout) })
                 }
                 is Return -> sout.a
-                is Suspend -> sout.s.invoke()
+                is Suspend -> sout.s.fix().f()
             }
         }
     }

@@ -1,6 +1,7 @@
 package chapter13.solutions.ex1
 
 import arrow.Kind
+import arrow.Kind2
 
 interface Functor<F> {
     fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B>
@@ -14,9 +15,8 @@ interface Monad<F> : Functor<F> {
 }
 
 class ForFree private constructor() { companion object }
-typealias FreeOf<F, A> = arrow.Kind2<ForFree, F, A>
-typealias FreePartialOf<F> = arrow.Kind<ForFree, F>
-typealias FreeKindedJ<F, A> = arrow.HkJ2<ForFree, F, A>
+typealias FreeOf<F, A> = Kind2<ForFree, F, A>
+typealias FreePartialOf<F> = Kind<ForFree, F>
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 inline fun <F, A> FreeOf<F, A>.fix(): Free<F, A> = this as Free<F, A>
 

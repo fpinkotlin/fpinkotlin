@@ -2,11 +2,12 @@ package chapter13.sec2
 
 import arrow.Kind
 import chapter11.Functor
-import chapter13.ForIO
-import chapter13.IO
-import chapter13.IOOf
-import chapter13.IORef
-import chapter13.fix
+import chapter13.boilerplate.io.ForIO
+import chapter13.boilerplate.io.IO
+import chapter13.boilerplate.io.IOOf
+import chapter13.boilerplate.io.IORef
+import chapter13.boilerplate.io.fix
+
 import chapter13.toStream
 import chapter5.Cons
 import chapter5.Empty

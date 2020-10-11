@@ -1,7 +1,7 @@
 package chapter13.sec4.free
 
 import arrow.Kind
-import chapter13.FreeOf
+import chapter13.boilerplate.free.FreeOf
 
 //tag::init[]
 sealed class Free<F, A> : FreeOf<F, A> // <1>
