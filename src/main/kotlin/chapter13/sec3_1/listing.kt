@@ -97,7 +97,7 @@ sealed class IO<A> : IOOf<A> {
 }
 
 data class Return<A>(val a: A) : IO<A>() // <1>
-data class Suspend<A>(val r: () -> A) : IO<A>() // <2>
+data class Suspend<A>(val resume: () -> A) : IO<A>() // <2>
 data class FlatMap<A, B>(
     val sub: IO<A>,
     val f: (A) -> IO<B>
@@ -117,7 +117,7 @@ val p = IO.monad()
 tailrec fun <A> run(io: IO<A>): A =
     when (io) {
         is Return -> io.a
-        is Suspend -> io.r()
+        is Suspend -> io.resume()
         is FlatMap<*, *> -> { // <1>
             val x = io.sub as IO<A>
             val f = io.f as (A) -> IO<A>
@@ -125,7 +125,7 @@ tailrec fun <A> run(io: IO<A>): A =
                 is Return ->
                     run(f(x.a))
                 is Suspend -> // <2>
-                    run(f(x.r()))
+                    run(f(x.resume()))
                 is FlatMap<*, *> -> {
                     val g = x.f as (A) -> IO<A>
                     val y = x.sub as IO<A>
