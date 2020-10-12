@@ -25,10 +25,8 @@ object Listing2 {
     val g = List(100000) { idx -> f } // <1>
         .fold(f) { a: (Int) -> IO<Int>, b: (Int) -> IO<Int> ->
             { x: Int ->
-                Suspend { Unit }.flatMap { _ ->
-                    a(x).flatMap(b)
-                }
+                Suspend { Unit }.flatMap { _ -> a(x).flatMap(b) } // <2>
             }
-        } // <2>
+        }
     //end::init2[]
 }
