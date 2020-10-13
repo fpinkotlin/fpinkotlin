@@ -19,7 +19,7 @@ data class Gen<A>(val sample: State<RNG, A>) {
 
         fun choose(start: Int, stopExclusive: Int): Gen<Int> =
             Gen(State { rng: RNG -> nonNegativeInt(rng) }
-                .map { (start + it) % (stopExclusive - start) })
+                .map { start + (it % (stopExclusive - start)) })
 
         fun <A> listOfN(n: Int, ga: Gen<A>): Gen<List<A>> =
             Gen(State.sequence(List(n) { ga.sample }))
