@@ -9,13 +9,19 @@ import chapter11.Monad
 import chapter11.Par
 import chapter13.boilerplate.free.Free
 import chapter13.boilerplate.free.Suspend
+import chapter13.sec4_3.ConsoleReader
+import chapter13.sec4_3.ConsoleState
 
 typealias ConsoleIO<A> = Free<ForConsole, A>
 
 //tag::init1[]
 @higherkind
 sealed class Console<A> : ConsoleOf<A> {
+    //tag::ignore[]
+    abstract fun toReader(): ConsoleReader<A>
+    abstract fun toState(): ConsoleState<A>
 
+    //end::ignore[]
     abstract fun toPar(): Par<A> // <1>
 
     abstract fun toThunk(): () -> A // <2>
@@ -51,6 +57,11 @@ object ReadLine : Console<Option<String>>() {
         } catch (e: Exception) {
             None
         }
+
+    //tag::ignore[]
+    override fun toReader(): ConsoleReader<Option<String>> = TODO()
+    override fun toState(): ConsoleState<Option<String>> = TODO()
+    //end::ignore[]
 }
 
 data class PrintLine(val line: String) : Console<Unit>() {
@@ -58,6 +69,11 @@ data class PrintLine(val line: String) : Console<Unit>() {
     override fun toPar(): Par<Unit> = Par.lazyUnit { println(line) }
 
     override fun toThunk(): () -> Unit = { println(line) }
+
+    //tag::ignore[]
+    override fun toReader(): ConsoleReader<Unit> = TODO()
+    override fun toState(): ConsoleState<Unit> = TODO()
+    //end::ignore[]
 }
 //end::init1[]
 
