@@ -13,8 +13,8 @@ sealed class Free<F, A> : FreeOf<F, A> {
 }
 
 data class Return<F, A>(val a: A) : Free<F, A>()
-data class Suspend<F, A>(val s: Kind<F, A>) : Free<F, A>()
+data class Suspend<F, A>(val resume: Kind<F, A>) : Free<F, A>()
 data class FlatMap<F, A, B>(
-    val s: Free<F, A>,
+    val sub: Free<F, A>,
     val f: (A) -> Free<F, B>
 ) : Free<F, B>()

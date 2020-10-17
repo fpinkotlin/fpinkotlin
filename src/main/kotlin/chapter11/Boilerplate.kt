@@ -33,6 +33,8 @@ data class Gen<A>(val sample: State<RNG, A>) : GenOf<A> {
 class Par<A>(run: (ExecutorService) -> Future<A>) : ParOf<A> {
     companion object {
         fun <A> unit(a: A): Par<A> = TODO()
+
+        fun <A> lazyUnit(a: () -> A): Par<A> = TODO()
     }
 
     fun <B> flatMap(f: (A) -> Par<B>): Par<B> = TODO()

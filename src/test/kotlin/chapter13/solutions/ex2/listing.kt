@@ -12,18 +12,18 @@ import chapter13.boilerplate.function.fix
 tailrec fun <A> runTrampoline(ffa: Free<ForFunction0, A>): A =
     when (ffa) {
         is Return -> ffa.a
-        is Suspend -> ffa.s.fix().f()
+        is Suspend -> ffa.resume.fix().f()
         is FlatMap<*, *, *> -> {
-            val sout = ffa.s as Free<ForFunction0, A>
+            val sout = ffa.sub as Free<ForFunction0, A>
             val fout = ffa.f as (A) -> Free<ForFunction0, A>
             when (sout) {
                 is FlatMap<*, *, *> -> {
-                    val sin = sout.s as Free<ForFunction0, A>
+                    val sin = sout.sub as Free<ForFunction0, A>
                     val fin = sout.f as (A) -> Free<ForFunction0, A>
                     runTrampoline(sin.flatMap { a: A -> fin(a).flatMap(fout) })
                 }
                 is Return -> sout.a
-                is Suspend -> sout.s.fix().f()
+                is Suspend -> sout.resume.fix().f()
             }
         }
     }
