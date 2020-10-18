@@ -8,6 +8,13 @@ import chapter5.Stream.Companion.empty
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
+//tag::append[]
+fun <A> Stream<A>.append(sa: () -> Stream<A>): Stream<A> =
+    foldRight(
+        sa,
+        { h, t -> cons({ h }, t) })
+//end::append[]
+
 class Solution_5_7 : WordSpec({
 
     //tag::map[]
@@ -23,13 +30,6 @@ class Solution_5_7 : WordSpec({
             { empty<A>() },
             { h, t -> if (f(h)) cons({ h }, t) else t() })
     //end::filter[]
-
-    //tag::append[]
-    fun <A> Stream<A>.append(sa: () -> Stream<A>): Stream<A> =
-        foldRight(
-            sa,
-            { h, t -> cons({ h }, t) })
-    //end::append[]
 
     //tag::flatmap[]
     fun <A, B> Stream<A>.flatMap(f: (A) -> Stream<B>): Stream<B> =

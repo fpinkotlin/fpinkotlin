@@ -14,18 +14,13 @@ class Solution_5_15 : WordSpec({
 
     //tag::tails[]
     fun <A> Stream<A>.tails(): Stream<Stream<A>> =
-        Stream.cons(
-            { this },
-            {
-                unfold(this) { s: Stream<A> ->
-                    when (s) {
-                        is Cons ->
-                            Some(Pair(s.tail(), s.tail()))
-                        else -> None
-                    }
-                }
+        unfold(this) { s: Stream<A> ->
+            when (s) {
+                is Cons ->
+                    Some(Pair(s, s.tail()))
+                else -> None
             }
-        )
+        }.append({ Stream.empty() })
     //end::tails[]
 
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = when (this) {
