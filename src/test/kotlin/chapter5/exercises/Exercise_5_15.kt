@@ -28,7 +28,8 @@ class Exercise_5_15 : WordSpec({
                 List.of(
                     ConsL(1, ConsL(2, ConsL(3, NilL))),
                     ConsL(2, ConsL(3, NilL)),
-                    ConsL(3, NilL)
+                    ConsL(3, NilL),
+                    NilL
                 )
         }
     }

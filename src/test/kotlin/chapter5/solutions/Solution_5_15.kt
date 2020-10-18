@@ -14,13 +14,18 @@ class Solution_5_15 : WordSpec({
 
     //tag::tails[]
     fun <A> Stream<A>.tails(): Stream<Stream<A>> =
-        unfold(this) { s: Stream<A> ->
-            when (s) {
-                is Cons ->
-                    Some(Pair(s, s.tail()))
-                else -> None
+        Stream.cons(
+            { this },
+            {
+                unfold(this) { s: Stream<A> ->
+                    when (s) {
+                        is Cons ->
+                            Some(Pair(s.tail(), s.tail()))
+                        else -> None
+                    }
+                }
             }
-        }
+        )
     //end::tails[]
 
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = when (this) {
@@ -35,7 +40,8 @@ class Solution_5_15 : WordSpec({
                 List.of(
                     ConsL(1, ConsL(2, ConsL(3, NilL))),
                     ConsL(2, ConsL(3, NilL)),
-                    ConsL(3, NilL)
+                    ConsL(3, NilL),
+                    NilL
                 )
         }
     }
