@@ -10,6 +10,8 @@ sealed class Free<F, A> : FreeOf<F, A> {
     }
 
     fun <B> flatMap(f: (A) -> Free<F, B>): Free<F, B> = TODO()
+
+    fun <B> map(f: (A) -> B): Free<F, B> = TODO()
 }
 
 data class Return<F, A>(val a: A) : Free<F, A>()
