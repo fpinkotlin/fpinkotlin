@@ -20,7 +20,9 @@ tailrec fun <A> runTrampoline(ffa: Free<ForFunction0, A>): A =
                 is FlatMap<*, *, *> -> {
                     val sin = sout.sub as Free<ForFunction0, A>
                     val fin = sout.f as (A) -> Free<ForFunction0, A>
-                    runTrampoline(sin.flatMap { a: A -> fin(a).flatMap(fout) })
+                    runTrampoline(sin.flatMap { a ->
+                        fin(a).flatMap(fout)
+                    })
                 }
                 is Return -> sout.a
                 is Suspend -> sout.resume.fix().f()
