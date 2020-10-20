@@ -12,7 +12,7 @@ abstract class Future<A> {
 }
 
 @higherkind
-class Par<A>(run: (ExecutorService) -> Future<A>) : ParOf<A>
+class Par<A>(val run: (ExecutorService) -> Future<A>) : ParOf<A>
 //end::init1[]
 
 //tag::init2[]

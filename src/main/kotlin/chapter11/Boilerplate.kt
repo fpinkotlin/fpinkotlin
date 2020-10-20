@@ -30,7 +30,7 @@ data class Gen<A>(val sample: State<RNG, A>) : GenOf<A> {
 }
 
 @higherkind
-class Par<A>(run: (ExecutorService) -> Future<A>) : ParOf<A> {
+class Par<A>(val run: (ExecutorService) -> Future<A>) : ParOf<A> {
     companion object {
         fun <A> unit(a: A): Par<A> = TODO()
 
