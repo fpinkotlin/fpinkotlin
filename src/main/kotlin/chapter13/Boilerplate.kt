@@ -11,36 +11,6 @@ interface Monad<F> : Functor<F> {
 
     fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
 
-    fun <A> doWhile(
-        fa: Kind<F, A>,
-        cond: (A) -> Kind<F, Boolean>
-    ): Kind<F, Unit>
-
-    fun <A, B> forever(fa: Kind<F, A>): Kind<F, B>
-
-    fun <A, B> foldM(
-        sa: Stream<A>,
-        z: B,
-        f: (B, A) -> Kind<F, B>
-    ): Kind<F, B>
-
-    fun <A, B> foldDiscardM(
-        sa: Stream<A>,
-        z: B,
-        f: (B, A) -> Kind<F, B>
-    ): Kind<F, Unit>
-
-    fun <A> foreachM(
-        sa: Stream<A>,
-        f: (A) -> Kind<F, Unit>
-    ): Kind<F, Unit>
-
-    fun <A> skip(fa: Kind<F, A>): Kind<F, Unit> = map(fa) { Unit }
-
-    fun <A> sequenceDiscard(sa: Stream<Kind<F, A>>): Kind<F, Unit> =
-        foreachM(sa) { a -> skip(a) }
-
-    fun <A> whenM(ok: Boolean, f: () -> Kind<F, A>): Kind<F, Boolean>
 }
 
 fun stdin(): IO<String> = IO { readLine().orEmpty() }

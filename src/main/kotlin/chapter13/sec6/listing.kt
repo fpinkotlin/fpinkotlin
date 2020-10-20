@@ -1,11 +1,12 @@
 package chapter13.sec6
 
 import arrow.Kind
-import chapter11.ForPar
-import chapter11.fix
 import chapter13.Monad
 import chapter13.boilerplate.free.Free
-
+import chapter13.boilerplate.par.ForPar
+import chapter13.boilerplate.par.Par
+import chapter13.boilerplate.par.fix
+import chapter13.boilerplate.par.par.monad.monad
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -15,9 +16,7 @@ typealias IO<A> = Free<ForPar, A>
 
 fun <A> run(io: IO<A>): A = TODO()
 
-fun <F, A> run(free: Free<F, A>, M: Monad<F>): Kind<F, A> = TODO()
-
-fun parMonad(): Monad<ForPar> = TODO()
+fun <F, A> run(free: Free<F, A>, monad: Monad<F>): Kind<F, A> = TODO()
 
 //tag::init2[]
 abstract class App {
@@ -26,7 +25,7 @@ abstract class App {
         ioa: IO<A>,
         pool: ExecutorService
     ): A =
-        run(ioa, parMonad()).fix().run(pool).get() // <1>
+        run(ioa, Par.monad()).fix().run(pool).get() // <1>
 
     fun main(args: Array<String>): Unit { // <2>
         val pool = Executors.newFixedThreadPool(8)

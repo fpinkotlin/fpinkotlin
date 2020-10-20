@@ -4,9 +4,6 @@ import arrow.Kind
 import arrow.extension
 import chapter13.Monad
 import chapter13.sec3_1.io.monad.monad
-import chapter5.Cons
-import chapter5.Empty
-import chapter5.Stream
 
 class ForIO {
     companion object
@@ -34,55 +31,11 @@ interface IOMonad : Monad<ForIO> {
     ): Kind<ForIO, B> =
         flatMap(fa.fix()) { a -> unit(f(a)) }
 
-    override fun <A> doWhile(
-        fa: IOOf<A>,
-        cond: (A) -> IOOf<Boolean>
-    ): IOOf<Unit> =
-        fa.fix().flatMap { a: A ->
-            cond(a).fix().flatMap { ok: Boolean ->
-                if (ok) doWhile(fa, cond).fix() else unit(Unit).fix()
-            }
-        }
-
-    override fun <A, B> forever(fa: IOOf<A>): IOOf<B> {
+    fun <A, B> forever(fa: IOOf<A>): IOOf<B> {
         val t: IOOf<B> by lazy { forever<A, B>(fa) }
         return fa.fix().flatMap { t.fix() }
     }
 
-    override fun <A, B> foldM(
-        sa: Stream<A>,
-        z: B,
-        f: (B, A) -> IOOf<B>
-    ): IOOf<B> =
-        when (sa) {
-            is Cons ->
-                f(z, sa.head()).fix().flatMap { b ->
-                    foldM(sa.tail(), z, f).fix()
-                }
-            is Empty -> unit(z)
-        }
-
-    override fun <A, B> foldDiscardM(
-        sa: Stream<A>,
-        z: B,
-        f: (B, A) -> Kind<ForIO, B>
-    ): Kind<ForIO, Unit> =
-        foldM(sa, z, f).fix().map { Unit }
-
-    override fun <A> foreachM(
-        sa: Stream<A>,
-        f: (A) -> IOOf<Unit>
-    ): IOOf<Unit> =
-        foldDiscardM(sa, Unit) { _, a -> f(a) }
-
-    override fun <A> whenM(
-        ok: Boolean,
-        f: () -> IOOf<A>
-    ): IOOf<Boolean> =
-        if (ok) f().fix().map { true } else unit(false)
-
-    fun <A> sequenceDiscard(vararg fa: IOOf<A>): IOOf<Unit> =
-        sequenceDiscard(Stream.of(*fa))
 }
 
 //tag::init1[]
