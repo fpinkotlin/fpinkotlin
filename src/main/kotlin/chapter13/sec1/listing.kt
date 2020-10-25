@@ -58,6 +58,6 @@ val listing3 = {
         }
 
     fun contest(p1: Player, p2: Player): Unit = // <2>
-        println(winnerMsg(winner(p1, p2)))
+        println(winnerMsg(winner(p1, p2))) // <3>
     //end::init3[]
 }
