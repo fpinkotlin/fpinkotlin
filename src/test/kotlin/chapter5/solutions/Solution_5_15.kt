@@ -20,7 +20,7 @@ class Solution_5_15 : WordSpec({
                     Some(Pair(s, s.tail()))
                 else -> None
             }
-        }
+        }.append({ Stream.empty() })
     //end::tails[]
 
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = when (this) {
@@ -35,7 +35,8 @@ class Solution_5_15 : WordSpec({
                 List.of(
                     ConsL(1, ConsL(2, ConsL(3, NilL))),
                     ConsL(2, ConsL(3, NilL)),
-                    ConsL(3, NilL)
+                    ConsL(3, NilL),
+                    NilL
                 )
         }
     }
