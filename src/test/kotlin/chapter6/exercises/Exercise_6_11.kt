@@ -23,7 +23,7 @@ data class Machine(
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Solution_6_11 : WordSpec({
+class Exercise_6_11 : WordSpec({
 
     //tag::init2[]
     fun simulateMachine(
