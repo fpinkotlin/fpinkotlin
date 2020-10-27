@@ -73,9 +73,9 @@ object Listing12C {
 }
 
 object Listing12D {
-    //tag::init4[]
     fun fahrenheitToCelsius(f: Double): Double = (f - 32) * 5.0 / 9.0
 
+    //tag::init4[]
     fun converter(): IO {
         val prompt: IO =
             stdout("Enter a temperature in Degrees Fahrenheit:")
@@ -88,17 +88,17 @@ object Listing12E {
     //tag::init5[]
     interface IO<A> {
 
-        //tag::init6[]
+        //tag::companion[]
         companion object {
 
             fun <A> unit(a: () -> A) = object : IO<A> {
                 override fun run(): A = a()
             }
 
-            operator fun <A> invoke(a: () -> A) = unit(a) // <1>
+            operator fun <A> invoke(a: () -> A) = unit(a)
         }
 
-        //end::init6[]
+        //end::companion[]
         fun run(): A
 
         fun <B> map(f: (A) -> B): IO<B> =
@@ -111,7 +111,7 @@ object Listing12E {
                 override fun run(): B = f(this@IO.run()).run()
             }
 
-        infix fun <B> product(io: IO<B>): IO<Pair<A, B>> =
+        infix fun <B> assoc(io: IO<B>): IO<Pair<A, B>> =
             object : IO<Pair<A, B>> {
                 override fun run(): Pair<A, B> =
                     Pair(this@IO.run(), io.run())
@@ -139,7 +139,7 @@ object Listing12E {
 
     val readInt: IO<Int> = stdin().map { it.toInt() } // <2>
 
-    val readInts: IO<Pair<Int, Int>> = readInt product readInt // <3>
+    val readInts: IO<Pair<Int, Int>> = readInt assoc readInt // <3>
     //end::init8[]
 }
 
