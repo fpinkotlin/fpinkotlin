@@ -12,16 +12,14 @@ import chapter13.boilerplate.free.Suspend
 import chapter13.sec4_3.ConsoleReader
 import chapter13.sec4_3.ConsoleState
 
+//tag::init6[]
 typealias ConsoleIO<A> = Free<ForConsole, A>
+//end::init6[]
 
 //tag::init1[]
 @higherkind
 sealed class Console<A> : ConsoleOf<A> {
-    //tag::ignore[]
-    abstract fun toReader(): ConsoleReader<A>
-    abstract fun toState(): ConsoleState<A>
 
-    //end::ignore[]
     abstract fun toPar(): Par<A> // <1>
 
     abstract fun toThunk(): () -> A // <2>
@@ -42,7 +40,12 @@ sealed class Console<A> : ConsoleOf<A> {
             is ReadLine -> TODO("not possible!")
             is PrintLine -> TODO("also not possible!")
         }
+
     //end::init5[]
+    //tag::ignore[]
+    abstract fun toReader(): ConsoleReader<A>
+    abstract fun toState(): ConsoleState<A>
+    //end::ignore[]
 }
 
 object ReadLine : Console<Option<String>>() {
@@ -51,7 +54,7 @@ object ReadLine : Console<Option<String>>() {
 
     override fun toThunk(): () -> Option<String> = { run() }
 
-    fun run(): Option<String> = // <3>
+    private fun run(): Option<String> = // <3>
         try {
             Some(readLine().orEmpty())
         } catch (e: Exception) {

@@ -21,16 +21,16 @@ fun <F, A> run(free: Free<F, A>, monad: Monad<F>): Kind<F, A> = TODO()
 //tag::init2[]
 abstract class App {
 
+    fun main(args: Array<String>): Unit { // <1>
+        val pool = Executors.newFixedThreadPool(8)
+        unsafePerformIO(pureMain(args), pool)
+    }
+
     private fun <A> unsafePerformIO(
         ioa: IO<A>,
         pool: ExecutorService
     ): A =
-        run(ioa, Par.monad()).fix().run(pool).get() // <1>
-
-    fun main(args: Array<String>): Unit { // <2>
-        val pool = Executors.newFixedThreadPool(8)
-        unsafePerformIO(pureMain(args), pool)
-    }
+        run(ioa, Par.monad()).fix().run(pool).get() // <2>
 
     abstract fun pureMain(args: Array<String>): IO<Unit> // <3>
 }

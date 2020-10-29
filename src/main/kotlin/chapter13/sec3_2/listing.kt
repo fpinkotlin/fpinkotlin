@@ -9,11 +9,7 @@ object Listing {
     //tag::init1[]
     val f = { x: Int -> x }
     val g = List(100000) { idx -> f } // <1>
-        .fold(f) { ff, h ->
-            { n: Int ->
-                ff(h(n))
-            }
-        } // <2>
+        .fold(f) { ff, h -> { n: Int -> ff(h(n)) } } // <2>
     //end::init1[]
 
     val result = g(42)

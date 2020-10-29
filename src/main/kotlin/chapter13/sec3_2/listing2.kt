@@ -28,3 +28,14 @@ data class FlatMap<A, B>(
     val f: (A) -> Tailrec<B>
 ) : Tailrec<B>()
 //end::init1[]
+
+
+//tag::init2[]
+val f = { x: Int -> Return(x) }
+    val g = List(100000) { idx -> f }
+        .fold(f) { a: (Int) -> Tailrec<Int>, b: (Int) -> Tailrec<Int> ->
+            { x: Int ->
+                Suspend { Unit }.flatMap { _ -> a(x).flatMap(b) }
+            }
+        }
+//end::init2[]

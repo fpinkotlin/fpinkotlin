@@ -40,7 +40,6 @@ interface IOMonad : Monad<ForIO> {
 
 //tag::init1[]
 sealed class IO<A> : IOOf<A> {
-
     companion object {
         fun <A> unit(a: A) = Suspend { a }
     }
@@ -72,17 +71,17 @@ tailrec fun <A> run(io: IO<A>): A =
         is Return -> io.a
         is Suspend -> io.resume()
         is FlatMap<*, *> -> { // <1>
-            val x = io.sub as IO<A>
-            val f = io.f as (A) -> IO<A>
+            val x = io.sub as IO<A> // <2>
+            val f = io.f as (A) -> IO<A> // <2>
             when (x) {
                 is Return ->
                     run(f(x.a))
-                is Suspend -> // <2>
+                is Suspend -> // <3>
                     run(f(x.resume()))
                 is FlatMap<*, *> -> {
                     val g = x.f as (A) -> IO<A>
                     val y = x.sub as IO<A>
-                    run(y.flatMap { a: A -> g(a).flatMap(f) }) // <3>
+                    run(y.flatMap { a: A -> g(a).flatMap(f) }) // <4>
                 }
             }
         }

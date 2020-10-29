@@ -3,7 +3,8 @@ package chapter13.sec3
 import chapter13.boilerplate.io.IO
 import chapter13.boilerplate.io.fix
 import chapter13.boilerplate.io.io.monad.monad
-import chapter13.stdout
+
+fun stdout(msg: String): IO<Unit> = IO { println(msg) }
 
 //tag::init1[]
 val p: IO<Unit> =

@@ -19,8 +19,11 @@ sealed class Async<A> : AsyncOf<A> {
     }
 
     //end::ignore[]
-    fun <B> flatMap(f: (A) -> Async<B>): Async<B> = FlatMap(this, f)
-    fun <B> map(f: (A) -> B): Async<B> = flatMap { a -> Return(f(a)) }
+    fun <B> flatMap(f: (A) -> Async<B>): Async<B> =
+        FlatMap(this, f)
+
+    fun <B> map(f: (A) -> B): Async<B> =
+        flatMap { a -> Return(f(a)) }
 }
 
 data class Return<A>(val a: A) : Async<A>()
@@ -32,13 +35,11 @@ data class FlatMap<A, B>(
 //end::init1[]
 
 //tag::init2[]
-//tag::ignore[]
-@Suppress("UNCHECKED_CAST")
-//end::ignore[]
+@Suppress("UNCHECKED_CAST") // <1>
 tailrec fun <A> step(async: Async<A>): Async<A> =
     when (async) {
         is FlatMap<*, *> -> {
-            val y = async.sub as Async<A>
+            val y = async.sub as Async<A> // <1>
             val g = async.f as (A) -> Async<A>
             when (y) {
                 is FlatMap<*, *> -> {
@@ -53,9 +54,7 @@ tailrec fun <A> step(async: Async<A>): Async<A> =
         else -> async
     }
 
-//tag::ignore[]
 @Suppress("UNCHECKED_CAST")
-//end::ignore[]
 fun <A> run(async: Async<A>): Par<A> =
     when (val stepped = step(async)) {
         is Return -> Par.unit(stepped.a)
