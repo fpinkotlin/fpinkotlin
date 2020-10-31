@@ -2,6 +2,7 @@ package chapter8.solutions.ex4
 
 import chapter8.RNG
 import chapter8.State
+import chapter8.double
 import chapter8.nonNegativeInt
 
 data class Gen<A>(val sample: State<RNG, A>) {
@@ -11,5 +12,12 @@ data class Gen<A>(val sample: State<RNG, A>) {
             Gen(State { rng: RNG -> nonNegativeInt(rng) }
                 .map { start + (it % (stopExclusive - start)) })
         //end::init[]
+
+        //tag::init2[]
+        fun chooseEvenly(start: Int, stopExclusive: Int): Gen<Int> =
+            Gen(State { rng: RNG -> double(rng) }
+                .map { start + (it * (stopExclusive - start)) }
+                .map { it.toInt() })
+        //end::init2[]
     }
 }

@@ -21,6 +21,11 @@ data class Gen<A>(val sample: State<RNG, A>) {
             Gen(State { rng: RNG -> nonNegativeInt(rng) }
                 .map { start + (it % (stopExclusive - start)) })
 
+        fun chooseEvenly(start: Int, stopExclusive: Int): Gen<Int> =
+            Gen(State { rng: RNG -> double(rng) }
+                .map { start + (it * (stopExclusive - start)) }
+                .map { it.toInt() })
+
         fun <A> listOfN(n: Int, ga: Gen<A>): Gen<List<A>> =
             Gen(State.sequence(List(n) { ga.sample }))
 
