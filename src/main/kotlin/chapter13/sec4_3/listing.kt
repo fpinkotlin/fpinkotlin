@@ -23,31 +23,32 @@ inline fun <A> ConsoleReaderOf<A>.fix(): ConsoleReader<A> =
 //tag::init1[]
 data class ConsoleReader<A>(val run: (String) -> A) : ConsoleReaderOf<A> {
 
-    companion object
+    companion object // <.>
 
     fun <B> flatMap(f: (A) -> ConsoleReader<B>): ConsoleReader<B> =
-        ConsoleReader { r -> f(run(r)).run(r) }
+        ConsoleReader { r -> f(run(r)).run(r) } // <.>
 
     fun <B> map(f: (A) -> B): ConsoleReader<B> =
-        ConsoleReader { r -> f(run(r)) }
+        ConsoleReader { r -> f(run(r)) } // <.>
 }
 
-@extension
-interface ConsoleReaderMonad : Monad<ForConsoleReader> {
+@extension // <.>
+interface ConsoleReaderMonad : Monad<ForConsoleReader> { // <.>
 
-    override fun <A> unit(a: A): ConsoleReaderOf<A> = ConsoleReader { a }
+    override fun <A> unit(a: A): ConsoleReaderOf<A> =
+        ConsoleReader { a }
 
     override fun <A, B> flatMap(
         fa: ConsoleReaderOf<A>,
         f: (A) -> ConsoleReaderOf<B>
     ): ConsoleReaderOf<B> =
-        fa.fix().flatMap { a -> f(a).fix() }
+        fa.fix().flatMap { a -> f(a).fix() } // <.>
 
     override fun <A, B> map(
         fa: ConsoleReaderOf<A>,
         f: (A) -> B
     ): ConsoleReaderOf<B> =
-        fa.fix().map(f)
+        fa.fix().map(f) // <.>
 }
 //end::init1[]
 
