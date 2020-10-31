@@ -9,7 +9,6 @@ import chapter8.Result
 import chapter8.State
 import chapter8.TestCases
 import chapter8.double
-import chapter8.nonNegativeInt
 import kotlin.math.absoluteValue
 import kotlin.math.min
 
@@ -18,8 +17,8 @@ data class Gen<A>(val sample: State<RNG, A>) {
         fun <A> unit(a: A): Gen<A> = Gen(State.unit(a))
 
         fun choose(start: Int, stopExclusive: Int): Gen<Int> =
-            Gen(State { rng: RNG -> nonNegativeInt(rng) }
-                .map { start + (it % (stopExclusive - start)) })
+            Gen(State { rng: RNG -> double(rng) }
+                .map { start + (it * (stopExclusive - start)).toInt() })
 
         fun <A> listOfN(n: Int, ga: Gen<A>): Gen<List<A>> =
             Gen(State.sequence(List(n) { ga.sample }))
