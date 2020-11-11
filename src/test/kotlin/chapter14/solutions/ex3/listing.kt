@@ -8,7 +8,8 @@ import kotlinx.collections.immutable.toImmutableMap
 //tag::init[]
 abstract class STMap<S, K, V> @PublishedApi internal constructor() {
     companion object {
-        inline operator fun <S, reified K, reified V> invoke(): ST<S, STMap<S, K, V>> =
+        inline operator fun <S, reified K, reified V> invoke():
+            ST<S, STMap<S, K, V>> =
             ST {
                 object : STMap<S, K, V>() {
                     override val map: MutableMap<K, V> = mutableMapOf()
