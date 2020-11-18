@@ -13,14 +13,16 @@ class Solution_5_5 : WordSpec({
     //tag::init[]
     fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
         foldRight({ empty() },
-            { h, t -> if (p(h)) cons({ h }, t) else t() })
+            { h, t ->
+                if (p(h)) cons({ h }, t) else { empty() }
+            })
     //end::init[]
 
     "Stream.takeWhile" should {
         "return elements while the predicate evaluates true" {
-            val s = Stream.of(1, 2, 3, 4, 5)
+            val s = Stream.of(1, 2, 7, 3, 4, 5)
             s.takeWhile { it < 4 }.toList() shouldBe
-                List.of(1, 2, 3)
+                List.of(1, 2)
         }
         "return all elements if predicate always evaluates true" {
             val s = Stream.of(1, 2, 3, 4, 5)
