@@ -1,7 +1,24 @@
 package chapter14.sec2
 
+import arrow.core.Either
+import arrow.extension
+import arrow.typeclasses.Monad
+import arrow.typeclasses.MonadSyntax
+import chapter14.sec2.st.monad.monad
+
+class ForST private constructor() {
+    companion object
+}
+
+typealias STOf<S, A> = arrow.Kind2<ForST, S, A>
+
+typealias STPartialOf<S> = arrow.Kind<ForST, S>
+
+@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+inline fun <S, A> STOf<S, A>.fix(): ST<S, A> = this as ST<S, A>
+
 //tag::init1[]
-abstract class ST<S, A> internal constructor() { // <1>
+abstract class ST<S, A> internal constructor() : STOf<S, A> { // <1>
     companion object {
         operator fun <S, A> invoke(a: () -> A): ST<S, A> {
             val memo by lazy(a) // <2>
@@ -80,6 +97,42 @@ val p1 =
     }
 //end::init3[]
 
+@extension
+interface STMonad<S, A> : Monad<STPartialOf<S>> {
+
+    override fun <A> just(a: A): STOf<S, A> = ST { a }
+
+    override fun <A, B> STOf<S, A>.flatMap(
+        f: (A) -> STOf<S, B>
+    ): STOf<S, B> =
+        this.fix().flatMap { a -> f(a).fix() }
+
+    override fun <A, B> tailRecM(
+        a: A,
+        f: (A) -> STOf<S, Either<A, B>>
+    ): STOf<S, B> = TODO()
+}
+
+fun <S, A> ST.Companion.fx(
+    c: suspend MonadSyntax<STPartialOf<S>>.() -> A
+): ST<S, A> =
+    ST.monad<S, A>().fx.monad(c).fix()
+
+//tag::init3b[]
+val p2 =
+    ST.fx<Nothing, Pair<Int, Int>> {
+        val r1 = !STRef<Nothing, Int>(10)
+        val r2 = !STRef<Nothing, Int>(20)
+        val x = !r1.read()
+        val y = !r2.read()
+        !r1.write(y + 1)
+        !r2.write(x + 1)
+        val a = !r1.read()
+        val b = !r2.read()
+        a to b
+    }
+//end::init3b[]
+
 //tag::init4[]
 interface RunnableST<A> {
     fun <S> invoke(): ST<S, A>
@@ -87,24 +140,18 @@ interface RunnableST<A> {
 //end::init4[]
 
 //tag::init5[]
-val p2 = object : RunnableST<Pair<Int, Int>> {
+val p3 = object : RunnableST<Pair<Int, Int>> {
     override fun <S> invoke(): ST<S, Pair<Int, Int>> =
-        STRef<S, Int>(10).flatMap { r1: STRef<S, Int> ->
-            STRef<S, Int>(20).flatMap { r2: STRef<S, Int> ->
-                r1.read().flatMap { x ->
-                    r2.read().flatMap { y ->
-                        r1.write(y + 1).flatMap {
-                            r2.write(x + 1).flatMap {
-                                r1.read().flatMap { a ->
-                                    r2.read().map { b ->
-                                        Pair(a, b)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        ST.fx {
+            val r1 = !STRef<S, Int>(10)
+            val r2 = !STRef<S, Int>(20)
+            val x = !r1.read()
+            val y = !r2.read()
+            !r1.write(y + 1)
+            !r2.write(x + 1)
+            val a = !r1.read()
+            val b = !r2.read()
+            a to b
         }
 }
 //end::init5[]
@@ -167,28 +214,22 @@ object Immutable {
         r: Int,
         pivot: Int
     ): ST<S, Int> =
-        arr.read(pivot).flatMap { vp ->
-            arr.swap(pivot, r).flatMap {
-                STRef<S, Int>(l).flatMap { j ->
-                    (l until r).fold(noop<S>()) { st, i: Int ->
-                        st.flatMap {
-                            arr.read(i).flatMap { vi ->
-                                if (vi < vp) {
-                                    j.read().flatMap { vj ->
-                                        arr.swap(i, vj).flatMap {
-                                            j.write(vj + 1)
-                                        }
-                                    }
-                                } else noop()
-                            }
-                        }
-                    }.flatMap {
-                        j.read().flatMap { x ->
-                            arr.swap(x, r).map { x }
-                        }
-                    }
-                }
+        ST.fx {
+            val vp = !arr.read(pivot)
+            !arr.swap(pivot, r)
+            val j = !STRef<S, Int>(l)
+            !(l until r).fold(noop<S>()) { st, i: Int ->
+                !st
+                val vi = !arr.read(i)
+                if (vi < vp) {
+                    val vj = !j.read()
+                    !arr.swap(i, vj)
+                    j.write(vj + 1)
+                } else noop()
             }
+            val x = !j.read()
+            !arr.swap(x, r)
+            x
         }
 
     private fun <S> qs(arr: STArray<S, Int>, l: Int, r: Int): ST<S, Unit> =
@@ -205,17 +246,17 @@ object Immutable {
     fun quicksort(xs: List<Int>): List<Int> =
         if (xs.isEmpty()) xs else ST.runST(object : RunnableST<List<Int>> {
             override fun <S> invoke(): ST<S, List<Int>> =
-                STArray.fromList<S, Int>(xs).flatMap { arr ->
-                    arr.size.flatMap { size ->
-                        qs(arr, 0, size - 1).flatMap {
-                            arr.freeze().map { it }
-                        }
-                    }
+                ST.fx {
+                    val arr = !STArray.fromList<S, Int>(xs)
+                    val size = !arr.size
+                    !qs(arr, 0, size -1)
+                    !arr.freeze()
                 }
         })
     //end::init10[]
 }
 
 fun main() {
+    println(ST.runST(p3))
     println(Immutable.quicksort(listOf(9, 8, 7, 6, 5, 4, 3, 2, 1)))
 }
