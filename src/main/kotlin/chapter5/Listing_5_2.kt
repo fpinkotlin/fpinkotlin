@@ -25,6 +25,9 @@ sealed class Stream<out A> {
 
         fun <A> empty(): Stream<A> = Empty
         //end::empty[]
+
+        fun <A> continually(a: A): Stream<A> =
+            cons({ a }, { continually(a) })
     }
     //end::companion[]
 }
