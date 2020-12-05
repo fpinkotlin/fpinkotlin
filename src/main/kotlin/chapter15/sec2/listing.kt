@@ -1,8 +1,11 @@
 package chapter15.sec2
 
+import arrow.core.andThen
+import arrow.extension
 import chapter10.None
 import chapter10.Option
 import chapter10.Some
+import chapter13.Monad
 import chapter3.List
 import chapter5.Cons
 import chapter5.Empty
@@ -10,8 +13,18 @@ import chapter5.Stream
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
 
+class ForProcess private constructor() {
+    companion object
+}
+typealias ProcessOf<I, O> = arrow.Kind2<ForProcess, I, O>
+typealias ProcessPartialOf<I> = arrow.Kind<ForProcess, I>
+
+@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+inline fun <I, O> ProcessOf<I, O>.fix(): Process<I, O> =
+    this as Process<I, O>
+
 //tag::init1[]
-sealed class Process<I, O> {
+sealed class Process<I, O> : ProcessOf<I, O> {
     //tag::init2[]
     operator fun invoke(si: Stream<I>): Stream<O> =
         when (this) {
@@ -39,8 +52,49 @@ sealed class Process<I, O> {
             }
         return go(this)
     }
+
     //end::init4[]
-    //driver methods
+    //tag::init9[]
+    fun <O2> map(f: (O) -> O2): Process<I, O2> = this pipe lift(f)
+
+    //end::init9[]
+    //tag::init10[]
+    infix fun append(p2: Process<I, O>): Process<I, O> =
+        when (this) {
+            is Halt -> p2
+            is Emit -> Emit(this.head, this.tail append p2)
+            is Await -> Await { i: Option<I> ->
+                (this.recv andThen { p1 -> p1 append p2 })(i)
+            }
+        }
+
+    //end::init10[]
+    //tag::init11[]
+    fun <O2> flatMap(f: (O) -> Process<I, O2>): Process<I, O2> =
+        when (this) {
+            is Halt -> Halt()
+            is Emit -> f(this.head) append this.tail.flatMap(f)
+            is Await -> Await { i: Option<I> ->
+                (this.recv andThen { p -> p.flatMap(f) })(i)
+            }
+        }
+
+    //end::init11[]
+    //tag::ignore[]
+    infix fun <I, O, O2> Process<I, O>.pipe(p2: Process<O, O2>): Process<I, O2> =
+        when (p2) {
+            is Halt -> Halt()
+            is Emit -> Emit(p2.head, this pipe p2.tail)
+            is Await -> when (this) {
+                is Emit -> this.tail pipe p2.recv(Some(this.head))
+                is Halt -> Halt<I, O>() pipe p2.recv(None)
+                is Await -> Await { i -> this.recv(i) pipe p2 }
+            }
+        }
+
+    companion object
+    //end::ignore[]
+    //driver and instance methods
 }
 
 data class Emit<I, O>(
@@ -122,6 +176,24 @@ fun <A> Stream<A>.toList(): List<A> {
     }
     return reverse(go(this, NilL))
 }
+
+//tag::init12[]
+@extension
+interface ProcessMonad<I, O> : Monad<ProcessPartialOf<I>> {
+
+    override fun <A> unit(a: A): ProcessOf<I, A> = Emit(a)
+
+    override fun <A, B> flatMap(
+        fa: ProcessOf<I, A>,
+        f: (A) -> ProcessOf<I, B>
+    ): ProcessOf<I, B> = fa.fix().flatMap { a -> f(a).fix() }
+
+    override fun <A, B> map(
+        fa: ProcessOf<I, A>,
+        f: (A) -> B
+    ): ProcessOf<I, B> = fa.fix().map(f)
+}
+//end::init12[]
 
 fun main() {
     //liftOne

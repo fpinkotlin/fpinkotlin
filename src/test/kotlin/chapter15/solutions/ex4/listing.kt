@@ -26,16 +26,16 @@ fun <S, I, O> loop(z: S, f: (I, S) -> Pair<O, S>): Process<I, O> =
 
 //tag::init[]
 fun sum(start: Double): Process<Double, Double> =
-    loop(0.0) { i: Double, s: Double -> Pair(i + s, i + s) }
+    loop(0.0) { i: Double, acc: Double -> Pair(acc + i, acc + i) }
 
 fun <I> count(): Process<I, Int> =
-    loop(0) { _, s: Int -> Pair(s + 1, s + 1) }
+    loop(0) { _, n: Int -> Pair(n + 1, n + 1) }
 //end::init[]
 
 class Exercise4 : WordSpec({
     val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0)
     "sum" should {
-        "produce a stream that accumulates a sum of the values of a stream" {
+        "produce a stream that accumulates a sum of values of a stream" {
             sum(0.0)(stream).toList() shouldBe
                 List.of(1.0, 3.0, 6.0, 10.0, 15.0)
         }
