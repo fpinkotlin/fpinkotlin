@@ -1,7 +1,8 @@
 package chapter15.solutions.ex9
 
 import chapter13.boilerplate.io.IO
-import chapter15.sec2.*
+import chapter15.sec2.lift
+import chapter15.sec2.processFile
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import java.io.File
