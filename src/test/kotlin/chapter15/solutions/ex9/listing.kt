@@ -13,8 +13,8 @@ fun toCelsius(fahrenheit: Double): Double =
 //tag::init2[]
 fun convert(infile: File, outfile: File): File =
     outfile.bufferedWriter().use { bw ->
-        val fn = { of: File, dg: Double ->
-            bw.write(dg.toString())
+        val fn = { of: File, celsius: Double ->
+            bw.write(celsius.toString())
             bw.newLine()
             of
         }
