@@ -1,6 +1,5 @@
 package chapter15.solutions.ex9
 
-import chapter13.boilerplate.io.IO
 import chapter15.sec2.lift
 import chapter15.sec2.processFile
 import io.kotlintest.shouldBe
@@ -13,7 +12,7 @@ fun toCelsius(fahrenheit: Double): Double =
 //end::init1[]
 
 //tag::init2[]
-fun convert(infile: File, outfile: File): IO<File> =
+fun convert(infile: File, outfile: File): File =
     outfile.bufferedWriter().use { bw ->
         val fn = { of: File, celsius: Double ->
             bw.write(celsius.toString())
@@ -25,7 +24,7 @@ fun convert(infile: File, outfile: File): IO<File> =
             lift { df -> toCelsius(df.toDouble()) },
             outfile,
             fn
-        )
+        ).run()
     }
 //end::init2[]
 
@@ -34,7 +33,7 @@ class Exercise9 : WordSpec({
         "apply a process and write a new file" {
             val infile = File("src/test/resources/samples/preprocess.txt")
             val outfile = File("build/postprocess.txt")
-            hasContent(convert(infile, outfile).run(),
+            hasContent(convert(infile, outfile),
                 """
                     30.0
                     20.0
