@@ -6,10 +6,12 @@ import chapter10.None
 import chapter10.Option
 import chapter10.Some
 import chapter13.Monad
+import chapter13.boilerplate.io.IO
 import chapter3.List
 import chapter5.Cons
 import chapter5.Empty
 import chapter5.Stream
+import java.io.File
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
 
@@ -81,7 +83,7 @@ sealed class Process<I, O> : ProcessOf<I, O> {
 
     //end::init11[]
     //tag::ignore[]
-    infix fun <I, O, O2> Process<I, O>.pipe(p2: Process<O, O2>): Process<I, O2> =
+    public infix fun <I, O, O2> Process<I, O>.pipe(p2: Process<O, O2>): Process<I, O2> =
         when (p2) {
             is Halt -> Halt()
             is Emit -> Emit(p2.head, this pipe p2.tail)
@@ -194,6 +196,50 @@ interface ProcessMonad<I, O> : Monad<ProcessPartialOf<I>> {
     ): ProcessOf<I, B> = fa.fix().map(f)
 }
 //end::init12[]
+
+//tag::init13[]
+fun <A, B> processFile(
+    file: File,
+    proc: Process<String, A>,
+    z: B,
+    fn: (B, A) -> B
+): IO<B> = IO { // <1>
+
+    tailrec fun go(
+        ss: Iterator<String>,
+        curr: Process<String, A>,
+        acc: B
+    ): B = // <2>
+        when (curr) {
+            is Halt -> acc
+            is Await -> {
+                val next =
+                    if (ss.hasNext()) curr.recv(Some(ss.next()))
+                    else curr.recv(None)
+                go(ss, next, acc)
+            }
+            is Emit -> go(ss, curr.tail, fn(acc, curr.head))
+        }
+
+    file.bufferedReader().use { reader -> // <3>
+        go(reader.lines().iterator(), proc, z)
+    }
+}
+//end::init13[]
+
+fun <I> exists(f: (I) -> Boolean): Process<I, Boolean> = TODO()
+fun <I> count(): Process<I, Int> = TODO()
+infix fun <I, O, O2> Process<I, O>.pipe(
+    p2: Process<O, O2>
+): Process<I, O2> = TODO()
+
+fun listing() {
+    val f = File("/path/to/file")
+    //tag::init14[]
+    val proc = count<String>() pipe exists { it > 40000 }
+    processFile(f, proc, false) { a, b -> a || b }
+    //end::init14[]
+}
 
 fun main() {
     //liftOne
