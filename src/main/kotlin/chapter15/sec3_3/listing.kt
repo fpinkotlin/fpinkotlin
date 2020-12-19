@@ -1,7 +1,6 @@
 package chapter15.sec3_3
 
 import arrow.Kind
-import arrow.core.andThen
 import arrow.higherkind
 import chapter12.Either
 import chapter12.Left
@@ -10,11 +9,7 @@ import chapter12.fix
 
 //tag::init1[]
 @higherkind // <1>
-data class Is<I>(
-    val Get: F<I> = F() // <2>
-) {
-    class F<T> // <3>
-}
+class Is<I> : IsOf<I>
 //end::init1[]
 
 //tag::init2[]
@@ -37,25 +32,26 @@ inline fun <I, O> Process1<I, O>.fix1(): Process<I, O> =
 
 sealed class Process<I, O> : ProcessOf<I, O> {
 
-    //tag::init3[]
-    data class Await<A, O>(
-        val req: Is.F<ForIs>,
-        val recv: (Either<Throwable, A>) -> Process<ForIs, O>
-    ) : Process<ForIs, O>()
-    //end::init3[]
-
-    data class Emit<F, O>(
-        val head: O,
-        val tail: Process<ForIs, O>
-    ) : Process<ForIs, O>()
-
-    data class Halt<F, O>(val err: Throwable) : Process<ForIs, O>()
-
-    object End : Exception()
-
-    object Kill : Exception()
-
     companion object {
+
+        //tag::init3[]
+        data class Await<F, A, O>(
+            val req: Kind<F, A>,
+            val recv: (Either<Throwable, A>) -> Process<F, O>
+        ) : Process<F, O>()
+        //end::init3[]
+
+        data class Emit<F, O>(
+            val head: O,
+            val tail: Process<F, O>
+        ) : Process<F, O>()
+
+        data class Halt<F, O>(val err: Throwable) : Process<F, O>()
+
+        object End : Exception()
+
+        object Kill : Exception()
+
         fun <F, O> Try(p: () -> Process<F, O>): Process<F, O> = TODO()
 
         //tag::init4[]
@@ -63,11 +59,11 @@ sealed class Process<I, O> : ProcessOf<I, O> {
             recv: (I) -> Process1<ForIs, O>,
             fallback: Process1<ForIs, O> = halt1<ForIs, O>()
         ): Process1<I, O> =
-            Await<I, O>(Is<ForIs>().Get) { ei ->
+            Await(Is<I>()) { ei ->
                 when (ei) {
                     is Left -> when (val err = ei.value) {
                         is End -> fallback
-                        else -> Halt<ForIs, O>(err)
+                        else -> Halt(err)
                     }
                     is Right -> Try { recv(ei.value) }
                 }
@@ -89,7 +85,7 @@ sealed class Process<I, O> : ProcessOf<I, O> {
         //tag::init5[]
         fun <I, O> lift(f: (I) -> O): Process1<ForIs, O> =
             await1<I, O>({
-                Emit<I, O>(f(it), Halt<ForIs, O>(End)).fix1()
+                Emit<I, O>(f(it), Halt<ForIs, O>(End).fix1()).fix1()
             })
 
         fun <I> filter(f: (I) -> Boolean): Process1<ForIs, I> =
@@ -113,7 +109,10 @@ sealed class Process<I, O> : ProcessOf<I, O> {
         fun <F, A, O> await(
             req: Kind<Any?, Any?>,
             recv: (Either<Throwable, Nothing>) -> Process<out Any?, out Any?>
-        ): Process<F, O> = TODO()
+        ): Process<F, O> = Await(
+            req as Kind<F, A>,
+            recv as (Either<Throwable, A>) -> Process<F, O>
+        )
 
         fun <F, A, O> awaitAndThen(
             req: Kind<Any?, Any?>,
@@ -123,39 +122,36 @@ sealed class Process<I, O> : ProcessOf<I, O> {
     }
 
     //tag::init6[]
-    infix fun <O2> pipe(p2: Process1<O, O2>): Process<ForIs, O2> =
+    infix fun <O2> pipe(p2: Process1<O, O2>): Process<I, O2> =
         when (p2) {
             is Halt<*, *> ->
                 this.kill<O2>() // <1>
                     .onHalt { e2 ->
-                        Halt<ForIs, O2>(p2.err).append {
-                            Halt<ForIs, O2>(e2) // <2>
+                        Halt<I, O2>(p2.err).append {
+                            Halt(e2) // <2>
                         }
-                    }.fix1()
+                    }
             is Emit<*, *> -> {
                 val h = p2.head as O2
-                val t = p2.tail as Process<ForIs, O2>
-                Emit<ForIs, O2>(h, this.pipe(t.fix1()))
+                val t = p2.tail as Process<I, O2>
+                Emit(h, this.pipe(t.fix1()))
             }
-            is Await<*, *> -> {
+            is Await<*, *, *> -> {
                 val rcv =
-                    p2.recv as (Either<Throwable, O>) -> Process<ForIs, O2>
+                    p2.recv as (Either<Throwable, O>) -> Process<I, O2>
                 when (this) {
                     is Halt<*, *> ->
-                        Halt<ForIs, O2>(this.err) pipe
+                        Halt<I, O2>(this.err) pipe
                             rcv(Left(this.err)).fix1() // <3>
                     is Emit<*, *> -> {
                         val h = this.head as O
-                        val t = this.tail as Process<ForIs, O>
+                        val t = this.tail as Process<I, O>
                         t.pipe(Try { rcv(Right(h).fix()) }.fix1())
                     }
-                    is Await<*, *> -> {
-                        val re0 = this.req as Kind<ForIs, O>
-                        val rcv0 =
-                            this.recv as (Either<Throwable, Nothing>) -> Process<ForIs, O>
-                        awaitAndThen<ForIs, O, O2>(
-                            re0,
-                            { ei -> rcv0(ei) },
+                    is Await<*, *, *> -> {
+                        awaitAndThen<I, O, O2>(
+                            req,
+                            recv,
                             { it pipe p2 }
                         )
                     }
@@ -164,50 +160,57 @@ sealed class Process<I, O> : ProcessOf<I, O> {
         }
     //end::init6[]
 
-    fun onHalt(
-        f: (Throwable) -> ProcessOf<ForIs, O>
-    ): ProcessOf<ForIs, O> = TODO()
+    fun onHalt(f: (Throwable) -> Process<I, O>): Process<I, O> = TODO()
 
-    fun append(p: () -> Process<ForIs, O>): Process<ForIs, O> = TODO()
+    fun append(p: () -> Process<I, O>): Process<I, O> = TODO()
+
+    fun repeat(): Process<I, O> = TODO()
+
+    fun onComplete(p: () -> Process<I, O>): Process<I, O> = TODO()
 
     //tag::init7[]
-    fun <O2> kill(): Process<ForIs, O2> =
+    fun <O2> kill(): Process<I, O2> =
         when (this) {
-            is Await<*, *> -> {
+            is Await<*, *, *> -> {
                 val rcv =
-                    recv as (Either<Throwable, Nothing>) -> Process<ForIs, O>
+                    recv as (Either<Throwable, Nothing>) -> Process<I, O2>
                 rcv(Left(Kill)).drain<O2>() // <1>
                     .onHalt { e ->
                         when (e) {
-                            is Kill -> Halt<ForIs, O2>(End) // <2>
-                            else -> Halt<ForIs, O2>(e)
+                            is Kill -> Halt(End) // <2>
+                            else -> Halt(e)
                         }
-                    }.fix1()
+                    }
             }
-            is Halt<*, *> -> Halt<ForIs, O2>(this.err)
-            is Emit<*, *> -> tail.kill()
+            is Halt<*, *> -> Halt(this.err)
+            is Emit<*, *> -> {
+                val t = this.tail as Process<I, O>
+                t.kill()
+            }
         }
 
-    private fun <O2> drain(): Process<ForIs, O2> =
+    private fun <O2> drain(): Process<I, O2> =
         when (this) {
-            is Halt<*, *> -> Halt<ForIs, O2>(this.err)
-            is Emit<*, *> -> this.tail.drain()
-            is Await<*, *> -> {
-                val rcv =
-                    recv as (Either<Throwable, Nothing>) -> Process<ForIs, O2>
-                Await(req, recv andThen { it.drain<O2>() })
+            is Halt<*, *> -> Halt(this.err)
+            is Emit<*, *> -> {
+                val t = this.tail as Process<I, O2>
+                t.drain()
+            }
+            is Await<*, *, *> -> {
+                val re = req as Kind<I, O2>
+                awaitAndThen<I, O2, O2>(re, recv) { it.drain() }
             }
         }
     //end::init7[]
 
     //tag::init8[]
-    fun filter(f: (O) -> Boolean): Process<ForIs, O> =
+    fun filter(f: (O) -> Boolean): Process<I, O> =
         this pipe Process.filter(f)
     //end::init8[]
 
-    fun take(n: Int): Process<ForIs, O> =
+    fun take(n: Int): Process<I, O> =
         this pipe Process.take(n)
 
-    fun takeWhile(f: (O) -> Boolean): Process<ForIs, O> =
+    fun takeWhile(f: (O) -> Boolean): Process<I, O> =
         this pipe Process.takeWhile(f)
 }
