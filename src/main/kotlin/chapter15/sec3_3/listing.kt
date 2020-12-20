@@ -1,6 +1,7 @@
 package chapter15.sec3_3
 
 import arrow.Kind
+import arrow.core.andThen
 import arrow.higherkind
 import chapter12.Either
 import chapter12.Left
@@ -21,6 +22,10 @@ class ForProcess private constructor() {
 }
 typealias ProcessOf<I, O> = arrow.Kind2<ForProcess, I, O>
 typealias ProcessPartialOf<I> = arrow.Kind<ForProcess, I>
+
+@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+inline fun <F, O> ProcessOf<F, O>.fix(): Process<F, O> =
+    this as Process<F, O>
 
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 inline fun <I, O> ProcessOf<I, O>.fix1(): Process1<I, O> =
@@ -52,7 +57,12 @@ sealed class Process<I, O> : ProcessOf<I, O> {
 
         object Kill : Exception()
 
-        fun <F, O> Try(p: () -> Process<F, O>): Process<F, O> = TODO()
+        fun <F, O> Try(p: () -> Process<F, O>): Process<F, O> =
+            try {
+                p()
+            } catch (e: Throwable) {
+                Halt(e)
+            }
 
         //tag::init4[]
         fun <I, O> await1(
@@ -118,7 +128,22 @@ sealed class Process<I, O> : ProcessOf<I, O> {
             req: Kind<Any?, Any?>,
             recv: (Either<Throwable, Nothing>) -> Process<out Any?, out Any?>,
             fn: (Process<F, A>) -> Process<F, O>
-        ): Process<F, O> = TODO()
+        ): Process<F, O> =
+            Await(
+                req as Kind<F, Nothing>,
+                recv as (Either<Throwable, A>) -> Process<F, A> andThen fn
+            )
+
+        fun <F, A> eval(fa: Kind<F, A>): Process<F, A> =
+            await<F, A, A>(fa) { ea: Either<Throwable, Nothing> ->
+                when (ea) {
+                    is Right<A> -> Emit(ea.value, Halt(End))
+                    is Left -> Halt(ea.value)
+                }
+            }
+
+        fun <F, A, B> eval_(fa: Kind<F, A>): Process<F, B> =
+            eval(fa).drain()
     }
 
     //tag::init6[]
@@ -160,14 +185,6 @@ sealed class Process<I, O> : ProcessOf<I, O> {
         }
     //end::init6[]
 
-    fun onHalt(f: (Throwable) -> Process<I, O>): Process<I, O> = TODO()
-
-    fun append(p: () -> Process<I, O>): Process<I, O> = TODO()
-
-    fun repeat(): Process<I, O> = TODO()
-
-    fun onComplete(p: () -> Process<I, O>): Process<I, O> = TODO()
-
     //tag::init7[]
     fun <O2> kill(): Process<I, O2> =
         when (this) {
@@ -189,7 +206,7 @@ sealed class Process<I, O> : ProcessOf<I, O> {
             }
         }
 
-    private fun <O2> drain(): Process<I, O2> =
+    fun <O2> drain(): Process<I, O2> =
         when (this) {
             is Halt<*, *> -> Halt(this.err)
             is Emit<*, *> -> {
@@ -213,4 +230,61 @@ sealed class Process<I, O> : ProcessOf<I, O> {
 
     fun takeWhile(f: (O) -> Boolean): Process<I, O> =
         this pipe Process.takeWhile(f)
+
+    //extras
+    fun onHalt(f: (Throwable) -> Process<I, O>): Process<I, O> =
+        when (this) {
+            is Halt -> Try { f(this.err) }
+            is Emit -> Emit(this.head, this.tail.onHalt(f))
+            is Await<*, *, *> ->
+                awaitAndThen<I, O, O>(req, recv) { it.onHalt(f) }
+        }
+
+    fun append(p: () -> Process<I, O>): Process<I, O> =
+        this.onHalt { e ->
+            when (e) {
+                is End -> Try(p)
+                else -> Halt(e)
+            }
+        }
+
+    fun repeat(): Process<I, O> = this.append { this.repeat() }
+
+    fun onComplete(p: () -> Process<I, O>): Process<I, O> =
+        this.onHalt { e: Throwable ->
+            when (e) {
+                is End -> p().asFinalizer() // <2>
+                else -> p().asFinalizer().append { Halt(e) }
+            }
+        }.fix()
+
+    fun asFinalizer(): Process<I, O> =
+        when (this) {
+            is Emit -> Emit(this.head, this.tail.asFinalizer())
+            is Halt -> Halt(this.err)
+            is Await<*, *, *> -> {
+                await<I, O, O>(this.req) { ei: Either<Throwable, Nothing> ->
+                    when (ei) {
+                        is Left -> when (val e = ei.value) {
+                            is Kill -> this.asFinalizer()
+                            else -> this.recv(Left(e))
+                        }
+                        else -> this.recv(ei)
+                    }
+                }
+            }
+        }
+
+    fun <O2> flatMap(f: (O) -> Process<I, O2>): Process<I, O2> =
+        when (this) {
+            is Halt ->
+                Halt(err)
+            is Emit ->
+                Try { f(head) }.apply { tail.flatMap(f) }
+            is Await<*, *, *> -> {
+                awaitAndThen<I, O, O2>(req, recv) { it.flatMap(f) }
+            }
+        }
+
+    fun <O2> map(f: (O) -> O2): Process<I, O2> = this pipe lift(f)
 }
