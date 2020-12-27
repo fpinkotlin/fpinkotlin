@@ -12,17 +12,3 @@ interface Listing<F, G> {
     ): Monad<CompositePartialOf<F, G>> = TODO()
     //end::init1[]
 }
-
-/*
-//tag::init2[]
-fun <A, B> flatMap(
-    mna: CompositeOf<F, G, A>,
-    f: (A) -> CompositeOf<F, G, B>
-): CompositeOf<F, G, B> =
-    mf.flatMap(mna.fix().value) { na: Kind<G, A> ->
-        mg.flatMap(na) { a: A ->
-            f(a)
-        }
-    }
-//end::init2[]
-*/

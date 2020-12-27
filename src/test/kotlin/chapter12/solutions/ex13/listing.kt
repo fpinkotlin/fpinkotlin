@@ -10,6 +10,7 @@ import arrow.syntax.function.tupled
 import chapter12.Applicative
 import chapter12.Functor
 
+//tag::init1[]
 val idApplicative: Applicative<ForId> =
     object : Applicative<ForId> {
         override fun <A> unit(a: A): IdOf<A> = Id(a)
@@ -27,8 +28,9 @@ val idApplicative: Applicative<ForId> =
         ): IdOf<B> =
             fa.fix().map(f)
     }
+//end::init1[]
 
-//tag::init1[]
+//tag::init2[]
 interface Traversable<F> : Functor<F> {
 
     fun <G, A, B> traverse(
@@ -47,4 +49,4 @@ interface Traversable<F> : Functor<F> {
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
         traverse(fa, idApplicative) { Id(f(it)) }.fix().extract()
 }
-//end::init1[]
+//end::init2[]
