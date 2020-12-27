@@ -107,7 +107,7 @@ val T = object : Traversable<ForListK> {
         }
 }
 
-class Exercise16 : WordSpec({
+class Exercise15 : WordSpec({
 
     val x = listOf(1, 2, 3, 4, 5).k()
     val y = listOf(6, 7, 8, 9, 10).k()

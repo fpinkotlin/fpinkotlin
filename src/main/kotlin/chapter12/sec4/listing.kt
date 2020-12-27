@@ -73,8 +73,8 @@ val listing1 = {
     //tag::init2[]
     val F = eitherMonad<String>()
     F.flatMap(validName(name)) { f1: String ->
-        F.flatMap(validDateOfBirth(dob)) { f2 ->
-            F.map(validPhone(phone)) { f3 ->
+        F.flatMap(validDateOfBirth(dob)) { f2: Date ->
+            F.map(validPhone(phone)) { f3: String ->
                 WebForm(f1, f2, f3)
             }
         }
@@ -160,11 +160,11 @@ val listing3 = {
         try {
             Success(SimpleDateFormat("yyyy-MM-dd").parse(dob))
         } catch (e: Exception) {
-            Failure("Data of birth must be in format yyyy-MM-dd")
+            Failure("Date of birth must be in format yyyy-MM-dd")
         }
 
     fun validPhone(phone: String): Validation<String, String> =
-        if (phone.matches("[0-9]{10}".toRegex())) Success(phone)
+        if (phone.replace("\\D", "").matches("[0-9]{10}".toRegex())) Success(phone)
         else Failure("Phone number must be 10 digits")
     //end::init5[]
 
