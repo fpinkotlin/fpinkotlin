@@ -33,7 +33,7 @@ class Exercise5 : WordSpec({
     "pipe" should {
         "fuse together two processes" {
             val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0)
-            val sumP: Process<Double, Double> = sum(0.0)
+            val sumP: Process<Double, Double> = sum()
             val take4 = take<Double>(4)
             val fused = sumP pipe take4
             fused(stream).toList() shouldBe List.of(1.0, 3.0, 6.0, 10.0)

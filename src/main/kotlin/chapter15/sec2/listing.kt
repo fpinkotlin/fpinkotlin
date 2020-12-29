@@ -136,7 +136,7 @@ fun <I> filter(p: (I) -> Boolean): Process<I, I> =
 //end::init6[]
 
 //tag::init7[]
-fun sum(start: Double): Process<Double, Double> {
+fun sum(): Process<Double, Double> {
     fun go(acc: Double): Process<Double, Double> =
         Await { i: Option<Double> ->
             when (i) {
@@ -144,7 +144,7 @@ fun sum(start: Double): Process<Double, Double> {
                 is None -> Halt<Double, Double>()
             }
         }
-    return go(start)
+    return go(0.0)
 }
 //end::init7[]
 
@@ -255,5 +255,5 @@ fun main() {
     println(even(Stream.of(1, 2, 3, 4, 5)).toList())
 
     //sum
-    println(sum(0.0)(Stream.of(1.0, 2.0, 3.0, 4.0)).toList())
+    println(sum()(Stream.of(1.0, 2.0, 3.0, 4.0)).toList())
 }

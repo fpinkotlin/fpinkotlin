@@ -15,7 +15,7 @@ import io.kotlintest.specs.WordSpec
 
 //tag::init[]
 fun mean(): Process<Double, Double> =
-    zip(sum(0.0), count()).map { (sm, cnt) -> sm / cnt }
+    zip(sum(), count()).map { (sm, cnt) -> sm / cnt }
 
 fun <A, B, C> zip(
     p1: Process<A, B>,
@@ -44,7 +44,7 @@ class Exercise6 : WordSpec({
 
     "the combinator" should {
         "feed input into two processes" {
-            val p1 = sum(0.0)
+            val p1 = sum()
             val p2 = count<Double>()
             zip(p1, p2)(stream).toList() shouldBe List.of(
                 1.0 to 1,

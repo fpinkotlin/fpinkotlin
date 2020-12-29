@@ -28,13 +28,13 @@ val listing1 = {
     val br = file.bufferedReader()
     val lines = br.lineSequence()
     //tag::init2[]
-    lines.withIndex().exists { it.index + 1 > 40000 }
+    lines.withIndex().exists { it.index >= 40000 }
     //end::init2[]
 
     //tag::init3[]
     lines.filter { it.trim().isNotBlank() }
         .withIndex()
-        .exists { it.index + 1 > 40000 }
+        .exists { it.index >= 40000 }
     //end::init3[]
 
     //tag::init4[]
@@ -48,17 +48,18 @@ val listing1 = {
 }
 
 //tag::init5[]
-fun lines(fileName: String): IO<Sequence<String>> = IO {
-    val file = File(fileName)
-    val br = file.bufferedReader()
-    val end: String by lazy {
-        br.close()
-        System.lineSeparator()
-    }
+fun lines(fileName: String): IO<Sequence<String>> =
+    IO {
+        val file = File(fileName)
+        val br = file.bufferedReader()
+        val end: String by lazy {
+            br.close()
+            System.lineSeparator()
+        }
 
-    sequence {
-        yieldAll(br.lineSequence())
-        yield(end)
+        sequence {
+            yieldAll(br.lineSequence())
+            yield(end)
+        }
     }
-}
 //end::init5[]
