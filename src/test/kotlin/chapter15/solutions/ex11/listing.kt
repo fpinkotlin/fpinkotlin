@@ -21,7 +21,7 @@ fun <F, A> eval(fa: Kind<F, A>): Process<F, A> =
         }
     }
 
-fun <F, A, B> eval_(fa: Kind<F, A>): Process<F, B> =
+fun <F, A, B> evalDrain(fa: Kind<F, A>): Process<F, B> =
     eval(fa).drain()
 
 fun <F, A, B> Process<F, A>.drain(): Process<F, B> =

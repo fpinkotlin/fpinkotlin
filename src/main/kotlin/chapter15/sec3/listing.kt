@@ -27,8 +27,8 @@ import java.util.concurrent.ExecutorService
 sealed class Process<F, O> : ProcessOf<F, O> {
     companion object {
         data class Await<F, A, O>(
-            val req: Kind<F, A>,
-            val recv: (Either<Throwable, A>) -> Process<F, O> // <1>
+            val req: Kind<F, A>, // <1>
+            val recv: (Either<Throwable, A>) -> Process<F, O> // <2>
         ) : Process<F, A>()
 
         data class Emit<F, O>(
@@ -36,68 +36,57 @@ sealed class Process<F, O> : ProcessOf<F, O> {
             val tail: Process<F, O>
         ) : Process<F, O>()
 
-        data class Halt<F, O>(val err: Throwable) : Process<F, O>() // <2>
+        data class Halt<F, O>(val err: Throwable) : Process<F, O>() // <3>
 
-        object End : Exception() // <3>
+        object End : Exception() // <4>
 
-        object Kill : Exception() // <4>
+        object Kill : Exception() // <5>
     }
 
     //tag::init2[]
-    fun apply(p: () -> Process<F, O>): Process<F, O> =
+    fun onHalt(f: (Throwable) -> Process<F, O>): Process<F, O> =
+        when (this) {
+            is Halt -> tryP { f(this.err) } // <1>
+            is Emit -> Emit(this.head, tail.onHalt(f))
+            is Await<*, *, *> ->
+                awaitAndThen(req, recv) { p: Process<F, O> -> //<2>
+                    p.onHalt(f)
+                }
+        }
+
+    fun append(p: () -> Process<F, O>): Process<F, O> =
         this.onHalt { ex: Throwable ->
             when (ex) {
-                is End -> p() // <1>
-                else -> Halt(ex) // <2>
+                is End -> p() // <3>
+                else -> Halt(ex) // <4>
             }
         }.fix()
-
-    fun onHalt(f: (Throwable) -> ProcessOf<F, O>): ProcessOf<F, O> =
-        when (this) {
-            is Halt ->
-                Try { f(this.err).fix() } // <3>
-            is Emit ->
-                Emit(this.head, tail.onHalt(f).fix())
-            is Await<*, *, *> ->
-                awaitAndThen<F, O, O>(req, recv) {
-                    it.onHalt(f).fix()
-                } //<4>
-        }
 
     //end::init2[]
     //tag::init5[]
     fun <O2> flatMap(f: (O) -> Process<F, O2>): Process<F, O2> =
         when (this) {
-            is Halt ->
-                Halt(err)
-            is Emit ->
-                Try { f(head) }.apply { tail.flatMap(f) }
-            is Await<*, *, *> -> {
-                awaitAndThen<F, O, O2>(req, recv) { it.flatMap(f) }
-            }
+            is Halt -> Halt(err)
+            is Emit -> tryP { f(head) }.append { tail.flatMap(f) }
+            is Await<*, *, *> ->
+                awaitAndThen(req, recv) { p: Process<F, O> ->
+                    p.flatMap(f)
+                }
         }
 
     //end::init5[]
-    //tag::ignore[]
+    //tag::init5_5[]
     fun <O2> map(f: (O) -> O2): Process<F, O2> =
         when (this) {
+            is Halt -> Halt(err)
+            is Emit -> tryP { Emit(f(head), tail.map(f)) }
             is Await<*, *, *> ->
-                awaitAndThen<F, O, O2>(req, recv) { it.map(f) }
-            is Emit ->
-                Try { Emit(f(head), tail.map(f)) }
-            is Halt ->
-                Halt(err)
+                awaitAndThen(req, recv) { p: Process<F, O> ->
+                    p.map(f)
+                }
         }
 
-    fun append(p: () -> Process<F, O>): Process<F, O> =
-        this.onHalt { e ->
-            when (e) {
-                is End -> Try { p() }
-                else -> Halt(e)
-            }
-        }.fix()
-
-    //end::ignore[]
+    //end::init5_5[]
     //tag::init9[]
     fun onComplete(p: () -> Process<F, O>): Process<F, O> = // <1>
         this.onHalt { e: Throwable ->
@@ -106,8 +95,8 @@ sealed class Process<F, O> : ProcessOf<F, O> {
                 else -> p().asFinalizer().append { Halt(e) }
             }
         }.fix()
-    //end::init9[]
 
+    //end::init9[]
     //tag::init10[]
     private fun asFinalizer(): Process<F, O> =
         when (this) {
@@ -116,10 +105,11 @@ sealed class Process<F, O> : ProcessOf<F, O> {
             is Await<*, *, *> -> {
                 await<F, O, O>(this.req) { ei: Either<Throwable, Nothing> ->
                     when (ei) {
-                        is Left -> when (val e = ei.value) {
-                            is Kill -> this.asFinalizer()
-                            else -> this.recv(Left(e))
-                        }
+                        is Left ->
+                            when (val e = ei.value) {
+                                is Kill -> this.asFinalizer()
+                                else -> this.recv(Left(e))
+                            }
                         else -> this.recv(ei)
                     }
                 }
@@ -130,7 +120,7 @@ sealed class Process<F, O> : ProcessOf<F, O> {
 
 //end::init1[]
 //tag::init3[]
-fun <F, O> Try(p: () -> Process<F, O>): Process<F, O> =
+fun <F, O> tryP(p: () -> Process<F, O>): Process<F, O> =
     try {
         p()
     } catch (e: Throwable) {
@@ -179,9 +169,9 @@ fun <O> runLog(src: Process<ForIO, O>): IO<Sequence<O>> = IO {
                     else -> throw e
                 }
             is Await<*, *, *> -> {
-                val re = cur.req as IO<O>
+                val re = cur.req as IO<O> // <1>
                 val rcv = cur.recv
-                    as (Either<Throwable, O>) -> Process<ForIO, O>
+                    as (Either<Throwable, O>) -> Process<ForIO, O> // <1>
                 val next: Process<ForIO, O> = try {
                     rcv(Right(unsafePerformIO(re, E)).fix())
                 } catch (err: Throwable) {
@@ -211,12 +201,12 @@ const val fileName = "src/main/resources/samples/lines.txt"
 
 //tag::init8[]
 val p: Process<ForIO, String> =
-    await<ForIO, BufferedReader, String>(
+    await<ForIO, BufferedReader, String>( // <1>
         IO { BufferedReader(FileReader(fileName)) }
     ) { ei1: Either<Throwable, BufferedReader> ->
         when (ei1) {
             is Right -> processNext(ei1)
-            is Left -> Halt(ei1.value) // <1>
+            is Left -> Halt(ei1.value) // <2>
         }
     }
 
@@ -226,12 +216,12 @@ private fun processNext(ei1: Right<BufferedReader>): Process<ForIO, String> =
     ) { ei2: Either<Throwable, String?> ->
         when (ei2) {
             is Right ->
-                if (ei2.value == null) Halt(End) // <2>
+                if (ei2.value == null) Halt(End) // <3>
                 else Emit(ei2.value, processNext(ei1))
             is Left -> {
                 await<ForIO, Nothing, Nothing>(
                     IO { ei1.value.close() }
-                ) { Halt(ei2.value) } // <3>
+                ) { Halt(ei2.value) } // <4>
             }
         }
     }
@@ -243,12 +233,8 @@ fun <R, O> resource(
     use: (R) -> Process<ForIO, O>,
     release: (R) -> Process<ForIO, O>
 ): Process<ForIO, O> =
-    await<ForIO, R, O>(acquire) { ei: Either<Throwable, R> ->
-        when (ei) {
-            is Right -> use(ei.value).onComplete { release(ei.value) }
-            else -> release((ei as Right<R>).value)
-        }
-    }.fix()
+    eval(acquire) // <1>
+        .flatMap { use(it).onComplete { release(it) } } // <2>
 //end::init11[]
 
 fun <F, A> eval(fa: Kind<F, A>): Process<F, A> =
@@ -259,7 +245,7 @@ fun <F, A> eval(fa: Kind<F, A>): Process<F, A> =
         }
     }
 
-fun <F, A, B> eval_(fa: Kind<F, A>): Process<F, B> =
+fun <F, A, B> evalDrain(fa: Kind<F, A>): Process<F, B> =
     eval(fa).drain()
 
 fun <F, A, B> Process<F, A>.drain(): Process<F, B> =
@@ -295,7 +281,7 @@ fun lines(fileName: String): Process<ForIO, String> =
 
             lns()
         },
-        { br: BufferedReader -> eval_(IO { br.close() }) }
+        { br: BufferedReader -> evalDrain(IO { br.close() }) }
     )
 //end::init12[]
 

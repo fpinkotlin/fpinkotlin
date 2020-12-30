@@ -9,12 +9,10 @@ import java.sql.Connection
 import java.sql.PreparedStatement
 
 //tag::init1[]
-fun <F, O, O2> Process<F, O>.through(
-    p2: Process<F, (O) -> Process<F, O2>>
-): Process<F, O2> =
-    join(
-        zipWith(this, p2) { o: O, f: (O) -> Process<F, O2> -> f(o) }
-    )
+fun <F, I, O> Process<F, I>.through(
+    p2: Process<F, (I) -> Process<F, O>>
+): Process<F, O> =
+    join(zipWith(this, p2) { o: I, f: (I) -> Process<F, O> -> f(o) })
 //end::init1[]
 
 //tag::init2[]
@@ -26,4 +24,4 @@ fun query(
     conn: IO<Connection>
 ): Channel<ForIO, (Connection) -> PreparedStatement, Map<String, Any>>
 //end::init3[]
-= TODO()
+    = TODO()

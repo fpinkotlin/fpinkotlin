@@ -6,6 +6,7 @@ import chapter10.Some
 import chapter12.Either
 import chapter12.Left
 import chapter12.Right
+import chapter12.fix
 import chapter13.boilerplate.io.ForIO
 import chapter13.boilerplate.io.IO
 import chapter13.boilerplate.io.IOOf
@@ -15,11 +16,10 @@ import chapter15.sec3_3.Process.Companion.Await
 import chapter15.sec3_3.Process.Companion.Emit
 import chapter15.sec3_3.Process.Companion.End
 import chapter15.sec3_3.Process.Companion.Halt
-import chapter15.sec3_3.Process.Companion.await
 import chapter15.sec3_3.Process.Companion.await1
 import chapter15.sec3_3.Process.Companion.emit1
 import chapter15.sec3_3.Process.Companion.eval
-import chapter15.sec3_3.Process.Companion.eval_
+import chapter15.sec3_3.Process.Companion.evalDrain
 import chapter15.sec3_3.Process1
 import chapter15.sec3_4.tee
 import chapter15.sec3_4.zipWith
@@ -27,7 +27,6 @@ import java.io.BufferedReader
 import java.io.FileReader
 import java.io.FileWriter
 import java.util.concurrent.ExecutorService
-import chapter12.fix
 
 //tag::init1[]
 typealias Sink<F, O> = Process<F, (O) -> Process<F, Unit>>
@@ -43,12 +42,16 @@ fun <R, O> resource(
 //tag::init2[]
 fun fileW(file: String, append: Boolean = false): Sink<ForIO, String> =
     resource(
-        acquire = IO { FileWriter(file, append) },
-        use = { fw -> constant { s: String -> eval(IO { fw.write(s) }) } },
-        release = { fw -> eval_(IO { fw.close() }) }
+        acquire = IO { FileWriter(file, append) }, // <1>
+        use = { fw: FileWriter ->
+            constant { s: String -> eval(IO { fw.write(s) }) } // <2>
+        },
+        release = { fw: FileWriter ->
+            evalDrain(IO { fw.close() }) // <3>
+        }
     )
 
-fun <A> constant(a: A): Process<ForIO, A> = // <1>
+fun <A> constant(a: A): Process<ForIO, A> = // <4>
     eval(IO { a }).flatMap { Emit(it, constant(it)) }
 //end::init2[]
 
@@ -56,11 +59,11 @@ fun <F, O> join(p: Process<F, Process<F, O>>): Process<F, O> =
     p.flatMap { it }
 
 //tag::init3[]
-fun <F, O1, O2, O3> zipWith(
-    p1: Process<F, O1>,
-    p2: Process<F, O2>,
-    f: (O1, O2) -> O3
-): Process<F, O3> =
+fun <F, I1, I2, O> zipWith(
+    p1: Process<F, I1>,
+    p2: Process<F, I2>,
+    f: (I1, I2) -> O
+): Process<F, O> =
     tee(p1, p2, zipWith(f))
 
 fun <F, O> Process<F, O>.to(sink: Sink<F, O>): Process<F, Unit> =
@@ -93,7 +96,7 @@ fun lines(fileName: String): Process<ForIO, String> =
 
             lns()
         },
-        { br: BufferedReader -> eval_(IO { br.close() }) }
+        { br: BufferedReader -> evalDrain(IO { br.close() }) }
     )
 
 fun fahrenheitToCelsius(f: Double): Double = (f - 32) * 5.0 / 9.0

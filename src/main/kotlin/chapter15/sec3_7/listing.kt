@@ -37,7 +37,7 @@ val convertMultisink2: Process<ForIO, Unit> =
         lines(infile)
             .filter { !it.startsWith("#") }
             .map { fahrenheitToCelsius(it.toDouble()) }
-            .filter { it > 0 } // discard temperatures below zero
+            .filter { it > 0 } // <1>
             .map { it.toString() }
             .to(fileW("${infile}.celsius"))
     }.drain()

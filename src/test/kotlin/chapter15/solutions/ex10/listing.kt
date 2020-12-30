@@ -8,7 +8,7 @@ import chapter15.sec3.Process.Companion.Await
 import chapter15.sec3.Process.Companion.Emit
 import chapter15.sec3.Process.Companion.End
 import chapter15.sec3.Process.Companion.Halt
-import chapter15.sec3.Try
+import chapter15.sec3.tryP
 
 //tag::init[]
 fun <F, O> Process<F, O>.runLog(MC: MonadCatch<F>): Kind<F, Sequence<O>> {
@@ -27,7 +27,7 @@ fun <F, O> Process<F, O>.runLog(MC: MonadCatch<F>): Kind<F, Sequence<O>> {
                 val rcv: (Either<Throwable, O>) -> Process<F, O> =
                     cur.recv as (Either<Throwable, O>) -> Process<F, O>
                 MC.flatMap(MC.attempt(re)) { ei ->
-                    go(Try { rcv(ei) }, acc)
+                    go(tryP { rcv(ei) }, acc)
                 }
             }
         }

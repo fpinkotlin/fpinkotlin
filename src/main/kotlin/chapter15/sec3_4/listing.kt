@@ -18,19 +18,19 @@ import chapter15.sec3_3.Process.Companion.awaitAndThen
 @higherkind
 sealed class T<I1, I2, X> : TOf<I1, I2, X> {
 
-    companion object {
+    companion object { // <1>
         fun <I1, I2> left() = L<I1, I2>()
         fun <I1, I2> right() = R<I1, I2>()
     }
 
     abstract fun get(): Either<(I1) -> X, (I2) -> X>
 
-    class L<I1, I2> : T<I1, I2, I1>() {
+    class L<I1, I2> : T<I1, I2, I1>() { // <2>
         override fun get(): Either<(I1) -> I1, (I2) -> I1> =
             Left { l: I1 -> l }
     }
 
-    class R<I1, I2> : T<I1, I2, I2>() {
+    class R<I1, I2> : T<I1, I2, I2>() { // <3>
         override fun get(): Either<(I1) -> I2, (I2) -> I2> =
             Right { r: I2 -> r }.fix()
     }
@@ -42,15 +42,13 @@ typealias Tee<I1, I2, O> = Process<ForT, O>
 //end::init2[]
 
 //tag::init3[]
-fun <I1, I2, O> haltT(): Tee<I1, I2, O> = Halt(End)
-
 fun <I1, I2, O> awaitL(
     fallback: Tee<I1, I2, O> = haltT<I1, I2, O>(),
     recv: (I1) -> Tee<I1, I2, O>
 ): Tee<I1, I2, O> =
     await<ForT, I1, O>(
-        T.left<I1, I2>().get()
-    ) { e: Either<Throwable, I1> ->
+        T.left<I1, I2>() // <1>
+    ) { e: Either<Throwable, I1> -> // <2>
         when (e) {
             is Left -> when (val err = e.value) {
                 is End -> fallback
@@ -65,8 +63,8 @@ fun <I1, I2, O> awaitR(
     recv: (I2) -> Tee<I1, I2, O>
 ): Tee<I1, I2, O> =
     await<ForT, I1, O>(
-        T.right<I1, I2>().get().fix()
-    ) { e: Either<Throwable, I2> ->
+        T.right<I1, I2>() // <3>
+    ) { e: Either<Throwable, I2> -> // <4>
         when (e) {
             is Left -> when (val err = e.value) {
                 is End -> fallback
@@ -81,6 +79,9 @@ fun <I1, I2, O> emitT(
     tl: Tee<I1, I2, O> = haltT<I1, I2, O>()
 ): Tee<I1, I2, O> =
     Emit(h, tl)
+
+fun <I1, I2, O> haltT(): Tee<I1, I2, O> =
+    Halt(End)
 //end::init3[]
 
 //tag::init4[]
@@ -98,42 +99,43 @@ fun <I1, I2> zip(): Tee<I1, I2, Pair<I1, I2>> =
 //end::init4[]
 
 //tag::init5[]
-fun <F, O1, O2, O3> tee(
-    p1: Process<F, O1>,
-    p2: Process<F, O2>,
-    t: Tee<O1, O2, O3>
-): Process<F, O3> =
+fun <F, I1, I2, O> tee(
+    p1: Process<F, I1>,
+    p2: Process<F, I2>,
+    t: Tee<I1, I2, O>
+): Process<F, O> =
     when (t) {
         is Halt ->
-            p1.kill<O3>() // <1>
+            p1.kill<O>() // <1>
                 .onComplete { p2.kill() }
                 .onComplete { Halt(t.err) }
         is Emit ->
             Emit(t.head, tee(p1, p2, t)) // <2>
         is Await<*, *, *> -> {
-            val side = t.req as Either<(O1) -> O1, (O2) -> O2>
-            val rcv =
-                t.recv as (Either<Nothing, Any?>) -> Process<ForT, O3>
 
-            when (side) { // <3>
+            val side = t.req as T<I1, I2, O>
+            val rcv =
+                t.recv as (Either<Nothing, Any?>) -> Tee<I1, I2, O>
+
+            when (side.get()) { // <3>
                 is Left -> when (p1) {
                     is Halt ->
-                        p2.kill<O3>().onComplete { Halt(p1.err) } // <4>
+                        p2.kill<O>().onComplete { Halt(p1.err) } // <4>
                     is Emit ->
                         tee(p1.tail, p2, Try { rcv(Right(p1.head)) }) //<5>
-                    is Await<*, *, *> -> { // <6>
-                        awaitAndThen<F, O2, O3>(
-                            p1.req, p1.recv, { tee(it, p2, t) })
-                    }
+                    is Await<*, *, *> ->
+                        awaitAndThen<F, I2, O>(
+                            p1.req, p1.recv
+                        ) { tee(it, p2, t) }
                 }
                 is Right -> when (p2) { // <7>
-                    is Halt -> p1.kill<O3>().onComplete { Halt(p2.err) }
+                    is Halt -> p1.kill<O>().onComplete { Halt(p2.err) }
                     is Emit ->
                         tee(p1, p2.tail, Try { rcv(Right(p2.head)) })
                     is Await<*, *, *> -> {
-                        awaitAndThen<F, O2, O3>(
-                            p2.req, p2.recv, { tee(p1, it, t) }
-                        )
+                        awaitAndThen<F, I2, O>(
+                            p2.req, p2.recv
+                        ) { tee(p1, it, t) }
                     }
                 }
             }
