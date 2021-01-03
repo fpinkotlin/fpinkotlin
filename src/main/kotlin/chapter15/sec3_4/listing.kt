@@ -124,7 +124,7 @@ fun <F, I1, I2, O> tee(
                     is Emit ->
                         tee(p1.tail, p2, Try { rcv(Right(p1.head)) }) //<5>
                     is Await<*, *, *> ->
-                        awaitAndThen<F, I2, O>(
+                        awaitAndThen<F, I2, O>( // <6>
                             p1.req, p1.recv
                         ) { tee(it, p2, t) }
                 }
