@@ -164,7 +164,7 @@ val listing3 = {
         }
 
     fun validPhone(phone: String): Validation<String, String> =
-        if (phone.replace("\\D", "").matches("[0-9]{10}".toRegex())) Success(phone)
+        if (phone.matches("[0-9]{10}".toRegex())) Success(phone)
         else Failure("Phone number must be 10 digits")
     //end::init5[]
 
