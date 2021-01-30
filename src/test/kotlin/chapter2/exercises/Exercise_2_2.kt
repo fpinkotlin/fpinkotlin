@@ -34,6 +34,16 @@ class Exercise_2_2 : WordSpec({
         }
         """!verify ordering of a list of correctly ordered Strings
             based on an ordering HOF""" {
+        """!detect ordering of an empty list as sorted""" {
+            isSorted(
+                persistentListOf<Int>()
+            ) { a, b -> b > a } shouldBe true
+        }
+        """!detect ordering of an single element list as sorted""" {
+            isSorted(
+                persistentListOf(1)
+            ) { a, b -> b > a } shouldBe true
+        }
             isSorted(
                 persistentListOf("a", "b", "c")
             ) { a, b -> b > a } shouldBe true
