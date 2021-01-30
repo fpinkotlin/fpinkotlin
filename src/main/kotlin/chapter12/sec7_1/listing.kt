@@ -1,7 +1,6 @@
 package chapter12.sec7_1
 
 import arrow.Kind
-import arrow.Kind2
 import arrow.higherkind
 import chapter10.Monoid
 import chapter12.Functor
@@ -40,7 +39,6 @@ interface Foldable<F> {
 typealias Const<M, A> = M
 //end::init5[]
  */
-
 
 interface Applicative<F> : Functor<F> {
     fun <A> unit(a: A): Kind<F, A>

@@ -74,7 +74,9 @@ class Exercise1 : WordSpec({
         }
     }
     "dropWhile" should {
-        dropWhile<Int> { 5 > it }(stream).toList() shouldBe
-            List.of(5, 6, 7)
+        "drop elements from a stream while a predicate is true" {
+            dropWhile<Int> { 5 > it }(stream).toList() shouldBe
+                List.of(5, 6, 7)
+        }
     }
 })
