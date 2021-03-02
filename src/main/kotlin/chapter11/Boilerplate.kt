@@ -9,10 +9,14 @@ import arrow.core.fix
 import arrow.higherkind
 import chapter10.Cons
 import chapter10.ForList
+import chapter10.ForOption
 import chapter10.List
 import chapter10.ListOf
+import chapter10.Option
+import chapter10.OptionOf
 import chapter10.fix
 import chapter8.RNG
+import java.math.BigDecimal
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
@@ -76,6 +80,7 @@ interface Functor<F> {
     fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B>
 }
 
+//tag::init1[]
 interface Monad<F> : Functor<F> {
 
     fun <A> unit(a: A): Kind<F, A>
@@ -85,6 +90,7 @@ interface Monad<F> : Functor<F> {
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
         flatMap(fa) { a -> unit(f(a)) }
 
+    //tag::ignore[]
     fun <A, B, C> map2(fa: Kind<F, A>, fb: Kind<F, B>, f: (A, B) -> C) =
         flatMap(fa) { a -> map(fb) { b -> f(a, b) } }
 
@@ -124,7 +130,9 @@ interface Monad<F> : Functor<F> {
 
     fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
         flatMap(mma) { ma -> ma }
+    //end::ignore[]
 }
+//end::init1[]
 
 val listKMonad = object : Monad<ForListK> {
     override fun <A> unit(a: A): ListKOf<A> = ListK.empty()
