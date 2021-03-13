@@ -8,6 +8,7 @@ import chapter13.boilerplate.free.Return
 import chapter13.boilerplate.free.Suspend
 
 //tag::init1[]
+@Suppress("UNCHECKED_CAST")
 tailrec fun <F, A> step(free: Free<F, A>): Free<F, A> =
     when (free) {
         is FlatMap<*, *, *> -> {
@@ -26,6 +27,7 @@ tailrec fun <F, A> step(free: Free<F, A>): Free<F, A> =
         else -> free
     }
 
+@Suppress("UNCHECKED_CAST")
 fun <F, A> run(free: Free<F, A>, M: Monad<F>): Kind<F, A> =
     when (val stepped = step(free)) {
         is Return -> M.unit(stepped.a)
