@@ -40,11 +40,11 @@ tailrec fun <A> step(async: Async<A>): Async<A> =
     when (async) {
         is FlatMap<*, *> -> {
             val y = async.sub as Async<A> // <1>
-            val g = async.f as (A) -> Async<A>
+            val g = async.f as (A) -> Async<A> // <1>
             when (y) {
                 is FlatMap<*, *> -> {
-                    val x = y.sub as Async<A>
-                    val f = y.f as (A) -> Async<A>
+                    val x = y.sub as Async<A> // <1>
+                    val f = y.f as (A) -> Async<A> // <1>
                     step(x.flatMap { a -> f(a).flatMap(g) })
                 }
                 is Return -> step(g(y.a))
@@ -60,8 +60,8 @@ fun <A> run(async: Async<A>): Par<A> =
         is Return -> Par.unit(stepped.a)
         is Suspend -> stepped.resume
         is FlatMap<*, *> -> {
-            val x = stepped.sub as Async<A>
-            val f = stepped.f as (A) -> Async<A>
+            val x = stepped.sub as Async<A> // <1>
+            val f = stepped.f as (A) -> Async<A> // <1>
             when (x) {
                 is Suspend -> x.resume.flatMap { a -> run(f(a)) }
                 else -> throw RuntimeException(
