@@ -44,9 +44,12 @@ fun simulateMachine(
     inputs: List<Input>
 ): State<Machine, Tuple2<Int, Int>> =
     State.fx(Id.monad()) {
-        val (x) = inputs.map(update).map(StateApi::modify)
+        inputs
+            .map(update)
+            .map(StateApi::modify)
             .stateSequential()
-        val (s: Machine) = StateApi.get<Machine>()
+            .bind()
+        val s = StateApi.get<Machine>().bind()
         Tuple2(s.candies, s.coins)
     }
 //end::init2[]

@@ -16,8 +16,8 @@ object Listing_4_7 {
         val ae = age.parseToInt() // <4>
         val te = numberOfSpeedingTickets.parseToInt()
         return Either.fx { // <5>
-            val (a) = ae // <6>
-            val (t) = te
+            val a = ae.bind() // <6>
+            val t = te.bind()
             insuranceRateQuote(a, t) // <7>
         }
     }

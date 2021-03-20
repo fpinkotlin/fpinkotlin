@@ -78,9 +78,9 @@ fun <A> zipWithIndex(la: List<A>): List<Pair<Int, A>> =
 ...
 { acc: StateOf<Int, List<Pair<Int, A>>>, a: A ->
     acc.fx {
-        val (xs) = acc
-        val (n) = acc.getState()
-        val (_) = acc.setState(n + 1)
+        val xs = acc.bind()
+        val n = acc.getState().bind()
+        acc.setState(n + 1).bind()
         listOf(Pair(n, a)) + xs
     }
 }

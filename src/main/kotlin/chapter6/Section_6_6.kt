@@ -39,9 +39,9 @@ object Section_6_6 {
     //tag::init2[]
     val ns2: State<RNG, List<Int>> =
         State.fx(Id.monad()) { // <1>
-            val (x: Int) = int // <2>
-            val (y: Int) = int // <3>
-            val (xs: List<Int>) = ints(x) // <4>
+            val x: Int = int.bind() // <2>
+            val y: Int = int.bind() // <3>
+            val xs: List<Int> = ints(x).bind() // <4>
             xs.map { it % y } // <5>
         }
     //end::init2[]
@@ -49,8 +49,8 @@ object Section_6_6 {
     //tag::init3[]
     fun <S> modify(f: (S) -> S): State<S, Unit> =
         State.fx(Id.monad()) { // <1>
-            val (s: S) = get<S>() // <2>
-            val (_) = set(f(s)) // <3>
+            val s: S = get<S>().bind() // <2>
+            set(f(s)).bind() // <3>
         }
     //end::init3[]
 

@@ -121,14 +121,14 @@ fun <S, A> ST.Companion.fx(
 //tag::init3b[]
 val p2 =
     ST.fx<Nothing, Pair<Int, Int>> {
-        val r1 = !STRef<Nothing, Int>(10)
-        val r2 = !STRef<Nothing, Int>(20)
-        val x = !r1.read()
-        val y = !r2.read()
-        !r1.write(y + 1)
-        !r2.write(x + 1)
-        val a = !r1.read()
-        val b = !r2.read()
+        val r1 = STRef<Nothing, Int>(10).bind()
+        val r2 = STRef<Nothing, Int>(20).bind()
+        val x = r1.read().bind()
+        val y = r2.read().bind()
+        r1.write(y + 1).bind()
+        r2.write(x + 1).bind()
+        val a = r1.read().bind()
+        val b = r2.read().bind()
         a to b
     }
 //end::init3b[]
@@ -143,14 +143,14 @@ interface RunnableST<A> {
 val p3 = object : RunnableST<Pair<Int, Int>> {
     override fun <S> invoke(): ST<S, Pair<Int, Int>> =
         ST.fx {
-            val r1 = !STRef<S, Int>(10)
-            val r2 = !STRef<S, Int>(20)
-            val x = !r1.read()
-            val y = !r2.read()
-            !r1.write(y + 1)
-            !r2.write(x + 1)
-            val a = !r1.read()
-            val b = !r2.read()
+            val r1 = STRef<S, Int>(10).bind()
+            val r2 = STRef<S, Int>(20).bind()
+            val x = r1.read().bind()
+            val y = r2.read().bind()
+            r1.write(y + 1).bind()
+            r2.write(x + 1).bind()
+            val a = r1.read().bind()
+            val b = r2.read().bind()
             a to b
         }
 }
@@ -215,20 +215,20 @@ object Immutable {
         pivot: Int
     ): ST<S, Int> =
         ST.fx {
-            val vp = !arr.read(pivot)
-            !arr.swap(pivot, r)
-            val j = !STRef<S, Int>(l)
-            !(l until r).fold(noop<S>()) { st, i: Int ->
-                !st
-                val vi = !arr.read(i)
+            val vp = arr.read(pivot).bind()
+            arr.swap(pivot, r).bind()
+            val j = STRef<S, Int>(l).bind()
+            (l until r).fold(noop<S>()) { st, i: Int ->
+                st.bind()
+                val vi = arr.read(i).bind()
                 if (vi < vp) {
-                    val vj = !j.read()
-                    !arr.swap(i, vj)
+                    val vj = j.read().bind()
+                    arr.swap(i, vj).bind()
                     j.write(vj + 1)
                 } else noop()
-            }
-            val x = !j.read()
-            !arr.swap(x, r)
+            }.bind()
+            val x = j.read().bind()
+            arr.swap(x, r).bind()
             x
         }
 
@@ -247,10 +247,10 @@ object Immutable {
         if (xs.isEmpty()) xs else ST.runST(object : RunnableST<List<Int>> {
             override fun <S> invoke(): ST<S, List<Int>> =
                 ST.fx {
-                    val arr = !STArray.fromList<S, Int>(xs)
-                    val size = !arr.size
-                    !qs(arr, 0, size -1)
-                    !arr.freeze()
+                    val arr = STArray.fromList<S, Int>(xs).bind()
+                    val size = arr.size.bind()
+                    qs(arr, 0, size - 1).bind()
+                    arr.freeze().bind()
                 }
         })
     //end::init10[]

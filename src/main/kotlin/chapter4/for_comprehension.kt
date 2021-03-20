@@ -1,12 +1,14 @@
 package chapter4
 
-import arrow.core.Option
-import arrow.core.extensions.fx
+object ForComprehension {
 
-object ForComprehensionSidebar {
+    fun <A, B> Option<A>.flatMap(f: (A) -> Option<B>): Option<B> = TODO()
+    fun <A, B> Option<A>.map(f: (A) -> B): Option<B> = TODO()
+    fun <A> Option.Companion.fx(f: () -> Unit): Option<A> = TODO()
+    fun <A> Option<A>.bind(): A = TODO()
 
     object FlatMapExample {
-        //tag::flatmap[]
+        //tag::map2[]
         fun <A, B, C> map2(
             oa: Option<A>,
             ob: Option<B>,
@@ -17,7 +19,7 @@ object ForComprehensionSidebar {
                     f(a, b)
                 }
             }
-        //end::flatmap[]
+        //end::map2[]
     }
 
     object BindingExample {
@@ -28,8 +30,8 @@ object ForComprehensionSidebar {
             f: (A, B) -> C
         ): Option<C> =
             Option.fx {
-                val (a) = oa
-                val (b) = ob
+                val a = oa.bind()
+                val b = ob.bind()
                 f(a, b)
             }
         //end::binding[]

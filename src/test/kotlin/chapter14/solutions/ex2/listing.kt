@@ -43,20 +43,20 @@ fun <S> partition(
     pivot: Int
 ): ST<S, Int> =
     ST.fx {
-        val vp = !arr.read(pivot)
-        !arr.swap(pivot, r)
-        val j = !STRef<S, Int>(l)
-        !(l until r).fold(noop<S>()) { st, i: Int ->
-            !st
-            val vi = !arr.read(i)
+        val vp = arr.read(pivot).bind()
+        arr.swap(pivot, r).bind()
+        val j = STRef<S, Int>(l).bind()
+        (l until r).fold(noop<S>()) { st, i: Int ->
+            st.bind()
+            val vi = arr.read(i).bind()
             if (vi < vp) {
-                val vj = !j.read()
-                !arr.swap(i, vj)
+                val vj = j.read().bind()
+                arr.swap(i, vj).bind()
                 j.write(vj + 1)
             } else noop()
-        }
-        val x = !j.read()
-        !arr.swap(x, r)
+        }.bind()
+        val x = j.read().bind()
+        arr.swap(x, r).bind()
         x
     }
 
