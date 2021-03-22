@@ -1,28 +1,28 @@
-package chapter2
+package chapter2.sec3
 
-object Listing_2_6_1 {
-    //tag::par1[]
+val listing1 = {
+    //tag::init1[]
     fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C = TODO()
-    //end::par1[]
+    //end::init1[]
 }
 
-object Listing_2_6_2 {
-    //tag::par2[]
+val listing2 = {
+    //tag::init2[]
     fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
         { b: B -> TODO() }
-    //end::par2[]
+    //end::init2[]
 }
 
-object Listing_2_6_3 {
-    //tag::par3[]
+val listing3 = {
+    //tag::init3[]
     fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
         { b: B -> f(a, b) }
-    //end::par3[]
+    //end::init3[]
 }
 
-object Listing_2_6_4 {
-    //tag::par4[]
+val listing4 = {
+    //tag::init4[]
     fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
         { b -> f(a, b) }
-    //end::par4[]
+    //end::init4[]
 }
