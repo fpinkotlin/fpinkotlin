@@ -23,7 +23,7 @@ fun mean(): Process<Double, Double> =
 //TODO: Enable tests by removing `!` prefix
 class Exercise3 : WordSpec({
     "mean" should {
-        "!calculate a running average of values encounterd so far" {
+        "!calculate a running average of values encountered so far" {
             val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0)
             val p = mean()
             p(stream).toList() shouldBe List.of(1.0, 1.5, 2.0, 2.5, 3.0)

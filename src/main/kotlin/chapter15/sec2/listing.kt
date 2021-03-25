@@ -252,6 +252,7 @@ fun main() {
 
     //repeated left
     val units = Stream.continually(Unit)
+    println(units)
     println(lift<Unit, Int> { _ -> 1 }(units))
 
     //filtering

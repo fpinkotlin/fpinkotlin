@@ -58,7 +58,7 @@ class Exercise6 : WordSpec({
     }
 
     "mean" should {
-        "calculate a running average of values encounterd so far" {
+        "calculate a running average of values encountered so far" {
             val p = mean()
             p(stream).toList() shouldBe
                 List.of(1.0, 1.5, 2.0, 2.5, 3.0, 3.5)
