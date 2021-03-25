@@ -7,10 +7,9 @@ import io.kotlintest.specs.WordSpec
 
 // tag::init[]
 fun <A, B> map(xs: List<A>, f: (A) -> B): List<B> =
-    foldRightL(
-        xs,
-        List.empty(),
-        { a, xa -> Cons(f(a), xa) })
+    foldRightL(xs, List.empty()) { a: A, xa: List<B> ->
+        Cons(f(a), xa)
+    }
 // end::init[]
 
 class Solution_3_17 : WordSpec({
