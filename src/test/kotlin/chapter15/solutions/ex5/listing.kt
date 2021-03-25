@@ -35,7 +35,10 @@ fun product(): Process<Double, Double> {
     fun go(acc: Double): Process<Double, Double> =
         Await { i: Option<Double> ->
             when (i) {
-                is Some -> if (i.get == 0.0) Emit (0.0) else Emit(i.get * acc, go(i.get * acc))
+                is Some -> if (i.get == 0.0)
+                    Emit (0.0)
+                else
+                    Emit(i.get * acc, go(i.get * acc))
                 is None -> Halt<Double, Double>()
             }
         }
@@ -58,7 +61,8 @@ class Exercise5 : WordSpec({
             val fused = incP pipe productP
             // incP: (2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0)
             // productP: (2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0)
-            fused(stream).toList() shouldBe List.of(2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0)
+            fused(stream).toList() shouldBe
+                    List.of(2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0)
         }
         "fuse together two processes (test 2 inversus)" {
             val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0)
@@ -67,7 +71,8 @@ class Exercise5 : WordSpec({
             val fused = productP pipe incP
             // productP: (1.0, 2.0, 3.0, 24.0, 120.0, 720.0, 5040.0)
             // incP: (2.0, 3.0, 7.0, 25.0, 121.0, 721.0, 5041.0)
-            fused(stream).toList() shouldBe List.of(2.0, 3.0, 7.0, 25.0, 121.0, 721.0, 5041.0)
+            fused(stream).toList() shouldBe
+                    List.of(2.0, 3.0, 7.0, 25.0, 121.0, 721.0, 5041.0)
         }
     }
 })
