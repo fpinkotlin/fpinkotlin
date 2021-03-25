@@ -1,0 +1,10 @@
+# Absolute zero
+-273.15
+# Water melting point
+32.0
+50.0
+68.0
+# Standard body temperature
+98.6
+# Water boiling point
+212.0

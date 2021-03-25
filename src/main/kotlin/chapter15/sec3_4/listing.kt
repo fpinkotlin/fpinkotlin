@@ -110,7 +110,7 @@ fun <F, I1, I2, O> tee(
                 .onComplete { p2.kill() }
                 .onComplete { Halt(t.err) }
         is Emit ->
-            Emit(t.head, tee(p1, p2, t)) // <2>
+            Emit(t.head, tee(p1, p2, t.tail)) // <2>
         is Await<*, *, *> -> {
 
             val side = t.req as T<I1, I2, O>

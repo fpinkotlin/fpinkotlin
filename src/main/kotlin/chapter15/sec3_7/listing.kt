@@ -10,8 +10,8 @@ fun fahrenheitToCelsius(f: Double): Double = (f - 32) * 5.0 / 9.0
 
 //tag::init1[]
 val convertAll: Process<ForIO, Unit> =
-    fileW("celsius.tx").take(1).flatMap { out ->
-        lines("fahrenheits.txt")
+    fileW("celsius.txt").take(1).flatMap { out ->
+        lines("fahrenheit.txt")
             .flatMap { infile ->
                 lines(infile)
                     .map { fahrenheitToCelsius(it.toDouble()) }
@@ -22,7 +22,7 @@ val convertAll: Process<ForIO, Unit> =
 
 //tag::init2[]
 val convertMultiSink: Process<ForIO, Unit> =
-    lines("fahrenheits.txt")
+    lines("fahrenheit.txt")
         .flatMap { infile ->
             lines(infile)
                 .map { fahrenheitToCelsius(it.toDouble()) }
@@ -33,7 +33,7 @@ val convertMultiSink: Process<ForIO, Unit> =
 
 //tag::init3[]
 val convertMultisink2: Process<ForIO, Unit> =
-    lines("fahrenheits.txt").flatMap { infile ->
+    lines("fahrenheit.txt").flatMap { infile ->
         lines(infile)
             .filter { !it.startsWith("#") }
             .map { fahrenheitToCelsius(it.toDouble()) }
