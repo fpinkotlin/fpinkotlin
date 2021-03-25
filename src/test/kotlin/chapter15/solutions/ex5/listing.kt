@@ -35,10 +35,8 @@ fun product(): Process<Double, Double> {
     fun go(acc: Double): Process<Double, Double> =
         Await { i: Option<Double> ->
             when (i) {
-                is Some -> if (i.get == 0.0)
-                    Emit (0.0)
-                else
-                    Emit(i.get * acc, go(i.get * acc))
+                is Some -> if (i.get == 0.0) Emit(0.0)
+                    else Emit(i.get * acc, go(i.get * acc))
                 is None -> Halt<Double, Double>()
             }
         }
