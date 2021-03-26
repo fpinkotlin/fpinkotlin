@@ -1,8 +1,8 @@
 package chapter8.exercises.ex13
 
-import chapter8.sec3.listing3.Gen
-import chapter8.sec3.listing3.SGen
-import chapter8.sec4.listing1.run
+import chapter8.sec3_3.Gen
+import chapter8.sec3_3.SGen
+import chapter8.sec4_1.run
 
 fun main() {
     //tag::init1[]
