@@ -4,7 +4,7 @@ import chapter7.sec4.map
 import chapter7.sec4.unit
 import chapter8.Falsified
 import chapter8.Passed
-import chapter8.sec3_3.Prop
+import chapter8.Prop
 import java.util.concurrent.Executors
 
 fun check(p: () -> Boolean): Prop = Prop { _, _, _ ->

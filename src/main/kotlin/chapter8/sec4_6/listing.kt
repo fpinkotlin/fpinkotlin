@@ -2,7 +2,7 @@ package chapter8.sec4_6
 
 import chapter8.Falsified
 import chapter8.Passed
-import chapter8.sec3_3.Prop
+import chapter8.Prop
 
 val listing5 = {
     //tag::init[]

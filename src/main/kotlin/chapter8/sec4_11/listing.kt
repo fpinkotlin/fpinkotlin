@@ -1,9 +1,9 @@
 package chapter8.sec4_11
 
 import chapter7.sec4.Par
-import chapter8.sec3_3.Gen
-import chapter8.sec3_3.Prop
-import chapter8.sec3_3.Prop.Companion.forAll
+import chapter8.Gen
+import chapter8.Prop
+import chapter8.Prop.Companion.forAll
 import chapter8.sec4_10.ges
 import chapter8.sec4_10.map2
 
