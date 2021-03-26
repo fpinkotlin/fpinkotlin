@@ -1,8 +1,8 @@
 package chapter8.exercises.ex14
 
-import chapter8.sec3.listing3.Gen
-import chapter8.sec3.listing3.Prop
-import chapter8.sec4.listing1.run
+import chapter8.sec3_3.Gen
+import chapter8.sec3_3.Prop
+import chapter8.sec4_1.run
 
 val smallInt = Gen.choose(-10, 10)
 
