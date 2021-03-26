@@ -3,7 +3,7 @@ package chapter8.sec4_15
 import chapter7.sec4.Par
 import chapter7.sec4.map
 import chapter7.sec4.unit
-import chapter8.sec3_3.Gen
+import chapter8.Gen
 import chapter8.sec4_12.forAllPar
 import chapter8.sec4_9.equal
 

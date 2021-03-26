@@ -1,6 +1,6 @@
 package chapter8.sec4_4
 
-import chapter8.sec3_3.Prop
+import chapter8.Prop
 
 val listing3 = {
     //tag::init[]

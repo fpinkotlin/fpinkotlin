@@ -1,9 +1,9 @@
 package chapter8.solutions.ex14
 
 import arrow.core.extensions.list.foldable.exists
-import chapter8.sec3_3.Gen
-import chapter8.sec3_3.Prop.Companion.forAll
-import chapter8.sec3_3.SGen
+import chapter8.Gen
+import chapter8.Prop.Companion.forAll
+import chapter8.SGen
 import chapter8.sec4_1.run
 
 val smallInt = Gen.choose(-10, 10)

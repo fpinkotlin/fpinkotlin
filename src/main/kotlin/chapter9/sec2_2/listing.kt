@@ -2,9 +2,9 @@ package chapter9.sec2_2
 
 import arrow.core.Either
 import arrow.core.Right
-import chapter8.sec3_3.Gen
-import chapter8.sec3_3.Prop
-import chapter8.sec3_3.Prop.Companion.forAll
+import chapter8.Gen
+import chapter8.Prop
+import chapter8.Prop.Companion.forAll
 
 interface Parser<A>
 

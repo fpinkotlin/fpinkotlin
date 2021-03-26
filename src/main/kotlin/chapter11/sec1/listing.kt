@@ -13,7 +13,7 @@ import chapter10.fix
 import chapter4.Option
 import chapter7.sec3.Par
 import chapter7.sec3.Pars
-import chapter8.sec3_3.Gen
+import chapter8.Gen
 import chapter9.Parser
 
 //tag::init1[]

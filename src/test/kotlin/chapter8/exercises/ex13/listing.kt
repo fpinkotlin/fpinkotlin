@@ -1,7 +1,7 @@
 package chapter8.exercises.ex13
 
-import chapter8.sec3_3.Gen
-import chapter8.sec3_3.SGen
+import chapter8.Gen
+import chapter8.SGen
 import chapter8.sec4_1.run
 
 fun main() {
