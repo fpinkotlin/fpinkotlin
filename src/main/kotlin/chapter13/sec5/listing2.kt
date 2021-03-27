@@ -4,7 +4,6 @@ import arrow.higherkind
 import chapter12.Either
 import chapter13.boilerplate.free.Free
 import chapter13.boilerplate.free.Suspend
-import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 
 //tag::init1[]
@@ -13,20 +12,19 @@ abstract class Future<A> {
 }
 
 @higherkind
-class Par<A>(val run: (ExecutorService) -> Future<A>) : ParOf<A>
-//end::init1[]
-{
-    companion object {
-        //tag::init2[]
-        fun <A> async(run: ((A) -> Unit) -> Unit): Par<A> =
-            Par { es ->
-                object : Future<A>() {
-                    override fun invoke(cb: (A) -> Unit): Unit = run(cb)
-                }
-            }
-        //end::init2[]
-    }
+class Par<A>(val run: (ExecutorService) -> Future<A>) : ParOf<A> {
+    companion object
 }
+//end::init1[]
+
+//tag::init2[]
+fun <A> Par.Companion.async(run: ((A) -> Unit) -> Unit): Par<A> =
+    Par { es ->
+        object : Future<A>() {
+            override fun invoke(cb: (A) -> Unit): Unit = run(cb)
+        }
+    }
+//end::init2[]
 
 //tag::init3[]
 fun nonblockingRead(

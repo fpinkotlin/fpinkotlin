@@ -10,7 +10,6 @@ interface Monad<F> : Functor<F> {
     fun <A> unit(a: A): Kind<F, A>
 
     fun <A, B> flatMap(fa: Kind<F, A>, f: (A) -> Kind<F, B>): Kind<F, B>
-
 }
 
 fun stdin(): IO<String> = IO { readLine().orEmpty() }

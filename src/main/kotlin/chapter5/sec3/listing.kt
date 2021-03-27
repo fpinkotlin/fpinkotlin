@@ -45,7 +45,7 @@ sealed class Stream<out A> {
     //tag::init2[]
     fun <B> foldRight(
         z: () -> B,
-        f: (A, () -> B) -> B  // <1>
+        f: (A, () -> B) -> B // <1>
     ): B =
         when (this) {
             is Cons -> f(this.head()) {
@@ -64,7 +64,6 @@ sealed class Stream<out A> {
     fun find(p: (A) -> Boolean): Option<A> =
         filter(p).headOption()
     //end::init4[]
-
 }
 
 data class Cons<out A>(

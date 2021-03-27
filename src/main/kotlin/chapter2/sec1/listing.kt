@@ -22,7 +22,6 @@ val listing2 = {
     //end::init2[]
 }
 
-
 //tag::init3[]
 object Example {
 

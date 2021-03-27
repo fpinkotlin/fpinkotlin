@@ -32,7 +32,7 @@ val listing2 = {
         }
 
     fun contest(p1: Player, p2: Player): Unit = // <2>
-        when(val player = winner(p1, p2)) {
+        when (val player = winner(p1, p2)) {
             is Some ->
                 println("${player.get.name} is the winner!")
             is None ->
@@ -52,7 +52,7 @@ val listing3 = {
     //tag::init3[]
 
     fun winnerMsg(op: Option<Player>): String = // <1>
-        when(op) {
+        when (op) {
             is Some -> "${op.get.name} is the winner"
             is None -> "It's a draw"
         }

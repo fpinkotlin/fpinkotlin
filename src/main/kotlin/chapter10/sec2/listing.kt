@@ -31,4 +31,3 @@ val listing2 = {
 fun <A> concatenate(la: List<A>, m: Monoid<A>): A =
     la.foldLeft(m.nil, m::combine)
 //end::init5[]
-

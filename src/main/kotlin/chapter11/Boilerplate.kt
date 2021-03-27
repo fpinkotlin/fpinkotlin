@@ -9,14 +9,10 @@ import arrow.core.fix
 import arrow.higherkind
 import chapter10.Cons
 import chapter10.ForList
-import chapter10.ForOption
 import chapter10.List
 import chapter10.ListOf
-import chapter10.Option
-import chapter10.OptionOf
 import chapter10.fix
 import chapter8.RNG
-import java.math.BigDecimal
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 

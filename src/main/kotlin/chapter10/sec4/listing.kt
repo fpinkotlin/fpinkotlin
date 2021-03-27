@@ -24,4 +24,3 @@ val sidebar = {
     M.combine(f(x), f(y)) == f(N.combine(x, y))
     //end::init3[]
 }
-

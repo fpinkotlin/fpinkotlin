@@ -103,7 +103,7 @@ sealed class Process<F, O> : ProcessOf<F, O> {
             is Emit -> Emit(this.head, this.tail.asFinalizer())
             is Halt -> Halt(this.err)
             is Await<*, *, *> -> {
-                await<F, O, O>(this.req) { ei: Either<Throwable, Nothing> ->
+                await<F, O, O>(this.req) { ei ->
                     when (ei) {
                         is Left ->
                             when (val e = ei.value) {
@@ -210,7 +210,9 @@ val p: Process<ForIO, String> =
         }
     }
 
-private fun processNext(ei1: Right<BufferedReader>): Process<ForIO, String> =
+private fun processNext(
+    ei1: Right<BufferedReader>
+): Process<ForIO, String> =
     await<ForIO, BufferedReader, String>(
         IO { ei1.value.readLine() }
     ) { ei2: Either<Throwable, String?> ->

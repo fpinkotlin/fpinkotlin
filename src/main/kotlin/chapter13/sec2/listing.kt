@@ -51,7 +51,7 @@ object Listing12B {
         fun run(): Unit
 
         fun assoc(io: IO): IO = object : IO {
-            override fun run(): Unit {
+            override fun run() {
                 this@IO.run() // <1>
                 io.run() // <2>
             }
@@ -64,7 +64,7 @@ object Listing12C {
     //tag::init3[]
     fun fahrenheitToCelsius(f: Double): Double = (f - 32) * 5.0 / 9.0
 
-    fun converter(): Unit {
+    fun converter() {
         println("Enter a temperature in Degrees Fahrenheit:")
         val d = readLine().orEmpty().toDouble()
         println(fahrenheitToCelsius(d))

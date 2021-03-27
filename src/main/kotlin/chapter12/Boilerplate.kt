@@ -71,14 +71,19 @@ interface Traversable<F> : Functor<F> {
 }
 
 @higherkind
-class Product<F, G, A>(val value: Pair<Kind<F, A>, Kind<G, A>>) : ProductOf<F, G, A>
+class Product<F, G, A>(
+    val value: Pair<Kind<F, A>, Kind<G, A>>
+) : ProductOf<F, G, A>
 
 @higherkind
-class Composite<F, G, A>(val value: Kind<F, Kind<G, A>>) : CompositeOf<F, G, A>
+class Composite<F, G, A>(val value: Kind<F, Kind<G, A>>) :
+    CompositeOf<F, G, A>
 
 //tag::init3[]
 @higherkind
-class Fusion<F, G, H, B>(val value: Pair<Kind<G, Kind<F, B>>, Kind<H, Kind<F, B>>>): FusionOf<F, G, H, B>
+class Fusion<F, G, H, B>(
+    val value: Pair<Kind<G, Kind<F, B>>, Kind<H, Kind<F, B>>>
+) : FusionOf<F, G, H, B>
 //end::init3[]
 
 // List
@@ -171,4 +176,6 @@ data class Tree<out A>(val head: A, val tail: List<Tree<A>>) : TreeOf<A>
 //end::init[]
 
 fun assertEqual(o1: Any, o2: Any): Unit =
-    if (o1 != o2) throw AssertionError("$o1 not equal to $o2") else Unit
+    if (o1 != o2)
+        throw AssertionError("$o1 not equal to $o2")
+    else Unit

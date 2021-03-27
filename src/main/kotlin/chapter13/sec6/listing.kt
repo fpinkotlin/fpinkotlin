@@ -21,7 +21,7 @@ fun <F, A> run(free: Free<F, A>, monad: Monad<F>): Kind<F, A> = TODO()
 //tag::init2[]
 abstract class App {
 
-    fun main(args: Array<String>): Unit { // <1>
+    fun main(args: Array<String>) { // <1>
         val pool = Executors.newFixedThreadPool(8)
         unsafePerformIO(pureMain(args), pool)
     }

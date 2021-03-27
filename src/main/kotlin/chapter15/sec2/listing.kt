@@ -83,7 +83,9 @@ sealed class Process<I, O> : ProcessOf<I, O> {
 
     //end::init11[]
     //tag::ignore[]
-    public infix fun <I, O, O2> Process<I, O>.pipe(p2: Process<O, O2>): Process<I, O2> =
+    public infix fun <I, O, O2> Process<I, O>.pipe(
+        p2: Process<O, O2>
+    ): Process<I, O2> =
         when (p2) {
             is Halt -> Halt()
             is Emit -> Emit(p2.head, this pipe p2.tail)

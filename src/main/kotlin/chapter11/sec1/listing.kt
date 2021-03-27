@@ -76,12 +76,16 @@ val listing = {
 
 interface Functor2<F> {
     //tag::distribute2[]
-    fun <A, B> distribute(fab: Kind<F, Pair<A, B>>): Pair<Kind<F, A>, Kind<F, B>>
+    fun <A, B> distribute(
+        fab: Kind<F, Pair<A, B>>
+    ): Pair<Kind<F, A>, Kind<F, B>>
     //end::distribute2[]
         = TODO()
 
     //tag::codistribute2[]
-    fun <A, B> codistribute(e: Either<Kind<F, A>, Kind<F, B>>): Kind<F, Either<A, B>>
+    fun <A, B> codistribute(
+        e: Either<Kind<F, A>, Kind<F, B>>
+    ): Kind<F, Either<A, B>>
     //end::codistribute2[]
         = TODO()
 }
