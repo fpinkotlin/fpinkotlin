@@ -1,16 +1,11 @@
 package chapter11.sec5_2
 
-import arrow.Kind
-import arrow.Kind2
 import arrow.core.extensions.list.foldable.foldLeft
 import arrow.higherkind
 import chapter11.sec2.Monad
 
 @higherkind
-//tag::init1[]
-data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A>
-//end::init1[]
-{
+data class State<S, out A>(val run: (S) -> Pair<A, S>) : StateOf<S, A> {
 
     companion object {
         fun <S, A> unit(a: A): State<S, A> =

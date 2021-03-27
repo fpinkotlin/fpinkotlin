@@ -44,7 +44,6 @@ val listing1 = {
         .joinToString("")
         .indexOf("abracadabra")
     //end::init4[]
-
 }
 
 //tag::init5[]

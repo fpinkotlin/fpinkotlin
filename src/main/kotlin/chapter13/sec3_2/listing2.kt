@@ -29,7 +29,6 @@ data class FlatMap<A, B>(
 ) : Tailrec<B>()
 //end::init1[]
 
-
 //tag::init2[]
 val f = { x: Int -> Return(x) }
     val g = List(100000) { idx -> f }

@@ -27,10 +27,7 @@ class ForList private constructor() {
 typealias ListOf<A> = Kind<ForList, A>
 //end::init3[]
 
-//tag::init4[]
-sealed class List<out A> : ListOf<A>
-//end::init4[]
-{
+sealed class List<out A> : ListOf<A> {
     companion object {
 
         fun <A> of(vararg aa: A): List<A> {

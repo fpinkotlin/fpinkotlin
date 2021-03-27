@@ -5,13 +5,10 @@ import java.math.BigDecimal
 
 //tag::init1[]
 @higherkind
-sealed class Option<out A> : OptionOf<A>
-//tag::ignore[]
-{
-    companion object
+sealed class Option<out A> : OptionOf<A> {
+    companion object // <1>
 }
 
-//end::ignore[]
 data class Some<out A>(val get: A) : Option<A>()
 object None : Option<Nothing>()
 //end::init1[]
@@ -56,7 +53,7 @@ class CryptoCurrencyWallet(
 
 //tag::init5[]
 interface OptionMonad : Monad<ForOption> {
-    
+
     override fun <A> unit(a: A): OptionOf<A> =
         if (a == null) None else Some(a)
 
@@ -91,4 +88,3 @@ class ImprovedCryptoCurrencyWallet(
         }.fix()
 }
 //end::init7[]
-

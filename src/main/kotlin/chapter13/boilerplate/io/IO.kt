@@ -116,5 +116,4 @@ interface IOMonad : Monad<ForIO> {
         f: () -> IOOf<A>
     ): IOOf<Boolean> =
         if (ok) f().fix().map { true } else unit(false)
-
 }

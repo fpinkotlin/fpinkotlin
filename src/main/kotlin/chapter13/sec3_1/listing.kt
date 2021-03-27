@@ -35,7 +35,6 @@ interface IOMonad : Monad<ForIO> {
         val t: IOOf<B> by lazy { forever<A, B>(fa) }
         return fa.fix().flatMap { t.fix() }
     }
-
 }
 
 //tag::init1[]
