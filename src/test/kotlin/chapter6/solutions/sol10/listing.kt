@@ -1,4 +1,4 @@
-package chapter6.solutions
+package chapter6.solutions.sol10
 
 import chapter3.Cons
 import chapter3.List
@@ -47,7 +47,7 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
 }
 //end::init[]
 
-class Solution_6_10 : WordSpec({
+class Solution10 : WordSpec({
     "unit" should {
         "compose a new state of pure a" {
             State.unit<RNG, Int>(1).run(rng1) shouldBe Pair(1, rng1)

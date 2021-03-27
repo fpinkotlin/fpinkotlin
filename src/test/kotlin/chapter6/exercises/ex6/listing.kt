@@ -1,4 +1,4 @@
-package chapter6.exercises
+package chapter6.exercises.ex6
 
 import chapter6.Rand
 import chapter6.rng1
@@ -9,7 +9,7 @@ import io.kotlintest.specs.WordSpec
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Exercise_6_6 : WordSpec({
+class Exercise6 : WordSpec({
 
     //tag::init[]
     fun <A, B, C> map2(

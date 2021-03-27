@@ -1,4 +1,4 @@
-package chapter6.exercises
+package chapter6.exercises.ex7
 
 import chapter3.List
 import chapter6.RNG
@@ -11,7 +11,7 @@ import io.kotlintest.specs.WordSpec
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Exercise_6_7 : WordSpec({
+class Exercise7 : WordSpec({
 
     //tag::init[]
     fun <A> sequence(fs: List<Rand<A>>): Rand<List<A>> = TODO()

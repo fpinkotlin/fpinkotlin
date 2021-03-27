@@ -1,4 +1,4 @@
-package chapter6.solutions
+package chapter6.solutions.sol7
 
 import chapter3.Cons
 import chapter3.List
@@ -7,6 +7,7 @@ import chapter3.solutions.foldRight
 import chapter6.RNG
 import chapter6.Rand
 import chapter6.rng1
+import chapter6.solutions.sol6.map2
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -38,7 +39,7 @@ fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> {
 }
 //end::init[]
 
-class Solution_6_7 : WordSpec({
+class Solution7 : WordSpec({
     "sequence" should {
 
         """combine the results of many actions using

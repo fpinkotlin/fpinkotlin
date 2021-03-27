@@ -1,4 +1,4 @@
-package chapter6.exercises
+package chapter6.exercises.ex4
 
 import chapter3.List
 import chapter6.RNG
@@ -9,7 +9,7 @@ import io.kotlintest.specs.WordSpec
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Exercise_6_4 : WordSpec({
+class Exercise4 : WordSpec({
 
     //tag::init[]
     fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()

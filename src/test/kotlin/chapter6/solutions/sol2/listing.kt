@@ -1,22 +1,26 @@
-package chapter6.exercises
+package chapter6.solutions.sol2
 
 import chapter6.RNG
-import chapter6.unusedRng
+import chapter6.solutions.sol1.nonNegativeInt
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-/**
- * TODO: Re-enable tests by removing `!` prefix!
- */
-class Exercise_6_2 : WordSpec({
+//tag::init[]
+fun double(rng: RNG): Pair<Double, RNG> {
+    val (i, rng2) = nonNegativeInt(rng)
+    return Pair(i / (Int.MAX_VALUE.toDouble() + 1), rng2)
+}
+//end::init[]
 
-    //tag::init[]
-    fun double(rng: RNG): Pair<Double, RNG> = TODO()
-    //end::init[]
+class Solution2 : WordSpec({
 
     "double" should {
 
-        "!generate a max value approaching 1 based on Int.MAX_VALUE" {
+        val unusedRng = object : RNG {
+            override fun nextInt(): Pair<Int, RNG> = TODO()
+        }
+
+        "generate a max value approaching 1 based on Int.MAX_VALUE" {
 
             val rngMax = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
@@ -29,7 +33,7 @@ class Exercise_6_2 : WordSpec({
             )
         }
 
-        "!generate a min value of 0 based on 0" {
+        "generate a min value of 0 based on 0" {
             val rngMin = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
                     Pair(0, unusedRng)
