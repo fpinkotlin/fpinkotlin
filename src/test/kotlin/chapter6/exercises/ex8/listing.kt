@@ -2,6 +2,7 @@ package chapter6.exercises.ex8
 
 import chapter6.Rand
 import chapter6.rng1
+// import chapter6.solutions.sol1.nonNegativeInt
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec

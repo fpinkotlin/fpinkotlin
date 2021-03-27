@@ -1,5 +1,6 @@
 package chapter6.exercises.ex6
 
+// import chapter6.RNG
 import chapter6.Rand
 import chapter6.rng1
 import chapter6.unit

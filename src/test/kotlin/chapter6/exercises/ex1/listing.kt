@@ -1,7 +1,6 @@
 package chapter6.exercises.ex1
 
 import chapter6.RNG
-import chapter6.unusedRng
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
@@ -15,6 +14,10 @@ class Exercise1 : WordSpec({
     //end::init[]
 
     "nonNegativeInt" should {
+
+        val unusedRng = object : RNG {
+            override fun nextInt(): Pair<Int, RNG> = TODO()
+        }
 
         "!return 0 if nextInt() yields 0" {
 
