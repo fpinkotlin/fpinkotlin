@@ -1,5 +1,8 @@
 package chapter5
 
+import chapter4.Option
+import chapter4.getOrElse
+
 sealed class Stream<out A> {
 
     companion object {
@@ -19,7 +22,21 @@ sealed class Stream<out A> {
 
         fun <A> continually(a: A): Stream<A> =
             cons({ a }, { continually(a) })
+
+        fun <A, S> unfold(z: S, f: (S) -> Option<Pair<A, S>>): Stream<A> =
+            f(z).map { pair ->
+                cons({ pair.first },
+                    { Stream.unfold(pair.second, f) })
+            }.getOrElse {
+                empty()
+            }
     }
+
+    fun <B> foldRight(z: () -> B, f: (A, () -> B) -> B): B =
+        when (this) {
+            is Cons -> f(this.head()) { this.tail().foldRight(z, f) }
+            is Empty -> z()
+        }
 }
 
 data class Cons<out A>(
@@ -28,4 +45,3 @@ data class Cons<out A>(
 ) : Stream<A>()
 
 object Empty : Stream<Nothing>()
-//end::init[]
