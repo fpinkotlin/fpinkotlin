@@ -1,8 +1,13 @@
 package chapter6.exercises.ex11
 
+// import arrow.core.Id
 import arrow.core.Tuple2
+// import arrow.core.extensions.id.monad.monad
 import arrow.mtl.State
+// import arrow.mtl.StateApi
+// import arrow.mtl.extensions.fx
 import arrow.mtl.runS
+// import arrow.mtl.stateSequential
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import kotlinx.collections.immutable.persistentListOf

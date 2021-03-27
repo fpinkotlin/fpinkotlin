@@ -1,6 +1,9 @@
 package chapter7.exercises.ex6
 
-import chapter7.sec3.Par
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Future
+
+typealias Par<A> = (ExecutorService) -> Future<A>
 
 object Listing {
     //tag::init[]
