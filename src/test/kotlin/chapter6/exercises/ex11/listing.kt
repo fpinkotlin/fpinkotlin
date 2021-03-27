@@ -1,4 +1,4 @@
-package chapter6.exercises
+package chapter6.exercises.ex11
 
 import arrow.core.Tuple2
 import arrow.mtl.State

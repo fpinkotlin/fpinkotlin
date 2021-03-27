@@ -1,21 +1,32 @@
-package chapter6.exercises
+package chapter6.solutions.sol3
 
 import chapter6.RNG
+import chapter6.solutions.sol2.double
+import chapter6.solutions.sol5.doubleR
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-/**
- * TODO: Re-enable tests by removing `!` prefix!
- */
-class Exercise_6_3 : WordSpec({
+class Solution3 : WordSpec({
 
     //tag::init[]
-    fun intDouble(rng: RNG): Pair<Pair<Int, Double>, RNG> = TODO()
+    fun intDouble(rng: RNG): Pair<Pair<Int, Double>, RNG> {
+        val (i, rng2) = rng.nextInt()
+        val (d, rng3) = double(rng2)
+        return Pair(Pair(i, d), rng3)
+    }
 
-    fun doubleInt(rng: RNG): Pair<Pair<Double, Int>, RNG> = TODO()
+    fun doubleInt(rng: RNG): Pair<Pair<Double, Int>, RNG> {
+        val (id, rng2) = intDouble(rng)
+        val (i, d) = id
+        return Pair(Pair(d, i), rng2)
+    }
 
-    fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> =
-        TODO()
+    fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> {
+        val (d1, rng2) = doubleR(rng)
+        val (d2, rng3) = doubleR(rng2)
+        val (d3, rng4) = doubleR(rng3)
+        return Pair(Triple(d1, d2, d3), rng4)
+    }
     //end::init[]
 
     "intDouble" should {
@@ -42,21 +53,21 @@ class Exercise_6_3 : WordSpec({
                 Pair(Int.MAX_VALUE, rng2)
         }
 
-        "!generate a pair of int and double" {
+        "generate a pair of int and double" {
             val (id, _) = intDouble(rng)
             val (i, d) = id
             i shouldBe Int.MAX_VALUE
             d shouldBe doubleBelowOne
         }
 
-        "!generate a pair of double and int" {
+        "generate a pair of double and int" {
             val (di, _) = doubleInt(rng)
             val (d, i) = di
             d shouldBe doubleBelowOne
             i shouldBe Int.MAX_VALUE
         }
 
-        "!generate a triple of double, double, double" {
+        "generate a triple of double, double, double" {
             val (ddd, _) = double3(rng)
             val (d1, d2, d3) = ddd
             d1 shouldBe doubleBelowOne

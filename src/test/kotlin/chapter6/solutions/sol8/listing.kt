@@ -1,7 +1,8 @@
-package chapter6.solutions
+package chapter6.solutions.sol8
 
 import chapter6.Rand
 import chapter6.rng1
+import chapter6.solutions.sol1.nonNegativeInt
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -21,7 +22,7 @@ fun nonNegativeIntLessThan(n: Int): Rand<Int> =
     }
 //end::init[]
 
-class Solution_6_8 : WordSpec({
+class Solution8 : WordSpec({
     "flatMap" should {
         "pass along an RNG" {
 

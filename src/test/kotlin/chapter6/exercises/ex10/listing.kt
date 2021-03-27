@@ -1,4 +1,4 @@
-package chapter6.exercises
+package chapter6.exercises.ex10
 
 import chapter3.List
 import chapter6.RNG
@@ -31,7 +31,7 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Exercise_6_10 : WordSpec({
+class Exercise10 : WordSpec({
     "unit" should {
         "!compose a new state of pure a" {
             State.unit<RNG, Int>(1).run(rng1) shouldBe Pair(1, rng1)

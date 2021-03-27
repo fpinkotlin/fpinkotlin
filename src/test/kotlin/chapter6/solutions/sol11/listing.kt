@@ -1,4 +1,4 @@
-package chapter6.solutions
+package chapter6.solutions.sol11
 
 import arrow.core.Id
 import arrow.core.Tuple2
@@ -54,7 +54,7 @@ fun simulateMachine(
     }
 //end::init2[]
 
-class Solution_6_11 : WordSpec({
+class Solution11 : WordSpec({
     "simulateMachine" should {
         "allow the purchase of a single candy" {
             val actions = persistentListOf(Coin)

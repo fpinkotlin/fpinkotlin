@@ -1,4 +1,4 @@
-package chapter6.exercises
+package chapter6.exercises.ex8
 
 import chapter6.Rand
 import chapter6.rng1
@@ -9,7 +9,7 @@ import io.kotlintest.specs.WordSpec
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Exercise_6_8 : WordSpec({
+class Exercise8 : WordSpec({
 
     //tag::init[]
     fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> = TODO()

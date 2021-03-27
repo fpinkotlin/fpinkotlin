@@ -1,4 +1,4 @@
-package chapter6.solutions
+package chapter6.solutions.sol4
 
 import chapter3.Cons
 import chapter3.List
@@ -17,7 +17,7 @@ fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> =
     } else Pair(Nil, rng)
 //end::init[]
 
-class Solution_6_4 : WordSpec({
+class Solution4 : WordSpec({
 
     "ints" should {
         "generate a list of ints of a specified length" {
