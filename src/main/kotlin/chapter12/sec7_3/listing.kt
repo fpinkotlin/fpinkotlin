@@ -24,7 +24,7 @@ interface Traverse<F> : Functor<F>, Foldable<F> {
     //tag::init0[]
     fun <A, B> zip(ta: Kind<F, A>, tb: Kind<F, B>): Kind<F, Pair<A, B>> =
         mapAccum(ta, toList(tb)) { a: A, b: List<B> ->
-            when(b) {
+            when (b) {
                 is Cons -> Pair(Pair(a, b.head), b.tail)
                 is Nil -> throw Exception("incompatible shapes for zip")
             }

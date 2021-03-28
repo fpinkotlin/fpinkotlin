@@ -1,9 +1,9 @@
 package chapter8.sec5
 
 import arrow.core.extensions.list.foldable.forAll
-import chapter8.sec3.listing3.Gen
-import chapter8.sec3.listing3.Prop
-import chapter8.sec4.listing1.run
+import chapter8.Gen
+import chapter8.Prop
+import chapter8.sec4_1.run
 
 val listing = {
 

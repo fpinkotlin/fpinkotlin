@@ -1,6 +1,8 @@
 package chapter7
 
-import chapter7.sec2.Callable
+interface Callable<A> {
+    fun call(): A
+}
 
 //tag::sb1[]
 interface Runnable {

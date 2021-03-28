@@ -170,7 +170,9 @@ abstract class STArray<S, A> @PublishedApi internal constructor() { // <1>
         }
 
         //tag::init8[]
-        inline fun <S, reified A> fromList(xs: List<A>): ST<S, STArray<S, A>> =
+        inline fun <S, reified A> fromList(
+            xs: List<A>
+        ): ST<S, STArray<S, A>> =
             ST {
                 object : STArray<S, A>() {
                     override val value: Array<A> = xs.toTypedArray()

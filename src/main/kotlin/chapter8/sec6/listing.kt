@@ -1,7 +1,7 @@
 package chapter8.sec6
 
 import chapter7.sec5.Par
-import chapter8.sec3.listing3.Gen
+import chapter8.Gen
 
 val listing = {
     //tag::init1[]

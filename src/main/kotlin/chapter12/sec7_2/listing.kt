@@ -138,5 +138,3 @@ interface Traversable2<F> : Functor<F>, Foldable<F> {
         }.second.reverse()
     //end::init6[]
 }
-
-

@@ -5,8 +5,8 @@ import chapter10.intAdditionMonoid
 import chapter10.intMultiplicationMonoid
 import chapter8.Passed
 import chapter8.SimpleRNG
-import chapter8.sec3.listing3.Gen
-import chapter8.sec3.listing3.Prop.Companion.forAll
+import chapter8.Gen
+import chapter8.Prop.Companion.forAll
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 

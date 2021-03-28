@@ -50,7 +50,7 @@ data class TimedMap2Future<A, B, C>(
 }
 //end::init[]
 
-class Solution_7_3 : WordSpec({
+class Solution3 : WordSpec({
 
     val es: ExecutorService = ThreadPoolExecutor(
         1,

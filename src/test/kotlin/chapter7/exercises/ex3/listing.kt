@@ -31,7 +31,7 @@ data class TimedMap2Future<A, B, C>(
     override fun isCancelled(): Boolean = TODO()
 }
 
-class Exercise_7_3 : WordSpec({
+class Exercise3 : WordSpec({
 
     fun <A, B, C> map2(
         a: Par<A>,
