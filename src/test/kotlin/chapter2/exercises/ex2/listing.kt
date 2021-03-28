@@ -1,4 +1,4 @@
-package chapter2.exercises
+package chapter2.exercises.ex2
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -14,7 +14,7 @@ val <T> List<T>.head: T
 fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean = TODO()
 // end::init[]
 
-class Exercise_2_2 : WordSpec({
+class Exercise2 : WordSpec({
 
     /**
      * Re-enable the tests by removing the `!` prefix!
