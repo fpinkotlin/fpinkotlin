@@ -3,7 +3,7 @@ package chapter6.solutions.sol7
 import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
-import chapter3.solutions.foldRight
+import chapter3.foldRight
 import chapter6.RNG
 import chapter6.Rand
 import chapter6.rng1

@@ -1,7 +1,7 @@
 package chapter5.solutions.sol1
 
 import chapter3.List
-import chapter3.solutions.reverse
+import chapter3.reverse
 import chapter5.Cons
 import chapter5.Empty
 import chapter5.Stream
