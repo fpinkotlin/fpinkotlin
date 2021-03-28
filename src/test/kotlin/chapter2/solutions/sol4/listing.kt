@@ -1,9 +1,9 @@
-package chapter2.solutions
+package chapter2.solutions.sol4
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class Solution_2_4 : WordSpec({
+class Solution4 : WordSpec({
     // tag::init[]
     fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C =
         { a: A, b: B -> f(a)(b) }

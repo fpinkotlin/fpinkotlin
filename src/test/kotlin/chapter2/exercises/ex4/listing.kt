@@ -1,9 +1,9 @@
-package chapter2.exercises
+package chapter2.exercises.ex4
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class Exercise_2_4 : WordSpec({
+class Exercise4 : WordSpec({
     // tag::init[]
     fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C = TODO()
     // end::init[]

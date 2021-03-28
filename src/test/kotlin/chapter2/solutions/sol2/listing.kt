@@ -1,4 +1,4 @@
-package chapter2.solutions
+package chapter2.solutions.sol2
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -21,7 +21,7 @@ fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean {
 }
 // end::init[]
 
-class Solution_2_2 : WordSpec({
+class Solution2 : WordSpec({
     "isSorted" should {
         """detect ordering of a list of correctly ordered Ints based
             on an ordering HOF""" {
