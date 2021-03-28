@@ -14,7 +14,7 @@ fun <A, B, C> map2(
 ): Par<C> = Par(function(sum.get, sum1.get))
 //end::init[]
 
-class Solution_7_1 : WordSpec({
+class Solution1 : WordSpec({
     "Par.map2" should {
         """declare a valid signature that combines two Pars by
             applying another function""" {

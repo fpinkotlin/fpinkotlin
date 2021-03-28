@@ -23,7 +23,7 @@ class Par<A>(val get: A) {
 }
 //end::init[]
 
-class Solution_7_2 : WordSpec({
+class Solution2 : WordSpec({
 
     "Par" should {
         "create a computation that immediately results in a value" {

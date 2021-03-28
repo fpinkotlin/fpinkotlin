@@ -28,7 +28,7 @@ data class Machine(
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
-class Exercise_6_11 : WordSpec({
+class Exercise11 : WordSpec({
 
     //tag::init2[]
     fun simulateMachine(
