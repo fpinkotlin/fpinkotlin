@@ -1,4 +1,4 @@
-package chapter4.exercises
+package chapter4.exercises.ex6
 
 import chapter4.Either
 import chapter4.Left
@@ -23,7 +23,7 @@ fun <E, A, B, C> map2(
 ): Either<E, C> = TODO()
 //end::init[]
 
-class Exercise_4_6 : WordSpec({
+class Exercise6 : WordSpec({
 
     val right: Either<Throwable, Int> = Right(1)
 

@@ -1,4 +1,4 @@
-package chapter4.exercises
+package chapter4.exercises.ex7
 
 import chapter3.List
 import chapter4.Either
@@ -7,7 +7,7 @@ import chapter4.Right
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class Exercise_4_7 : WordSpec({
+class Exercise7 : WordSpec({
 
     //tag::init[]
     fun <E, A, B> traverse(

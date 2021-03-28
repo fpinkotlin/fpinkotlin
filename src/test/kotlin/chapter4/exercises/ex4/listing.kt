@@ -1,4 +1,4 @@
-package chapter4.exercises
+package chapter4.exercises.ex4
 
 import chapter3.List
 import chapter4.None
@@ -11,7 +11,7 @@ import io.kotlintest.specs.WordSpec
 fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()
 //end::init[]
 
-class Exercise_4_4 : WordSpec({
+class Exercise4 : WordSpec({
 
     "sequence" should {
         "!turn a list of some options into an option of list" {

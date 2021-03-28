@@ -11,6 +11,9 @@ sealed class Option<out A> {
             is Some -> Some(f(this.get))
         }
 
+    fun <B> flatMap(f: (A) -> Option<B>): Option<B> =
+        this.map(f).getOrElse { None }
+
     fun isEmpty(): Boolean = this
         .map { false }
         .getOrElse { true }

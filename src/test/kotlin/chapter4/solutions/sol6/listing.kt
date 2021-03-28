@@ -1,4 +1,4 @@
-package chapter4.solutions
+package chapter4.solutions.sol6
 
 import chapter4.Either
 import chapter4.Left
@@ -33,7 +33,7 @@ fun <E, A, B, C> map2(
     ae.flatMap { a -> be.map { b -> f(a, b) } }
 //end::init[]
 
-class Solution_4_6 : WordSpec({
+class Solution6 : WordSpec({
 
     val right: Either<Throwable, Int> = Right(1)
 

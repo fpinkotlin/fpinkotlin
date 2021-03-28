@@ -1,4 +1,4 @@
-package chapter4.solutions
+package chapter4.solutions.sol1
 
 import chapter4.None
 import chapter4.Option
@@ -51,7 +51,7 @@ fun <A> Option<A>.filter_2(f: (A) -> Boolean): Option<A> =
     }
 //end::alternate[]
 
-class Solution_4_1 : WordSpec({
+class Solution1 : WordSpec({
 
     val none = Option.empty<Int>()
 

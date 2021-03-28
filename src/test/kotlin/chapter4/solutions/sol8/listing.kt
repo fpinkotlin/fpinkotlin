@@ -1,4 +1,4 @@
-package chapter4.solutions
+package chapter4.solutions.sol8
 
 //tag::init[]
 sealed class Partial<out A, out B>
