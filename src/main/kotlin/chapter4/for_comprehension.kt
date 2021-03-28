@@ -1,7 +1,5 @@
 package chapter4
 
-fun <A, B> Option<A>.flatMap(f: (A) -> Option<B>): Option<B> = TODO()
-fun <A, B> Option<A>.map(f: (A) -> B): Option<B> = TODO()
 fun <A> Option.Companion.fx(f: () -> Unit): Option<A> = TODO()
 fun <A> Option<A>.bind(): A = TODO()
 

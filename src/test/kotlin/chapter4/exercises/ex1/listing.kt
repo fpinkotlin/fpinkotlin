@@ -1,4 +1,4 @@
-package chapter4.exercises
+package chapter4.exercises.ex1
 
 import chapter4.None
 import chapter4.Option
@@ -33,7 +33,7 @@ fun <A> Option<A>.filter_2(
 ): Option<A> = TODO()
 //end::alternate[]
 
-class Exercise_4_1 : WordSpec({
+class Exercise1 : WordSpec({
 
     val none = Option.empty<Int>()
 

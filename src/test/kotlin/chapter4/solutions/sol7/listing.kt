@@ -1,4 +1,4 @@
-package chapter4.solutions
+package chapter4.solutions.sol7
 
 import chapter3.Cons
 import chapter3.List
@@ -6,10 +6,11 @@ import chapter3.Nil
 import chapter4.Either
 import chapter4.Left
 import chapter4.Right
+import chapter4.map2
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
-class Solution_4_7 : WordSpec({
+class Solution7 : WordSpec({
 
     //tag::init[]
     fun <E, A, B> traverse(

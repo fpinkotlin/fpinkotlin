@@ -1,13 +1,14 @@
-package chapter4.solutions
+package chapter4.solutions.sol2
 
 import chapter3.List
-import chapter4.Boilerplate.isEmpty
-import chapter4.Boilerplate.map
-import chapter4.Boilerplate.size
-import chapter4.Boilerplate.sum
+import chapter4.isEmpty
+import chapter4.map
+import chapter4.size
+import chapter4.sum
 import chapter4.None
 import chapter4.Option
 import chapter4.Some
+import chapter4.getOrElse
 import io.kotlintest.matchers.doubles.plusOrMinus
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -27,7 +28,7 @@ fun variance(xs: List<Double>): Option<Double> =
     }
 //end::init[]
 
-class Solution_4_2 : WordSpec({
+class Solution2 : WordSpec({
 
     "variance" should {
         "determine the variance of a list of numbers" {
