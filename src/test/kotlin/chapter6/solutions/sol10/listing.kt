@@ -2,7 +2,7 @@ package chapter6.solutions.sol10
 
 import chapter3.Cons
 import chapter3.List
-import chapter3.solutions.foldRight
+import chapter3.foldRight
 import chapter6.RNG
 import chapter6.rng1
 import io.kotlintest.shouldBe
