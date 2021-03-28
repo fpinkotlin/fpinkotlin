@@ -45,4 +45,3 @@ fun <E, A, B, C> map2(
     f: (A, B) -> C
 ): Either<E, C> =
     ae.flatMap { a -> be.map { b -> f(a, b) } }
-

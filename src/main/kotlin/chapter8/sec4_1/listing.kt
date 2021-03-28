@@ -38,5 +38,5 @@ fun main() {
         !ns.exists { it > mx } // <1>
     }
     //end::init1[]
-    chapter8.sec4_1.run(maxProp)
+    run(maxProp)
 }
