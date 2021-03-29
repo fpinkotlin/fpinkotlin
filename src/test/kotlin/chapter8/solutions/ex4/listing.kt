@@ -14,7 +14,7 @@ data class Gen<A>(val sample: State<RNG, A>) {
         //end::init[]
 
         //tag::init2[]
-        fun chooseEvenly(start: Int, stopExclusive: Int): Gen<Int> =
+        fun chooseUnbiased(start: Int, stopExclusive: Int): Gen<Int> =
             Gen(State { rng: RNG -> double(rng) }
                 .map { start + (it * (stopExclusive - start)) }
                 .map { it.toInt() })
