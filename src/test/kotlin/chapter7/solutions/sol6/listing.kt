@@ -4,6 +4,7 @@ import chapter7.solutions.sol3.TimedMap2Future
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 import java.util.concurrent.Callable
+import java.util.concurrent.CompletableFuture.completedFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
@@ -17,7 +18,7 @@ object Pars {
         }
 
     fun <A> unit(a: A): Par<A> =
-        { es: ExecutorService -> TODO() }
+        { es: ExecutorService -> completedFuture(a) }
 
     fun <A> fork(a: () -> Par<A>): Par<A> =
         { es: ExecutorService ->

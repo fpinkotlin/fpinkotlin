@@ -1,6 +1,7 @@
 package chapter7.solutions.sol4
 
 import java.util.concurrent.Callable
+import java.util.concurrent.CompletableFuture.completedFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
@@ -12,7 +13,7 @@ fun <A, B> asyncF(f: (A) -> B): (A) -> Par<B> =
 //end::init[]
 
 fun <A> unit(a: A): Par<A> =
-    { es: ExecutorService -> TODO() }
+    { es: ExecutorService -> completedFuture(a) }
 
 fun <A> fork(
     a: () -> Par<A>
