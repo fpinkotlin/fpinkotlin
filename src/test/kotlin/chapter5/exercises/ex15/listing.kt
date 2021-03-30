@@ -9,9 +9,7 @@ import utils.SOLUTION_HERE
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
 
-/**
- * Re-enable the tests by removing the `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise15 : WordSpec({
 
     //tag::tails[]

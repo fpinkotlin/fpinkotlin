@@ -41,9 +41,7 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
 }
 //end::init[]
 
-/**
- * TODO: Re-enable tests by removing `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise10 : WordSpec({
     "unit" should {
         "!compose a new state of pure a" {

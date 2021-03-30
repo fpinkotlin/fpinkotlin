@@ -26,9 +26,7 @@ data class Machine(
 )
 //end::init1[]
 
-/**
- * TODO: Re-enable tests by removing `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise11 : WordSpec({
 
     //tag::init2[]

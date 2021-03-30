@@ -14,6 +14,7 @@ fun <A> sequence(xs: List<Option<A>>): Option<List<A>> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise4 : WordSpec({
 
     "sequence" should {

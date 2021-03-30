@@ -20,6 +20,7 @@ fun <I> count(): Process<I, Int> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise2 : WordSpec({
     "count" should {
         "!emit a stream of numbers representing elements consumed" {

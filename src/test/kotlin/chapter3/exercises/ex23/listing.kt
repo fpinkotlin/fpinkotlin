@@ -17,6 +17,7 @@ tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise23 : WordSpec({
     "list subsequence" should {
         "!determine if a list starts with" {

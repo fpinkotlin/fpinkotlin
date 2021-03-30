@@ -11,6 +11,7 @@ fun <A> reverse(xs: List<A>): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise11 : WordSpec({
     "list reverse" should {
         "!reverse list elements" {

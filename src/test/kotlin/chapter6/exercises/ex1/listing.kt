@@ -5,9 +5,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE
 
-/**
- * TODO: Re-enable tests by removing `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
 
     //tag::init[]

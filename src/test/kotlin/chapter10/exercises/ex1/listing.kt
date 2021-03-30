@@ -24,6 +24,7 @@ fun booleanAnd(): Monoid<Boolean> =
     SOLUTION_HERE()
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
     "int and boolean monoids" should {
         "!uphold the law of associativity" {

@@ -107,6 +107,7 @@ val T = object : Traversable<ForListK> {
         }
 }
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise15 : WordSpec({
 
     val x = listOf(1, 2, 3, 4, 5).k()

@@ -13,6 +13,7 @@ fun <A, B> functionMonoid(b: Monoid<B>): Monoid<(A) -> B> =
     SOLUTION_HERE()
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise18 : WordSpec({
 
     "functionMonoid" should {

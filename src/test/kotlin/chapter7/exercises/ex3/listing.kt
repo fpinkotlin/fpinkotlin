@@ -40,6 +40,7 @@ fun <A, B, C> map2(
 ): Par<C> =
     SOLUTION_HERE()
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise3 : WordSpec({
 
     val es: ExecutorService =

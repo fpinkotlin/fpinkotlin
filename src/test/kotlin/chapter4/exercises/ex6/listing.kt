@@ -29,6 +29,7 @@ fun <E, A, B, C> map2(
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise6 : WordSpec({
 
     val right: Either<Throwable, Int> = Right(1)

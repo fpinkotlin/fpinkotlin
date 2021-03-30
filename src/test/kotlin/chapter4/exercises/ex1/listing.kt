@@ -49,6 +49,7 @@ fun <A> Option<A>.filter_2(
     SOLUTION_HERE()
 //end::alternate[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
 
     val none = Option.empty<Int>()

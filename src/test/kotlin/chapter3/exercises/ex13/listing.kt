@@ -13,6 +13,7 @@ fun <A> append(a1: List<A>, a2: List<A>): List<A> =
 
 fun <A> appendL(a1: List<A>, a2: List<A>): List<A> = SOLUTION_HERE()
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise13 : WordSpec({
     "!list append" should {
         "append two lists to each other using foldRight" {

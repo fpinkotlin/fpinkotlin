@@ -13,6 +13,7 @@ fun <A> drop(l: List<A>, n: Int): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise3 : WordSpec({
     "list drop" should {
         "!drop a given number of elements within capacity" {

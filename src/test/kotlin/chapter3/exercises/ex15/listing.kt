@@ -11,6 +11,7 @@ fun increment(xs: List<Int>): List<Int> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise15 : WordSpec({
     "list increment" should {
         "!add 1 to every element" {

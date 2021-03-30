@@ -25,6 +25,7 @@ fun <A, B> parFoldMap(
     SOLUTION_HERE()
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise8 : WordSpec() {
 
     val es = Executors.newFixedThreadPool(4)

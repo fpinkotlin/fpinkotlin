@@ -12,6 +12,7 @@ fun wordCount(s: String): Int =
     SOLUTION_HERE()
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise11 : WordSpec({
 
     val words: List<String> =

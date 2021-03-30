@@ -13,6 +13,7 @@ fun maximum(tree: Tree<Int>): Int =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise25 : WordSpec({
     "tree maximum" should {
         "!determine the maximum value held in a tree" {

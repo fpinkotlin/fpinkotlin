@@ -60,6 +60,7 @@ interface Applicative<F> : Functor<F> {
     //end::init1[]
 }
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
     "product" should {
         "!return all product permutations of lists" {

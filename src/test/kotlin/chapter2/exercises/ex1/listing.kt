@@ -5,6 +5,7 @@ import io.kotlintest.specs.WordSpec
 import kotlinx.collections.immutable.persistentMapOf
 import utils.SOLUTION_HERE
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
     //tag::init[]
     fun fib(i: Int): Int =
@@ -12,9 +13,6 @@ class Exercise1 : WordSpec({
         SOLUTION_HERE()
     //end::init[]
 
-    /**
-     * Re-enable the tests by removing the `!` prefix!
-     */
     "fib" should {
         "!return the nth fibonacci number" {
             persistentMapOf(

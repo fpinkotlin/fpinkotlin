@@ -29,6 +29,7 @@ fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise28 : WordSpec({
     "tree fold" should {
 

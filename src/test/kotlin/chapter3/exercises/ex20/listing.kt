@@ -11,6 +11,7 @@ fun <A> filter2(xa: List<A>, f: (A) -> Boolean): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise20 : WordSpec({
     "list filter" should {
         "!filter out elements not compliant to predicate" {

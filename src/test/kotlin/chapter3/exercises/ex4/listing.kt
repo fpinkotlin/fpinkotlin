@@ -12,6 +12,7 @@ fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise4 : WordSpec({
 
     "list dropWhile" should {

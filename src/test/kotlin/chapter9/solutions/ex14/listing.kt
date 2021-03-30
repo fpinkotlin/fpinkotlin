@@ -20,7 +20,7 @@ data class ParseError(val stack: List<Pair<Location, String>> = emptyList()) {
 
     private fun latestLoc(): Option<Location> = latest().map { it.first }
 
-    /**
+    /*
      * Display collapsed error stack - any adjacent stack elements with the
      * same location are combined on one line. For the bottommost error, we
      * display the full line, with a caret pointing to the column of the

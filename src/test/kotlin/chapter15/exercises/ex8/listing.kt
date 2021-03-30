@@ -20,6 +20,7 @@ fun <I> exists(f: (I) -> Boolean): Process<I, Boolean> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise8 : WordSpec({
     "exists" should {
         "!not halt and yield all intermediate results" {

@@ -8,6 +8,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise7 : WordSpec({
 
     //tag::init[]

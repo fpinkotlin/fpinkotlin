@@ -11,6 +11,7 @@ fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise22 : WordSpec({
     "list zipWith" should {
         "!apply a function to elements of two corresponding lists" {

@@ -17,6 +17,7 @@ fun <I, O> Process<I, O>.zipWithIndex(): Process<I, Pair<Int, O>> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise7 : WordSpec({
 
     fun <I> pass(): Process<I, I> = lift { it }

@@ -11,6 +11,7 @@ fun doubleToString(xs: List<Double>): List<String> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise16 : WordSpec({
     "list doubleToString" should {
         "!convert every double element to a string" {

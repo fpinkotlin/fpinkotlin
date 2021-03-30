@@ -35,6 +35,7 @@ fun <I> count(): Process<I, Int> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise4 : WordSpec({
     val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0)
     "sum" should {

@@ -39,9 +39,7 @@ fun <A, B> Stream<A>.zipAll(
     SOLUTION_HERE()
 //end::init[]
 
-/**
- * Re-enable the tests by removing the `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise13 : WordSpec({
 
     "Stream.map" should {

@@ -12,6 +12,7 @@ import io.kotlintest.specs.WordSpec
 object OptionFoldable : Foldable<ForOption>
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise15 : WordSpec({
     "OptionFoldable" should {
         "!foldMap some" {

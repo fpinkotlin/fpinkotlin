@@ -15,6 +15,7 @@ fun <A> concat2(lla: List<List<A>>): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise14 : WordSpec({
     "list concat" should {
         "!concatenate a list of lists into a single list" {

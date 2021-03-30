@@ -23,6 +23,7 @@ infix fun <I, O, O2> Process<I, O>.pipe(
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise5 : WordSpec({
     "pipe" should {
         "!fuse together two processes" {

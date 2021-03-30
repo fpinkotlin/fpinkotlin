@@ -11,6 +11,7 @@ tailrec fun <A, B> foldLeft(xs: List<A>, z: B, f: (B, A) -> B): B =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise9 : WordSpec({
     "list foldLeft" should {
         """!apply a function f providing a zero accumulator from tail

@@ -16,9 +16,7 @@ fun <A, S> unfold(z: S, f: (S) -> Option<Pair<A, S>>): Stream<A> =
     SOLUTION_HERE()
 //end::init[]
 
-/**
- * Re-enable the tests by removing the `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise11 : WordSpec({
     "unfold" should {
         """!return a stream based on an initial state and a function

@@ -11,6 +11,7 @@ fun <A, B> map(xs: List<A>, f: (A) -> B): List<B> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise17 : WordSpec({
     "list map" should {
         "!apply a function to every list element" {

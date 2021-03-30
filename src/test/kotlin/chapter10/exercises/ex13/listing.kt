@@ -12,6 +12,7 @@ import io.kotlintest.specs.WordSpec
 object ListFoldable : Foldable<ForList>
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise13 : WordSpec({
     "ListFoldable" should {
         "!foldRight" {

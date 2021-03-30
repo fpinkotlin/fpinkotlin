@@ -13,6 +13,7 @@ import io.kotlintest.specs.WordSpec
 object TreeFoldable : Foldable<ForTree>
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise14 : WordSpec({
     "TreeFoldable" should {
         val t = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))

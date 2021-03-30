@@ -20,6 +20,7 @@ fun mean(): Process<Double, Double> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise3 : WordSpec({
     "mean" should {
         "!calculate a running average of values encounterd so far" {

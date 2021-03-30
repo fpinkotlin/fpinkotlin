@@ -11,6 +11,7 @@ fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise19 : WordSpec({
     "list flatmap" should {
         "!map and flatten a list" {

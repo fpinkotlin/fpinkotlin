@@ -13,6 +13,7 @@ fun <A> size(tree: Tree<A>): Int =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise24 : WordSpec({
     "tree size" should {
         "!determine the total size of a tree" {

@@ -4,6 +4,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise5 : WordSpec({
     // tag::init[]
     fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C =
@@ -11,9 +12,6 @@ class Exercise5 : WordSpec({
         SOLUTION_HERE()
     // end::init[]
 
-    /**
-     * Re-enable the tests by removing the `!` prefix!
-     */
     "compose" should {
         "!apply function composition over two functions" {
             val fahrenheit2celsius: (Double) -> String =

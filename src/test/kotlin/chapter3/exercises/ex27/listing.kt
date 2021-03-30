@@ -13,6 +13,7 @@ fun <A, B> map(tree: Tree<A>, f: (A) -> B): Tree<B> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise27 : WordSpec({
     "!tree map" should {
         "transform all leaves of a map" {

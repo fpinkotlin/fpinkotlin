@@ -26,6 +26,7 @@ fun mean(): Process<Double, Double> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise6 : WordSpec({
 
     val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)

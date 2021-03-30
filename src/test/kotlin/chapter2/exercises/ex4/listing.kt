@@ -4,6 +4,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise4 : WordSpec({
     // tag::init[]
     fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C =
@@ -11,9 +12,6 @@ class Exercise4 : WordSpec({
         SOLUTION_HERE()
     // end::init[]
 
-    /**
-     * Re-enable the tests by removing the `!` prefix!
-     */
     "uncurry" should {
         """!take a function accepting two values and then apply that
             function to the components of the pair which is the

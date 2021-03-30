@@ -19,6 +19,7 @@ fun <A> lengthL(xs: List<A>): Int =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise10 : WordSpec({
     "!list sumL" should {
         "add all integers" {

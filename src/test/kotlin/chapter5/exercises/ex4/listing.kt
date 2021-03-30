@@ -11,9 +11,7 @@ fun <A> Stream<A>.forAll(p: (A) -> Boolean): Boolean =
     SOLUTION_HERE()
 //end::init[]
 
-/**
- * Re-enable the tests by removing the `!` prefix!
- */
+//TODO: Enable tests by removing `!` prefix
 class Exercise4 : WordSpec({
 
     "Stream.forAll" should {

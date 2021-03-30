@@ -13,6 +13,7 @@ fun <A> setHead(xs: List<A>, x: A): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise2 : WordSpec({
     "list setHead" should {
         "!return a new List with a replaced head" {

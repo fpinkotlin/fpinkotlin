@@ -18,6 +18,7 @@ object ListFoldable : Foldable<ForList> {
     //end::init1[]
 }
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise19 : WordSpec({
     "bag" should {
         "!bin the contents of a list into a map" {

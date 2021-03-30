@@ -19,6 +19,7 @@ fun convert(infile: File, outfile: File): File =
     SOLUTION_HERE()
 //end::init2[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise9 : WordSpec({
     "convert" should {
         "!apply a process and write a new file" {

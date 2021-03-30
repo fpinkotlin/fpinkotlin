@@ -32,6 +32,7 @@ fun <I> dropWhile(p: (I) -> Boolean): Process<I, I> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
     val stream = Stream.of(1, 2, 3, 4, 5, 6, 7)
     "take" should {

@@ -17,6 +17,7 @@ fun <A, B> productMonoid(
     SOLUTION_HERE()
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise17 : WordSpec({
     "productMonoid" should {
         "!comply with the law of associativity" {

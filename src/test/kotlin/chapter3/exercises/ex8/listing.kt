@@ -12,6 +12,7 @@ fun <A> length(xs: List<A>): Int =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise8 : WordSpec({
     "list length" should {
         "!calculate the length" {

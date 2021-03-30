@@ -13,6 +13,7 @@ fun <A> tail(xs: List<A>): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
     "list tail" should {
         "!return the the tail when present" {

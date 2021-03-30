@@ -23,6 +23,7 @@ fun variance(xs: List<Double>): Option<Double> =
     SOLUTION_HERE()
 //end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise2 : WordSpec({
 
     "variance" should {

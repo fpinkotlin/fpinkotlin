@@ -15,6 +15,7 @@ fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise12 : WordSpec({
     "list foldLeftR" should {
         "!implement foldLeft functionality using foldRight" {

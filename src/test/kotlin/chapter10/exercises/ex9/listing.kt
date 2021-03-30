@@ -10,6 +10,7 @@ fun ordered(ints: Sequence<Int>): Boolean =
     SOLUTION_HERE()
 //end::init1[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise9 : WordSpec({
     "ordered using balanced fold" should {
         "!verify ordering ordered list" {

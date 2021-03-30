@@ -11,6 +11,7 @@ fun add(xa: List<Int>, xb: List<Int>): List<Int> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise21 : WordSpec({
     "list add" should {
         "!add elements of two corresponding lists" {

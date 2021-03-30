@@ -13,6 +13,7 @@ fun <A> init(l: List<A>): List<A> =
     SOLUTION_HERE()
 // end::init[]
 
+//TODO: Enable tests by removing `!` prefix
 class Exercise5 : WordSpec({
 
     "list init" should {
