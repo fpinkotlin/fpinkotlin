@@ -98,27 +98,27 @@ class Exercise13 : WordSpec({
         "!combine two streams of equal length" {
             Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3))
                 .toList() shouldBe List.of(
-                Pair(Some(1), Some(1)),
-                Pair(Some(2), Some(2)),
-                Pair(Some(3), Some(3))
+                Some(1) to Some(1),
+                Some(2) to Some(2),
+                Some(3) to Some(3)
             )
         }
         "!combine two streams until the first is exhausted" {
             Stream.of(1, 2, 3, 4).zipAll(Stream.of(1, 2, 3))
                 .toList() shouldBe List.of(
-                Pair(Some(1), Some(1)),
-                Pair(Some(2), Some(2)),
-                Pair(Some(3), Some(3)),
-                Pair(Some(4), None)
+                Some(1) to Some(1),
+                Some(2) to Some(2),
+                Some(3) to Some(3),
+                Some(4) to None
             )
         }
         "!combine two streams until the second is exhausted" {
             Stream.of(1, 2, 3).zipAll(Stream.of(1, 2, 3, 4))
                 .toList() shouldBe List.of(
-                Pair(Some(1), Some(1)),
-                Pair(Some(2), Some(2)),
-                Pair(Some(3), Some(3)),
-                Pair(None, Some(4))
+                Some(1) to Some(1),
+                Some(2) to Some(2),
+                Some(3) to Some(3),
+                None to Some(4)
             )
         }
     }

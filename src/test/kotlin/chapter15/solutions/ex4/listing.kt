@@ -26,10 +26,10 @@ fun <S, I, O> loop(z: S, f: (I, S) -> Pair<O, S>): Process<I, O> =
 
 //tag::init[]
 fun sum(start: Double): Process<Double, Double> =
-    loop(0.0) { i: Double, acc: Double -> Pair(acc + i, acc + i) }
+    loop(0.0) { i: Double, acc: Double -> (acc + i) to (acc + i) }
 
 fun <I> count(): Process<I, Int> =
-    loop(0) { _, n: Int -> Pair(n + 1, n + 1) }
+    loop(0) { _, n: Int -> (n + 1) to (n + 1) }
 //end::init[]
 
 class Exercise4 : WordSpec({

@@ -8,7 +8,7 @@ import io.kotlintest.specs.WordSpec
 //tag::init[]
 fun double(rng: RNG): Pair<Double, RNG> {
     val (i, rng2) = nonNegativeInt(rng)
-    return Pair(i / (Int.MAX_VALUE.toDouble() + 1), rng2)
+    return (i / (Int.MAX_VALUE.toDouble() + 1)) to rng2
 }
 //end::init[]
 
@@ -24,22 +24,19 @@ class Solution2 : WordSpec({
 
             val rngMax = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(Int.MAX_VALUE, unusedRng)
+                    Int.MAX_VALUE to unusedRng
             }
 
-            double(rngMax) shouldBe Pair(
-                0.9999999995343387,
-                unusedRng
-            )
+            double(rngMax) shouldBe (0.9999999995343387 to unusedRng)
         }
 
         "generate a min value of 0 based on 0" {
             val rngMin = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(0, unusedRng)
+                    0 to unusedRng
             }
 
-            double(rngMin) shouldBe Pair(0.0, unusedRng)
+            double(rngMin) shouldBe (0.0 to unusedRng)
         }
     }
 })

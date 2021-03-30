@@ -19,11 +19,11 @@ fun <F, G> product(
         ): ProductOf<F, G, B> {
             val (fab, gab) = fgab.fix().value
             val (fa, ga) = fga.fix().value
-            return Product(Pair(AF.apply(fab, fa), AG.apply(gab, ga)))
+            return Product(AF.apply(fab, fa) to AG.apply(gab, ga))
         }
 
         override fun <A> unit(a: A): ProductOf<F, G, A> =
-            Product(Pair(AF.unit(a), AG.unit(a)))
+            Product(AF.unit(a) to AG.unit(a))
     }
 
 //end::init1[]

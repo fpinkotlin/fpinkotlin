@@ -28,25 +28,22 @@ class Exercise5 : WordSpec({
 
             val rngMax = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(Int.MAX_VALUE, unusedRng)
+                    Int.MAX_VALUE to unusedRng
             }
 
             val doubleRand = doubleR()
-            doubleRand(rngMax) shouldBe Pair(
-                0.9999999995343387,
-                unusedRng
-            )
+            doubleRand(rngMax) shouldBe (0.9999999995343387 to unusedRng)
         }
 
         "!generate a min value of 0 based on 0 using Rand" {
 
             val rngMin = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(0, unusedRng)
+                    0 to unusedRng
             }
 
             val doubleRand = doubleR()
-            doubleRand(rngMin) shouldBe Pair(0.0, unusedRng)
+            doubleRand(rngMin) shouldBe (0.0 to unusedRng)
         }
     }
 })

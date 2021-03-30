@@ -12,13 +12,13 @@ class Solution3 : WordSpec({
     fun intDouble(rng: RNG): Pair<Pair<Int, Double>, RNG> {
         val (i, rng2) = rng.nextInt()
         val (d, rng3) = double(rng2)
-        return Pair(Pair(i, d), rng3)
+        return (i to d) to rng3
     }
 
     fun doubleInt(rng: RNG): Pair<Pair<Double, Int>, RNG> {
         val (id, rng2) = intDouble(rng)
         val (i, d) = id
-        return Pair(Pair(d, i), rng2)
+        return (d to i) to rng2
     }
 
     fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> {
@@ -26,7 +26,7 @@ class Solution3 : WordSpec({
         val (d1, rng2) = doubleRand(rng)
         val (d2, rng3) = doubleRand(rng2)
         val (d3, rng4) = doubleRand(rng3)
-        return Pair(Triple(d1, d2, d3), rng4)
+        return Triple(d1, d2, d3) to rng4
     }
     //end::init[]
 
@@ -41,17 +41,17 @@ class Solution3 : WordSpec({
 
         val rng3 = object : RNG {
             override fun nextInt(): Pair<Int, RNG> =
-                Pair(Int.MAX_VALUE, unusedRng)
+                Int.MAX_VALUE to unusedRng
         }
 
         val rng2 = object : RNG {
             override fun nextInt(): Pair<Int, RNG> =
-                Pair(Int.MAX_VALUE, rng3)
+                Int.MAX_VALUE to rng3
         }
 
         val rng = object : RNG {
             override fun nextInt(): Pair<Int, RNG> =
-                Pair(Int.MAX_VALUE, rng2)
+                Int.MAX_VALUE to rng2
         }
 
         "generate a pair of int and double" {

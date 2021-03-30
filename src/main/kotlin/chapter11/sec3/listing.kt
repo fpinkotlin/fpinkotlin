@@ -23,6 +23,6 @@ interface Monad<F> : Functor<F> {
         ma: Kind<F, A>,
         mb: Kind<F, B>
     ): Kind<F, Pair<A, B>> =
-        map2(ma, mb) { a, b -> Pair(a, b) }
+        map2(ma, mb) { a, b -> a to b }
     //end::init[]
 }

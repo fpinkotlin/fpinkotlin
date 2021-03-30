@@ -11,11 +11,11 @@ data class ParseError(
 ) {
 
     fun push(loc: Location, msg: String): ParseError =
-        this.copy(stack = listOf(Pair(loc, msg)) + stack)
+        this.copy(stack = listOf(loc to msg) + stack)
 
     fun label(s: String): ParseError =
         ParseError(latestLoc()
-            .map { Pair(it, s) }
+            .map { it to s }
             .toList())
 
     private fun latest(): Option<Pair<Location, String>> =

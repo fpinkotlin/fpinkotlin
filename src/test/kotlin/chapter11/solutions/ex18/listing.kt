@@ -3,13 +3,13 @@ package chapter11.solutions.ex18
 import chapter11.sec5_2.State
 
 fun <S, A> unit(a: A): State<S, A> =
-    State { s: S -> Pair(a, s) }
+    State { s: S -> a to s }
 
 fun <S> getState(): State<S, S> =
-    State { s -> Pair(s, s) }
+    State { s -> s to s }
 
 fun <S> setState(s: S): State<S, Unit> =
-    State { Pair(Unit, s) }
+    State { Unit to s }
 
 fun main() {
     //tag::init[]

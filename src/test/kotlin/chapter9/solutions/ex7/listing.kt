@@ -12,7 +12,7 @@ abstract class Listing : ParserDsl<ParseError>() {
             pa: Parser<A>,
             pb: Parser<B>
         ): Parser<Pair<A, B>> =
-            pa.flatMap { a -> pb.map { b -> Pair(a, b) } }
+            pa.flatMap { a -> pb.map { b -> a to b } }
         //end::init1[]
 
         //tag::init2[]

@@ -25,7 +25,7 @@ interface RNG {
 fun randomPair(rng: RNG): Pair<Int, Int> {
     val (i1, _) = rng.nextInt()
     val (i2, _) = rng.nextInt()
-    return Pair(i1, i2)
+    return i1 to i2
 }
 //end::init3[]
 
@@ -33,6 +33,6 @@ fun randomPair(rng: RNG): Pair<Int, Int> {
 fun randomPair2(rng: RNG): Pair<Pair<Int, Int>, RNG> {
     val (i1, rng2) = rng.nextInt()
     val (i2, rng3) = rng2.nextInt() //<1>
-    return Pair(Pair(i1, i2), rng3) // <2>
+    return (i1 to i2) to rng3 // <2>
 }
 //end::init4[]

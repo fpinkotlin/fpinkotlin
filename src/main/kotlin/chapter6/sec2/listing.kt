@@ -12,7 +12,7 @@ data class SimpleRNG(val seed: Long) : RNG {
                 0xFFFFFFFFFFFFL // <1>
         val nextRNG = SimpleRNG(newSeed) // <2>
         val n = (newSeed ushr 16).toInt() // <3>
-        return Pair(n, nextRNG) // <4>
+        return n to nextRNG // <4>
     }
 }
 //end::init1[]

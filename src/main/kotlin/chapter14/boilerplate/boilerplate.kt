@@ -22,7 +22,7 @@ abstract class ST<S, A> internal constructor() : STOf<S, A> {
         operator fun <S, A> invoke(a: () -> A): ST<S, A> {
             val memo by lazy(a)
             return object : ST<S, A>() {
-                override fun run(s: S) = Pair(memo, s)
+                override fun run(s: S) = memo to s
             }
         }
 
@@ -35,7 +35,7 @@ abstract class ST<S, A> internal constructor() : STOf<S, A> {
     fun <B> map(f: (A) -> B): ST<S, B> = object : ST<S, B>() {
         override fun run(s: S): Pair<B, S> {
             val (a, s1) = this@ST.run(s)
-            return Pair(f(a), s1)
+            return f(a) to s1
         }
     }
 
@@ -69,7 +69,7 @@ abstract class STRef<S, A> private constructor() {
     fun write(a: A): ST<S, Unit> = object : ST<S, Unit>() {
         override fun run(s: S): Pair<Unit, S> {
             cell = a
-            return Pair(Unit, s)
+            return Unit to s
         }
     }
 }
@@ -103,7 +103,7 @@ abstract class STArray<S, A> @PublishedApi internal constructor() {
     fun write(i: Int, a: A): ST<S, Unit> = object : ST<S, Unit>() {
         override fun run(s: S): Pair<Unit, S> {
             value[i] = a
-            return Pair(Unit, s)
+            return Unit to s
         }
     }
 

@@ -92,6 +92,6 @@ data class ConsoleState<A>(
     fun <B> map(f: (A) -> B): ConsoleState<B> =
         ConsoleState { bs1: Buffers ->
             val (a, bs2) = run(bs1)
-            Pair(f(a), bs2)
+            f(a) to bs2
         }
 }

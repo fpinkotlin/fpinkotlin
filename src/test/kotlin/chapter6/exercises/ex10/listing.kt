@@ -45,14 +45,14 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
 class Exercise10 : WordSpec({
     "unit" should {
         "!compose a new state of pure a" {
-            State.unit<RNG, Int>(1).run(rng1) shouldBe Pair(1, rng1)
+            State.unit<RNG, Int>(1).run(rng1) shouldBe (1 to rng1)
         }
     }
     "map" should {
         "!transform a state" {
             State.unit<RNG, Int>(1)
                 .map { it.toString() }
-                .run(rng1) shouldBe Pair("1", rng1)
+                .run(rng1) shouldBe ("1" to rng1)
         }
     }
     "flatMap" should {
@@ -60,7 +60,7 @@ class Exercise10 : WordSpec({
             State.unit<RNG, Int>(1)
                 .flatMap { i ->
                     State.unit<RNG, String>(i.toString())
-                }.run(rng1) shouldBe Pair("1", rng1)
+                }.run(rng1) shouldBe ("1" to rng1)
         }
     }
     "map2" should {

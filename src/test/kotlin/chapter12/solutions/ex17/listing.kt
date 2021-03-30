@@ -20,15 +20,12 @@ infix fun <F, G> Applicative<F>.product(
             val (fab, gab) = fgab.fix().value
             val (fa, ga) = fga.fix().value
             return Product(
-                Pair(
-                    this@product.apply(fab, fa),
-                    ag.apply(gab, ga)
-                )
+                this@product.apply(fab, fa) to ag.apply(gab, ga)
             )
         }
 
         override fun <A> unit(a: A): ProductOf<F, G, A> =
-            Product(Pair(this@product.unit(a), ag.unit(a)))
+            Product(this@product.unit(a) to ag.unit(a))
     }
 
 interface Traversable<F> : Functor<F>, Foldable<F> {
@@ -55,7 +52,7 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         g: (A) -> Kind<H, B>
     ): Pair<Kind<G, Kind<F, B>>, Kind<H, Kind<F, B>>> =
         traverse(ta, AG product AH) { a ->
-            Product(Pair(f(a), g(a)))
+            Product(f(a) to g(a))
         }.fix().value
     //end::init[]
 }

@@ -13,8 +13,8 @@ fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> =
     if (count > 0) {
         val (i, r1) = rng.nextInt()
         val (xs, r2) = ints(count - 1, r1)
-        Pair(Cons(i, xs), r2)
-    } else Pair(Nil, rng)
+        Cons(i, xs) to r2
+    } else Nil to rng
 //end::init[]
 
 class Solution4 : WordSpec({
@@ -22,8 +22,7 @@ class Solution4 : WordSpec({
     "ints" should {
         "generate a list of ints of a specified length" {
 
-            ints(5, rng1) shouldBe
-                Pair(List.of(1, 1, 1, 1, 1), rng1)
+            ints(5, rng1) shouldBe (List.of(1, 1, 1, 1, 1) to rng1)
         }
     }
 })

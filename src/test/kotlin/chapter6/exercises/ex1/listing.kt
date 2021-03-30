@@ -24,46 +24,40 @@ class Exercise1 : WordSpec({
 
             val rng0 = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(0, unusedRng)
+                    0 to unusedRng
             }
 
-            nonNegativeInt(rng0) shouldBe Pair(0, unusedRng)
+            nonNegativeInt(rng0) shouldBe (0 to unusedRng)
         }
 
         "!return Int.MAX_VALUE when nextInt() yields Int.MAX_VALUE" {
 
             val rngMax = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(Int.MAX_VALUE, unusedRng)
+                    Int.MAX_VALUE to unusedRng
             }
 
-            nonNegativeInt(rngMax) shouldBe Pair(
-                Int.MAX_VALUE,
-                unusedRng
-            )
+            nonNegativeInt(rngMax) shouldBe (Int.MAX_VALUE to unusedRng)
         }
 
         "!return Int.MAX_VALUE when nextInt() yields Int.MIN_VALUE" {
 
             val rngMin = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(Int.MIN_VALUE, unusedRng)
+                    Int.MIN_VALUE to unusedRng
             }
 
-            nonNegativeInt(rngMin) shouldBe Pair(
-                Int.MAX_VALUE,
-                unusedRng
-            )
+            nonNegativeInt(rngMin) shouldBe (Int.MAX_VALUE to unusedRng)
         }
 
         "!return 0 when nextInt() yields -1" {
 
             val rngNeg = object : RNG {
                 override fun nextInt(): Pair<Int, RNG> =
-                    Pair(-1, unusedRng)
+                    -1 to unusedRng
             }
 
-            nonNegativeInt(rngNeg) shouldBe Pair(0, unusedRng)
+            nonNegativeInt(rngNeg) shouldBe (0 to unusedRng)
         }
     }
 })

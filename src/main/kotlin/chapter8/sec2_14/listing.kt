@@ -56,7 +56,7 @@ data class Prop(val check: (TestCases, RNG) -> Result) {
 fun main() {
     fun nextInt(rng: RNG): Pair<Int, RNG> {
         val (i1, rng2) = rng.nextInt()
-        return Pair(i1, rng2)
+        return i1 to rng2
     }
 
     fun integerGen(): Gen<Int> = Gen(State { rng -> nextInt(rng) })

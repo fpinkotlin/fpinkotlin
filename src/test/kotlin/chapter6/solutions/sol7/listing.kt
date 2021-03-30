@@ -20,7 +20,7 @@ fun <A> sequence(fs: List<Rand<A>>): Rand<List<A>> = { rng ->
         is Cons -> {
             val (a, nrng) = fs.head(rng)
             val (xa, frng) = sequence(fs.tail)(nrng)
-            Pair(Cons(a, xa), frng)
+            Cons(a, xa) to frng
         }
     }
 }
@@ -34,7 +34,7 @@ fun <A> sequence2(fs: List<Rand<A>>): Rand<List<A>> =
 fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> {
     fun go(c: Int): List<Rand<Int>> =
         if (c == 0) Nil
-        else Cons({ r -> Pair(1, r) }, go(c - 1))
+        else Cons({ r -> 1 to r }, go(c - 1))
     return sequence2(go(count))(rng)
 }
 //end::init[]

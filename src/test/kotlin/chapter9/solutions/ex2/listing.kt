@@ -42,7 +42,7 @@ abstract class Listing : ParserDsl<ParseError>() {
     val listing3 = {
         //tag::init4[]
         a.map(::f) product b.map(::g) ==
-            (a product b).map { (a1, b1) -> Pair(f(a1), g(b1)) }
+            (a product b).map { (a1, b1) -> f(a1) to g(b1) }
         //end::init4[]
     }
 }

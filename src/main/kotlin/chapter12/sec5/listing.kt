@@ -49,12 +49,12 @@ interface Listing<F, A> : Applicative<F> {
         ma: Kind<F, A>,
         mb: Kind<F, B>
     ): Kind<F, Pair<A, B>> =
-        map2(ma, mb) { a, b -> Pair(a, b) }
+        map2(ma, mb) { a, b -> a to b }
     //end::init7[]
 
     //tag::init8[]
     fun <A, B, C> assoc(p: Pair<A, Pair<B, C>>): Pair<Pair<A, B>, C> =
-        Pair(Pair(p.first, p.second.first), p.second.second)
+        (p.first to p.second.first) to p.second.second
     //end::init8[]
 
     fun listing3() {
@@ -73,7 +73,7 @@ interface Listing<F, A> : Applicative<F> {
         f: (I1) -> O1,
         g: (I2) -> O2
     ): (I1, I2) -> Pair<O1, O2> =
-        { i1, i2 -> Pair(f(i1), g(i2)) }
+        { i1, i2 -> f(i1) to g(i2) }
     //end::init12[]
 
     fun listing4() {

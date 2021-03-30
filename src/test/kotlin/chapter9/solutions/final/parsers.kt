@@ -12,11 +12,11 @@ data class ParseError(
 ) {
 
     fun push(loc: Location, msg: String): ParseError =
-        this.copy(stack = listOf(Pair(loc, msg)) + stack)
+        this.copy(stack = listOf(loc to msg) + stack)
 
     fun label(s: String): ParseError =
         ParseError(latestLoc()
-            .map { Pair(it, s) }
+            .map { it to s }
             .toList())
 
     private fun latest(): Option<Pair<Location, String>> =
@@ -84,7 +84,7 @@ data class Location(val input: String, val offset: Int = 0) {
         }
     }
 
-    fun toError(msg: String) = ParseError(listOf(Pair(this, msg)))
+    fun toError(msg: String) = ParseError(listOf(this to msg))
 }
 
 typealias Parser<A> = (Location) -> Result<A>
@@ -314,7 +314,7 @@ open class ParsersImpl<PE> : Parsers<PE>() {
 
         val latestLocation = latest.map { it.first }
 
-        return ParseError(latestLocation.map { Pair(it, msg) }.toList())
+        return ParseError(latestLocation.map { it to msg }.toList())
     }
 
     override fun <A> tag(msg: String, pa: Parser<A>): Parser<A> =
@@ -346,7 +346,7 @@ open class ParsersImpl<PE> : Parsers<PE>() {
         pa: Parser<A>,
         pb: () -> Parser<B>
     ): Parser<Pair<A, B>> =
-        flatMap(pa, { a -> map(pb()) { b -> Pair(a, b) } })
+        flatMap(pa, { a -> map(pb()) { b -> a to b } })
 
     override fun <A, B, C> map2(
         pa: Parser<A>,

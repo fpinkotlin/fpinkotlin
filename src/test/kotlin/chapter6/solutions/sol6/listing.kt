@@ -12,7 +12,7 @@ fun <A, B, C> map2(ra: Rand<A>, rb: Rand<B>, f: (A, B) -> C): Rand<C> =
     { r1: RNG ->
         val (a, r2) = ra(r1)
         val (b, r3) = rb(r2)
-        Pair(f(a, b), r3)
+        f(a, b) to r3
     }
 //end::init[]
 

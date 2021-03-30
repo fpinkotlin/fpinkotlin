@@ -12,7 +12,7 @@ infix fun <T> T.cons(la: List<T>): List<T> = listOf(this) + la
 
 //tag::init1[]
 fun ParseError.push(loc: Location, msg: String): ParseError =
-    this.copy(stack = Pair(loc, msg) cons this.stack)
+    this.copy(stack = (loc to msg) cons this.stack)
 //end::init1[]
 
 //tag::init2[]
@@ -44,6 +44,6 @@ fun ParseError.tag(msg: String): ParseError {
 
     val latestLocation = latest.map { it.first } // <2>
 
-    return ParseError(latestLocation.map { Pair(it, msg) }.toList()) // <3>
+    return ParseError(latestLocation.map { it to msg }.toList()) // <3>
 }
 //end::init5[]

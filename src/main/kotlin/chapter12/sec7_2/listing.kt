@@ -27,7 +27,7 @@ typealias StateMonad<S> = Monad<StatePartialOf<S>>
 fun <S> stateMonad() = object : StateMonad<S> {
 
     override fun <A> unit(a: A): StateOf<S, A> =
-        State { s -> Pair(a, s) }
+        State { s -> a to s }
 
     override fun <A, B> flatMap(
         fa: StateOf<S, A>,
@@ -89,7 +89,7 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         traverseS(ta) { a: A ->
             State.get<Int>().flatMap { s: Int -> // <1>
                 State.set(s + 1).map { _ -> // <2>
-                    Pair(a, s)
+                    a to s
                 }
             }
         }.run(0).first // <3>
@@ -129,12 +129,12 @@ interface Traversable2<F> : Functor<F>, Foldable<F> {
 
     fun <A> zipWithIndex(ta: Kind<F, A>): Kind<F, Pair<A, Int>> =
         mapAccum(ta, 0) { a, s ->
-            Pair(Pair(a, s), s + 1)
+            (a to s) to (s + 1)
         }.first
 
     fun <A> toList(ta: Kind<F, A>): List<A> =
         mapAccum(ta, Nil) { a: A, s: List<A> ->
-            Pair(Unit, Cons(a, s))
+            Unit to Cons(a, s)
         }.second.reverse()
     //end::init6[]
 }

@@ -114,7 +114,7 @@ object Listing12E {
         infix fun <B> assoc(io: IO<B>): IO<Pair<A, B>> =
             object : IO<Pair<A, B>> {
                 override fun run(): Pair<A, B> =
-                    Pair(this@IO.run(), io.run())
+                    this@IO.run() to io.run()
             }
     }
     //end::init5[]

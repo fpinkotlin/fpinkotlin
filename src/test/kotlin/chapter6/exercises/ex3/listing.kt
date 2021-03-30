@@ -35,17 +35,17 @@ class Exercise3 : WordSpec({
 
         val rng3 = object : RNG {
             override fun nextInt(): Pair<Int, RNG> =
-                Pair(Int.MAX_VALUE, unusedRng)
+                Int.MAX_VALUE to unusedRng
         }
 
         val rng2 = object : RNG {
             override fun nextInt(): Pair<Int, RNG> =
-                Pair(Int.MAX_VALUE, rng3)
+                Int.MAX_VALUE to rng3
         }
 
         val rng = object : RNG {
             override fun nextInt(): Pair<Int, RNG> =
-                Pair(Int.MAX_VALUE, rng2)
+                Int.MAX_VALUE to rng2
         }
 
         "!generate a pair of int and double" {

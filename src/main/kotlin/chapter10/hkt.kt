@@ -153,7 +153,7 @@ typealias StatePartialOf<S> = Kind<ForState, S>
 interface StateMonad<S> : Monad<StatePartialOf<S>> { // <1>
 
     override fun <A> unit(a: A): StateOf<S, A> = // <2>
-        State { s -> Pair(a, s) }
+        State { s -> a to s }
 
     override fun <A, B> flatMap(
         fa: StateOf<S, A>, // <2>

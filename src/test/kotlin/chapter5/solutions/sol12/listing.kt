@@ -12,24 +12,24 @@ class Solution12 : WordSpec({
 
     //tag::fibs[]
     fun fibs(): Stream<Int> =
-        Stream.unfold(Pair(0, 1), { (curr, next) ->
-            Some(Pair(curr, Pair(next, curr + next)))
+        Stream.unfold(0 to 1, { (curr, next) ->
+            Some(curr to (next to (curr + next)))
         })
     //end::fibs[]
 
     //tag::from[]
     fun from(n: Int): Stream<Int> =
-        Stream.unfold(n, { a -> Some(Pair(a, a + 1)) })
+        Stream.unfold(n, { a -> Some(a to (a + 1)) })
     //end::from[]
 
     //tag::constant[]
     fun <A> constant(n: A): Stream<A> =
-        Stream.unfold(n, { a -> Some(Pair(a, a)) })
+        Stream.unfold(n, { a -> Some(a to a) })
     //end::constant[]
 
     //tag::ones[]
     fun ones(): Stream<Int> =
-        Stream.unfold(1, { Some(Pair(1, 1)) })
+        Stream.unfold(1, { Some(1 to 1) })
     //end::ones[]
 
     "fibs" should {

@@ -25,7 +25,7 @@ interface Traverse<F> : Functor<F>, Foldable<F> {
     fun <A, B> zip(ta: Kind<F, A>, tb: Kind<F, B>): Kind<F, Pair<A, B>> =
         mapAccum(ta, toList(tb)) { a: A, b: List<B> ->
             when (b) {
-                is Cons -> Pair(Pair(a, b.head), b.tail)
+                is Cons -> (a to b.head) to b.tail
                 is Nil -> throw Exception("incompatible shapes for zip")
             }
         }.first
@@ -38,8 +38,8 @@ interface Traverse<F> : Functor<F>, Foldable<F> {
     ): Kind<F, Pair<A, Option<B>>> =
         mapAccum(ta, toList(tb)) { a: A, b: List<B> ->
             when (b) {
-                is Nil -> Pair(Pair(a, None), Nil)
-                is Cons -> Pair(Pair(a, Some(b.head)), b.tail)
+                is Nil -> (a to None) to Nil
+                is Cons -> (a to Some(b.head)) to b.tail
             }
         }.first
 
@@ -49,8 +49,8 @@ interface Traverse<F> : Functor<F>, Foldable<F> {
     ): Kind<F, Pair<Option<A>, B>> =
         mapAccum(tb, toList(ta)) { b: B, a: List<A> ->
             when (a) {
-                is Nil -> Pair(Pair(None, b), Nil)
-                is Cons -> Pair(Pair(Some(a.head), b), a.tail)
+                is Nil -> (None to b) to Nil
+                is Cons -> (Some(a.head) to b) to a.tail
             }
         }.first
     //end::init1[]

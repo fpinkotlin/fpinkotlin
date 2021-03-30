@@ -13,14 +13,14 @@ val intR: Rand<Int> = { rng -> rng.nextInt() }
 //end::init2[]
 
 //tag::init3[]
-fun <A> unit(a: A): Rand<A> = { rng -> Pair(a, rng) }
+fun <A> unit(a: A): Rand<A> = { rng -> a to rng }
 //end::init3[]
 
 //tag::init4[]
 fun <A, B> map(s: Rand<A>, f: (A) -> B): Rand<B> =
     { rng ->
         val (a, rng2) = s(rng)
-        Pair(f(a), rng2)
+        f(a) to rng2
     }
 //end::init4[]
 
@@ -39,7 +39,7 @@ fun <A, B, C> map2(
 
 //tag::init6[]
 fun <A, B> both(ra: Rand<A>, rb: Rand<B>): Rand<Pair<A, B>> =
-    map2(ra, rb) { a, b -> Pair(a, b) }
+    map2(ra, rb) { a, b -> a to b }
 //end::init6[]
 
 //tag::init7[]
@@ -75,7 +75,7 @@ fun nonNegativeIntLessThan(n: Int): Rand<Int> =
         val (i, rng2) = nonNegativeInt(rng)
         val mod = i % n
         if (i + (n - 1) - mod >= 0)
-            Pair(mod, rng2)
+            mod to rng2
         else nonNegativeIntLessThan(n)(rng2)
     }
 //end::init10[]

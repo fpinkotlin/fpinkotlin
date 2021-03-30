@@ -85,13 +85,13 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
 
     fun <A> toList(ta: Kind<F, A>): List<A> =
         mapAccum(ta, emptyList()) { a: A, la: List<A> ->
-            Pair(Unit, listOf(a) + la)
+            Unit to (listOf(a) + la)
         }.second.reversed()
 
     //tag::init[]
     fun <A> reverse(ta: Kind<F, A>): Kind<F, A> =
         mapAccum(ta, toList(ta).reversed()) { _, ls ->
-            Pair(ls.first(), ls.drop(1))
+            ls.first() to ls.drop(1)
         }.first
     //end::init[]
 }

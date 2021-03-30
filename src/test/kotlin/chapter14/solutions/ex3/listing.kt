@@ -30,32 +30,32 @@ abstract class STMap<S, K, V> @PublishedApi internal constructor() {
 
     fun get(k: K): ST<S, V> = object : ST<S, V>() {
         override fun run(s: S): Pair<V, S> =
-            Pair(map.getOrElse(k, noElementFor(k)), s)
+            map.getOrElse(k, noElementFor(k)) to s
     }
 
     fun getOption(k: K): ST<S, Option<V>> = object : ST<S, Option<V>>() {
         override fun run(s: S): Pair<Option<V>, S> =
-            Pair(Option.of(map[k]), s)
+            Option.of(map[k]) to s
     }
 
     fun put(k: K, v: V): ST<S, Unit> = object : ST<S, Unit>() {
         override fun run(s: S): Pair<Unit, S> {
             map[k] = v
-            return Pair(Unit, s)
+            return Unit to s
         }
     }
 
     fun remove(k: K): ST<S, Unit> = object : ST<S, Unit>() {
         override fun run(s: S): Pair<Unit, S> {
             map.remove(k)
-            return Pair(Unit, s)
+            return Unit to s
         }
     }
 
     fun clear(): ST<S, Unit> = object : ST<S, Unit>() {
         override fun run(s: S): Pair<Unit, S> {
             map.clear()
-            return Pair(Unit, s)
+            return Unit to s
         }
     }
 

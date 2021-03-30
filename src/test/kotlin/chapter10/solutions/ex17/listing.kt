@@ -14,13 +14,11 @@ fun <A, B> productMonoid(
 ): Monoid<Pair<A, B>> =
     object : Monoid<Pair<A, B>> {
         override fun combine(a1: Pair<A, B>, a2: Pair<A, B>): Pair<A, B> =
-            Pair(
-                ma.combine(a1.first, a2.first),
+            ma.combine(a1.first, a2.first) to
                 mb.combine(a1.second, a2.second)
-            )
 
         override val nil: Pair<A, B>
-            get() = Pair(ma.nil, mb.nil)
+            get() = ma.nil to mb.nil
     }
 //end::init1[]
 

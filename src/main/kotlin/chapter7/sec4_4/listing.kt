@@ -114,10 +114,8 @@ fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> =
     map2(pa, pa) { a: A, _ -> f(a) }
 
 fun <A> List<A>.splitAt(idx: Int): Pair<List<A>, List<A>> = // <1>
-    Pair(
-        this.subList(0, idx),
+    this.subList(0, idx) to
         this.subList(idx, this.size)
-    )
 
 fun <A> sequence(ps: List<Par<A>>): Par<List<A>> {
     return when {

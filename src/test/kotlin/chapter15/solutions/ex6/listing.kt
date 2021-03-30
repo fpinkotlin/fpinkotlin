@@ -25,7 +25,7 @@ fun <A, B, C> zip(
         is Halt -> Halt()
         is Await -> Await { oa -> zip(p1.recv(oa), feed(oa, p2)) }
         is Emit -> when (p2) {
-            is Emit -> Emit(Pair(p1.head, p2.head), zip(p1.tail, p2.tail))
+            is Emit -> Emit(p1.head to p2.head, zip(p1.tail, p2.tail))
             else -> throw RuntimeException("impossible")
         }
     }

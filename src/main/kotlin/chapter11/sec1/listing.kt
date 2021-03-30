@@ -43,7 +43,7 @@ interface Functor<F> {
     fun <A, B> distribute(
         fab: Kind<F, Pair<A, B>>
     ): Pair<Kind<F, A>, Kind<F, B>> =
-        Pair(map(fab) { it.first }, map(fab) { it.second })
+        map(fab) { it.first } to map(fab) { it.second }
     //end::distribute[]
     //tag::codistribute[]
 

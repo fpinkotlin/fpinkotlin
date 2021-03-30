@@ -12,7 +12,7 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) : IntStateOf<A> {
 
     companion object {
         fun <S, A> unit(a: A): State<S, A> =
-            State { s: S -> Pair(a, s) }
+            State { s: S -> a to s }
     }
 
     fun <B> map(f: (A) -> B): State<S, B> =
@@ -41,7 +41,7 @@ fun <A> IntStateOf<A>.fix() = this as IntState<A>
 //tag::init4[]
 val intState = object : Monad<ForIntState> { // <1>
     override fun <A> unit(a: A): IntStateOf<A> = // <2>
-        IntState { s: Int -> Pair(a, s) }
+        IntState { s: Int -> a to s }
 
     override fun <A, B> flatMap(
         fa: IntStateOf<A>,

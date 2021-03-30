@@ -23,10 +23,8 @@ val sum1 = {
 
 //tag::splitat[]
 fun <A> List<A>.splitAt(idx: Int): Pair<List<A>, List<A>> = // <1>
-    Pair(
-        this.subList(0, idx),
+    this.subList(0, idx) to
         this.subList(idx, this.size)
-    )
 //end::splitat[]
 
 val sum2 = {

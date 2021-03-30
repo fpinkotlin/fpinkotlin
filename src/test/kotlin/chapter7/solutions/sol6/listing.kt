@@ -44,10 +44,8 @@ object Pars {
     fun <A> List<A>.splitAt(
         idx: Int
     ): Pair<PersistentList<A>, PersistentList<A>> =
-        Pair(
-            this.subList(0, idx).toPersistentList(),
+        this.subList(0, idx).toPersistentList() to
             this.subList(idx, this.size).toPersistentList()
-        )
 
     fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> =
         map2(pa, pa, { a: A, _ -> f(a) })
