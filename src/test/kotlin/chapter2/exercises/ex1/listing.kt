@@ -3,11 +3,14 @@ package chapter2.exercises.ex1
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import kotlinx.collections.immutable.persistentMapOf
+import utils.SOLUTION_HERE
 
 class Exercise1 : WordSpec({
-    // tag::init[]
-    fun fib(i: Int): Int = TODO()
-    // end::init[]
+    //tag::init[]
+    fun fib(i: Int): Int =
+
+        SOLUTION_HERE()
+    //end::init[]
 
     /**
      * Re-enable the tests by removing the `!` prefix!

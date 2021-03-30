@@ -3,9 +3,12 @@ package chapter5.exercises.ex4
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <A> Stream<A>.forAll(p: (A) -> Boolean): Boolean = TODO()
+fun <A> Stream<A>.forAll(p: (A) -> Boolean): Boolean =
+
+    SOLUTION_HERE()
 //end::init[]
 
 /**

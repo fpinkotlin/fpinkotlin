@@ -1,5 +1,7 @@
 package chapter9.exercises.ex9
 
+import utils.SOLUTION_HERE
+
 sealed class JSON
 
 object JNull : JSON()
@@ -44,6 +46,8 @@ abstract class ParsersDsl<PE> : Parsers<PE>() {
 }
 
 abstract class JSONParsers : ParsersDsl<ParseError>() {
-    val jsonParser: Parser<JSON> = TODO()
+    val jsonParser: Parser<JSON> =
+
+        SOLUTION_HERE()
 }
 //end::init[]

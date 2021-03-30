@@ -7,6 +7,7 @@ package chapter14.exercises.ex3
 
 //tag::init[]
 abstract class STMap<S, K, V> @PublishedApi internal constructor() {
-    //TODO: implement this
+
+    //SOLUTION_HERE()
 }
 //end::init[]

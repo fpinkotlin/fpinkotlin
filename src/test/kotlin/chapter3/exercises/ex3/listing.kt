@@ -5,9 +5,12 @@ import chapter3.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> drop(l: List<A>, n: Int): List<A> = TODO()
+fun <A> drop(l: List<A>, n: Int): List<A> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise3 : WordSpec({
@@ -23,9 +26,9 @@ class Exercise3 : WordSpec({
 
         """!throw an illegal state exception when dropped elements
             exceed capacity""" {
-                shouldThrow<IllegalStateException> {
-                    drop(List.of(1, 2, 3, 4, 5), 6)
-                }
+            shouldThrow<IllegalStateException> {
+                drop(List.of(1, 2, 3, 4, 5), 6)
             }
+        }
     }
 })

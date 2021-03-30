@@ -6,6 +6,7 @@ import chapter6.rng1
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * TODO: Re-enable tests by removing `!` prefix!
@@ -13,10 +14,12 @@ import io.kotlintest.specs.WordSpec
 class Exercise8 : WordSpec({
 
     //tag::init[]
-    fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> = TODO()
+    fun <A, B> flatMap(f: Rand<A>, g: (A) -> Rand<B>): Rand<B> =
+
+        SOLUTION_HERE()
     //end::init[]
 
-    fun nonNegativeIntLessThan(n: Int): Rand<Int> = TODO()
+    fun nonNegativeIntLessThan(n: Int): Rand<Int> = SOLUTION_HERE()
 
     "flatMap" should {
         "!pass along an RNG" {

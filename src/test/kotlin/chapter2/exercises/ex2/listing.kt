@@ -3,6 +3,7 @@ package chapter2.exercises.ex2
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import kotlinx.collections.immutable.persistentListOf
+import utils.SOLUTION_HERE
 
 // tag::init[]
 val <T> List<T>.tail: List<T>
@@ -11,7 +12,9 @@ val <T> List<T>.tail: List<T>
 val <T> List<T>.head: T
     get() = first()
 
-fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean = TODO()
+fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise2 : WordSpec({

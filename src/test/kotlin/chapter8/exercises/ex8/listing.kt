@@ -2,6 +2,7 @@ package chapter8.exercises.ex8
 
 import chapter8.RNG
 import chapter8.State
+import utils.SOLUTION_HERE
 
 data class Gen<A>(val sample: State<RNG, A>) {
     companion object {
@@ -10,7 +11,9 @@ data class Gen<A>(val sample: State<RNG, A>) {
         fun <A> weighted(
             pga: Pair<Gen<A>, Double>,
             pgb: Pair<Gen<A>, Double>
-        ): Gen<A> = TODO()
+        ): Gen<A> =
+
+            SOLUTION_HERE()
         //end::init[]
     }
 

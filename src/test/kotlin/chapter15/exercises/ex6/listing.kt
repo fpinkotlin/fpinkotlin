@@ -12,13 +12,18 @@ import chapter3.List
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
+
 fun <A, B, C> zip(
     p1: Process<A, B>,
     p2: Process<A, C>
-): Process<A, Pair<B, C>> = TODO()
+): Process<A, Pair<B, C>> =
+    SOLUTION_HERE()
 
 //tag::init[]
-fun mean(): Process<Double, Double> = TODO()
+fun mean(): Process<Double, Double> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise6 : WordSpec({

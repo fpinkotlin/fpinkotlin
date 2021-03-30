@@ -4,6 +4,7 @@ import arrow.Kind
 import chapter10.Cons
 import chapter10.List
 import chapter11.Functor
+import utils.SOLUTION_HERE
 
 interface Monad<F> : Functor<F> {
 
@@ -25,10 +26,14 @@ interface Monad<F> : Functor<F> {
         )
 
     //tag::init1[]
-    fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> = TODO()
+    fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> =
+
+        SOLUTION_HERE()
     //end::init1[]
 
     //tag::init2[]
-    fun <A> _replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> = TODO()
+    fun <A> _replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> =
+
+        SOLUTION_HERE()
     //end::init2[]
 }

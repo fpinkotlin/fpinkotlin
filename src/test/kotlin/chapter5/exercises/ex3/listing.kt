@@ -5,6 +5,7 @@ import chapter5.Stream
 import chapter5.solutions.sol1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * Re-enable the tests by removing the `!` prefix!
@@ -12,7 +13,9 @@ import io.kotlintest.specs.WordSpec
 class Exercise3 : WordSpec({
 
     //tag::init[]
-    fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> = TODO()
+    fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
+
+        SOLUTION_HERE()
     //end::init[]
 
     "Stream.takeWhile" should {

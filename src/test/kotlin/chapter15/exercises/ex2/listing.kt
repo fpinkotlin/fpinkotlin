@@ -12,9 +12,12 @@ import chapter3.List
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <I> count(): Process<I, Int> = TODO()
+fun <I> count(): Process<I, Int> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise2 : WordSpec({

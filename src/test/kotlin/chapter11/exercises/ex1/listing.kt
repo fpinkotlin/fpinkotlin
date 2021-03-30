@@ -6,18 +6,29 @@ import chapter10.ForList
 import chapter10.ForOption
 import chapter11.ForPar
 import chapter11.sec2.Monad
+import utils.SOLUTION_HERE
 
 //tag::init1[]
 object Monads {
 
-    val parMonad: Monad<ForPar> = TODO()
+    fun parMonad(): Monad<ForPar> =
 
-    val optionMonad: Monad<ForOption> = TODO()
+        SOLUTION_HERE()
 
-    val listMonad: Monad<ForList> = TODO()
+    fun optionMonad(): Monad<ForOption> =
 
-    val listKMonad: Monad<ForListK> = TODO()
+        SOLUTION_HERE()
 
-    val sequenceKMonad: Monad<ForSequenceK> = TODO()
+    fun listMonad(): Monad<ForList> =
+
+        SOLUTION_HERE()
+
+    fun listKMonad(): Monad<ForListK> =
+
+        SOLUTION_HERE()
+
+    fun sequenceKMonad(): Monad<ForSequenceK> =
+
+        SOLUTION_HERE()
 }
 //end::init1[]

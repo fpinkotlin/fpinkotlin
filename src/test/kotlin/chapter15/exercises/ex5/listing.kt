@@ -13,11 +13,14 @@ import chapter3.List
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
 infix fun <I, O, O2> Process<I, O>.pipe(
     g: Process<O, O2>
-): Process<I, O2> = TODO()
+): Process<I, O2> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise5 : WordSpec({

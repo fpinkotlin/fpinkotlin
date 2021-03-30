@@ -2,10 +2,13 @@ package chapter2.exercises.ex5
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 class Exercise5 : WordSpec({
     // tag::init[]
-    fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C = TODO()
+    fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C =
+
+        SOLUTION_HERE()
     // end::init[]
 
     /**

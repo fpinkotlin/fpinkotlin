@@ -4,9 +4,12 @@ import chapter10.Monoid
 import chapter10.stringMonoid
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init1[]
-fun <A, B> foldMap(la: List<A>, m: Monoid<B>, f: (A) -> B): B = TODO()
+fun <A, B> foldMap(la: List<A>, m: Monoid<B>, f: (A) -> B): B =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 class Exercise7 : WordSpec({

@@ -7,13 +7,17 @@ import chapter6.RNG
 import chapter6.rng1
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
+
 /**
  * TODO: Re-enable tests by removing `!` prefix!
  */
 class Exercise4 : WordSpec({
 
     //tag::init[]
-    fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> = TODO()
+    fun ints(count: Int, rng: RNG): Pair<List<Int>, RNG> =
+
+        SOLUTION_HERE()
     //end::init[]
 
     "ints" should {

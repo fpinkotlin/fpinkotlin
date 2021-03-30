@@ -4,6 +4,7 @@ import chapter6.RNG
 //import chapter6.solutions.sol1.nonNegativeInt
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * TODO: Re-enable tests by removing `!` prefix!
@@ -11,7 +12,9 @@ import io.kotlintest.specs.WordSpec
 class Exercise2 : WordSpec({
 
     //tag::init[]
-    fun double(rng: RNG): Pair<Double, RNG> = TODO()
+    fun double(rng: RNG): Pair<Double, RNG> =
+
+        SOLUTION_HERE()
     //end::init[]
 
     "double" should {

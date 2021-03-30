@@ -7,17 +7,22 @@ import io.kotlintest.TestCase
 import io.kotlintest.TestResult
 import io.kotlintest.specs.WordSpec
 import org.awaitility.Awaitility.await
+import utils.SOLUTION_HERE
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicReference
 
 //tag::init1[]
-fun <A> par(m: Monoid<A>): Monoid<Par<A>> = TODO()
+fun <A> par(m: Monoid<A>): Monoid<Par<A>> =
+
+    SOLUTION_HERE()
 
 fun <A, B> parFoldMap(
     la: List<A>,
     pm: Monoid<Par<B>>,
     f: (A) -> B
-): Par<B> = TODO()
+): Par<B> =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 class Exercise8 : WordSpec() {

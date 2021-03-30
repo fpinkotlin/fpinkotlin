@@ -11,6 +11,7 @@ import arrow.mtl.runS
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import kotlinx.collections.immutable.persistentListOf
+import utils.SOLUTION_HERE
 
 //tag::init1[]
 sealed class Input
@@ -33,7 +34,9 @@ class Exercise11 : WordSpec({
     //tag::init2[]
     fun simulateMachine(
         inputs: List<Input>
-    ): State<Machine, Tuple2<Int, Int>> = TODO()
+    ): State<Machine, Tuple2<Int, Int>> =
+
+        SOLUTION_HERE()
     //end::init2[]
 
     "simulateMachine" should {

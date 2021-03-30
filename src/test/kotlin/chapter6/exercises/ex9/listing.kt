@@ -7,11 +7,14 @@ import chapter6.rng1
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 class Exercise9 : WordSpec({
 
     //tag::init1[]
-    fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> = TODO()
+    fun <A, B> mapF(ra: Rand<A>, f: (A) -> B): Rand<B> =
+
+        SOLUTION_HERE()
     //end::init1[]
 
     "mapF" should {
@@ -30,7 +33,9 @@ class Exercise9 : WordSpec({
         ra: Rand<A>,
         rb: Rand<B>,
         f: (A, B) -> C
-    ): Rand<C> = TODO()
+    ): Rand<C> =
+
+        SOLUTION_HERE()
     //end::init2[]
 
     "map2F" should {

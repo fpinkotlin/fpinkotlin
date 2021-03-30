@@ -12,15 +12,24 @@ import chapter3.List
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <I> take(n: Int): Process<I, I> = TODO()
+fun <I> take(n: Int): Process<I, I> =
 
-fun <I> drop(n: Int): Process<I, I> = TODO()
+    SOLUTION_HERE()
 
-fun <I> takeWhile(p: (I) -> Boolean): Process<I, I> = TODO()
+fun <I> drop(n: Int): Process<I, I> =
 
-fun <I> dropWhile(p: (I) -> Boolean): Process<I, I> = TODO()
+    SOLUTION_HERE()
+
+fun <I> takeWhile(p: (I) -> Boolean): Process<I, I> =
+
+    SOLUTION_HERE()
+
+fun <I> dropWhile(p: (I) -> Boolean): Process<I, I> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise1 : WordSpec({

@@ -3,9 +3,12 @@ package chapter3.exercises.ex22
 import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> = TODO()
+fun <A> zipWith(xa: List<A>, xb: List<A>, f: (A, A) -> A): List<A> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise22 : WordSpec({

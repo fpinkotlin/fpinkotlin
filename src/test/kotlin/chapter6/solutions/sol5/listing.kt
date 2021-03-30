@@ -8,7 +8,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
 //tag::init[]
-val doubleR: Rand<Double> =
+fun doubleR(): Rand<Double> =
     map(::nonNegativeInt) { i ->
         i / (Int.MAX_VALUE.toDouble() + 1)
     }
@@ -30,7 +30,8 @@ class Solution5 : WordSpec({
                         Pair(Int.MAX_VALUE, unusedRng)
                 }
 
-                doubleR(rngMax) shouldBe Pair(
+            val doubleRand = doubleR()
+            doubleRand(rngMax) shouldBe Pair(
                     0.9999999995343387,
                     unusedRng
                 )
@@ -42,7 +43,8 @@ class Solution5 : WordSpec({
                     Pair(0, unusedRng)
             }
 
-            doubleR(rngMin) shouldBe Pair(0.0, unusedRng)
+            val doubleRand = doubleR()
+            doubleRand(rngMin) shouldBe Pair(0.0, unusedRng)
         }
     }
 })

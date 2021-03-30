@@ -2,6 +2,7 @@ package chapter12.exercises.ex7
 
 import arrow.Kind
 import chapter11.Monad
+import utils.SOLUTION_HERE
 
 interface Listing<F, A> : Monad<F> {
 
@@ -13,11 +14,11 @@ interface Listing<F, A> : Monad<F> {
     fun listing1() {
 
         map2(unit(Unit), fa) { _, a -> a }
-        TODO("prove me")
+        SOLUTION_HERE("prove me")
         fa == fa
 
         map2(fa, unit(Unit)) { a, _ -> a }
-        TODO("prove me")
+        SOLUTION_HERE("prove me")
         fa == fa
     }
 }

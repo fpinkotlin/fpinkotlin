@@ -2,6 +2,7 @@ package chapter12.exercises.ex3
 
 import arrow.Kind
 import chapter12.Functor
+import utils.SOLUTION_HERE
 
 interface Applicative<F> : Functor<F> {
 
@@ -18,7 +19,9 @@ interface Applicative<F> : Functor<F> {
         fb: Kind<F, B>,
         fc: Kind<F, C>,
         f: (A, B, C) -> D
-    ): Kind<F, D> = TODO()
+    ): Kind<F, D> =
+
+        SOLUTION_HERE()
 
     fun <A, B, C, D, E> map4(
         fa: Kind<F, A>,
@@ -26,6 +29,8 @@ interface Applicative<F> : Functor<F> {
         fc: Kind<F, C>,
         fd: Kind<F, D>,
         f: (A, B, C, D) -> E
-    ): Kind<F, E> = TODO()
+    ): Kind<F, E> =
+
+        SOLUTION_HERE()
     //end::init1[]
 }

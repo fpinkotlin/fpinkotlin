@@ -7,6 +7,7 @@ import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import utils.SOLUTION_HERE
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 import java.util.concurrent.LinkedBlockingQueue
@@ -24,20 +25,22 @@ data class TimedMap2Future<A, B, C>(
 
     override fun get(): C = TODO()
 
-    override fun get(to: Long, tu: TimeUnit): C = TODO()
+    override fun get(to: Long, tu: TimeUnit): C =
+        SOLUTION_HERE("will be used to get the future result")
 
     override fun cancel(b: Boolean): Boolean = TODO()
 
     override fun isCancelled(): Boolean = TODO()
 }
 
-class Exercise3 : WordSpec({
+fun <A, B, C> map2(
+    a: Par<A>,
+    b: Par<B>,
+    f: (A, B) -> C
+): Par<C> =
+    SOLUTION_HERE()
 
-    fun <A, B, C> map2(
-        a: Par<A>,
-        b: Par<B>,
-        f: (A, B) -> C
-    ): Par<C> = TODO()
+class Exercise3 : WordSpec({
 
     val es: ExecutorService =
         ThreadPoolExecutor(

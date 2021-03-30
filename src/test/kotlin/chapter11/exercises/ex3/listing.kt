@@ -3,6 +3,7 @@ package chapter11.exercises.ex3
 import arrow.Kind
 import chapter10.List
 import chapter11.Functor
+import utils.SOLUTION_HERE
 
 interface Monad<F> : Functor<F> {
 
@@ -19,10 +20,14 @@ interface Monad<F> : Functor<F> {
     fun <A, B> traverse(
         la: List<A>,
         f: (A) -> Kind<F, B>
-    ): Kind<F, List<B>> = TODO()
+    ): Kind<F, List<B>> =
+
+        SOLUTION_HERE()
     //end::traverse[]
 
     //tag::sequence[]
-    fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> = TODO()
+    fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> =
+
+        SOLUTION_HERE()
     //end::sequence[]
 }

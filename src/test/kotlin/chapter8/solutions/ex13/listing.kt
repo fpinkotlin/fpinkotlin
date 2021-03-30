@@ -16,12 +16,12 @@ fun main() {
     val smallInt = Gen.choose(-10, 10)
 
     //tag::init2[]
-    val maxProp =
+    fun maxProp() =
         Prop.forAll(nonEmptyListOf(smallInt)) { ns: List<Int> ->
             val mx = ns.max()
                 ?: throw IllegalStateException("max on empty list")
             !ns.exists { it > mx }
         }
     //end::init2[]
-    run(maxProp)
+    run(maxProp())
 }

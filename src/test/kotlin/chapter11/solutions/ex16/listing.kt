@@ -26,7 +26,7 @@ typealias IdOf<A> = Kind<ForId, A>
 
 fun <A> IdOf<A>.fix() = this as Id<A>
 
-val idMonad = object : Monad<ForId> {
+fun idMonad() = object : Monad<ForId> {
     override fun <A> unit(a: A): IdOf<A> =
         Id.unit(a)
 
@@ -40,8 +40,9 @@ val idMonad = object : Monad<ForId> {
 
 fun main() {
     //tag::init2[]
-    val id: Id<String> = idMonad.flatMap(Id("Hello, ")) { a: String ->
-        idMonad.flatMap(Id("monad!")) { b: String ->
+    val IDM: Monad<ForId> = idMonad()
+    val id: Id<String> = IDM.flatMap(Id("Hello, ")) { a: String ->
+        IDM.flatMap(Id("monad!")) { b: String ->
             Id(a + b)
         }
     }.fix()

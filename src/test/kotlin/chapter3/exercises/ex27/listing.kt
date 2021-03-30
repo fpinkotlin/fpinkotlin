@@ -5,9 +5,12 @@ import chapter3.Leaf
 import chapter3.Tree
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A, B> map(tree: Tree<A>, f: (A) -> B): Tree<B> = TODO()
+fun <A, B> map(tree: Tree<A>, f: (A) -> B): Tree<B> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise27 : WordSpec({

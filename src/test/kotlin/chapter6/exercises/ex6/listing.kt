@@ -6,6 +6,7 @@ import chapter6.rng1
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * TODO: Re-enable tests by removing `!` prefix!
@@ -17,7 +18,9 @@ class Exercise6 : WordSpec({
         ra: Rand<A>,
         rb: Rand<B>,
         f: (A, B) -> C
-    ): Rand<C> = TODO()
+    ): Rand<C> =
+
+        SOLUTION_HERE()
     //end::init[]
 
     "map2" should {

@@ -5,10 +5,12 @@ import chapter4.Option
 import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
 fun <A, B, C> map2(a: Option<A>, b: Option<B>, f: (A, B) -> C): Option<C> =
-    TODO()
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise3 : WordSpec({

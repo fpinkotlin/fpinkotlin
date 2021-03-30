@@ -4,9 +4,12 @@ import chapter3.List
 import chapter3.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> = TODO()
+fun <A> dropWhile(l: List<A>, f: (A) -> Boolean): List<A> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise4 : WordSpec({

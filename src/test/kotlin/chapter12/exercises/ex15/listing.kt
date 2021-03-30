@@ -20,6 +20,7 @@ import chapter12.sec7_2.stateMonad
 import chapter12.sec7_2.stateMonadApplicative
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 val idApplicative: Applicative<ForId> =
     object : Applicative<ForId> {
@@ -89,7 +90,9 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         }.second.reversed()
 
     //tag::init[]
-    fun <A> reverse(ta: Kind<F, A>): Kind<F, A> = TODO()
+    fun <A> reverse(ta: Kind<F, A>): Kind<F, A> =
+
+        SOLUTION_HERE()
     //end::init[]
 }
 

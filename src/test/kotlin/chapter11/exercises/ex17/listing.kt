@@ -1,12 +1,11 @@
 package chapter11.exercises.ex17
 
-import arrow.Kind
 import chapter10.List
 import chapter11.State
 import chapter11.StateMonad
 import chapter11.StateOf
-import chapter11.StatePartialOf
 import chapter11.fix
+import utils.SOLUTION_HERE
 
 val intMonad: StateMonad<Int> = object : StateMonad<Int> {
     override fun <A> unit(a: A): StateOf<Int, A> =
@@ -25,10 +24,16 @@ fun main() {
     val stateB: State<Int, Int> = State { b: Int -> Pair(b, 10 * b) }
 
     //tag::init[]
-    val replicateIntState: StateOf<Int, List<Int>> = TODO()
+    fun replicateIntState(): StateOf<Int, List<Int>> =
 
-    val map2IntState: StateOf<Int, Int> = TODO()
+        SOLUTION_HERE()
 
-    val sequenceIntState: StateOf<Int, List<Int>> = TODO()
+    fun map2IntState(): StateOf<Int, Int> =
+
+        SOLUTION_HERE()
+
+    fun sequenceIntState(): StateOf<Int, List<Int>> =
+
+        SOLUTION_HERE()
     //end::init[]
 }

@@ -3,11 +3,16 @@ package chapter3.exercises.ex14
 import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> concat(xxs: List<List<A>>): List<A> = TODO()
+fun <A> concat(lla: List<List<A>>): List<A> =
 
-fun <A> concat2(xxs: List<List<A>>): List<A> = TODO()
+    SOLUTION_HERE()
+
+fun <A> concat2(lla: List<List<A>>): List<A> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise14 : WordSpec({

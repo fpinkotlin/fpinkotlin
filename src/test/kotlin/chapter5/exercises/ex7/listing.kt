@@ -6,6 +6,7 @@ import chapter5.Stream.Companion.empty
 import chapter5.solutions.sol1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * Re-enable the tests by removing the `!` prefix!
@@ -13,19 +14,27 @@ import io.kotlintest.specs.WordSpec
 class Exercise7 : WordSpec({
 
     //tag::map[]
-    fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> = TODO()
+    fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> =
+
+        SOLUTION_HERE()
     //end::map[]
 
     //tag::filter[]
-    fun <A> Stream<A>.filter(f: (A) -> Boolean): Stream<A> = TODO()
+    fun <A> Stream<A>.filter(f: (A) -> Boolean): Stream<A> =
+
+        SOLUTION_HERE()
     //end::filter[]
 
     //tag::append[]
-    fun <A> Stream<A>.append(sa: () -> Stream<A>): Stream<A> = TODO()
+    fun <A> Stream<A>.append(sa: () -> Stream<A>): Stream<A> =
+
+        SOLUTION_HERE()
     //end::append[]
 
     //tag::flatmap[]
-    fun <A, B> Stream<A>.flatMap(f: (A) -> Stream<B>): Stream<B> = TODO()
+    fun <A, B> Stream<A>.flatMap(f: (A) -> Stream<B>): Stream<B> =
+
+        SOLUTION_HERE()
     //end::flatmap[]
 
     "Stream.map" should {

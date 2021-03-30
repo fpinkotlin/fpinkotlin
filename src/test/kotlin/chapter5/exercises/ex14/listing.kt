@@ -3,6 +3,7 @@ package chapter5.exercises.ex14
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * Re-enable the tests by removing the `!` prefix!
@@ -10,7 +11,9 @@ import io.kotlintest.specs.WordSpec
 class Exercise14 : WordSpec({
 
     //tag::startswith[]
-    fun <A> Stream<A>.startsWith(that: Stream<A>): Boolean = TODO()
+    fun <A> Stream<A>.startsWith(that: Stream<A>): Boolean =
+
+        SOLUTION_HERE()
     //end::startswith[]
 
     "Stream.startsWith" should {

@@ -10,22 +10,33 @@ import chapter5.Stream.Companion.empty
 import chapter5.solutions.sol1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> = TODO()
+fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> =
 
-fun <A> Stream<A>.take(n: Int): Stream<A> = TODO()
+    SOLUTION_HERE()
 
-fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> = TODO()
+fun <A> Stream<A>.take(n: Int): Stream<A> =
+
+    SOLUTION_HERE()
+
+fun <A> Stream<A>.takeWhile(p: (A) -> Boolean): Stream<A> =
+
+    SOLUTION_HERE()
 
 fun <A, B, C> Stream<A>.zipWith(
     that: Stream<B>,
     f: (A, B) -> C
-): Stream<C> = TODO()
+): Stream<C> =
+
+    SOLUTION_HERE()
 
 fun <A, B> Stream<A>.zipAll(
     that: Stream<B>
-): Stream<Pair<Option<A>, Option<B>>> = TODO()
+): Stream<Pair<Option<A>, Option<B>>> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 /**

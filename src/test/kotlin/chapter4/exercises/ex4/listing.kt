@@ -6,9 +6,12 @@ import chapter4.Option
 import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()
+fun <A> sequence(xs: List<Option<A>>): Option<List<A>> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise4 : WordSpec({

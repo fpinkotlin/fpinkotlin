@@ -1,6 +1,7 @@
 package chapter8.exercises.ex9
 
 import chapter8.RNG
+import utils.SOLUTION_HERE
 
 typealias TestCases = Int
 
@@ -24,8 +25,12 @@ data class Falsified(
 
 //tag::init[]
 data class Prop(val run: (TestCases, RNG) -> Result) {
-    fun and(p: Prop): Prop = TODO()
+    fun and(p: Prop): Prop =
 
-    fun or(p: Prop): Prop = TODO()
+        SOLUTION_HERE()
+
+    fun or(p: Prop): Prop =
+
+        SOLUTION_HERE()
 }
 //end::init[]

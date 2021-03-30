@@ -11,7 +11,7 @@ import chapter12.Applicative
 import chapter12.Functor
 
 //tag::init1[]
-val idApplicative: Applicative<ForId> =
+fun idApplicative(): Applicative<ForId> =
     object : Applicative<ForId> {
         override fun <A> unit(a: A): IdOf<A> = Id(a)
 
@@ -47,6 +47,6 @@ interface Traversable<F> : Functor<F> {
         traverse(fga, AG) { it }
 
     override fun <A, B> map(fa: Kind<F, A>, f: (A) -> B): Kind<F, B> =
-        traverse(fa, idApplicative) { Id(f(it)) }.fix().extract()
+        traverse(fa, idApplicative()) { Id(f(it)) }.fix().extract()
 }
 //end::init2[]

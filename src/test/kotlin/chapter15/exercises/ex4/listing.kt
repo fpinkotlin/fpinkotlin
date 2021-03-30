@@ -12,6 +12,7 @@ import chapter3.List
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 fun <S, I, O> loop(z: S, f: (I, S) -> Pair<O, S>): Process<I, O> =
     Await { i: Option<I> ->
@@ -25,9 +26,13 @@ fun <S, I, O> loop(z: S, f: (I, S) -> Pair<O, S>): Process<I, O> =
     }
 
 //tag::init[]
-fun sum(start: Double): Process<Double, Double> = TODO()
+fun sum(start: Double): Process<Double, Double> =
 
-fun <I> count(): Process<I, Int> = TODO()
+    SOLUTION_HERE()
+
+fun <I> count(): Process<I, Int> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise4 : WordSpec({

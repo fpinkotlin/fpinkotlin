@@ -7,26 +7,37 @@ import chapter6.RNG
 import chapter6.rng1
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
 data class State<S, out A>(val run: (S) -> Pair<A, S>) {
 
     companion object {
-        fun <S, A> unit(a: A): State<S, A> = TODO()
+        fun <S, A> unit(a: A): State<S, A> =
+
+            SOLUTION_HERE()
 
         fun <S, A, B, C> map2(
             ra: State<S, A>,
             rb: State<S, B>,
             f: (A, B) -> C
-        ): State<S, C> = TODO()
+        ): State<S, C> =
+
+            SOLUTION_HERE()
 
         fun <S, A> sequence(fs: List<State<S, A>>):
-            State<S, List<A>> = TODO()
+            State<S, List<A>> =
+
+            SOLUTION_HERE()
     }
 
-    fun <B> map(f: (A) -> B): State<S, B> = TODO()
+    fun <B> map(f: (A) -> B): State<S, B> =
 
-    fun <B> flatMap(f: (A) -> State<S, B>): State<S, B> = TODO()
+        SOLUTION_HERE()
+
+    fun <B> flatMap(f: (A) -> State<S, B>): State<S, B> =
+
+        SOLUTION_HERE()
 }
 //end::init[]
 

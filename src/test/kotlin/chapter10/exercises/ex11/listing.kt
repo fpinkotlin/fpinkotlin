@@ -4,9 +4,12 @@ import io.kotlintest.properties.Gen
 import io.kotlintest.properties.assertAll
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init1[]
-fun wordCount(s: String): Int = TODO()
+fun wordCount(s: String): Int =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 class Exercise11 : WordSpec({

@@ -9,9 +9,12 @@ import chapter3.List
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <I, O> Process<I, O>.zipWithIndex(): Process<I, Pair<Int, O>> = TODO()
+fun <I, O> Process<I, O>.zipWithIndex(): Process<I, Pair<Int, O>> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 class Exercise7 : WordSpec({

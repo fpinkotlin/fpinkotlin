@@ -5,6 +5,7 @@ import chapter5.Stream
 import chapter5.solutions.sol1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * Re-enable the tests by removing the `!` prefix!
@@ -13,7 +14,8 @@ class Exercise16 : WordSpec({
 
     //tag::scanright[]
     fun <A, B> Stream<A>.scanRight(z: B, f: (A, () -> B) -> B): Stream<B> =
-        TODO()
+
+        SOLUTION_HERE()
     //end::scanright[]
 
     "Stream.scanRight" should {

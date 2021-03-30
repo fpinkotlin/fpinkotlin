@@ -3,13 +3,20 @@ package chapter3.exercises.ex10
 import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun sumL(xs: List<Int>): Int = TODO()
+fun sumL(xs: List<Int>): Int =
 
-fun productL(xs: List<Double>): Double = TODO()
+    SOLUTION_HERE()
 
-fun <A> lengthL(xs: List<A>): Int = TODO()
+fun productL(xs: List<Double>): Double =
+
+    SOLUTION_HERE()
+
+fun <A> lengthL(xs: List<A>): Int =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise10 : WordSpec({

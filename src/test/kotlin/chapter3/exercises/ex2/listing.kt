@@ -5,9 +5,12 @@ import chapter3.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> setHead(xs: List<A>, x: A): List<A> = TODO()
+fun <A> setHead(xs: List<A>, x: A): List<A> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise2 : WordSpec({

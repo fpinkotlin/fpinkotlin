@@ -3,6 +3,8 @@ package chapter14.exercises.ex2
 import chapter14.sec2.ST
 import chapter14.sec2.STArray
 import chapter14.sec2.STRef
+import utils.SOLUTION_HERE
+
 //import chapter14.sec2.fx
 
 fun <S> partition1(
@@ -41,9 +43,13 @@ fun <S> partition(
     l: Int,
     r: Int,
     pivot: Int
-): ST<S, Int> = TODO()
+): ST<S, Int> =
 
-fun <S> qs(arr: STArray<S, Int>, l: Int, r: Int): ST<S, Unit> = TODO()
+    SOLUTION_HERE()
+
+fun <S> qs(arr: STArray<S, Int>, l: Int, r: Int): ST<S, Unit> =
+
+    SOLUTION_HERE()
 
 fun <S> noop() = ST<S, Unit> { Unit }
 //end::init[]

@@ -3,6 +3,7 @@ package chapter12.exercises.ex11
 import arrow.Kind
 import arrow.syntax.function.curried
 import chapter12.Functor
+import utils.SOLUTION_HERE
 
 interface Applicative<F> : Functor<F> {
 
@@ -29,6 +30,8 @@ interface Applicative<F> : Functor<F> {
     //tag::init1[]
     fun <K, V> sequence(
         mkv: Map<K, Kind<F, V>>
-    ): Kind<F, Map<K, V>> = TODO()
+    ): Kind<F, Map<K, V>> =
+
+        SOLUTION_HERE()
     //end::init1[]
 }

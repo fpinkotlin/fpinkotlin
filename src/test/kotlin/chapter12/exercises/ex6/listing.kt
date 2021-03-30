@@ -9,11 +9,14 @@ import chapter12.sec4.ValidationPartialOf
 import chapter12.sec4.fix
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 import java.time.Instant
 import java.util.Date
 
 //tag::init1[]
-fun <E> validation(): Applicative<ValidationPartialOf<E>> = TODO()
+fun <E> validation(): Applicative<ValidationPartialOf<E>> =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 class ValidationSpec : WordSpec({

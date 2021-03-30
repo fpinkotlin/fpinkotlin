@@ -3,13 +3,18 @@ package chapter3.exercises.ex23
 import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::startsWith[]
-tailrec fun <A> startsWith(l1: List<A>, l2: List<A>): Boolean = TODO()
+tailrec fun <A> startsWith(l1: List<A>, l2: List<A>): Boolean =
+
+    SOLUTION_HERE()
 // end::startsWith[]
 
 // tag::init[]
-tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean = TODO()
+tailrec fun <A> hasSubsequence(xs: List<A>, sub: List<A>): Boolean =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise23 : WordSpec({

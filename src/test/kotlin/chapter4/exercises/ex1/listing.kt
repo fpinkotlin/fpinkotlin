@@ -5,32 +5,48 @@ import chapter4.Option
 import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <A, B> Option<A>.map(f: (A) -> B): Option<B> = TODO() // <1>
+fun <A, B> Option<A>.map(f: (A) -> B): Option<B> =
 
-fun <A, B> Option<A>.flatMap(f: (A) -> Option<B>): Option<B> = TODO()// <2>
+    SOLUTION_HERE() // <1>
 
-fun <A> Option<A>.getOrElse(default: () -> A): A = TODO() // <3>
+fun <A, B> Option<A>.flatMap(f: (A) -> Option<B>): Option<B> =
 
-fun <A> Option<A>.orElse(ob: () -> Option<A>): Option<A> = TODO() // <4>
+    SOLUTION_HERE()// <2>
 
-fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> = TODO() // <5>
+fun <A> Option<A>.getOrElse(default: () -> A): A =
+
+    SOLUTION_HERE() // <3>
+
+fun <A> Option<A>.orElse(ob: () -> Option<A>): Option<A> =
+
+    SOLUTION_HERE() // <4>
+
+fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> =
+
+    SOLUTION_HERE() // <5>
 //end::init[]
 
 //tag::alternate[]
 fun <A, B> Option<A>.flatMap_2(
     f: (A) -> Option<B>
 ): Option<B> =
-    TODO()
+
+    SOLUTION_HERE()
 
 fun <A> Option<A>.orElse_2(
     ob: () -> Option<A>
-): Option<A> = TODO()
+): Option<A> =
+
+    SOLUTION_HERE()
 
 fun <A> Option<A>.filter_2(
     f: (A) -> Boolean
-): Option<A> = TODO()
+): Option<A> =
+
+    SOLUTION_HERE()
 //end::alternate[]
 
 class Exercise1 : WordSpec({
@@ -51,14 +67,14 @@ class Exercise1 : WordSpec({
     "option flatMap" should {
         """!apply a function yielding an option to an
             option of some value""" {
-                some.flatMap { a ->
-                    Some(a.toString())
-                } shouldBe Some("10")
+            some.flatMap { a ->
+                Some(a.toString())
+            } shouldBe Some("10")
 
-                some.flatMap_2 { a ->
-                    Some(a.toString())
-                } shouldBe Some("10")
-            }
+            some.flatMap_2 { a ->
+                Some(a.toString())
+            } shouldBe Some("10")
+        }
         "!pass over an option of none" {
             none.flatMap { a ->
                 Some(a.toString())

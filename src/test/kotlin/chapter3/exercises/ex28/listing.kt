@@ -5,17 +5,28 @@ import chapter3.Leaf
 import chapter3.Tree
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B = TODO()
+fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B =
 
-fun <A> sizeF(ta: Tree<A>): Int = TODO()
+    SOLUTION_HERE()
 
-fun maximumF(ta: Tree<Int>): Int = TODO()
+fun <A> sizeF(ta: Tree<A>): Int =
 
-fun <A> depthF(ta: Tree<A>): Int = TODO()
+    SOLUTION_HERE()
 
-fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> = TODO()
+fun maximumF(ta: Tree<Int>): Int =
+
+    SOLUTION_HERE()
+
+fun <A> depthF(ta: Tree<A>): Int =
+
+    SOLUTION_HERE()
+
+fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise28 : WordSpec({

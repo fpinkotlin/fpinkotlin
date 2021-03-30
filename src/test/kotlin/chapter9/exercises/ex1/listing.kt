@@ -3,6 +3,7 @@ package chapter9.exercises.ex1
 import chapter9.ParseError
 import chapter9.solutions.final.Parser
 import chapter9.solutions.final.ParserDsl
+import utils.SOLUTION_HERE
 
 abstract class Listing : ParserDsl<ParseError>() {
 
@@ -11,10 +12,14 @@ abstract class Listing : ParserDsl<ParseError>() {
         pa: Parser<A>,
         pb: () -> Parser<B>,
         f: (A, B) -> C
-    ): Parser<C> = TODO()
+    ): Parser<C> =
+
+        SOLUTION_HERE()
     //end::init1[]
 
     //tag::init2[]
-    override fun <A> many1(p: Parser<A>): Parser<List<A>> = TODO()
+    override fun <A> many1(p: Parser<A>): Parser<List<A>> =
+
+        SOLUTION_HERE()
     //end::init2[]
 }

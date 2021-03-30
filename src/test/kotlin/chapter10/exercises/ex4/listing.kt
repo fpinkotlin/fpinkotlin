@@ -9,9 +9,12 @@ import chapter8.Gen
 import chapter8.Prop
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init1[]
-fun <A> monoidLaws(m: Monoid<A>, gen: Gen<A>): Prop = TODO()
+fun <A> monoidLaws(m: Monoid<A>, gen: Gen<A>): Prop =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 //tag::init2[]
@@ -22,7 +25,7 @@ class Exercise4 : WordSpec({
     val intGen = Gen.choose(-10000, 10000)
 
     "law of associativity" should {
-        "be upheld using existing monoids" {
+        "!be upheld using existing monoids" {
             monoidLaws(intAdditionMonoid, intGen)
                 .check(max, count, rng) shouldBe Passed
 

@@ -5,6 +5,7 @@ import chapter10.List
 import chapter10.Monoid
 import chapter10.dual
 import chapter10.endoMonoid
+import utils.SOLUTION_HERE
 
 interface Foldable<F> {
 
@@ -18,6 +19,8 @@ interface Foldable<F> {
         foldRight(fa, m.nil, { a, b -> m.combine(f(a), b) })
 
     //tag::init1[]
-    fun <A> toList(fa: Kind<F, A>): List<A> = TODO()
+    fun <A> toList(fa: Kind<F, A>): List<A> =
+
+        SOLUTION_HERE()
     //end::init1[]
 }

@@ -2,9 +2,12 @@ package chapter10.exercises.ex3
 
 import arrow.core.compose
 import chapter10.Monoid
+import utils.SOLUTION_HERE
 
 //tag::init1[]
-fun <A> endoMonoid(): Monoid<(A) -> A> = TODO()
+fun <A> endoMonoid(): Monoid<(A) -> A> =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 //tag::init2[]

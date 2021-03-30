@@ -8,10 +8,13 @@ import io.kotlintest.properties.Gen
 import io.kotlintest.properties.assertAll
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 object ListFoldable : Foldable<ForList> {
     //tag::init1[]
-    fun <A> bag(la: List<A>): Map<A, Int> = TODO()
+    fun <A> bag(la: List<A>): Map<A, Int> =
+
+        SOLUTION_HERE()
     //end::init1[]
 }
 

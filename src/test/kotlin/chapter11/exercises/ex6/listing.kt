@@ -3,6 +3,7 @@ package chapter11.exercises.ex6
 import arrow.Kind
 import chapter10.List
 import chapter11.Functor
+import utils.SOLUTION_HERE
 
 interface Monad<F> : Functor<F> {
 
@@ -16,6 +17,8 @@ interface Monad<F> : Functor<F> {
     fun <A> filterM(
         ms: List<A>,
         f: (A) -> Kind<F, Boolean>
-    ): Kind<F, List<A>> = TODO()
+    ): Kind<F, List<A>> =
+
+        SOLUTION_HERE()
     //end::init[]
 }

@@ -23,7 +23,7 @@ import chapter11.sec2.Monad
 //tag::init1[]
 object Monads {
 
-    val parMonad = object : Monad<ForPar> {
+    fun parMonad() = object : Monad<ForPar> {
 
         override fun <A> unit(a: A): ParOf<A> = Par.unit(a)
 
@@ -34,7 +34,7 @@ object Monads {
             fa.fix().flatMap { f(it).fix() }
     }
 
-    val optionMonad = object : Monad<ForOption> {
+    fun optionMonad() = object : Monad<ForOption> {
 
         override fun <A> unit(a: A): OptionOf<A> = Some(a)
 
@@ -45,7 +45,7 @@ object Monads {
             fa.fix().flatMap { f(it).fix() }
     }
 
-    val listMonad = object : Monad<ForList> {
+    fun listMonad() = object : Monad<ForList> {
 
         override fun <A> unit(a: A): ListOf<A> = List.of(a)
 
@@ -56,7 +56,7 @@ object Monads {
             fa.fix().flatMap { f(it).fix() }
     }
 
-    val listKMonad = object : Monad<ForListK> {
+    fun listKMonad() = object : Monad<ForListK> {
 
         override fun <A> unit(a: A): ListKOf<A> = ListK.just(a)
 
@@ -67,7 +67,7 @@ object Monads {
             fa.fix().flatMap(f)
     }
 
-    val sequenceKMonad = object : Monad<ForSequenceK> {
+    fun sequenceKMonad() = object : Monad<ForSequenceK> {
 
         override fun <A> unit(a: A): Kind<ForSequenceK, A> =
             SequenceK.just(a)

@@ -6,6 +6,7 @@ import chapter5.solutions.sol1.toList
 import chapter5.solutions.sol13.take
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * Re-enable the tests by removing the `!` prefix!
@@ -13,7 +14,9 @@ import io.kotlintest.specs.WordSpec
 class Exercise10 : WordSpec({
 
     //tag::init[]
-    fun fibs(): Stream<Int> = TODO()
+    fun fibs(): Stream<Int> =
+
+        SOLUTION_HERE()
     //end::init[]
 
     "fibs" should {

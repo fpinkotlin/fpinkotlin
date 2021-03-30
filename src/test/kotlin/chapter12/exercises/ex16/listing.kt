@@ -8,6 +8,7 @@ import chapter12.Functor
 import chapter12.sec7_2.Applicative
 import chapter12.sec7_2.stateMonad
 import chapter12.sec7_2.stateMonadApplicative
+import utils.SOLUTION_HERE
 
 interface Traversable<F> : Functor<F>, Foldable<F> {
 
@@ -39,6 +40,8 @@ interface Traversable<F> : Functor<F>, Foldable<F> {
         }.run(s)
 
     //tag::init[]
-    fun <A, B> foldLeft(fa: Kind<F, A>, z: B, f: (B, A) -> B): B = TODO()
+    fun <A, B> foldLeft(fa: Kind<F, A>, z: B, f: (B, A) -> B): B =
+
+        SOLUTION_HERE()
     //end::init[]
 }

@@ -6,6 +6,7 @@ import chapter5.Stream
 import chapter5.solutions.sol1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * Re-enable the tests by removing the `!` prefix!
@@ -13,11 +14,15 @@ import io.kotlintest.specs.WordSpec
 class Exercise2 : WordSpec({
 
     //tag::take[]
-    fun <A> Stream<A>.take(n: Int): Stream<A> = TODO()
+    fun <A> Stream<A>.take(n: Int): Stream<A> =
+
+        SOLUTION_HERE()
     //end::take[]
 
     //tag::drop[]
-    fun <A> Stream<A>.drop(n: Int): Stream<A> = TODO()
+    fun <A> Stream<A>.drop(n: Int): Stream<A> =
+
+        SOLUTION_HERE()
     //end::drop[]
 
     "Stream.take(n)" should {

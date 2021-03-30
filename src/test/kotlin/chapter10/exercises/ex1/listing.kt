@@ -4,34 +4,43 @@ import chapter10.Monoid
 import io.kotlintest.properties.assertAll
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init1[]
-val intAddition: Monoid<Int> = TODO()
+fun intAddition(): Monoid<Int> =
 
-val intMultiplication: Monoid<Int> = TODO()
+    SOLUTION_HERE()
 
-val booleanOr: Monoid<Boolean> = TODO()
+fun intMultiplication(): Monoid<Int> =
 
-val booleanAnd: Monoid<Boolean> = TODO()
+    SOLUTION_HERE()
+
+fun booleanOr(): Monoid<Boolean> =
+
+    SOLUTION_HERE()
+
+fun booleanAnd(): Monoid<Boolean> =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 class Exercise1 : WordSpec({
     "int and boolean monoids" should {
         "!uphold the law of associativity" {
             assertAll<Int, Int> { a, b ->
-                assert(intAddition.combine(a, b) == (a + b))
-                assert(intMultiplication.combine(a, b) == (a * b))
+                assert(intAddition().combine(a, b) == (a + b))
+                assert(intMultiplication().combine(a, b) == (a * b))
             }
             assertAll<Boolean, Boolean> { a, b ->
-                assert(booleanAnd.combine(a, b) == (a && b))
-                assert(booleanOr.combine(a, b) == (a || b))
+                assert(booleanAnd().combine(a, b) == (a && b))
+                assert(booleanOr().combine(a, b) == (a || b))
             }
         }
         "!uphold the law of identity" {
-            intAddition.nil shouldBe 0
-            intMultiplication.nil shouldBe 1
-            booleanAnd.nil shouldBe true
-            booleanOr.nil shouldBe false
+            intAddition().nil shouldBe 0
+            intMultiplication().nil shouldBe 1
+            booleanAnd().nil shouldBe true
+            booleanOr().nil shouldBe false
         }
     }
 })

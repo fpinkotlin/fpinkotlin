@@ -6,12 +6,15 @@ import chapter10.stringMonoid
 import io.kotlintest.properties.assertAll
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 //tag::init1[]
 fun <A, B> productMonoid(
     ma: Monoid<A>,
     mb: Monoid<B>
-): Monoid<Pair<A, B>> = TODO()
+): Monoid<Pair<A, B>> =
+
+    SOLUTION_HERE()
 //end::init1[]
 
 class Exercise17 : WordSpec({

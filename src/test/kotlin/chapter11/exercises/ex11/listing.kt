@@ -2,6 +2,7 @@ package chapter11.exercises.ex11
 
 import arrow.Kind
 import chapter11.Functor
+import utils.SOLUTION_HERE
 
 interface Monad<F> : Functor<F> {
 
@@ -13,6 +14,8 @@ interface Monad<F> : Functor<F> {
         flatMap(fa) { a -> unit(f(a)) }
 
     //tag::init[]
-    fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> = TODO()
+    fun <A> join(mma: Kind<F, Kind<F, A>>): Kind<F, A> =
+
+        SOLUTION_HERE()
     //end::init[]
 }

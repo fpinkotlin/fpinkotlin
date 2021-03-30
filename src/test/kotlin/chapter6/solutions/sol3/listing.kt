@@ -22,9 +22,10 @@ class Solution3 : WordSpec({
     }
 
     fun double3(rng: RNG): Pair<Triple<Double, Double, Double>, RNG> {
-        val (d1, rng2) = doubleR(rng)
-        val (d2, rng3) = doubleR(rng2)
-        val (d3, rng4) = doubleR(rng3)
+        val doubleRand = doubleR()
+        val (d1, rng2) = doubleRand(rng)
+        val (d2, rng3) = doubleRand(rng2)
+        val (d3, rng4) = doubleRand(rng3)
         return Pair(Triple(d1, d2, d3), rng4)
     }
     //end::init[]

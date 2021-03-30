@@ -4,9 +4,12 @@ import chapter3.List
 import chapter3.Nil
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> length(xs: List<A>): Int = TODO()
+fun <A> length(xs: List<A>): Int =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise8 : WordSpec({

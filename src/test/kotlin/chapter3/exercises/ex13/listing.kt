@@ -3,12 +3,15 @@ package chapter3.exercises.ex13
 import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A> append(a1: List<A>, a2: List<A>): List<A> = TODO()
+fun <A> append(a1: List<A>, a2: List<A>): List<A> =
+
+    SOLUTION_HERE()
 // end::init[]
 
-fun <A> appendL(a1: List<A>, a2: List<A>): List<A> = TODO()
+fun <A> appendL(a1: List<A>, a2: List<A>): List<A> = SOLUTION_HERE()
 
 class Exercise13 : WordSpec({
     "!list append" should {

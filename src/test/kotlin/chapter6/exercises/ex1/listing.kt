@@ -3,6 +3,7 @@ package chapter6.exercises.ex1
 import chapter6.RNG
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 /**
  * TODO: Re-enable tests by removing `!` prefix!
@@ -10,7 +11,9 @@ import io.kotlintest.specs.WordSpec
 class Exercise1 : WordSpec({
 
     //tag::init[]
-    fun nonNegativeInt(rng: RNG): Pair<Int, RNG> = TODO()
+    fun nonNegativeInt(rng: RNG): Pair<Int, RNG> =
+
+        SOLUTION_HERE()
     //end::init[]
 
     "nonNegativeInt" should {

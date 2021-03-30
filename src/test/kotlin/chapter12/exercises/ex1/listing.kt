@@ -13,6 +13,7 @@ import chapter12.ListOf
 import chapter12.fix
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 interface Applicative<F> : Functor<F> {
 
@@ -42,14 +43,20 @@ interface Applicative<F> : Functor<F> {
         )
 
     //tag::init1[]
-    fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> = TODO()
+    fun <A> sequence(lfa: List<Kind<F, A>>): Kind<F, List<A>> =
 
-    fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> = TODO()
+        SOLUTION_HERE()
+
+    fun <A> replicateM(n: Int, ma: Kind<F, A>): Kind<F, List<A>> =
+
+        SOLUTION_HERE()
 
     fun <A, B> product(
         ma: Kind<F, A>,
         mb: Kind<F, B>
-    ): Kind<F, Pair<A, B>> = TODO()
+    ): Kind<F, Pair<A, B>> =
+
+        SOLUTION_HERE()
     //end::init1[]
 }
 

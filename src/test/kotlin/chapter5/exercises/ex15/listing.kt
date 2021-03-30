@@ -5,6 +5,7 @@ import chapter5.Stream
 import chapter5.solutions.sol1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 import chapter3.Cons as ConsL
 import chapter3.Nil as NilL
 
@@ -14,10 +15,14 @@ import chapter3.Nil as NilL
 class Exercise15 : WordSpec({
 
     //tag::tails[]
-    fun <A> Stream<A>.tails(): Stream<Stream<A>> = TODO()
+    fun <A> Stream<A>.tails(): Stream<Stream<A>> =
+
+        SOLUTION_HERE()
     //end::tails[]
 
-    fun <A, B> List<A>.map(f: (A) -> B): List<B> = TODO()
+    fun <A, B> List<A>.map(f: (A) -> B): List<B> =
+
+        SOLUTION_HERE()
 
     "Stream.tails" should {
         "!return the stream of suffixes of the input sequence" {

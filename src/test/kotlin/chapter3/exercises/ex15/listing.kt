@@ -3,9 +3,12 @@ package chapter3.exercises.ex15
 import chapter3.List
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 // tag::init[]
-fun increment(xs: List<Int>): List<Int> = TODO()
+fun increment(xs: List<Int>): List<Int> =
+
+    SOLUTION_HERE()
 // end::init[]
 
 class Exercise15 : WordSpec({

@@ -4,8 +4,9 @@ import arrow.Kind
 import arrow.core.ForId
 import chapter12.Applicative
 import chapter12.Functor
+import utils.SOLUTION_HERE
 
-val idApplicative: Applicative<ForId> = TODO()
+fun idApplicative(): Applicative<ForId> = SOLUTION_HERE()
 
 //tag::init1[]
 interface Traversable<F> : Functor<F> {
@@ -27,6 +28,8 @@ interface Traversable<F> : Functor<F> {
     override fun <A, B> map(
         fa: Kind<F, A>,
         f: (A) -> B
-    ): Kind<F, B> = TODO()
+    ): Kind<F, B> =
+
+        SOLUTION_HERE()
 }
 //end::init1[]

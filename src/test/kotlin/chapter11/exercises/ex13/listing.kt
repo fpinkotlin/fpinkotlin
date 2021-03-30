@@ -2,6 +2,7 @@ package chapter11.exercises.ex13
 
 import arrow.Kind
 import chapter11.Monad
+import utils.SOLUTION_HERE
 
 interface Listing<F, A> : Monad<F> {
 
@@ -19,7 +20,9 @@ interface Listing<F, A> : Monad<F> {
             flatMap(x) { a -> flatMap(f(a), g) }
         //end::init1[]
 
-        TODO("Express in terms of join, map and unit using substitution")
+        SOLUTION_HERE(
+            "Express in terms of join, map and unit using substitution"
+        )
 
         //tag::init5[]
         join(unit(x)) ==

@@ -7,7 +7,7 @@ data class Stub(val chars: String) : WC()
 data class Part(val ls: String, val words: Int, val rs: String) : WC()
 
 //tag::init1[]
-val wcMonoid: Monoid<WC> = object : Monoid<WC> {
+fun wcMonoid(): Monoid<WC> = object : Monoid<WC> {
     override fun combine(a1: WC, a2: WC): WC =
         when (a1) {
             is Stub -> when (a2) {

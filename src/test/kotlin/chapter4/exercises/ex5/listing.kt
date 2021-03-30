@@ -6,6 +6,7 @@ import chapter4.Option
 import chapter4.Some
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 class Exercise5 : WordSpec({
 
@@ -13,10 +14,14 @@ class Exercise5 : WordSpec({
     fun <A, B> traverse(
         xa: List<A>,
         f: (A) -> Option<B>
-    ): Option<List<B>> = TODO()
+    ): Option<List<B>> =
+
+        SOLUTION_HERE()
     //end::traverse[]
 
-    fun <A> sequence(xs: List<Option<A>>): Option<List<A>> = TODO()
+    fun <A> sequence(xs: List<Option<A>>): Option<List<A>> =
+
+        SOLUTION_HERE()
 
     fun <A> catches(a: () -> A): Option<A> =
         try {
@@ -28,13 +33,13 @@ class Exercise5 : WordSpec({
     "traverse" should {
         """!return some option of a transformed list if all
             transformations succeed""" {
-                val xa = List.of(1, 2, 3, 4, 5)
-                traverse(xa) { a: Int ->
-                    catches { a.toString() }
-                } shouldBe Some(
-                    List.of("1", "2", "3", "4", "5")
-                )
-            }
+            val xa = List.of(1, 2, 3, 4, 5)
+            traverse(xa) { a: Int ->
+                catches { a.toString() }
+            } shouldBe Some(
+                List.of("1", "2", "3", "4", "5")
+            )
+        }
 
         "!return a none option if any transformations fail" {
             val xa = List.of("1", "2", "x", "4")

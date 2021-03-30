@@ -6,6 +6,7 @@ import chapter4.Left
 import chapter4.Right
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
+import utils.SOLUTION_HERE
 
 class Exercise7 : WordSpec({
 
@@ -13,23 +14,28 @@ class Exercise7 : WordSpec({
     fun <E, A, B> traverse(
         xs: List<A>,
         f: (A) -> Either<E, B>
-    ): Either<E, List<B>> = TODO()
+    ): Either<E, List<B>> =
+
+        SOLUTION_HERE()
 
     fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> =
-        TODO()
+
+        SOLUTION_HERE()
     //end::init[]
 
-    fun <A> catches(a: () -> A): Either<String, A> = TODO()
+    fun <A> catches(a: () -> A): Either<String, A> =
+
+        SOLUTION_HERE()
 
     "traverse" should {
         """!return a right either of a transformed list if all
             transformations succeed""" {
-                val xa = List.of("1", "2", "3", "4", "5")
+            val xa = List.of("1", "2", "3", "4", "5")
 
-                traverse(xa) { a ->
-                    catches { Integer.parseInt(a) }
-                } shouldBe Right(List.of(1, 2, 3, 4, 5))
-            }
+            traverse(xa) { a ->
+                catches { Integer.parseInt(a) }
+            } shouldBe Right(List.of(1, 2, 3, 4, 5))
+        }
 
         "!return a left either if any transformations fail" {
             val xa = List.of("1", "2", "x", "4", "5")
@@ -51,10 +57,10 @@ class Exercise7 : WordSpec({
 
         """!convert a list containing any left eithers into a
             left either""" {
-                val xe: List<Either<String, Int>> =
-                    List.of(Right(1), Left("boom"), Right(3))
+            val xe: List<Either<String, Int>> =
+                List.of(Right(1), Left("boom"), Right(3))
 
-                sequence(xe) shouldBe Left("boom")
-            }
+            sequence(xe) shouldBe Left("boom")
+        }
     }
 })

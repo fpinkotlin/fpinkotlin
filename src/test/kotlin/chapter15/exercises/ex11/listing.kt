@@ -11,11 +11,16 @@ import chapter15.sec3.Process.Companion.Emit
 import chapter15.sec3.Process.Companion.Halt
 // import chapter15.sec3.await
 import chapter15.sec3.awaitAndThen
+import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <F, A> eval(fa: Kind<F, A>): Process<F, A> = TODO()
+fun <F, A> eval(fa: Kind<F, A>): Process<F, A> =
 
-fun <F, A, B> evalDrain(fa: Kind<F, A>): Process<F, B> = TODO()
+    SOLUTION_HERE()
+
+fun <F, A, B> evalDrain(fa: Kind<F, A>): Process<F, B> =
+
+    SOLUTION_HERE()
 //end::init[]
 
 fun <F, A, B> Process<F, A>.drain(): Process<F, B> =
