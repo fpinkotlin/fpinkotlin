@@ -72,12 +72,13 @@ object JSONParser : ParserDsl<ParseError>() {
 
     fun <A> root(p: Parser<A>): Parser<A> = p skipR eof()
 
-    val jsonParser: Parser<JSON> =
+    val jsonParser: Parser<JSON> by lazy {
         root(whitespace() skipL (obj() or array()))
+    }
 }
 
 object Example : ParserDsl<ParseError>() {
-    val parser = char('a') product char('b').defer()
+    val parser by lazy { char('a') product char('b').defer() }
 }
 
 fun main() {
