@@ -15,7 +15,7 @@ infix fun <A> Parser<out A>.or(p: Parser<out A>): Parser<A> = TODO()
 fun <A> succeed(a: A): Parser<A> = TODO()
 
 //tag::init1[]
-fun <A> defer(pa: () -> Parser<A>): Parser<A> = TODO()
+fun <A> defer(pa: () -> Parser<A>): Parser<A> = pa()
 //end::init1[]
 
 //tag::init2[]
