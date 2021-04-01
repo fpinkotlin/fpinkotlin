@@ -1,8 +1,8 @@
 package chapter6.exercises.ex3
 
 import chapter6.RNG
-// import chapter6.solutions.sol2.double
-// import chapter6.solutions.sol5.doubleR
+// import chapter6.solutions.ex2.double
+// import chapter6.solutions.ex5.doubleR
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE

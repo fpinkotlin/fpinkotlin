@@ -3,7 +3,7 @@ package chapter6.exercises.ex9
 import chapter6.Rand
 // import chapter6.map
 import chapter6.rng1
-// import chapter6.solutions.sol8.flatMap
+// import chapter6.solutions.ex8.flatMap
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec

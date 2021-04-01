@@ -4,8 +4,8 @@ import chapter3.List
 import chapter4.Option
 import chapter4.Some
 import chapter5.Stream
-import chapter5.solutions.sol1.toList
-import chapter5.solutions.sol13.take
+import chapter5.solutions.ex1.toList
+import chapter5.solutions.ex13.take
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE

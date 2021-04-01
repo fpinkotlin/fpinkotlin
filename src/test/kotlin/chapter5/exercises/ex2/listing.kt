@@ -3,7 +3,7 @@ package chapter5.exercises.ex2
 import chapter3.List
 import chapter3.Nil
 import chapter5.Stream
-import chapter5.solutions.sol1.toList
+import chapter5.solutions.ex1.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE

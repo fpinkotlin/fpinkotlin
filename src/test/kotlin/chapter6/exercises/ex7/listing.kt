@@ -7,7 +7,7 @@ import chapter3.List
 import chapter6.RNG
 import chapter6.Rand
 import chapter6.rng1
-// import chapter6.solutions.sol6.map2
+// import chapter6.solutions.ex6.map2
 import chapter6.unit
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec

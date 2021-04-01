@@ -1,7 +1,7 @@
 package chapter6.exercises.ex2
 
 import chapter6.RNG
-//import chapter6.solutions.sol1.nonNegativeInt
+//import chapter6.solutions.ex1.nonNegativeInt
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE

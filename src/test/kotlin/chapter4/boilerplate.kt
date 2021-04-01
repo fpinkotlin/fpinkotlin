@@ -3,8 +3,8 @@ package chapter4
 import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
-import chapter4.solutions.sol6.flatMap
-import chapter4.solutions.sol6.map
+import chapter4.solutions.ex6.flatMap
+import chapter4.solutions.ex6.map
 
 fun <A, B> List<A>.map(f: (A) -> B): List<B> =
     this.foldRight(
