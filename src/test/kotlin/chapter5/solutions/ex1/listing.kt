@@ -17,7 +17,6 @@ fun <A> Stream<A>.toListUnsafe(): List<A> = when (this) {
     is Cons -> ConsL(this.head(), this.tail().toListUnsafe())
 }
 
-//TODO: copy to boilerplate and depend on it
 //Use tailrec in combination with reverse for a safer implementation
 fun <A> Stream<A>.toList(): List<A> {
     tailrec fun go(xs: Stream<A>, acc: List<A>): List<A> = when (xs) {
