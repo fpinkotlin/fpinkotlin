@@ -3,8 +3,6 @@ package chapter4
 import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
-import chapter4.solutions.ex6.flatMap
-import chapter4.solutions.ex6.map
 
 fun <A, B> List<A>.map(f: (A) -> B): List<B> =
     this.foldRight(
@@ -37,6 +35,24 @@ fun <A, B, C> map2(
         ob.map { b ->
             f(a, b)
         }
+    }
+
+fun <E, A, B> Either<E, A>.map(f: (A) -> B): Either<E, B> =
+    when (this) {
+        is Left -> this
+        is Right -> Right(f(this.value))
+    }
+
+fun <E, A> Either<E, A>.orElse(f: () -> Either<E, A>): Either<E, A> =
+    when (this) {
+        is Left -> f()
+        is Right -> this
+    }
+
+fun <E, A, B> Either<E, A>.flatMap(f: (A) -> Either<E, B>): Either<E, B> =
+    when (this) {
+        is Left -> this
+        is Right -> f(this.value)
     }
 
 fun <E, A, B, C> map2(

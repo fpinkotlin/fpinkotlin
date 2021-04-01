@@ -3,6 +3,7 @@ package chapter4.solutions.ex6
 import chapter4.Either
 import chapter4.Left
 import chapter4.Right
+import chapter4.flatMap
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 
@@ -17,13 +18,6 @@ fun <E, A> Either<E, A>.orElse(f: () -> Either<E, A>): Either<E, A> =
     when (this) {
         is Left -> f()
         is Right -> this
-    }
-
-//TODO: move to boilerplate
-fun <E, A, B> Either<E, A>.flatMap(f: (A) -> Either<E, B>): Either<E, B> =
-    when (this) {
-        is Left -> this
-        is Right -> f(this.value)
     }
 
 fun <E, A, B, C> map2(
