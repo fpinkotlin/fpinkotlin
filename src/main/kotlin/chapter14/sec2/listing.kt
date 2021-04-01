@@ -10,7 +10,9 @@ class ForST private constructor() {
     companion object
 }
 
+//tag::typealias[]
 typealias STOf<S, A> = arrow.Kind2<ForST, S, A>
+//end::typealias[]
 
 typealias STPartialOf<S> = arrow.Kind<ForST, S>
 
