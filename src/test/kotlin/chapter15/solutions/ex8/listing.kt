@@ -28,18 +28,12 @@ fun <I> exists(f: (I) -> Boolean): Process<I, Boolean> =
 //end::init1[]
 
 //tag::init2[]
-fun <I> existsAndHalts(f: (I) -> Boolean): Process<I, Boolean> =
+fun <I> existsAndHalt(f: (I) -> Boolean): Process<I, Boolean> =
     Await { i: Option<I> ->
         when (i) {
             is Some ->
-                if (f(i.get)) {
-                    Emit<I, Boolean>(true)
-                } else {
-                    Emit<I, Boolean>(
-                        false,
-                        existsAndHalts { f(it) }
-                    )
-                }
+                if (f(i.get)) Emit(true)
+                else Emit<I, Boolean>(false, existsAndHalt { f(it) })
             is None -> Halt<I, Boolean>()
         }
     }
@@ -47,17 +41,16 @@ fun <I> existsAndHalts(f: (I) -> Boolean): Process<I, Boolean> =
 
 class Exercise8 : WordSpec({
     "exists" should {
+        val stream = Stream.of(1, 3, 5, 6, 7)
         "not halt and yield all intermediate results" {
-            val stream = Stream.of(1, 3, 5, 6, 7)
             val p = exists<Int> { i -> i % 2 == 0 }
             p(stream).toList() shouldBe
                 List.of(false, false, false, true, true)
         }
         "halt and yield all intermediate results" {
-            val stream = Stream.of(1, 3, 5, 6, 7)
-            val p = existsAndHalts<Int> { i -> i % 2 == 0 }
+            val p = existsAndHalt<Int> { i -> i % 2 == 0 }
             p(stream).toList() shouldBe
-                    List.of(false, false, false, true)
+                List.of(false, false, false, true)
         }
     }
 })

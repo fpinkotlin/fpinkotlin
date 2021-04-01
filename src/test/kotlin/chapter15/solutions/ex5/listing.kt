@@ -1,15 +1,15 @@
 package chapter15.solutions.ex5
 
 import chapter10.None
-import chapter10.Option
 import chapter10.Some
+import chapter15.product
 import chapter15.sec2.Await
 import chapter15.sec2.Emit
 import chapter15.sec2.Halt
 import chapter15.sec2.Process
+import chapter15.sec2.lift
 import chapter15.sec2.sum
 import chapter15.sec2.toList
-import chapter15.sec2.lift
 import chapter15.solutions.ex1.take
 import chapter3.List
 import chapter5.Stream
@@ -31,18 +31,6 @@ infix fun <I, O, O2> Process<I, O>.pipe(
     }
 //end::init[]
 
-fun product(): Process<Double, Double> {
-    fun go(acc: Double): Process<Double, Double> =
-        Await { i: Option<Double> ->
-            when (i) {
-                is Some -> if (i.get == 0.0) Emit(0.0)
-                    else Emit(i.get * acc, go(i.get * acc))
-                is None -> Halt<Double, Double>()
-            }
-        }
-    return go(1.0)
-}
-
 class Exercise5 : WordSpec({
     "pipe" should {
         "fuse together two processes" {
@@ -60,7 +48,7 @@ class Exercise5 : WordSpec({
             // incP: (2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0)
             // productP: (2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0)
             fused(stream).toList() shouldBe
-                    List.of(2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0)
+                List.of(2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0)
         }
         "fuse together two processes (test 2 inversus)" {
             val stream = Stream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0)
@@ -70,7 +58,7 @@ class Exercise5 : WordSpec({
             // productP: (1.0, 2.0, 3.0, 24.0, 120.0, 720.0, 5040.0)
             // incP: (2.0, 3.0, 7.0, 25.0, 121.0, 721.0, 5041.0)
             fused(stream).toList() shouldBe
-                    List.of(2.0, 3.0, 7.0, 25.0, 121.0, 721.0, 5041.0)
+                List.of(2.0, 3.0, 7.0, 25.0, 121.0, 721.0, 5041.0)
         }
     }
 })
