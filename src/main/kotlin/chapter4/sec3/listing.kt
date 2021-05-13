@@ -93,7 +93,7 @@ private fun <A, B, C> map2(
 ): Option<C> = TODO()
 
 //tag::init10[]
-fun parseInsuranceQuote(
+fun parseInsuranceRateQuote(
     age: String,
     speedingTickets: String
 ): Option<Double> {
