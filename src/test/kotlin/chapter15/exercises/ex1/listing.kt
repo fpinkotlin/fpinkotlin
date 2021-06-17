@@ -34,7 +34,7 @@ fun <I> dropWhile(p: (I) -> Boolean): Process<I, I> =
 
 //TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
-    val stream = Stream.of(1, 2, 3, 4, 5, 6, 7, 1)
+    val stream = Stream.of(1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1)
     "take" should {
         "!consume the given number of elements from a stream" {
             take<Int>(5)(stream).toList() shouldBe List.of(1, 2, 3, 4, 5)
@@ -42,7 +42,7 @@ class Exercise1 : WordSpec({
     }
     "drop" should {
         "!drop the given number of elements from a stream" {
-            drop<Int>(5)(stream).toList() shouldBe List.of(6, 7, 1)
+            drop<Int>(5)(stream).toList() shouldBe List.of(6, 7, 6, 5, 4, 3, 2, 1)
         }
     }
     "takeWhile" should {
@@ -54,7 +54,7 @@ class Exercise1 : WordSpec({
     "dropWhile" should {
         "!drop elements from a stream while a predicate is true" {
             dropWhile<Int> { 5 > it }(stream).toList() shouldBe
-                List.of(5, 6, 7, 1)
+                List.of(5, 6, 7, 6, 5, 4, 3, 2, 1)
         }
     }
 })
