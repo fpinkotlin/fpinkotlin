@@ -10,8 +10,9 @@ import utils.SOLUTION_HERE
 
 typealias State = Location
 
-abstract class MyParser : ParserDsl<ParseError>() {
-    //tag::init1[]
+//tag::init1[]
+abstract class Parser : ParserDsl<ParseError>() {
+
     override fun string(s: String): Parser<String> =
 
         SOLUTION_HERE()
@@ -47,5 +48,5 @@ abstract class MyParser : ParserDsl<ParseError>() {
     private fun State.slice(n: Int): String =
 
         SOLUTION_HERE()
-    //end::init1[]
 }
+//end::init1[]

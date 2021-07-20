@@ -13,8 +13,8 @@ import chapter9.solutions.final.Success
 
 typealias State = Location
 
-abstract class MyParser : ParserDsl<ParseError>() {
-    //tag::init1[]
+//tag::init1[]
+abstract class Parser : ParserDsl<ParseError>() {
     override fun string(s: String): Parser<String> =
         { state: State ->
             when (val idx =
@@ -73,5 +73,5 @@ abstract class MyParser : ParserDsl<ParseError>() {
 
     private fun State.slice(n: Int) =
         this.input.substring(this.offset..this.offset + n)
-    //end::init1[]
 }
+//end::init1[]
