@@ -16,10 +16,10 @@ val maxProp = forAll(SGen.listOf(smallInt)) { ns ->
     nss.isEmpty() or // <1>
             (nss.size == 1) or // <2>
             nss.zip(nss.prepend(Int.MIN_VALUE))
-                .foldRight(true, { p, b ->
+                .foldRight(true) { p, b ->
                     val (pa, pb) = p
                     b && (pa >= pb)
-                }) and // <3>
+                } and // <3>
             nss.containsAll(ns) and // <4>
             !nss.exists { !ns.contains(it) } // <5>
 }

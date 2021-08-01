@@ -75,9 +75,8 @@ object Monads {
         override fun <A, B> flatMap(
             fa: Kind<ForSequenceK, A>,
             f: (A) -> Kind<ForSequenceK, B>
-        ): Kind<ForSequenceK, B> {
-            return fa.fix().flatMap(f)
-        }
+        ): Kind<ForSequenceK, B> =
+            fa.fix().flatMap(f)
     }
 }
 //end::init1[]
