@@ -64,7 +64,8 @@ class Exercise1 : WordSpec({
     }
     "drop" should {
         "drop the given number of elements from a stream" {
-            drop<Int>(5)(stream).toList() shouldBe List.of(6, 7, 6, 5, 4, 3, 2, 1)
+            drop<Int>(5)(stream).toList() shouldBe
+                List.of(6, 7, 6, 5, 4, 3, 2, 1)
         }
     }
     "takeWhile" should {
