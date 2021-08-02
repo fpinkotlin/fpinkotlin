@@ -1,0 +1,8 @@
+---
+addReviewers: true
+addAssignees: author
+
+reviewers:
+  - marc0der
+
+numberOfReviewers: 0
