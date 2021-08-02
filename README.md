@@ -41,9 +41,9 @@ within the IDE.
 
 ### Continuous Integration
 
-The project builds on [Travis CI](https://travis-ci.org/fpinkotlin/fpinkotlin),
-ensuring that the code always compiles and all tests pass, thus validating all
-the code in the book.
+The project builds with GitHub actions, ensuring that the code always compiles,
+is correctly formatted and all tests pass, thus validating all the code in the
+book.
 
 ### Contributions
 
