@@ -1,5 +1,7 @@
 # Function Programming in Kotlin
 
+![example workflow](https://github.com/fpinkotlin/fpinkotlin/actions/workflows/master/badge.svg)
+
 This is the official source code repository for Manning's [Functional
 Programming in
 Kotlin](https://www.manning.com/books/functional-programming-in-kotlin) book. It
