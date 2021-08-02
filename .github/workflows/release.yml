@@ -1,0 +1,16 @@
+name: master
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: "master"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Run checks
+      run: ./gradlew clean check
