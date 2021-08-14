@@ -64,7 +64,7 @@ fun nonNegativeLessThan(n: Int): Rand<Int> =
         map(::nonNegativeInt) { i ->
             val mod = i % n
             if (i + (n - 1) - mod >= 0) mod
-            else nonNegativeLessThan_B(n)(???) <1> <2>
+            else nonNegativeLessThan(n)(???) <1> <2>
         }
 //end::init9[]
  */
