@@ -64,12 +64,32 @@ class Solution12 : WordSpec({
         }
     }
 
+    "list strings foldLeftR" should {
+        "implement foldLeft functionality using foldRight" {
+            foldLeftR(
+                List.of("AAA", "BBB", "CCC", "DDD"),
+                "XYZ",
+                { x: String, y: String -> "$x:$y" }) shouldBe
+                "XYZ:AAA:BBB:CCC:DDD"
+        }
+    }
+
     "list foldRightL" should {
         "implement foldRight functionality using foldLeft" {
             foldRightL(
                 List.of(1, 2, 3, 4, 5),
                 0,
                 { x, y -> x + y }) shouldBe 15
+        }
+    }
+
+    "list strings foldRightL" should {
+        "implement foldLeft functionality using foldRight" {
+            foldRightL(
+                List.of("AAA", "BBB", "CCC", "DDD"),
+                "XYZ",
+                { x: String, y: String -> "$x:$y" }) shouldBe
+                "AAA:BBB:CCC:DDD:XYZ"
         }
     }
 })

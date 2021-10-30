@@ -22,4 +22,15 @@ class Exercise9 : WordSpec({
                 { x, y -> x + y }) shouldBe 15
         }
     }
+
+    "list strings foldLeft" should {
+        """!apply a function f builds the correct concatenated string
+            from the list""" {
+            foldLeft(
+                List.of("AAA", "BBB", "CCC", "DDD"),
+                "XYZ",
+                { x: String, y: String -> "$x:$y" }) shouldBe
+                "XYZ:AAA:BBB:CCC:DDD"
+        }
+    }
 })
