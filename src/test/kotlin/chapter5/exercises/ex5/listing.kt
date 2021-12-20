@@ -22,6 +22,11 @@ class Exercise5 : WordSpec({
             s.takeWhile { it < 4 }.toList() shouldBe
                 List.of(1, 2, 3)
         }
+        "!stop returning once predicate evaluates false" {
+            val s = Stream.of(1, 2, 3, 4, 5, 4, 3, 2, 1)
+            s.takeWhile { it < 4 }.toList() shouldBe
+                List.of(1, 2, 3)
+        }
         "!return all elements if predicate always evaluates true" {
             val s = Stream.of(1, 2, 3, 4, 5)
             s.takeWhile { true }.toList() shouldBe
