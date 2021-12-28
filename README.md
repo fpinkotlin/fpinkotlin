@@ -32,7 +32,12 @@ works through _all_ exercises in the book to gain the required proficiency.
 
 ### Building the project
 
-The project is built using Gradle with the Kotlin DSL. To run the build locally, simply execute the following on the command line:
+The project is built using Gradle with the Kotlin DSL. The project requires
+JDK 11 to build. You can install the correct version of JDK using [SDKMAN!](https://sdkman.io) as follows.
+
+	$ sdk env
+
+Next, run the build locally. Simply execute the following on the command line:
 
 	$ ./gradlew check
 
