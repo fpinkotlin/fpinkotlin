@@ -1,8 +1,8 @@
 package chapter9.solutions.ex5
 
-import chapter9.exercises.ex5.Parser
-
 interface Parser<A>
+
+class ParserImpl<A>() : Parser<A>
 
 fun <A, B, C> map2(
     pa: Parser<A>,
@@ -10,9 +10,9 @@ fun <A, B, C> map2(
     f: (A, B) -> C
 ): Parser<C> = TODO()
 
-infix fun <A> Parser<out A>.or(p: Parser<out A>): Parser<A> = TODO()
+infix fun <A> Parser<out A>.or(p: Parser<out A>): Parser<A> = ParserImpl()
 
-fun <A> succeed(a: A): Parser<A> = TODO()
+fun <A> succeed(a: A): Parser<A> = ParserImpl()
 
 //tag::init1[]
 fun <A> defer(pa: () -> Parser<A>): Parser<A> = pa()
@@ -24,3 +24,8 @@ fun <A> many(pa: Parser<A>): Parser<List<A>> =
         listOf(a) + la
     } or succeed(emptyList())
 //end::init2[]
+
+fun main() {
+    // This results in StackOverflowError
+    many(succeed("a"))
+}
