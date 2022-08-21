@@ -4,6 +4,7 @@ import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
 import io.kotlintest.shouldBe
+import io.kotlintest.shouldNotThrow
 import io.kotlintest.specs.WordSpec
 
 // tag::init[]
@@ -23,5 +24,18 @@ class Solution9 : WordSpec({
                     0,
                     { x, y -> x + y }) shouldBe 15
             }
+    }
+
+    "fold left with large array" should {
+        "not throw a stackoverflow" {
+            val ints = (1..10000).toList().toTypedArray()
+            shouldNotThrow<StackOverflowError> {
+                foldLeft(
+                    List.of(*ints),
+                    0,
+                    {x, y -> x + y }
+                )
+            }
+        }
     }
 })
