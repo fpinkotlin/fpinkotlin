@@ -23,11 +23,11 @@ fun <A, B> Stream<A>.map(f: (A) -> B): Stream<B> =
 
 //tag::take[]
 fun <A> Stream<A>.take(n: Int): Stream<A> =
-    Stream.unfold(this) { s: Stream<A> ->
+    Stream.unfold(this to n) { (s: Stream<A>, m: Int) ->
         when (s) {
             is Cons ->
-                if (n > 0)
-                    Some(s.head() to s.tail().take(n - 1))
+                if (m > 0)
+                    Some(s.head() to (s.tail() to m - 1))
                 else None
             else -> None
         }
