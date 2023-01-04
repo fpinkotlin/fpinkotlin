@@ -4,7 +4,9 @@ import chapter3.List
 import chapter4.None
 import chapter4.Some
 import chapter5.Cons
+import chapter5.Empty
 import chapter5.Stream
+import chapter5.solutions.ex7.append
 import chapter5.toList
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
@@ -21,7 +23,7 @@ class Solution15 : WordSpec({
                     Some(s to s.tail())
                 else -> None
             }
-        }
+        }.append { Stream.of(Empty) }
     //end::tails[]
 
     fun <A, B> List<A>.map(f: (A) -> B): List<B> = when (this) {
@@ -36,7 +38,8 @@ class Solution15 : WordSpec({
                 List.of(
                     ConsL(1, ConsL(2, ConsL(3, NilL))),
                     ConsL(2, ConsL(3, NilL)),
-                    ConsL(3, NilL)
+                    ConsL(3, NilL),
+                    NilL
                 )
         }
     }
