@@ -17,7 +17,7 @@ dependencies {
     compile("io.arrow-kt:arrow-fx:$arrowVersion")
     compile("io.arrow-kt:arrow-mtl:$arrowVersion")
     compile("io.arrow-kt:arrow-syntax:$arrowVersion")
-    compile("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.2")
+    compile("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
     compile("io.github.microutils:kotlin-logging:1.7.8")
     compile("org.awaitility:awaitility:4.0.2")
     runtime("org.slf4j:slf4j-simple:1.7.28")
@@ -28,8 +28,8 @@ dependencies {
 }
 
 repositories {
-    jcenter()
-    maven("https://dl.bintray.com/kotlin/kotlinx")
+    mavenCentral()
+    maven("https://repo.kotlin.link") // Replacement for Bintray Kotlin repositories
 }
 
 tasks.withType<KotlinCompile>().configureEach {
