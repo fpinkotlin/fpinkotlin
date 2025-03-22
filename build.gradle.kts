@@ -10,15 +10,20 @@ val test by tasks.getting(Test::class) {
     useJUnitPlatform { }
 }
 
+val kotlinVersion = "1.3.21"
 val arrowVersion = "0.10.2"
 dependencies {
-    implementation(kotlin("stdlib"))
+    implementation(kotlin("stdlib", kotlinVersion))
+    implementation(kotlin("stdlib-common", kotlinVersion))
+    implementation(kotlin("stdlib-jdk7", kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", kotlinVersion))
+    implementation(kotlin("reflect", kotlinVersion))
     implementation("io.arrow-kt:arrow-core-data:$arrowVersion")
     implementation("io.arrow-kt:arrow-fx:$arrowVersion")
     implementation("io.arrow-kt:arrow-mtl:$arrowVersion")
     implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
     implementation(
-        "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
+        "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3"
     )
     implementation("io.github.microutils:kotlin-logging:1.7.8")
     implementation("org.awaitility:awaitility:4.0.2")
