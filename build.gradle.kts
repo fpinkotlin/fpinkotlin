@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
+    id("com.github.ben-manes.versions") version "0.42.0"
     kotlin("jvm") version "1.3.21"
     kotlin("kapt") version "1.3.21"
 }
@@ -23,8 +24,8 @@ dependencies {
     implementation("io.arrow-kt:arrow-mtl:$arrowVersion")
     implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
     implementation("io.github.microutils:kotlin-logging:1.7.8")
-    implementation("org.awaitility:awaitility:4.0.2")
-    runtimeOnly("org.slf4j:slf4j-simple:1.7.28")
+    implementation("org.awaitility:awaitility:4.2.0")
+    runtimeOnly("org.slf4j:slf4j-simple:1.7.36")
 
     // need this at compile level for chapter 8
     implementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
