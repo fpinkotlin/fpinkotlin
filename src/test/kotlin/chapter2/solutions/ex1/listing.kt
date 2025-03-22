@@ -2,7 +2,7 @@ package chapter2.solutions.ex1
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
-import kotlinx.collections.immutable.persistentMapOf
+import kotlin.collections.mapOf
 
 class Solution1 : WordSpec({
     // tag::init[]
@@ -17,7 +17,7 @@ class Solution1 : WordSpec({
 
     "fib" should {
         "return the nth fibonacci number" {
-            persistentMapOf(
+            mapOf(
                 1 to 1,
                 2 to 1,
                 3 to 2,

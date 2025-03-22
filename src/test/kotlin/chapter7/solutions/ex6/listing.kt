@@ -1,8 +1,6 @@
 package chapter7.solutions.ex6
 
 import chapter7.solutions.ex3.TimedMap2Future
-import kotlinx.collections.immutable.PersistentList
-import kotlinx.collections.immutable.toPersistentList
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture.completedFuture
 import java.util.concurrent.ExecutorService
@@ -43,9 +41,9 @@ object Pars {
 
     fun <A> List<A>.splitAt(
         idx: Int
-    ): Pair<PersistentList<A>, PersistentList<A>> =
-        this.subList(0, idx).toPersistentList() to
-            this.subList(idx, this.size).toPersistentList()
+    ): Pair<List<A>, List<A>> =
+        this.subList(0, idx).toList() to
+            this.subList(idx, this.size).toList()
 
     fun <A, B> map(pa: Par<A>, f: (A) -> B): Par<B> =
         map2(pa, pa, { a: A, _ -> f(a) })

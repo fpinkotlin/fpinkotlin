@@ -1,6 +1,6 @@
 package chapter7.solutions.ex12
 
-import kotlinx.collections.immutable.PersistentMap
+import kotlin.collections.Map
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
 
@@ -25,7 +25,7 @@ fun <A> choiceN(n: Par<Int>, choices: List<Par<A>>): Par<A> =
 
 fun <K, V> choiceMap(
     key: Par<K>,
-    choices: PersistentMap<K, Par<V>>
+    choices: Map<K, Par<V>>
 ): Par<V> =
     { es: ExecutorService ->
         chooser(key, { choices.getValue(it) })(es)

@@ -22,9 +22,6 @@ dependencies {
     implementation("io.arrow-kt:arrow-fx:$arrowVersion")
     implementation("io.arrow-kt:arrow-mtl:$arrowVersion")
     implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
-    implementation(
-        "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3"
-    )
     implementation("io.github.microutils:kotlin-logging:1.7.8")
     implementation("org.awaitility:awaitility:4.0.2")
     runtimeOnly("org.slf4j:slf4j-simple:1.7.28")
