@@ -23,7 +23,7 @@ fun wordCount(s: String): Int {
     val WCM = wcMonoid()
     return when (val wc = foldMap(s.asSequence(), WCM) { wc(it) }) {
         is Stub -> unstub(wc.chars)
-        is Part -> unstub(wc.rs) + wc.words + unstub(wc.rs)
+        is Part -> unstub(wc.ls) + wc.words + unstub(wc.rs)
     }
 }
 //end::init1[]
