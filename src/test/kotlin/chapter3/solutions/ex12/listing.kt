@@ -57,6 +57,10 @@ class Solution12 : WordSpec({
                 List.of(1, 2, 3, 4, 5),
                 0,
                 { x, y -> x + y }) shouldBe 15
+            foldLeftR(
+                List.of("a", "b", "c"),
+                "",
+                { x, y -> x + y }) shouldBe "abc"
             foldLeftRDemystified(
                 List.of(1, 2, 3, 4, 5),
                 0,
@@ -70,6 +74,10 @@ class Solution12 : WordSpec({
                 List.of(1, 2, 3, 4, 5),
                 0,
                 { x, y -> x + y }) shouldBe 15
+            foldRightL(
+                List.of("a", "b", "c"),
+                "",
+                { x, y -> x + y }) shouldBe "abc"
         }
     }
 })
